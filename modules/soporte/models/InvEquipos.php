@@ -17,6 +17,7 @@ use app\modules\admin\models\CatPlanteles;
 use app\modules\admin\models\CatAreas;
 use app\modules\admin\models\CatPisos;
 
+
 /**
  * This is the model class for table "inv_equipos".
  *
@@ -58,10 +59,12 @@ class InvEquipos extends ActiveRecord
     {
         return [
             [['progresivo'], 'progresivovalido'],
-            [['progresivo'], 'unique', 'message'=>'Progresivo ya existe en la base'],
+            [['progresivo'], 'unique', 'message'=>'Progresivo ya registrado'],
             [['progresivo', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'clasif', 'created_by', 'updated_by'], 'integer'],
+
             [['serie', 'procesador', 'ram', 'disco_duro', 'observaciones', 'monitor', 'monitor_serie', 'teclado', 'teclado_serie', 'mouse', 'mouse_serie'], 'string'],
             [['progresivo', 'serie', 'procesador', 'ram', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'clasif', 'created_at', 'created_by'], 'required', 'message'=>''],
+            [['usuario', 'id_area', 'id_piso'], 'required', 'on'=>'upuser'],
           
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -161,6 +164,16 @@ class InvEquipos extends ActiveRecord
     public function getCatPlanteles()
     {
         return $this->hasOne(CatPlanteles::className(),['id'=>'id_plantel']);
+    }
+
+      public function getCatAreas()
+    {
+        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
+    }
+
+      public function getCatPisos()
+    {
+        return $this->hasOne(CatPisos::className(),['id'=>'id_piso']);
     }
 
     

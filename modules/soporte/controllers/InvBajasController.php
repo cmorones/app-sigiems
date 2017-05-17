@@ -11,7 +11,8 @@ use yii\filters\VerbFilter;
 use app\modules\telefonia\models\CatMarca;
 use app\modules\telefonia\models\CatModelo;
 use yii\db\Expression;
-use yii\behaviors\TimestampBehavior;
+
+
 
 /**
  * InvBajasController implements the CRUD actions for InvBajas model.
@@ -24,12 +25,7 @@ class InvBajasController extends Controller
     public function behaviors()
     {
         return [
-        [
-        'class' => TimestampBehavior::className(),
-            'createdAtAttribute' => 'create_time',
-            'updatedAtAttribute' => 'update_time',
-            'value' => new Expression('NOW()'),
-            ],
+       
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -59,12 +55,24 @@ class InvBajasController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new InvBajasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       // $searchModel = new InvBajasSearch();
+      //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$id_p);
 
         return $this->render('index', [
+            //'searchModel' => $searchModel,
+            //'dataProvider' => $dataProvider,
+        ]);
+    }
+
+       public function actionPeriodo($idp)
+    {
+        $searchModel = new InvBajasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+
+        return $this->render('periodo', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'idp' => $idp,
         ]);
     }
 
@@ -85,12 +93,32 @@ class InvBajasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($idp)
     {
         $model = new InvBajas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = new Expression('NOW()');
+           // $model->updated_at = new Expression('NOW()');
+            $model->id_plantel=Yii::$app->user->identity->id_plantel;
+            $model->id_periodo = $idp;
+            $model->estado_baja = 1;
+            $model->id_tipo = 1;
+            $model->bloq = 0;
+           // $fecha1 = $this->traerFechaInv($model->progresivo);
+           // $model->clasif = 1; //$this->antiguedad($fecha1,$fecha2);
+            if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+               // Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 //return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
+            return $this->redirect(['periodo', 'idp' => $idp]);
         } else {
             return $this->render('create', [
                 'model' => $model,

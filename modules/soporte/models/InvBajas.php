@@ -35,12 +35,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class InvBajas extends \yii\db\ActiveRecord
 {
-    public function behaviors()
-{
-    return [
-        TimestampBehavior::className(),
-    ];
-}
     /**
      * @inheritdoc
      */
@@ -58,7 +52,7 @@ class InvBajas extends \yii\db\ActiveRecord
             [['progresivo', 'id_tipo', 'marca', 'modelo', 'estado_baja', 'tipo_baja', 'id_periodo', 'id_plantel', 'id_area', 'id_piso', 'bloq', 'created_by', 'updated_by'], 'integer'],
             [['serie', 'observaciones', 'dictamen'], 'string'],
             [['id','progresivo','id_tipo','marca','modelo','serie','estado_baja','tipo_baja','id_periodo','id_plantel','id_area','id_piso','fecha_baja','observaciones','dictamen','bloq','created_at','created_by','updated_at','updated_by','certificado'], 'safe'],
-            [['id','progresivo','id_tipo','marca','modelo','serie','estado_baja','tipo_baja','id_periodo','id_plantel','id_area','id_piso','fecha_baja','dictamen','bloq','certificado'], 'required'],
+            [['progresivo','id_tipo','marca','modelo','serie','estado_baja','tipo_baja','id_periodo','id_plantel','id_area','id_piso','fecha_baja','bloq'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];

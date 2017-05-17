@@ -17,7 +17,19 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
   </div><!-- /.col -->
 </div>
 
+
 <div class="row">
+
+<?php 
+if ($model->usuario=='') {
+
+	echo '<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-12 col-sm-12 col-xs-12 edusec-profile-label edusecArLangCss"><strong>No existe Información para mostrar</strong></div>
+		
+	</div>';
+
+}else {
+	?>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong><?= $model->getAttributeLabel('usuario') ?></strong></div>
 		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->usuario ?></div>
@@ -30,13 +42,18 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong><?= $model->getAttributeLabel('id_area') ?></strong></div>
-		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?//= $model->catAreas->nombre ?></div>
+		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->catAreas->nombre ?></div>
 	</div>
 
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong><?= $model->getAttributeLabel('id_piso') ?></strong></div>
-		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?//= $model->catPisos->nombre ?></div>
+		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->catPisos->nombre ?></div>
 	</div>
+
+	<?php
+}
+
+?>
 	
 
 

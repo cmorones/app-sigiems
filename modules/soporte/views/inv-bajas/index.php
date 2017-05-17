@@ -13,43 +13,48 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 <br>
-<div class="inv-bajas-index">
+<div class="col-xs-12" style="padding-top: 10px;">
+  <div class="box">
+   <div class="box-body table-responsive">
+     <div class="assignment-index">
+     <h1>Control de Bajas</h1>
+          <table class="table table-striped table-bordered">
+    <tr>
+        <th>Periodo</th>
+        <th>Numero de Bajas</th>
+        <th>Mostrar</th>
+    </tr>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php 
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+$resultado = \Yii::$app->db->createCommand('SELECT * FROM cat_anos')->queryAll();
 
-            'id',
-            'progresivo',
-            'id_tipo',
-            'marca',
-            'modelo',
-            // 'serie',
-            // 'estado_baja',
-            // 'tipo_baja',
-            // 'id_periodo',
-            // 'id_plantel',
-            // 'id_area',
-            // 'id_piso',
-            // 'fecha_baja',
-            // 'observaciones',
-            // 'dictamen',
-            // 'bloq',
-            // 'created_at',
-            // 'created_by',
-            // 'updated_at',
-            // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-        <p>
-        <?= Html::a('Crear Nueva Baja', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+foreach ($resultado as $value) {
+
+?>
+
+<tr>
+    <td><?=$value['nombre']?></td>
+    <td>100</td>
+    <td> <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>Mostrar', ['periodo', 'idp' => $value['id']], ['class' => 'btn btn-success']) ?></td>            
+</tr>
+    <?php
+    # code...
+}
+
+?>
+
+
+
+
+
+</table>
+   
+     </div>
+   </div>
+  </div>
 </div>
+
+

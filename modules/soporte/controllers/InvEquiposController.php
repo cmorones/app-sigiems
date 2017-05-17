@@ -30,7 +30,7 @@ class InvEquiposController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view'],
+                        'actions' => ['index','create','view','update','update2', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -99,8 +99,10 @@ class InvEquiposController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             $model->created_by=Yii::$app->user->identity->user_id;
-            $model->created_at = new Expression('NOW()');
+            $model->created_at = $fecha = date("Y-m-d");//new Expression('NOW()');
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
+            $model->id_area=1;
+            $model->id_piso=1;
             $fecha1 = $this->traerFechaInv($model->progresivo);
             $model->clasif = 1; //$this->antiguedad($fecha1,$fecha2);
             if (!$model->save()) {
@@ -128,7 +130,7 @@ class InvEquiposController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        
         if ($model->load(Yii::$app->request->post())) {
             $model->updated_by=Yii::$app->user->identity->user_id;
             $model->updated_at = new Expression('NOW()');
@@ -141,6 +143,29 @@ class InvEquiposController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+     public function actionUpdate2($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = 'upuser';
+
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->updated_by=Yii::$app->user->identity->user_id;
+            $model->updated_at = new Expression('NOW()');
+            if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                # code...
+            }
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update2', [
                 'model' => $model,
             ]);
         }

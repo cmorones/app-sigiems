@@ -7,7 +7,7 @@ use app\modules\telefonia\models\CatMarca;
 use app\modules\telefonia\models\CatModelo;
 use app\modules\admin\models\CatPlanteles;
 use app\modules\admin\models\CatAreas;
-use app\modules\admin\models\CatPiso;
+use app\modules\admin\models\CatPisos;
 use app\modules\admin\models\CatAnos;
 use app\modules\admin\models\CatEstadoBajas;
 
@@ -18,7 +18,7 @@ use app\modules\admin\models\CatEstadoBajas;
 ?>
 
 <?php 
-$fecha = date("d-m-Y");
+$fecha = date("Y-m-d");
 ?>
 
 <div class="inv-bajas-form">
@@ -30,7 +30,7 @@ $fecha = date("d-m-Y");
     <div class="col-xs-4 edusecArLangHide"></div>
     <div class="col-xs-4 edusecArLangHide"></div>
     <div class="col-xs-4 left-padding">
-    <?= Html::a(Yii::t('app', 'Regresar'), ['view', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+    <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
 </div>
@@ -54,12 +54,13 @@ $fecha = date("d-m-Y");
                                              <?= $form->field($model, 'progresivo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Progresivo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
                                             </div>
                                         </div>
+               
                 <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Tipo:</label>
+                                            <label for="cname" class="control-label col-lg-2">Tipo de Baja:</label>
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'id_tipo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Tipo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                           <?= $form->field($model, 'tipo_baja', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'tipo'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\TipoEquipo::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona tipo ---')])->label(false); ?>
                                             </div>
                                         </div>
 <div class="form-group">
@@ -100,59 +101,23 @@ $fecha = date("d-m-Y");
                                         </div>
 
 
-                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Estado de la baja:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                            <?= $form->field($model, 'estado_baja', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatEstadoBajas::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Estado'])->label(false); ?>
-                                            </div>
-                                        </div>
+               
 
 
 
 
-                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Tipo de Baja:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'tipo_baja', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Tipo de Baja'] ] )->textInput(['maxlength' => 35])->label(false); ?>
-                                            </div>
-                                        </div>
-
-                <div class="form-group">
-                                          
-                                        
-                                             <label for="cname" class="control-label col-lg-2">Periodo:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'id_periodo', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAnos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Periodo'])->label(false); ?>
-                                            </div>
-                                        </div>
-                                        
-                <div class="form-group">
-                                          
-                                        
-                                             <label for="cname" class="control-label col-lg-2">Plantel:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'id_plantel', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPlanteles::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Plantel'])->label(false); ?>
-                                            </div>
-                                        </div>
+               
 
 
                                         
-                <div class="form-group">
+                   <div class="form-group">
                                           
                                         
                                              <label for="cname" class="control-label col-lg-2">Area:</label>
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAreas::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona una Area'])->label(false); ?>
+                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAreas::find()->all(), 'id_area', 'nombre'), ['prompt'=>'Selecciona una Área'])->label(false); ?>
                                             </div>
                                         </div>
                                         
@@ -163,37 +128,15 @@ $fecha = date("d-m-Y");
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'id_piso', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPiso::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un piso'])->label(false); ?>
+                                             <?= $form->field($model, 'id_piso', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPisos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un piso'])->label(false); ?>
                                             </div>
                                         </div>
                                         
                                         
-                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Dictamen:</label>
-                                            <div class="col-lg-4">
-                                              
+               
+                                    
 
-                                             <?= $form->field($model, 'dictamen', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Dictamen'] ] )->textInput(['maxlength' => 35])->label(false); ?>
-                                            </div>
-                                        </div>
-
-                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Certificado:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'certificado', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Certificado'] ] )->textInput(['maxlength' => 35])->label(false); ?>
-                                            </div>
-                                        </div>                           
-
-                                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Bloq:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'bloq', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Bloq'] ] )->textInput(['maxlength' => 35])->label(false); ?>
-                                            </div>
-                                        </div> 
+                              
                                           <div class="form-group">
                                           <label for="cname" class="control-label col-lg-2">Fecha de la Baja:</label>
                                             <div class="col-lg-4">
@@ -212,7 +155,7 @@ $fecha = date("d-m-Y");
                                         </div>
                                         
                                             <div class="col-lg-offset-2 col-lg-10">
-                                                <?= Html::submitButton($model->isNewRecord ? 'Agregar' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                                                <?= Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus" aria-hidden="true"></i>Agregar' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                                              
                                             </div>                                                                                                                                                                                                  
 

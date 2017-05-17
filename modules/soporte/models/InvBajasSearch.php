@@ -39,7 +39,7 @@ class InvBajasSearch extends InvBajas
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$id_p)
     {
         $query = InvBajas::find();
 
@@ -57,6 +57,8 @@ class InvBajasSearch extends InvBajas
             return $dataProvider;
         }
 
+        $id_plantel = Yii::$app->user->identity->id_plantel;
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -66,8 +68,8 @@ class InvBajasSearch extends InvBajas
             'modelo' => $this->modelo,
             'estado_baja' => $this->estado_baja,
             'tipo_baja' => $this->tipo_baja,
-            'id_periodo' => $this->id_periodo,
-            'id_plantel' => $this->id_plantel,
+            'id_periodo' => $id_p,
+             'id_plantel' => $id_plantel,
             'id_area' => $this->id_area,
             'id_piso' => $this->id_piso,
             'fecha_baja' => $this->fecha_baja,
