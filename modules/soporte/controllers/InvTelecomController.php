@@ -110,7 +110,7 @@ class InvTelecomController extends Controller
      */
     public function actionUpdate($id,$ide)
     {
-        $model = $this->findModel($ide);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
            // $model->id_equipo=$id;

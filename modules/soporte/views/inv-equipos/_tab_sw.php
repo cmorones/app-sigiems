@@ -9,12 +9,17 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 	<h2 class="page-header">	
 	<i class="fa fa-info-circle"></i> Información de Sistemas Operativos
 	<div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
-	<?php // if((Yii::$app->user->can("/student/stu-master/update") && ($_REQUEST['id'] == Yii::$app->session->get('stu_id'))) || (in_array("SuperAdmin", $adminUser)) || Yii::$app->user->can("updateAllStuInfo")) { ?>
+	<?php // if((Yii::$app->user->can("/student/stu-master/update") && ($_REQUEST['id'] == Yii::$app->session->get('stu_id'))) || (in_array("SuperAdmin", $adminUser)) || Yii::$app->user->can("updateAllStuInfo")) { 
+	  if(Yii::$app->user->can('/soporte/inv-equipos/create')) {
+			  	?>
+
 
 	
 
 			<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/soporte/inv-sw/create', 'id' => $model->id, 'tab' => 'guardians'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
-		
+		<?php
+	}
+	?>
 	</div>
 	</h2>
   </div><!-- /.col -->
@@ -67,8 +72,18 @@ foreach ($equipos as $key => $value) {
 			<td><?=$value['nombre']?></td>
 			<td><?=$value['observaciones']?></td>
 			<td>
+			<?php
+			if(Yii::$app->user->can('/soporte/inv-equipos/update')) {
+				?>
 				<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Editar'), ['/soporte/inv-sw/update', 'id' => $value['id'], 'tab' => 'guardians'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+				<?php
+			}
+			if(Yii::$app->user->can('/soporte/inv-equipos/delete')) {
+				?>
 				<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Eliminar'), ['/soporte/inv-sw/delete', 'id' => $value['id'], 'ide' => $value['id_equipo'], 'tab' => 'address'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+				<?php
+			}
+			?>
 			</td>
 		</tr>
 	</tbody>

@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\soporte\models\CatAntiguedad;
 use app\modules\soporte\models\EstadoEquipo;
 use app\modules\soporte\models\TipoEquipo;
+use app\modules\admin\models\CatPlanteles;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\soporte\models\InvEquipos */
@@ -38,7 +39,7 @@ use app\modules\soporte\models\TipoEquipo;
                                 <div class="form">
                                     <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="#" novalidate="novalidate">
                                         <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Progresivo</label>
+                                            <label for="cname" class="control-label col-lg-2">Nombre</label>
                                             <div class="col-lg-4">
                                               
 
@@ -47,14 +48,21 @@ use app\modules\soporte\models\TipoEquipo;
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-1">Depende de:</label>
+                                            <label for="ccomment" class="control-label col-lg-2">Plantel:</label>
+                                            <div class="col-lg-4">
+                                                <?= $form->field($model, 'id_plantel', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Area de la que de depende'] ] )->dropDownList(ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona Plantels ---')])->label(false); ?>
+                                            </div>
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="ccomment" class="control-label col-lg-2">Depende de:</label>
                                             <div class="col-lg-4">
                                                 <?= $form->field($model, 'id_dep', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Area de la que de depende'] ] )->dropDownList(ArrayHelper::map(app\modules\admin\models\CatAreas::find()->orderBy(['id_area'=>SORT_ASC])->all(),'id_area','nombre'),['prompt'=>Yii::t('app', '--- Selecciona Area ---')])->label(false); ?>
                                             </div>
                                         </div>
 
                                          <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Progresivo</label>
+                                            <label for="cname" class="control-label col-lg-2">Nivel</label>
                                             <div class="col-lg-4">
                                               
 

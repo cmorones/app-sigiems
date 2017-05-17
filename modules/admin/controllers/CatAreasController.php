@@ -70,8 +70,7 @@ class CatAreasController extends Controller
 
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
-            $model->id_plantel=Yii::$app->user->identity->id_plantel;
-
+          
             if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());

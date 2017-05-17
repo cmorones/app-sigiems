@@ -10,12 +10,13 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 	<i class="fa fa-info-circle"></i> Información del Equipo
 	<div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 	<?php // if((Yii::$app->user->can("/student/stu-master/update") && ($_REQUEST['id'] == Yii::$app->session->get('stu_id'))) || (in_array("SuperAdmin", $adminUser)) || Yii::$app->user->can("updateAllStuInfo")) { 
+//print_r($adminUser);
 
- //    if(Yii::$app->user->can('soporte/inv-equipos/update')) {
+     if(Yii::$app->user->can('/soporte/inv-equipos/update')) {
             	
 		?>
 		<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Editar'), ['update', 'id' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
-	<?php //} ?>
+	<?php } ?>
 	</div>
 	</h2>
   </div><!-- /.col -->
