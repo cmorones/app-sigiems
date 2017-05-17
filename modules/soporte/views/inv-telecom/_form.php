@@ -49,12 +49,11 @@ use app\modules\soporte\models\TipoEquipo;
                                         </div>
 
                                          <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Proxy</label>
+                                            <label for="ccomment" class="control-label col-lg-2">Proxy</label>
                                             <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'proxy', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Proxy'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                                <?= $form->field($model, 'proxy', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'estado'] ] )->dropDownList(ArrayHelper::map(app\modules\admin\models\ProxyNivel::find()->orderBy(['clave'=>SORT_ASC])->all(),'clave','nombre'),['prompt'=>Yii::t('app', '--- Selecciona estado ---')])->label(false); ?>
                                             </div>
+                                     
                                         </div>
 
                                        

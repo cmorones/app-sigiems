@@ -104,7 +104,7 @@ class InvEquiposController extends Controller
             $model->id_area=1;
             $model->id_piso=1;
             $fecha1 = $this->traerFechaInv($model->progresivo);
-            $model->clasif = 1; //$this->antiguedad($fecha1,$fecha2);
+            $model->clasif = $this->antiguedad($fecha1,$fecha2);
             if (!$model->save()) {
                 echo "<pre>";
                // print_r($model->getErrors());
