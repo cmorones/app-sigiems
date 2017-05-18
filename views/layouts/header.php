@@ -228,6 +228,10 @@ Yii::$app->name = "APP";
                         <li>
                             <?= Html::a('<i class="fa fa-male"></i> Usuarios',['/admin/users']) ?>
                         </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Catalogos',['/catalogos']) ?>
+                        </li>
                     </ul>
                 </div>
             </div>

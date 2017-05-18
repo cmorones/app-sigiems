@@ -9,8 +9,8 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\modules\soporte\models\CatMarcaimp;
-use app\modules\soporte\models\CatModeloimp;
+use app\modules\admin\models\CatMarca;
+use app\modules\admin\models\CatModelo;
 
 /**
  * InvImpresorasController implements the CRUD actions for InvImpresoras model.
@@ -28,7 +28,7 @@ class InvImpresorasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update', 'delete'],
+                        'actions' => ['index','create','view','update', 'delete','modelos'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -59,8 +59,8 @@ class InvImpresorasController extends Controller
     }
     public function actionModelos($id)
     {
-        $cuentaModelos = CatModeloimp::find()->where(['id_marca'=>$id])->count();
-        $modelos = CatModeloimp::find()->where(['id_marca'=>$id])->all();
+        $cuentaModelos = CatModelo::find()->where(['id_marca'=>$id])->count();
+        $modelos = CatModelo::find()->where(['id_marca'=>$id])->all();
 
         if ($cuentaModelos > 0) {
             foreach ($modelos as $key => $value) {

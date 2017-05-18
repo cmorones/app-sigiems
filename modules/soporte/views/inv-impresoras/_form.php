@@ -58,7 +58,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder'=>'tipo'] ] )->dropDownList(ArrayHelper::map(CatMarca::find()->orderBy(['id'=>SORT_ASC])->all(), 'id', 'nombre'), [
+                                             <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder'=>'tipo'] ] )->dropDownList(ArrayHelper::map(CatMarca::find()->where(['tipo'=>2])->orderBy(['id'=>SORT_ASC])->all(), 'id', 'nombre'), [
                                              'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
                                                    'onchange'=>'
                                                         $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-impresoras/modelos?id=').'"+$(this).val(), function( data ) {

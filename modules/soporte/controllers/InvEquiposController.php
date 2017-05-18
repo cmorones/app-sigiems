@@ -30,7 +30,7 @@ class InvEquiposController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','update2', 'delete'],
+                        'actions' => ['index','create','view','update','update2', 'delete','modelos'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
