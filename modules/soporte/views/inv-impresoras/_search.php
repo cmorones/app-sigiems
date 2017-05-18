@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'id_piso') ?>
 
-    <?php // echo $form->field($model, 'clasif') ?>
+    <?php // echo $form->field($model, 'antiguedad') ?>
 
     <?php // echo $form->field($model, 'observaciones') ?>
 

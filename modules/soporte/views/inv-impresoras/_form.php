@@ -1,24 +1,27 @@
+
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use app\modules\soporte\models\CatAntiguedad;
+use app\modules\admin\models\CatAreas;
+use app\modules\admin\models\CatPlanteles;
 use app\modules\soporte\models\EstadoEquipo;
-use app\modules\soporte\models\TipoEquipo;
+use app\modules\admin\models\CatPiso;
+use app\modules\soporte\models\CatMarcaimp;
+use app\modules\soporte\models\CatModeloimp;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\soporte\models\InvEquipos */
+/* @var $model app\modules\soporte\models\InvImpresoras */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<br>
-<br>
-<br>
-<br>
-<div class="inv-equipos-form">
+<?
+$plantel = @Yii::$app->user->identity->id_plantel;
+?>
 
-<div class="col-xs-12">
-  <div class="col-lg-8 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title"></h3>
+<div class="inv-impresoras-form">
+<div class="<?php echo $model->isNewRecord ? 'box-success' : 'box-info'; ?> box view-item col-xs-12 col-lg-12">
+<div class="col-lg-8 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title"></h3>
   </div>
   <div class="col-lg-4 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
     <div class="col-xs-4 edusecArLangHide"></div>
@@ -31,14 +34,15 @@ use app\modules\soporte\models\TipoEquipo;
 
     <?php $form = ActiveForm::begin(); ?>
       <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">Agregar/modificar Impresoras</h3></div>
+                     
                             <div class="panel-body">
                                 <div class="form">
                                     <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="#" novalidate="novalidate">
-                                        <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Progresivo</label>
+
+               <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Progresivo:</label>
                                             <div class="col-lg-4">
                                               
 
@@ -46,14 +50,23 @@ use app\modules\soporte\models\TipoEquipo;
                                             </div>
                                         </div>
 
-
-
-                                             <div class="form-group">
-                                            <label for="curl" class="control-label col-lg-2">Marca</label>
+                <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Tipo:</label>
                                             <div class="col-lg-4">
-                                                 <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'tipo'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\CatMarca::find()->where(['tipo'=>2])->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),
-                                                 [
-                                                    'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
+                                              
+
+                                             <?= $form->field($model, 'id_tipo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Tipo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                            </div>
+                                        </div>
+                <div class="form-group">
+                                          
+                                        
+                                            <label for="cname" class="control-label col-lg-2">Marca:</label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder'=>'tipo'] ] )->dropDownList(ArrayHelper::map(CatMarcaimp::find()->orderBy(['id'=>SORT_ASC])->all(), 'id', 'nombre'), [
+                                             'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
                                                    'onchange'=>'
                                                         $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-impresoras/modelos?id=').'"+$(this).val(), function( data ) {
                                                           $( "select#invimpresoras-modelo" ).html( data );
@@ -63,80 +76,116 @@ use app\modules\soporte\models\TipoEquipo;
 
                                                     '])->label(false); ?>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Modelo</label>
+                                        </div>                                    
+    
+    <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Modelo:</label>
                                             <div class="col-lg-4">
-                                                 <?= $form->field($model, 'modelo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'modelo'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\CatModelo::find()->orderBy(['id'=>SORT_ASC])->all(),'id','modelo'),['prompt'=>Yii::t('app', '--- Selecciona modelo ---')])->label(false); ?>
+                                              
+
+                                             <?= $form->field($model, 'modelo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'modelo'] ] )->dropDownList(ArrayHelper::map(CatModeloimp::find()->orderBy(['id'=>SORT_ASC])->all(),'id','modelo'),['prompt'=>Yii::t('app', '--- Selecciona modelo ---')])->label(false); ?>
                                             </div>
                                         </div>
-
-                                           <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Serie</label>
+                <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Serie:</label>
                                             <div class="col-lg-4">
-                                                <?= $form->field($model, 'serie', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Serie'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                              
+
+                                             <?= $form->field($model, 'serie', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Serie'] ] )->textInput(['maxlength' => 35])->label(false); ?>
                                             </div>
                                         </div>
-                                          <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Estado</label>
+    <div class="form-group">
+                                          
+                                        
+                                             <label for="cname" class="control-label col-lg-2">Estado:</label>
                                             <div class="col-lg-4">
-                                                <?= $form->field($model, 'estado', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'estado'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona estado ---')])->label(false); ?>
+                                              
+
+                                             <?= $form->field($model, 'estado', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(EstadoEquipo::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona Estado del Equipo'])->label(false); ?>
                                             </div>
                                         </div>
-
-                                         <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Area</label>
+          <div class="form-group">
+                                          
+                                        
+                                             <label for="cname" class="control-label col-lg-2">Plantel: </label>
                                             <div class="col-lg-4">
-                                                <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Area'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->orderBy(['id_area'=>SORT_ASC])->all(),'id_area','nombre'),['prompt'=>Yii::t('app', '--- Selecciona antiguedad ---')])->label(false); ?>
+                                              
 
+                                                       <?= $form->field($model, 'id_plantel')->textInput(['readonly' => true, 'value' => $plantel])->label(false); ?>
                                             </div>
                                         </div>
-
-
-                                         <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Ubicacion</label>
+                <div class="form-group">
+                                          
+                                        
+                                             <label for="cname" class="control-label col-lg-2">Area:</label>
                                             <div class="col-lg-4">
-                                                <?= $form->field($model, 'id_piso', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Piso'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\CatPiso::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona antiguedad ---')])->label(false); ?>
+                                              
 
+                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAreas::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona una Area'])->label(false); ?>
                                             </div>
                                         </div>
-
-                                           <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Antiguedad</label>
+    <div class="form-group">
+                                          
+                                        
+                                             <label for="cname" class="control-label col-lg-2">Piso:</label>
                                             <div class="col-lg-4">
-                                                <?= $form->field($model, 'clasif', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'clasif'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\CatAntiguedad::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona antiguedad ---')])->label(false); ?>
+                                              
 
+                                             <?= $form->field($model, 'estado', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPiso::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Piso'])->label(false); ?>
                                             </div>
                                         </div>
+                <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Antigüedad:</label>
+                                            <div class="col-lg-4">
+                                              
 
-                                          <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Observaciones</label>
+                                             <?= $form->field($model, 'antiguedad', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Antigüedad'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                            </div>
+                                        </div>
+         <div class="form-group">
+                                            <label for="ccomment" class="control-label col-lg-2">Observaciones:</label>
                                             <div class="col-lg-5">
                                                 <?= $form->field($model, 'observaciones', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Observaciones'] ] )->textArea(['class'=>'form-control','rows' => '6'])->label(false); ?>
                                             </div>
                                         </div>
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                                <?= Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus" aria-hidden="true"></i>Agregar' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                                             
+                                            </div>                        
+
+
+    <?//= $form->field($model, 'progresivo')->textInput() ?>
+
+    <?//= $form->field($model, 'id_tipo')->textInput() ?>
+
+    <?//= $form->field($model, 'marca')->textInput() ?>
+
+    <?//= $form->field($model, 'modelo')->textInput() ?>
+
+    <?//= $form->field($model, 'serie')->textInput() ?>
+
+    <?//= $form->field($model, 'estado')->textInput() ?>
+
+    <?//= $form->field($model, 'id_plantel')->textInput() ?>
+
+    <?//= $form->field($model, 'id_area')->textInput() ?>
+
+    <?//= $form->field($model, 'id_piso')->textInput() ?>
+
+    <?//= $form->field($model, 'antiguedad')->textInput() ?>
+
+    <?//= $form->field($model, 'observaciones')->textInput() ?>
+
+    <?//= $form->field($model, 'created_at')->textInput() ?>
+
+    <?//= $form->field($model, 'created_by')->textInput() ?>
+
+    <?//= $form->field($model, 'updated_at')->textInput() ?>
+
+    <?//= $form->field($model, 'updated_by')->textInput() ?>
 
 
 
-
-                                           
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                                <?= Html::submitButton($model->isNewRecord ? 'Agregar' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div> <!-- .form -->
-                                    <?php ActiveForm::end(); ?>
-
-                            </div> <!-- panel-body -->
-                        </div> <!-- panel -->
-                    </div> <!-- col -->
-
-
-  
+    <?php ActiveForm::end(); ?>
 
 </div>
-
-
-

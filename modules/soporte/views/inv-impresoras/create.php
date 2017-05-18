@@ -4,28 +4,21 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\soporte\models\InvEquipos */
+/* @var $model app\modules\soporte\models\InvImpresoras */
 
-$this->title = 'Create Inv Equipos';
-$this->params['breadcrumbs'][] = ['label' => 'Inv Equipos', 'url' => ['index']];
+$this->title = 'Agregar Impresora';
+$this->params['breadcrumbs'][] = ['label' => 'Inv Impresoras', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
 <br>
 <br>
-<br>
+<div class="inv-impresoras-create">
 
+    <h1><?= Html::encode($this->title) ?></h1>
 
-<div class="col-xs-12" style="padding-top: 10px;">
-  <div class="box">
-   <div class="box-body table-responsive">
-     <div class="assignment-index">
-  <?= $this->render('_form', [
+    <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-   
-     </div>
-   </div>
-  </div>
-</div>
 
+</div>

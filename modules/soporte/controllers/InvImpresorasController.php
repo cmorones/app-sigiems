@@ -6,10 +6,10 @@ use Yii;
 use app\modules\soporte\models\InvImpresoras;
 use app\modules\soporte\models\InvImpresorasSearch;
 use yii\web\Controller;
-use app\modules\soporte\models\CatModelo;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\db\Expression;
+use app\modules\soporte\models\CatMarcaimp;
+use app\modules\soporte\models\CatModeloimp;
 
 /**
  * InvImpresorasController implements the CRUD actions for InvImpresoras model.
@@ -45,6 +45,19 @@ class InvImpresorasController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionModelos($id)
+    {
+        $cuentaModelos = CatModeloimp::find()->where(['id_marca'=>$id])->count();
+        $modelos = CatModeloimp::find()->where(['id_marca'=>$id])->all();
+
+        if ($cuentaModelos > 0) {
+            foreach ($modelos as $key => $value) {
+                echo "<option value=". $value->id . ">". $value->modelo. "</option>";
+            }
+        }else{
+            echo "<option>-</option>";
+        }
+    }
 
     /**
      * Displays a single InvImpresoras model.
@@ -67,18 +80,8 @@ class InvImpresorasController extends Controller
     {
         $model = new InvImpresoras();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->id_tipo=2;
-            $model->created_by=Yii::$app->user->identity->user_id;
-            $model->created_at = new Expression('NOW()');
-            $model->id_plantel=Yii::$app->user->identity->id_plantel;
-            if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-                # code...
-            }
-            return $this->redirect(['index', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -131,20 +134,6 @@ class InvImpresorasController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-      public function actionModelos($id)
-    {
-        $cuentaModelos = CatModelo::find()->where(['id'=>$id])->count();
-        $modelos = CatModelo::find()->where(['id'=>$id])->all();
-
-        if ($cuentaModelos > 0) {
-            foreach ($modelos as $key => $value) {
-                echo "<option value=". $value->id . ">". $value->modelo. "</option>";
-            }
-        }else{
-            echo "<option>-</option>";
         }
     }
 }

@@ -2,83 +2,40 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
-use app\modules\soporte\models\TipoEquipo;
-use app\modules\soporte\models\CatMarca;
-use app\modules\soporte\models\CatModelo;
-
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\soporte\models\InvEquiposSearch */
+/* @var $searchModel app\modules\soporte\models\InvImpresorasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inv Equipos';
+$this->title = 'Inventario de  Impresoras';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
 <br>
 <br>
-<br>
 <div class="inv-impresoras-index">
 
-  
+      <div class="col-lg-12 col-sm-12 col-xs-12 no-padding"><h1 class="box-title"><i class="fa fa-list-alt"></i> <?php echo $this->title ?></h1></div>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Agregar Impresoras', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
- 
-</div>
-
-<div class="col-xs-12" style="padding-top: 10px;">
-  <div class="box">
-   <div class="box-body table-responsive">
-     <div class="assignment-index">
-        <?php
-        
-    Pjax::begin([
-        'enablePushState'=>false,
-    ]);
-  echo GridView::widget([
+  <div class=" box view-item col-xs-12 col-lg-12">
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-           // 'id',
+            'id',
             'progresivo',
-           // 'id_tipo',
-            [
-              'attribute'=>'marca',
-              'value' => 'catMarca.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatMarca::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
-            [
-              'attribute'=>'modelo',
-              'value' => 'catModelo.modelo',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatModelo::find()->orderBy('modelo')->asArray()->all(),'id','modelo')
-            ],
-            'serie',
-            [
-              'attribute'=>'estado',
-              'value' => 'estadoEquipo.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
-             // 'id_plantel',
-             [
-              'attribute'=>'id_area',
-              'value' => 'catArea.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->orderBy('nombre')->asArray()->all(),'id_area','nombre')
-            ],
-             [
-              'attribute'=>'id_piso',
-              'value' => 'catPiso.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatPiso::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
-             [
-              'attribute'=>'clasif',
-              'value' => 'catAntiguedad.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAntiguedad::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
+            'id_tipo',
+            'marca',
+            'modelo',
+            // 'serie',
+            // 'estado',
+            // 'id_plantel',
+            // 'id_area',
+            // 'id_piso',
+            // 'antiguedad',
             // 'observaciones',
             // 'created_at',
             // 'created_by',
@@ -87,11 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]);
-    Pjax::end();
-    ?>
-     </div>
-   </div>
-  </div>
+    ]); ?>
 </div>
-
+  <p>
+        <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>Agregar ', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
