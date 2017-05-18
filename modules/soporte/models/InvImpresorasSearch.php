@@ -18,7 +18,7 @@ class InvImpresorasSearch extends InvImpresoras
     public function rules()
     {
         return [
-            [['id', 'progresivo', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'clasif', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'progresivo', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'antiguedad', 'created_by', 'updated_by'], 'integer'],
             [['serie', 'observaciones', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -68,7 +68,7 @@ class InvImpresorasSearch extends InvImpresoras
             'id_plantel' => $this->id_plantel,
             'id_area' => $this->id_area,
             'id_piso' => $this->id_piso,
-            'clasif' => $this->clasif,
+            'antiguedad' => $this->antiguedad,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,

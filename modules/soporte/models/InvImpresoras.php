@@ -3,10 +3,6 @@
 namespace app\modules\soporte\models;
 
 use Yii;
-use app\modules\soporte\models\CatMarca;
-use app\modules\soporte\models\CatModelo;
-use app\modules\soporte\models\EstadoEquipo;
-use app\modules\soporte\models\CatAntiguedad;
 
 /**
  * This is the model class for table "inv_impresoras".
@@ -21,7 +17,7 @@ use app\modules\soporte\models\CatAntiguedad;
  * @property integer $id_plantel
  * @property integer $id_area
  * @property integer $id_piso
- * @property integer $clasif
+ * @property integer $antiguedad
  * @property string $observaciones
  * @property string $created_at
  * @property integer $created_by
@@ -47,14 +43,33 @@ class InvImpresoras extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['progresivo', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'clasif', 'created_by', 'updated_by'], 'integer'],
+             [['progresivo'], 'progresivovalido'],
+            [['progresivo', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'antiguedad', 'created_by', 'updated_by'], 'integer'],
             [['serie', 'observaciones'], 'string'],
-            [['created_at', 'created_by'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['progresivo','marca','modelo','serie','estado','id_area','id_piso','observaciones'], 'required', 'message'=>''],
+            [['created_at', 'updated_at','progresivo','id_tipo','marca','modelo','serie','estado','id_plantel','id_area','id_piso','antiguedad','observaciones','created_at','created_by','updated_at','updated_by'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
     }
+
+
+    public function progresivovalido($attribute, $params){
+
+
+       $cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(progresivo) FROM bienes_muebles where id_situacion_bien=1 and clave_cabms=\'5151000096\' and progresivo='.$this->progresivo.'')->queryColumn();
+
+       // $cuenta_inv[0] =0;
+
+                if ($cuenta_inv[0] == 0) {
+
+                    return $this->addError("progresivo", "Este progresivo no existe en inventario");
+                   //return true;
+            }
+           
+            
+    }
+
 
     /**
      * @inheritdoc
@@ -69,10 +84,10 @@ class InvImpresoras extends \yii\db\ActiveRecord
             'modelo' => 'Modelo',
             'serie' => 'Serie',
             'estado' => 'Estado',
-            'id_plantel' => 'Id Plantel',
-            'id_area' => 'Id Area',
-            'id_piso' => 'Id Piso',
-            'clasif' => 'Clasif',
+            'id_plantel' => 'Plantel',
+            'id_area' => 'Area',
+            'id_piso' => 'Piso',
+            'antiguedad' => 'Antigüedad',
             'observaciones' => 'Observaciones',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
@@ -96,34 +111,24 @@ class InvImpresoras extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
-
-      public function getCatMarca()
+            public function getCatPlanteles()
     {
-        return $this->hasOne(CatMarca::className(),['id'=>'marca']);
+        return $this->hasOne(CatPlanteles::className(),['id'=>'id_plantel']);
     }
-
-    public function getCatModelo()
+      public function getCatAreas()
     {
-        return $this->hasOne(CatModelo::className(),['id'=>'modelo']);
+        return $this->hasOne(CatAreas::className(),['id'=>'id_area']);
     }
-
-        public function getEstadoEquipo()
+      public function getCatEstado()
     {
-        return $this->hasOne(EstadoEquipo::className(),['id'=>'estado']);
+        return $this->hasOne(CatEstado::className(),['id'=>'id_estado']);
     }
-
-     public function getCatPiso()
+          public function getCatMarcaimp()
     {
-        return $this->hasOne(CatPiso::className(),['id'=>'id_piso']);
+        return $this->hasOne(getCatMarcaimp::className(),['id'=>'id_estado']);
     }
-
-     public function getCatArea()
+          public function getCatModeloimp()
     {
-        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
-    }
-
-     public function getCatAntiguedad()
-    {
-        return $this->hasOne(CatAntiguedad::className(),['id'=>'clasif']);
+        return $this->hasOne(getCatModeloimp::className(),['id'=>'id_estado']);
     }
 }

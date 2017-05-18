@@ -102,6 +102,11 @@ Yii::$app->name = "APP";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
                         </li>
 
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras',['/soporte/inv-impresoras/index']) ?>
+                        </li>
+
+
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
                         </li>
@@ -218,6 +223,10 @@ Yii::$app->name = "APP";
                         </li>
                         <li>
                             <?= Html::a('<i class="fa fa-male"></i> Rutas',['/rights/route']) ?>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Usuarios',['/admin/users']) ?>
                         </li>
                     </ul>
                 </div>

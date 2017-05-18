@@ -7,9 +7,9 @@ use yii\widgets\ActiveForm;
 use app\modules\admin\models\CatAreas;
 use app\modules\admin\models\CatPlanteles;
 use app\modules\soporte\models\EstadoEquipo;
-use app\modules\admin\models\CatPiso;
-use app\modules\soporte\models\CatMarcaimp;
-use app\modules\soporte\models\CatModeloimp;
+use app\modules\admin\models\CatPisos;
+use app\modules\admin\models\CatMarca;
+use app\modules\admin\models\CatModelo;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\soporte\models\InvImpresoras */
@@ -50,14 +50,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             </div>
                                         </div>
 
-                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Tipo:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'id_tipo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Tipo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
-                                            </div>
-                                        </div>
+            
                 <div class="form-group">
                                           
                                         
@@ -65,7 +58,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder'=>'tipo'] ] )->dropDownList(ArrayHelper::map(CatMarcaimp::find()->orderBy(['id'=>SORT_ASC])->all(), 'id', 'nombre'), [
+                                             <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder'=>'tipo'] ] )->dropDownList(ArrayHelper::map(CatMarca::find()->orderBy(['id'=>SORT_ASC])->all(), 'id', 'nombre'), [
                                              'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
                                                    'onchange'=>'
                                                         $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-impresoras/modelos?id=').'"+$(this).val(), function( data ) {
@@ -83,7 +76,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'modelo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'modelo'] ] )->dropDownList(ArrayHelper::map(CatModeloimp::find()->orderBy(['id'=>SORT_ASC])->all(),'id','modelo'),['prompt'=>Yii::t('app', '--- Selecciona modelo ---')])->label(false); ?>
+                                             <?= $form->field($model, 'modelo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'modelo'] ] )->dropDownList(ArrayHelper::map(CatModelo::find()->orderBy(['id'=>SORT_ASC])->all(),'id','modelo'),['prompt'=>Yii::t('app', '--- Selecciona modelo ---')])->label(false); ?>
                                             </div>
                                         </div>
                 <div class="form-group">
@@ -104,24 +97,15 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                              <?= $form->field($model, 'estado', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(EstadoEquipo::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona Estado del Equipo'])->label(false); ?>
                                             </div>
                                         </div>
-          <div class="form-group">
-                                          
-                                        
-                                             <label for="cname" class="control-label col-lg-2">Plantel: </label>
-                                            <div class="col-lg-4">
-                                              
-
-                                                       <?= $form->field($model, 'id_plantel')->textInput(['readonly' => true, 'value' => $plantel])->label(false); ?>
-                                            </div>
-                                        </div>
-                <div class="form-group">
+        
+                  <div class="form-group">
                                           
                                         
                                              <label for="cname" class="control-label col-lg-2">Area:</label>
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAreas::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona una Area'])->label(false); ?>
+                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->all(), 'id_area', 'nombre'), ['prompt'=>'Selecciona una Área'])->label(false); ?>
                                             </div>
                                         </div>
     <div class="form-group">
@@ -131,17 +115,10 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'estado', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPiso::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Piso'])->label(false); ?>
+                                             <?= $form->field($model, 'id_piso', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPisos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un piso'])->label(false); ?>
                                             </div>
                                         </div>
-                <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Antigüedad:</label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'antiguedad', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Antigüedad'] ] )->textInput(['maxlength' => 35])->label(false); ?>
-                                            </div>
-                                        </div>
+           
          <div class="form-group">
                                             <label for="ccomment" class="control-label col-lg-2">Observaciones:</label>
                                             <div class="col-lg-5">
