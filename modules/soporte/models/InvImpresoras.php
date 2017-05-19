@@ -123,12 +123,13 @@ class InvImpresoras extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CatEstado::className(),['id'=>'id_estado']);
     }
-          public function getCatMarcaimp()
+    public function getCatMarca()
     {
-        return $this->hasOne(getCatMarcaimp::className(),['id'=>'id_estado']);
+        return $this->hasOne(CatMarca::className(),['id'=>'marca']);
     }
-          public function getCatModeloimp()
+
+    public function getCatModelo()
     {
-        return $this->hasOne(getCatModeloimp::className(),['id'=>'id_estado']);
+        return $this->hasOne(CatModelo::className(),['id'=>'modelo']);
     }
 }

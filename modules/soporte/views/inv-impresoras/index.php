@@ -28,10 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'progresivo',
             //'id_tipo',
-            'marca',
-            'modelo',
+             [
+              'attribute'=>'marca',
+              'value' => 'catMarca.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatMarca::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+            [
+              'attribute'=>'modelo',
+              'value' => 'catModelo.modelo',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatModelo::find()->orderBy('modelo')->asArray()->all(),'id','modelo')
+            ],
             'serie',
-            'estado',
+              [
+              'attribute'=>'estado',
+              'value' => 'estadoEquipo.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             // 'id_plantel',
             'id_area',
             'id_piso',

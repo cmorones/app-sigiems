@@ -25,7 +25,7 @@ use yii\helpers\Html;
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
         </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="edusec-link-box">
                 <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag"></i></span>
                 <div class="edusec-link-box-content">
@@ -48,7 +48,7 @@ use yii\helpers\Html;
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
         </div>
-                     <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="edusec-link-box">
                 <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag"></i></span>
                 <div class="edusec-link-box-content">
@@ -59,53 +59,33 @@ use yii\helpers\Html;
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
         </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="edusec-link-box">
+                <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag"></i></span>
+                <div class="edusec-link-box-content">
+                  <span class="edusec-link-box-text"><?= Html::a('Marcas de Equipos', ['/admin/cat-marcas']);?></span>
+                  <span class="edusec-link-box-number"><?= app\modules\admin\models\CatMarca::find()->count(); ?></span>
+                    <span class="edusec-link-box-desc"></span>
+                     <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Agregar Nuevo'), ['/admin/cat-marcas/create']); ?></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+        </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="edusec-link-box">
+                <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag"></i></span>
+                <div class="edusec-link-box-content">
+                  <span class="edusec-link-box-text"><?= Html::a('Modelos de Equipos', ['/admin/cat-modelo']);?></span>
+                  <span class="edusec-link-box-number"><?= app\modules\admin\models\CatModelo::find()->count(); ?></span>
+                    <span class="edusec-link-box-desc"></span>
+                     <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Agregar Nuevo'), ['/admin/cat-modelo/create']); ?></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+        </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="edusec-link-box">
-                    <span class="edusec-link-box-icon bg-aqua">
-                        <i class="fa fa-university"></i>
-                    </span>
-                    <div class="edusec-link-box-content">
-                        <span class="edusec-link-box-text">
-                            <a href="/organization/view?id=1">Institute</a>                        </span>
-                        <span class="edusec-link-box-desc">
-                            Manage Institute Setup                        </span>
-                        <span class="edusec-link-box-bottom">
-                            <a href="/organization/update?id=1"><i class="fa fa-edit"></i> Edit</a>                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="edusec-link-box">
-                    <span class="edusec-link-box-icon bg-aqua">
-                        <i class="fa fa-language"></i>
-                    </span>
-                    <div class="edusec-link-box-content">
-                        <span class="edusec-link-box-text">
-                            <a href="/languages/index">Languages</a>                        </span>
-                        <span class="edusec-link-box-number">4</span>
-                        <span class="edusec-link-box-desc"></span>
-                        <span class="edusec-link-box-bottom">
-                            <a href="/languages/create"><i class="fa fa-plus-square"></i> Create New</a>                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="edusec-link-box">
-                    <span class="edusec-link-box-icon bg-aqua">
-                        <i class="fa fa-flag-checkered"></i>
-                    </span>
-                    <div class="edusec-link-box-content">
-                        <span class="edusec-link-box-text">
-                            <a href="/nationality/index">Nationality</a></span>
-                        <span class="edusec-link-box-number">3</span>
-                        <span class="edusec-link-box-desc"></span>
-                        <span class="edusec-link-box-bottom">
-                            <a href="/nationality/create"><i class="fa fa-plus-square"></i> Create New</a>                        </span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

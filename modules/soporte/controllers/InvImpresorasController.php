@@ -99,6 +99,7 @@ class InvImpresorasController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = $fecha = date("Y-m-d");//new Expressi
             $fecha1 = $this->traerFechaInv($model->progresivo);
+            $model->id_plantel=Yii::$app->user->identity->id_plantel;
             $model->antiguedad = 1; //$this->antiguedad($fecha1,$fecha2);
             $model->id_tipo=2;
 
