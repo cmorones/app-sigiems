@@ -41,13 +41,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'serie',
               [
               'attribute'=>'estado',
-              'value' => 'estadoEquipo.nombre',
+              'value' => 'catEstado.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             // 'id_plantel',
-            'id_area',
-            'id_piso',
-            'antiguedad',
+              [
+              'attribute'=>'id_area',
+              'value' => 'catAreas.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+
+             [
+              'attribute'=>'id_piso',
+              'value' => 'catEstado.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPisos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+             [
+              'attribute'=>'antiguedad',
+              'value' => 'catAntiguedad.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAntiguedad::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+           
             // 'observaciones',
             // 'created_at',
             // 'created_by',

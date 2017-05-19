@@ -2,7 +2,13 @@
 
 namespace app\modules\soporte\models;
 
+
 use Yii;
+use app\modules\soporte\models\EstadoEquipo;
+use app\modules\soporte\models\CatAntiguedad;
+use app\modules\admin\models\CatPlanteles;
+use app\modules\admin\models\CatAreas;
+use app\modules\admin\models\CatPisos;
 
 /**
  * This is the model class for table "inv_impresoras".
@@ -117,11 +123,24 @@ class InvImpresoras extends \yii\db\ActiveRecord
     }
       public function getCatAreas()
     {
-        return $this->hasOne(CatAreas::className(),['id'=>'id_area']);
+        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
     }
-      public function getCatEstado()
+
+       public function getCatEstado()
     {
-        return $this->hasOne(CatEstado::className(),['id'=>'id_estado']);
+        return $this->hasOne(EstadoEquipo::className(),['id'=>'estado']);
+    }
+
+  
+
+      public function getCatAntiguedad()
+    {
+        return $this->hasOne(CatAntiguedad::className(),['id'=>'antiguedad']);
+    }
+
+      public function getCatPisos()
+    {
+        return $this->hasOne(EstadoEquipo::className(),['id'=>'id_piso']);
     }
     public function getCatMarca()
     {
