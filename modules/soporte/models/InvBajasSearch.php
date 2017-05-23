@@ -19,7 +19,7 @@ class InvBajasSearch extends InvBajas
     {
         return [
             [['id', 'progresivo', 'id_tipo', 'marca', 'modelo', 'estado_baja', 'tipo_baja', 'id_periodo', 'id_plantel', 'id_area', 'id_piso', 'bloq', 'created_by', 'updated_by'], 'integer'],
-            [['serie', 'fecha_baja', 'observaciones', 'dictamen', 'created_at', 'updated_at'], 'safe'],
+            [['serie', 'fecha_baja', 'observaciones', 'dictamen', 'certificado', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -82,7 +82,8 @@ class InvBajasSearch extends InvBajas
 
         $query->andFilterWhere(['like', 'serie', $this->serie])
             ->andFilterWhere(['like', 'observaciones', $this->observaciones])
-            ->andFilterWhere(['like', 'dictamen', $this->dictamen]);
+            ->andFilterWhere(['like', 'dictamen', $this->dictamen])
+            ->andFilterWhere(['like', 'certificado', $this->certificado]);
 
         return $dataProvider;
     }

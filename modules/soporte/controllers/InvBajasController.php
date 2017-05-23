@@ -132,12 +132,25 @@ class InvBajasController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idp)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            $model->updated_by=Yii::$app->user->identity->user_id;
+            $model->updated_at = new Expression('NOW()');
+
+              if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+               // Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 //return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
+            return $this->redirect(['periodo', 'id' => $model->id,  'idp' => $idp]);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php 
 
 
-$resultado = \Yii::$app->db->createCommand('SELECT * FROM cat_anos')->queryAll();
+$resultado = \Yii::$app->db->createCommand('SELECT * FROM cat_anos where status=1')->queryAll();
 
 
 foreach ($resultado as $value) {
@@ -37,7 +37,7 @@ foreach ($resultado as $value) {
 
 <tr>
     <td><?=$value['nombre']?></td>
-    <td>100</td>
+    <td><?= app\modules\soporte\models\InvBajas::find()->where(['id'=>$value['id']])->andWhere(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></td>
     <td> <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>Mostrar', ['periodo', 'idp' => $value['id']], ['class' => 'btn btn-success']) ?></td>            
 </tr>
     <?php

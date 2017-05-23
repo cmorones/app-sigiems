@@ -5,6 +5,7 @@ namespace app\modules\soporte\models;
 use Yii;
 use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
+use app\modules\admin\models\EstadoBaja;
 
 /**
  * This is the model class for table "inv_bajas".
@@ -66,7 +67,7 @@ class InvBajas extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'progresivo' => 'Progresivo',
-            'id_tipo' => 'Id Tipo',
+            'id_tipo' => 'Tipo',
             'marca' => 'Marca',
             'modelo' => 'Modelo',
             'serie' => 'Serie',
@@ -74,8 +75,8 @@ class InvBajas extends \yii\db\ActiveRecord
             'tipo_baja' => 'Tipo Baja',
             'id_periodo' => 'Id Periodo',
             'id_plantel' => 'Id Plantel',
-            'id_area' => 'Id Area',
-            'id_piso' => 'Id Piso',
+            'id_area' => 'Area',
+            'id_piso' => 'Piso',
             'fecha_baja' => 'Fecha Baja',
             'observaciones' => 'Observaciones',
             'dictamen' => 'Dictamen',
@@ -110,7 +111,7 @@ class InvBajas extends \yii\db\ActiveRecord
     }
           public function getCatAreas()
     {
-        return $this->hasOne(CatAreas::className(),['id'=>'id_area']);
+        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
     }
           public function getCatAnos()
     {
@@ -123,5 +124,25 @@ class InvBajas extends \yii\db\ActiveRecord
               public function getCatPiso()
     {
         return $this->hasOne(CatPiso::className(),['id'=>'id_piso']);
+    }
+
+      public function getCatMarca()
+    {
+        return $this->hasOne(CatMarca::className(),['id'=>'marca']);
+    }
+
+    public function getCatModelo()
+    {
+        return $this->hasOne(CatModelo::className(),['id'=>'modelo']);
+    }
+
+     public function getTipoBaja()
+    {
+        return $this->hasOne(TipoEquipo::className(),['id'=>'tipo_baja']);
+    }
+
+    public function getEstadoBaja()
+    {
+        return $this->hasOne(EstadoBaja::className(),['id'=>'estado_baja']);
     }
 }

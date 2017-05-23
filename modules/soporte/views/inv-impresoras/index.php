@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
               [
               'attribute'=>'id_area',
               'value' => 'catAreas.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
             ],
 
              [
