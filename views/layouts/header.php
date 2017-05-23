@@ -82,7 +82,21 @@ Yii::$app->name = "APP";
                <!-- Menu Soporte Técnico --> 
              <?php  
               if(Yii::$app->user->can('menuSoporte')) {
-            ?>                                    
+            ?> 
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard',['/site'])?>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos IEMS',['/site/equipos'])?>
+                        </li>
+                    </ul>
+                </div>
+            </div>                                   
             <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="menu-box">
                     <ul>
