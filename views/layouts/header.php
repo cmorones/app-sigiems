@@ -128,6 +128,10 @@ Yii::$app->name = "APP";
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
                         </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Validacion de Bajas vs Almacen',['/soporte/inv-bajas/validacion']) ?>
+                        </li>
                          <?php
                             }
 

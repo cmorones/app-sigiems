@@ -81,8 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\EstadoBaja::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             // 'observaciones',
-            'dictamen',
-            'certificado',
+          // 'dictamen',
+           // 'certificado',
             // 'bloq',
             // 'created_at',
             // 'created_by',

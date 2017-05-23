@@ -6,6 +6,7 @@ use Yii;
 use app\modules\soporte\models\InvBajas;
 use app\modules\soporte\models\InvBajasSearch;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\modules\telefonia\models\CatMarca;
@@ -25,7 +26,17 @@ class InvBajasController extends Controller
     public function behaviors()
     {
         return [
-       
+             'access' => [
+                'class' => AccessControl::className(),
+               // 'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -59,6 +70,17 @@ class InvBajasController extends Controller
       //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$id_p);
 
         return $this->render('index', [
+            //'searchModel' => $searchModel,
+            //'dataProvider' => $dataProvider,
+        ]);
+    }
+
+     public function actionValidacion()
+    {
+       // $searchModel = new InvBajasSearch();
+      //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$id_p);
+
+        return $this->render('valida', [
             //'searchModel' => $searchModel,
             //'dataProvider' => $dataProvider,
         ]);
