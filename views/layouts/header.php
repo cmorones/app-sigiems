@@ -102,6 +102,10 @@ Yii::$app->name = "APP";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
                         </li>
 
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks',['/soporte/inv-nobreak/index']) ?>
+                        </li>
+
                          <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras',['/soporte/inv-impresoras/index']) ?>
                         </li>
