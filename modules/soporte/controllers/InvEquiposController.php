@@ -174,8 +174,8 @@ class InvEquiposController extends Controller
 
       public function actionModelos($id)
     {
-        $cuentaModelos = CatModelo::find()->where(['id'=>$id])->count();
-        $modelos = CatModelo::find()->where(['id'=>$id])->all();
+        $cuentaModelos = CatModelo::find()->where(['id_marca'=>$id])->count();
+        $modelos = CatModelo::find()->where(['id_marca'=>$id])->all();
 
         if ($cuentaModelos > 0) {
             foreach ($modelos as $key => $value) {
