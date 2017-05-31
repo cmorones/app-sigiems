@@ -83,6 +83,14 @@ echo AlertBlock::widget([
                                              <?= $form->field($model, 'id_piso', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPisos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un piso'])->label(false); ?>
                                             </div>
                                         </div>
+
+                                             <div class="form-group">
+                                            <label for="ccomment" class="control-label col-lg-2">Observaciones</label>
+                                            <div class="col-lg-5">
+                                                <?= $form->field($model, 'observaciones2', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Observaciones'] ] )->textArea(['class'=>'form-control','rows' => '6'])->label(false); ?>
+                                            </div>
+                                        </div>
+
                                            
                                         <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">

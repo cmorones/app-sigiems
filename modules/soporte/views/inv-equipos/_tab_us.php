@@ -57,6 +57,12 @@ if ($model->usuario=='') {
 		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->catPisos->nombre ?></div>
 	</div>
 
+
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong><?= $model->getAttributeLabel('observaciones2') ?></strong></div>
+		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->observaciones2 ?></div>
+	</div>
+
 	<?php
 }
 

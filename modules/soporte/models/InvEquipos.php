@@ -64,7 +64,7 @@ class InvEquipos extends ActiveRecord
 
             [['serie', 'procesador', 'ram', 'disco_duro', 'observaciones', 'monitor', 'monitor_serie', 'teclado', 'teclado_serie', 'mouse', 'mouse_serie'], 'string'],
             [['progresivo', 'serie', 'procesador', 'ram', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'clasif', 'created_at', 'created_by'], 'required', 'message'=>''],
-            [['usuario', 'id_area', 'id_piso'], 'required', 'on'=>'upuser'],
+            [['usuario', 'id_area', 'id_piso', 'observaciones2'], 'required', 'on'=>'upuser'],
           
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -119,6 +119,7 @@ class InvEquipos extends ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'observaciones2' => 'Observaciones',
         ];
     }
 
