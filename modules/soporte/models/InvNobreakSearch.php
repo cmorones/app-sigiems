@@ -57,6 +57,9 @@ class InvNobreakSearch extends InvNobreak
             return $dataProvider;
         }
 
+    $id_p = Yii::$app->user->identity->id_plantel;
+
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -65,7 +68,7 @@ class InvNobreakSearch extends InvNobreak
             'marca' => $this->marca,
             'modelo' => $this->modelo,
             'estado' => $this->estado,
-            'id_plantel' => $this->id_plantel,
+            'id_plantel' => $id_p,
             'id_area' => $this->id_area,
             'id_piso' => $this->id_piso,
             'antiguedad' => $this->antiguedad,
