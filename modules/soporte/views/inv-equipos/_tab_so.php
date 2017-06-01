@@ -7,7 +7,7 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 <div class="row">
   <div class="col-xs-12">
 	<h2 class="page-header">	
-	<i class="fa fa-info-circle"></i> Información de Sistemas Operativos
+	<i class="fa fa-info-circle"></i> Información de Software Instalado
 	<div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 	<?php // if((Yii::$app->user->can("/student/stu-master/update") && ($_REQUEST['id'] == Yii::$app->session->get('stu_id'))) || (in_array("SuperAdmin", $adminUser)) || Yii::$app->user->can("updateAllStuInfo")) { 
 
