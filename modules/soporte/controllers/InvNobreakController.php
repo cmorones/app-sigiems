@@ -28,7 +28,7 @@ class InvNobreakController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update', 'delete'],
+                        'actions' => ['index','create','view','update', 'delete', 'modelos'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -57,6 +57,21 @@ class InvNobreakController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+       public function actionModelos($id)
+    {
+        $cuentaModelos = CatModelo::find()->where(['id_marca'=>$id])->count();
+        $modelos = CatModelo::find()->where(['id_marca'=>$id])->all();
+
+        if ($cuentaModelos > 0) {
+            foreach ($modelos as $key => $value) {
+                echo "<option value=". $value->id . ">". $value->modelo. "</option>";
+            }
+        }else{
+            echo "<option>-</option>";
+        }
+    }
+
 
     /**
      * Displays a single InvNobreak model.

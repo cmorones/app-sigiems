@@ -61,15 +61,15 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                              <?= $form->field($model, 'marca', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder'=>'tipo'] ] )->dropDownList(ArrayHelper::map(CatMarca::find()->where(['tipo'=>5])->orderBy(['id'=>SORT_ASC])->all(), 'id', 'nombre'), [
                                              'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
                                                    'onchange'=>'
-                                                        $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-impresoras/modelos?id=').'"+$(this).val(), function( data ) {
-                                                          $( "select#invimpresoras-modelo" ).html( data );
+                                                        $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-nobreak/modelos?id=').'"+$(this).val(), function( data ) {
+                                                          $( "select#invnobreak-modelo" ).html( data );
                                                         });
 
 
 
                                                     '])->label(false); ?>
                                             </div>
-                                        </div>                                    
+                                        </div>                                     
     
     <div class="form-group">
                                             <label for="cname" class="control-label col-lg-2">Modelo:</label>
