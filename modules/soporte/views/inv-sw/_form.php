@@ -28,7 +28,7 @@ use app\modules\soporte\models\TipoEquipo;
                                 <div class="form">
                                     <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="#" novalidate="novalidate">
                                         <div class="form-group">
-                                            <label for="ccomment" class="control-label col-lg-2">Sistema Operativo</label>
+                                            <label for="ccomment" class="control-label col-lg-2">Nombre del Software</label>
                                             <div class="col-lg-4">
                                                 <?= $form->field($model, 'id_so', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'estado'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\CatSw::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona estado ---')])->label(false); ?>
                                             </div>

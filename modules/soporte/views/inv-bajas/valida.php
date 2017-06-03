@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
      <h1>Validacion de Bajas VS Almacen</h1>
           <table class="table table-striped table-bordered">
     <tr>
+        <th>Num</th>
         <th>Progresivo</th>
         <th>Tipo</th>
         <th>Marca</th>
@@ -36,14 +37,42 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $resultado = InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->all();
 
-
+$i=1;
 foreach ($resultado as $value) {
 
-if ($value->tipo_baja==2) {
+echo $value->id_tipo;
+
+
+if ($value->id_tipo==2) {
+  $clabe_cabs = '5151000080';
+}
+
+if ($value->id_tipo==1) {
   $clabe_cabs = '5151000138';
 }
 
+if ($value->id_tipo==3) {
+  $clabe_cabs = '5151000192';
+}
 
+if ($value->id_tipo==4) {
+  $clabe_cabs = '5151000138';
+}
+if ($value->id_tipo==5) {
+  $clabe_cabs = '5151000152';
+}
+
+if ($value->id_tipo==6) {
+  $clabe_cabs = '5651000018';
+}
+
+if ($value->id_tipo==7) {
+  $clabe_cabs = '5651000172';
+}
+
+echo ":";
+echo $clabe_cabs;
+echo "<br>";
 $sql = "SELECT 
   bienes_muebles.clave_cabms, 
   bienes_muebles.progresivo, 
@@ -63,7 +92,7 @@ FROM
   public.situacion_bienes
 WHERE
   bienes_muebles.clave_cabms = '".$clabe_cabs."' and 
-  bienes_muebles.progresivo = $value->progresivo and
+  bienes_muebles.progresivo = '$value->progresivo' and
   bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
   resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
   personal.id_empleado = resguardos.id_personal";
@@ -85,7 +114,7 @@ if ($inventario['marca']==$value->catMarca->nombre) {
   $img2 = Html::img('@web/images/unchecked.png');
 }
 
-if ($inventario['modelo']==$value->catModelo->modelo) {
+if ($inventario['modelo']==$value->modelo) {
   $img3 = Html::img('@web/images/checked.png');
 }else {
   $img3 = Html::img('@web/images/unchecked.png');
@@ -106,14 +135,17 @@ if ($inventario['serie']==$value->serie) {
 ?>
 
 <tr>
+    <td><?=$i?></td>
+    
     <td><?=$value->progresivo?>(<?=$inventario['progresivo']?>)<?=$img?></td>
-    <td><?=$value->tipoBaja->nombre?></td>
+    <td><?=$value->id_tipo?>:<?=$value->tipoBaja->nombre?></td>
     <td><?=$value->catMarca->nombre?>(<?=$inventario['marca']?>)<?=$img2?></td>
-    <td><?=$value->catModelo->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
+    <td><?=$value->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
     <td><?=$value->serie?>(<?=$inventario['modelo']?>)<?=$img3?></td>
                 
 </tr>
     <?php
+    $i++;
     # code...
 }
 
