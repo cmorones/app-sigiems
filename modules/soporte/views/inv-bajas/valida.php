@@ -27,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <th>Marca</th>
         <th>Modelo</th>
         <th>Serie</th>
+        <th>Situacion</th>
+        <th>Accion</th>
 
     </tr>
 
@@ -40,11 +42,16 @@ $resultado = InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->i
 $i=1;
 foreach ($resultado as $value) {
 
-echo $value->id_tipo;
+//echo $value->id_tipo;
+
+if ($value->catModelo->modelo) {
+ echo "$value->catModelo->modelo";
+}
+
 
 
 if ($value->id_tipo==2) {
-  $clabe_cabs = '5151000080';
+  $clabe_cabs = '5151000096';
 }
 
 if ($value->id_tipo==1) {
@@ -70,15 +77,16 @@ if ($value->id_tipo==7) {
   $clabe_cabs = '5651000172';
 }
 
-echo ":";
-echo $clabe_cabs;
-echo "<br>";
+//echo ":";
+//echo $clabe_cabs;
+//echo "<br>";
 $sql = "SELECT 
   bienes_muebles.clave_cabms, 
   bienes_muebles.progresivo, 
   bienes_muebles.marca, 
   bienes_muebles.modelo, 
-  bienes_muebles.serie, 
+  bienes_muebles.serie,
+  bienes_muebles.id_situacion_bien, 
   resguardos.id_bien_mueble, 
   personal.nombre_empleado, 
   personal.apellidos_empleado, 
@@ -126,7 +134,11 @@ if ($inventario['serie']==$value->serie) {
   $img3 = Html::img('@web/images/unchecked.png');
 }
 
-
+if ($inventario['id_situacion_bien'] == 1) {
+  $inv = "ACTIVO";
+}elseif ($inventario['id_situacion_bien'] == 2) {
+   $inv = "BAJA";
+}
 
 
 
@@ -141,7 +153,9 @@ if ($inventario['serie']==$value->serie) {
     <td><?=$value->id_tipo?>:<?=$value->tipoBaja->nombre?></td>
     <td><?=$value->catMarca->nombre?>(<?=$inventario['marca']?>)<?=$img2?></td>
     <td><?=$value->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
-    <td><?=$value->serie?>(<?=$inventario['modelo']?>)<?=$img3?></td>
+    <td><?=$value->serie?>(<?=$inventario['serie']?>)<?=$img3?></td>
+    <td><?= $inv?></td>
+    <td><?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Modificar', ['update', 'id' => $value['id'], 'idp' => $value['id_periodo']], ['class' => 'btn btn-info']) ?></td>
                 
 </tr>
     <?php
