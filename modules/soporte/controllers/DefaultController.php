@@ -1,7 +1,7 @@
 <?php
 namespace app\modules\soporte\controllers;
- use app\modules\soporte\models\InvEquipos;
- use app\modules\admin\models\CatPlanteles;
+use app\modules\soporte\models\InvEquipos;
+use app\modules\admin\models\CatPlanteles;
 
 
 
@@ -27,7 +27,7 @@ class DefaultController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'informePdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -59,6 +59,32 @@ class DefaultController extends Controller
         return $this->render('index', [
             'planteles' => $planteles,
             ]);
+    }
+
+    public function actionInformePdf()
+    {
+        /*$nationality = $empAdd = [];
+
+        $empMaster = EmpMaster::findOne($eid);
+        $empDocs = EmpDocs::find()->where(['emp_docs_emp_master_id'=>$eid])->join('join','document_category dc', 'dc.doc_category_id = emp_docs_category_id AND dc.is_status <> 2')->all();
+        $empInfo = EmpInfo::find()->where(['emp_info_emp_master_id'=>$eid])->one();
+
+        if($empMaster->emp_master_nationality_id !== null)
+            $nationality = Nationality::findOne($empMaster->emp_master_nationality_id)->nationality_name;
+
+        if($empMaster->emp_master_emp_address_id !== null)
+            $empAdd = EmpAddress::findOne($empMaster->emp_master_emp_address_id);*/
+
+        $html = $this->renderPartial('/default/informepdf',
+            [
+                /*'empDocs'=>$empDocs,
+                'empMaster'=>$empMaster,
+                'empInfo'=>$empInfo,
+                'nationality'=>$nationality,
+                'empAdd'=>$empAdd,*/
+            ]);
+    /*  $fName = $empInfo->emp_first_name."_".$empInfo->emp_last_name."_".date('Ymd_His');
+        return Yii::$app->pdf->exportData(Yii::t('emp','Employee Profile'),$fName,$html); */
     }
 
      public function actionCat()

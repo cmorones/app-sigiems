@@ -69,6 +69,10 @@ Yii::$app->name = "APP";
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard',['/site'])?>
                         </li>
+
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Avisos',['/site/avisos'])?>
+                        </li>
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos',['/site/equipos'])?>
                         </li>
@@ -199,6 +203,20 @@ Yii::$app->name = "APP";
                         <li>
                             <a href="#"><i class="fa fa-graduation-cap"></i> Reportes</a>
                         </li>
+
+                       <?php 
+                    //  if(Yii::$app->user->can('informeEquipos')) {
+                        ?>
+
+                        <li>
+
+                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe PDF',['/soporte/inf-pdf/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+              
+                        </li>
+                        <?php
+                   // }
+
+                    ?>
                         
                     </ul>
                 </div>

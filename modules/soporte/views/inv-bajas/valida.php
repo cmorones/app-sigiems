@@ -37,22 +37,25 @@ $this->params['breadcrumbs'][] = $this->title;
 //$plantel = Yii::$app->user->identity->id_plantel;
 //$resultado = \Yii::$app->db->createCommand('SELECT * FROM inv_bajas where estado_baja=1 and id_plantel='.$plantel)->queryAll();
 
-$resultado = InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->all();
+$resultado = InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
 
 $i=1;
 foreach ($resultado as $value) {
 
 //echo $value->id_tipo;
 
-if ($value->catModelo->modelo) {
+/*if ($value->catModelo->modelo) {
  echo "$value->catModelo->modelo";
-}
+}*/
 
 
 
 if ($value->id_tipo==2) {
   $clabe_cabs = '5151000096';
 }
+
+
+
 
 if ($value->id_tipo==1) {
   $clabe_cabs = '5151000138';
