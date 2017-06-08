@@ -31,7 +31,7 @@ class InvBajasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo'],
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

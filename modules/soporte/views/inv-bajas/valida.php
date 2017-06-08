@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 <br>
-<div class="col-xs-10" style="padding-top: 10px;">
+<div class="col-xs-12" style="padding-top: 10px;">
   <div class="box">
    <div class="box-body table-responsive">
      <div class="assignment-index">
@@ -22,13 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
           <table class="table table-striped table-bordered">
     <tr>
         <th>Num</th>
+        <th>Clave Cabms</th>
         <th>Progresivo</th>
         <th>Tipo</th>
         <th>Marca</th>
         <th>Modelo</th>
         <th>Serie</th>
         <th>Situacion</th>
-        <th>Resguardante</th>
+        <th>Resguardante (Almacen)</th>
         <th>Accion</th>
 
     </tr>
@@ -90,6 +91,7 @@ $sql = "SELECT
   bienes_muebles.marca, 
   bienes_muebles.modelo, 
   bienes_muebles.serie,
+  bienes_muebles.clave_cabms,
   bienes_muebles.id_situacion_bien, 
   resguardos.id_bien_mueble, 
   personal.nombre_empleado, 
@@ -152,7 +154,7 @@ if ($inventario['id_situacion_bien'] == 1) {
 
 <tr>
     <td><?=$i?></td>
-    
+    <td><?=$inventario['clave_cabms']?></td>
     <td><?=$value->progresivo?>(<?=$inventario['progresivo']?>)<?=$img?></td>
     <td><?=$value->tipoBaja->nombre?></td>
     <td><?=$value->catMarca->nombre?>(<?=$inventario['marca']?>)<?=$img2?></td>
