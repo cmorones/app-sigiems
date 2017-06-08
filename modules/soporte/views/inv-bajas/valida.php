@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <th>Modelo</th>
         <th>Serie</th>
         <th>Situacion</th>
+        <th>Resguardante</th>
         <th>Accion</th>
 
     </tr>
@@ -153,11 +154,12 @@ if ($inventario['id_situacion_bien'] == 1) {
     <td><?=$i?></td>
     
     <td><?=$value->progresivo?>(<?=$inventario['progresivo']?>)<?=$img?></td>
-    <td><?=$value->id_tipo?>:<?=$value->tipoBaja->nombre?></td>
+    <td><?=$value->tipoBaja->nombre?></td>
     <td><?=$value->catMarca->nombre?>(<?=$inventario['marca']?>)<?=$img2?></td>
-    <td><?=$value->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
+    <td><?=$value->catModelo->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
     <td><?=$value->serie?>(<?=$inventario['serie']?>)<?=$img3?></td>
     <td><?= $inv?></td>
+    <td><?=$inventario['nombre_empleado']?> <?=$inventario['apellidos_empleado']?> </td>
     <td><?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Modificar', ['update', 'id' => $value['id'], 'idp' => $value['id_periodo']], ['class' => 'btn btn-info']) ?></td>
                 
 </tr>
