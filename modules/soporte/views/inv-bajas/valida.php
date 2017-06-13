@@ -144,6 +144,8 @@ if ($inventario['id_situacion_bien'] == 1) {
   $inv = "ACTIVO";
 }elseif ($inventario['id_situacion_bien'] == 2) {
    $inv = "BAJA";
+}else{
+  $inv = "NO DEFINIDO";
 }
 
 

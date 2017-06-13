@@ -1,5 +1,9 @@
 <?php
 /* @var $this yii\web\View */$this->title = 'APP-SISMA';
+use yii\helpers\Html;
+use app\modules\soporte\models\InvBajas;
+use app\modules\admin\models\CatPlanteles;
+
 
 //$plantel = @Yii::$app->user->identity->id_plantel;
 $count1 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=1")->queryScalar();
@@ -24,7 +28,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
                 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            <i class="fa fa-dashboard"></i> Dashboard |<small> Instituto de Educación Media Superior </small>        </h1>
+            <i class="fa fa-dashboard"></i> Dashboard |<small> Inventario de Equipos porpiedad del IEMS</small>        </h1>
         <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
 <li class="active">Inicio</li>
 </ul>    </section>
@@ -62,7 +66,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
           <!-- small box -->
          <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>0</h3>
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->count(); ?></h3>
 
               <p>Bajas</p>
             </div>
@@ -154,39 +158,184 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
     <section class="col-lg-4">
         <div class="nav-tabs-custom" id="notice-board">
   
-        <table>
+        <table class="table table-striped table-bordered" >
+        <tr>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de Equipos</th>
+        </tr>
          <tr>
          <th>Plantel</th>
-            <th></th>
-            <th></th>
-            <th></th></tr>
-            
+            <th>Equipos que funcionan</th>
+            <th>Equipos que funcionan</th>
+            <th>Total</th></tr>
+
+            <?php
+
+              $resultado = CatPlanteles::find()->orderBy('id')->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr>
+              <td><?=$value['nombre']?></td>  
+              <td><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>$value['id']])->andWhere(['estado'=>1])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>$value['id']])->andWhere(['estado'=>2])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>$value['id']])->count(); ?></td>  
+            </tr>
+            <?php 
+          }
+
+          ?>
+
+             <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvEquipos::find()->where(['estado'=>1])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvEquipos::find()->where(['estado'=>2])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvEquipos::find()->count(); ?></b></td>
+          </tr>
         </table>
    
     </section>
-      <section class="col-lg-4">
+    <section class="col-lg-4">
         <div class="nav-tabs-custom" id="notice-board">
   
-        <table>
+        <table class="table table-striped table-bordered" >
+        <tr>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de Impresoras</th>
+        </tr>
          <tr>
          <th>Plantel</th>
-            <th></th>
-            <th></th>
-            <th></th></tr>
-            
+            <th>Equipos que funcionan</th>
+            <th>Equipos que funcionan</th>
+            <th>Total</th></tr>
+
+            <?php
+
+              $resultado = CatPlanteles::find()->orderBy('id')->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr>
+              <td><?=$value['nombre']?></td>  
+              <td><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>$value['id']])->andWhere(['estado'=>1])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>$value['id']])->andWhere(['estado'=>2])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>$value['id']])->count(); ?></td>  
+            </tr>
+            <?php 
+          }
+
+          ?>
+
+           <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvImpresoras::find()->where(['estado'=>1])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvImpresoras::find()->where(['estado'=>2])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvImpresoras::find()->count(); ?></b></td>
+          </tr>
         </table>
    
     </section>
-      <section class="col-lg-4">
+          <section class="col-lg-4">
         <div class="nav-tabs-custom" id="notice-board">
   
-        <table>
+        <table class="table table-striped table-bordered" >
+        <tr>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de No-Breaks</th>
+        </tr>
          <tr>
          <th>Plantel</th>
-            <th></th>
-            <th></th>
-            <th></th></tr>
-            
+            <th>no-breaks que funcionan</th>
+            <th>no-breaks que funcionan</th>
+            <th>Total</th></tr>
+
+            <?php
+
+              $resultado = CatPlanteles::find()->orderBy('id')->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr>
+              <td><?=$value['nombre']?></td>  
+              <td><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>$value['id']])->andWhere(['estado'=>1])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>$value['id']])->andWhere(['estado'=>2])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>$value['id']])->count(); ?></td>  
+            </tr>
+            <?php 
+          }
+
+          ?>
+        <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvNobreak::find()->where(['estado'=>1])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvNobreak::find()->where(['estado'=>2])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvNobreak::find()->count(); ?></b></td>
+          </tr>
+        </table>
+   
+    </section>
+</div>
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-dashboard"></i> Bajas |<small> Inventario de Bajas </small>        </h1>
+        <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
+<li class="active">Inicio</li>
+</ul>    </section>
+
+<div class="row">
+    <section class="col-lg-8">
+        <div class="nav-tabs-custom" id="notice-board">
+  
+        <table class="table table-striped table-bordered" >
+        
+         <tr>
+         <th colspan="1" rowspan="" headers="" scope=""></th>
+          <th colspan="10" rowspan="" headers="" scope="">Año 2017</th>
+        </tr>
+         <tr>
+            <th>Plantel</th>
+            <th>CPU</th>
+            <th>SERVIDORES</th>
+            <th>LAP-TOP</th>
+            <th>IMPRESORA</th>
+            <th>NO-BREAK</th>
+            <th>TELEFONO</th>
+            <th>VIDEOPROYECTOR</th>
+            <th>SWITCH</th>
+            <th>SCANNERS</th>
+            <th>TOTAL</th>
+          
+
+            <?php
+
+              $resultado = CatPlanteles::find()->orderBy('id')->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr aling="right">
+              <td><?=$value['nombre']?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'1'])->count(); ?></td>
+               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'2'])->count(); ?></td>
+               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'3'])->count(); ?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'4'])->count(); ?></td>
+               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'5'])->count(); ?></td> 
+                      <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'6'])->count(); ?></td>    
+                             <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'7'])->count(); ?></td>    
+                                    <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'8'])->count(); ?></td> 
+               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'9'])->count(); ?></td>          
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->count(); ?></td>  
+           </tr>
+            <?php 
+          }
+
+          ?>
+
+             <tr>
+            <td><b>Total</b></td>
+            <td><b></b></td>
+          </tr>
         </table>
    
     </section>
@@ -200,6 +349,12 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
               if(Yii::$app->user->can('mostrarEstadistcosTodosSoporte')) {
             ?>
 
+ <section class="content-header">
+        <h1>
+            <i class="fa fa-dashboard"></i> Externos |<small> Inventario de Equipos externos</small>        </h1>
+        <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
+<li class="active">Inicio</li>
+</ul>    </section>
 <div class="row">
 
         <!-- ./col -->
@@ -221,9 +376,9 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
           <!-- small box -->
          <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>0</h3>
+              <h3></h3>
 
-              <p>Bajas</p>
+              <p>Bajas 2017</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
