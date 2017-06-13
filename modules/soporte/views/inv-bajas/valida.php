@@ -133,11 +133,12 @@ if ($inventario['modelo']==$value->modelo) {
   $img3 = Html::img('@web/images/checked.png');
 }else {
   $img3 = Html::img('@web/images/unchecked.png');
-  
+
 }
 
 if ($inventario['serie']==$value->serie) {
   $img3 = Html::img('@web/images/checked.png');
+  $clase ="success";
 }else {
   $img3 = Html::img('@web/images/unchecked.png');
   $clase ="danger";
