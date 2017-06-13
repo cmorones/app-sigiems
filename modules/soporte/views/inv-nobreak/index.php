@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'Update'),]));
             },
         'delete' => function ($url, $model) {
-                return ((Yii::$app->user->can("/soporte/inv-nobreak/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Estas seguro de eliminar el registro?'),'method' => 'post'],]) : '');
+                return ((Yii::$app->user->can("EliminarNoBreaks")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Estas seguro de eliminar el registro?'),'method' => 'post'],]) : '');
             }
       ],
             ],
