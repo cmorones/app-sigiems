@@ -18,18 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="box">
    <div class="box-body table-responsive">
      <div class="assignment-index">
-     <h1>Validacion de Bajas VS Almacen</h1>
+     <h1>Validacion de Bajas VS Inventario</h1>
           <table class="table table-striped table-bordered">
     <tr>
         <th>Num</th>
         <th>Clave Cabms</th>
-        <th>Progresivo</th>
+        <th>Progresivo(Inventario)</th>
         <th>Tipo</th>
-        <th>Marca</th>
-        <th>Modelo</th>
+        <th>Marca(Inventario)</th>
+        <th>Modelo(Inventario)</th>
         <th>Serie</th>
+        <th>Serie(Inventario)</th>
         <th>Situacion</th>
-        <th>Resguardante (Almacen)</th>
+        <th>Resguardante (Inventario)</th>
         <th>Accion</th>
 
     </tr>
@@ -112,7 +113,7 @@ WHERE
   personal.id_empleado = resguardos.id_personal";
 
 
-
+$clase ="";
 $inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
 
 if ($inventario['progresivo']==$value->progresivo) {
@@ -132,12 +133,14 @@ if ($inventario['modelo']==$value->modelo) {
   $img3 = Html::img('@web/images/checked.png');
 }else {
   $img3 = Html::img('@web/images/unchecked.png');
+  
 }
 
 if ($inventario['serie']==$value->serie) {
   $img3 = Html::img('@web/images/checked.png');
 }else {
   $img3 = Html::img('@web/images/unchecked.png');
+  $clase ="danger";
 }
 
 if ($inventario['id_situacion_bien'] == 1) {
@@ -154,14 +157,15 @@ if ($inventario['id_situacion_bien'] == 1) {
 
 ?>
 
-<tr>
+<tr class="<?=$clase?>">
     <td><?=$i?></td>
     <td><?=$inventario['clave_cabms']?></td>
     <td><?=$value->progresivo?>(<?=$inventario['progresivo']?>)<?=$img?></td>
     <td><?=$value->tipoBaja->nombre?></td>
     <td><?=$value->catMarca->nombre?>(<?=$inventario['marca']?>)<?=$img2?></td>
     <td><?=$value->catModelo->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
-    <td><?=$value->serie?>(<?=$inventario['serie']?>)<?=$img3?></td>
+    <td><?=$value->serie?> <?=$img3?></td>
+    <td><?=$inventario['serie']?> <?=$img3?></td>
     <td><?= $inv?></td>
     <td><?=$inventario['nombre_empleado']?> <?=$inventario['apellidos_empleado']?> </td>
     <td><?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Modificar', ['update', 'id' => $value['id'], 'idp' => $value['id_periodo']], ['class' => 'btn btn-info']) ?></td>
