@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use app\modules\soporte\models\InvBajas;
 use app\modules\admin\models\CatPlanteles;
+use app\modules\soporte\models\InvEquipos;
+use app\modules\soporte\models\InvImpresoras;
+use app\modules\soporte\models\InvNobreak;
 
 
 //$plantel = @Yii::$app->user->identity->id_plantel;
@@ -165,7 +168,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
          <tr>
          <th>Plantel</th>
             <th>Equipos que funcionan</th>
-            <th>Equipos que funcionan</th>
+            <th>Equipos que no funcionan</th>
             <th>Total</th></tr>
 
             <?php
@@ -205,7 +208,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
          <tr>
          <th>Plantel</th>
             <th>Equipos que funcionan</th>
-            <th>Equipos que funcionan</th>
+            <th>Equipos que no funcionan</th>
             <th>Total</th></tr>
 
             <?php
@@ -245,7 +248,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
          <tr>
          <th>Plantel</th>
             <th>no-breaks que funcionan</th>
-            <th>no-breaks que funcionan</th>
+            <th>no-breaks que no funcionan</th>
             <th>Total</th></tr>
 
             <?php
@@ -552,7 +555,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
           <!-- small box -->
          <div class="small-box bg-yellow">
             <div class="inner">
-              <h3></h3>
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></h3>
 
               <p>Bajas 2017</p>
             </div>
@@ -640,15 +643,222 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
         <!-- ./col -->
       </div>
 
+            <div class="row">
+    <section class="col-lg-4">
+        <div class="nav-tabs-custom" id="notice-board">
+  
+        <table class="table table-striped table-bordered" >
+        <tr>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de Equipos</th>
+        </tr>
+         <tr>
+         <th>Plantel</th>
+            <th>Equipos que funcionan</th>
+            <th>Equipos que no funcionan</th>
+            <th>Total</th></tr>
+
+            <?php
+
+              $resultado = InvEquipos::find()->select(['marca'])->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->groupBy(['marca'])->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr>
+              <td><?=$value->catMarca->nombre?></td>  
+              <td><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->andWhere(['estado'=>1])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->andWhere(['estado'=>2])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->count(); ?></td>  
+            </tr>
+            <?php 
+          }
+
+          ?>
+
+             <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['estado'=>1])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['estado'=>2])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></b></td>
+          </tr>
+        </table>
+   
+    </section>
+      <section class="col-lg-4">
+        <div class="nav-tabs-custom" id="notice-board">
+  
+        <table class="table table-striped table-bordered" >
+        <tr>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de Impresoras</th>
+        </tr>
+         <tr>
+         <th>Plantel</th>
+            <th>Equipos que funcionan</th>
+            <th>Equipos que no funcionan</th>
+            <th>Total</th></tr>
+
+            <?php
+
+              $resultado = InvImpresoras::find()->select(['marca'])->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->groupBy(['marca'])->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr>
+              <td><?=$value->catMarca->nombre?></td>  
+              <td><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->andWhere(['estado'=>1])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->andWhere(['estado'=>2])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->count(); ?></td>  
+            </tr>
+            <?php 
+          }
+
+          ?>
+
+             <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['estado'=>1])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['estado'=>2])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvImpresoras::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></b></td>
+          </tr>
+        </table>
+   
+    </section>
+
+      <section class="col-lg-4">
+        <div class="nav-tabs-custom" id="notice-board">
+  
+        <table class="table table-striped table-bordered" >
+        <tr>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de No-Breaks</th>
+        </tr>
+         <tr>
+         <th>Plantel</th>
+            <th>Equipos que funcionan</th>
+            <th>Equipos que no funcionan</th>
+            <th>Total</th></tr>
+
+            <?php
+
+              $resultado = InvNobreak::find()->select(['marca'])->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->groupBy(['marca'])->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr>
+              <td><?=$value->catMarca->nombre?></td>  
+              <td><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->andWhere(['estado'=>1])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->andWhere(['estado'=>2])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value['marca']])->count(); ?></td>  
+            </tr>
+            <?php 
+          }
+
+          ?>
+
+             <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['estado'=>1])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['estado'=>2])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvNobreak::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></b></td>
+          </tr>
+        </table>
+   
+    </section>
+   
+        
+</div>
+
+ <section class="content-header">
+        <h1>
+            <i class="fa fa-dashboard"></i> Bajas |<small> Inventario de Bajas </small>        </h1>
+        <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
+<li class="active">Inicio</li>
+</ul>    </section>
+
+<div class="row">
+    <section class="col-lg-8">
+        <div class="nav-tabs-custom" id="notice-board">
+  
+        <table class="table table-striped table-bordered" >
+        
+         <tr>
+         <th colspan="1" rowspan="" headers="" scope=""></th>
+          <th colspan="10" rowspan="" headers="" scope="">Año 2017</th>
+        </tr>
+         <tr>
+            <th>Plantel</th>
+            <th>CPU</th>
+            <th>SERVIDORES</th>
+            <th>LAP-TOP</th>
+            <th>IMPRESORA</th>
+            <th>NO-BREAK</th>
+            <th>TELEFONO</th>
+            <th>VIDEOPROYECTOR</th>
+            <th>SWITCH</th>
+            <th>SCANNERS</th>
+            <th>TOTAL</th>
+          
+
+            <?php
+
+              $resultado = InvBajas::find()->select(['marca'])->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->groupBy(['marca'])->all();//InvBajas::find()->orderBy('id')->all();//InvEquipos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+              $i=1;
+              foreach ($resultado as $value) {
+
+            ?>
+            <tr aling="right">
+              <td><?=$value->catMarca->nombre?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'1'])->count(); ?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'2'])->count(); ?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'3'])->count(); ?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'4'])->count(); ?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'5'])->count(); ?></td> 
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'6'])->count(); ?></td>    
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'7'])->count(); ?></td>    
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'8'])->count(); ?></td> 
+               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['marca'=>$value->marca])->andWhere(['id_tipo'=>'9'])->count(); ?></td>          
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['marca'=>$value->marca])->andWhere(['id_periodo'=>'1'])->count(); ?></td>  
+           </tr>
+            <?php 
+          }
+
+          ?>
+
+             <tr>
+            <td><b>Total</b></td>
+            <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'1'])->count(); ?></b></td>
+            <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'2'])->count(); ?></b></td>
+
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'3'])->count(); ?></b></td>
+          
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'4'])->count(); ?></b></td>
+         
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'5'])->count(); ?></b></td>
+        
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'6'])->count(); ?></b></td>
+       
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'7'])->count(); ?></b></td>
+       
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'8'])->count(); ?></b></td>
+        
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'9'])->count(); ?></b></td>
+        
+          <td><b><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>'1'])->count(); ?></b></td>
+         
+         </tr>
+       
+        </table>
+   
+    </section>
+</div>
+
+
+
 
            <?php
         }
         ?>
-
-
-
-
-	
 
     </section><!-- right col -->
 </div><!-- /.row (main row) -->
