@@ -137,6 +137,14 @@ Yii::$app->name = "APP";
                           <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Validacion de Bajas vs Almacen',['/soporte/inv-bajas/validacion']) ?>
                         </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias',['/soporte/inv-baterias/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
+                        </li>
                          <?php
                             }
 

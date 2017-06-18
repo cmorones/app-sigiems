@@ -21,7 +21,7 @@ class InfPdfController extends \yii\web\Controller
 
        // $html = "Hola Mundo";
         $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('hola',$fName,$html);
+		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 
 
