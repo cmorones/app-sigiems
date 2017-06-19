@@ -43,7 +43,7 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
 </div>
 <div class="row">
        <!-- ./col -->
-        <div class="col-lg-4 col-xs-5">
+        <div class="col-lg-6 col-xs-5">
          
           <table class="table table-striped table-bordered" >
           <tr>
@@ -73,6 +73,7 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
         }
         ?>
 			<tr>
+			<td></td>
 			<td><b>Total</b></td>
 			<td><b><?=$suma?></b></td>
 
