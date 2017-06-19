@@ -17,8 +17,7 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
 <br>
 <br>
 <br>
-<br>
-<br>
+
 <div class="row">
 
         <!-- ./col -->
