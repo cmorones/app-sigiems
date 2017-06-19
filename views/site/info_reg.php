@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */$this->title = 'APP-SISMA';
 use yii\helpers\Html;
 use app\modules\soporte\models\InvBajas;
-use app\modules\admin\models\CatPlanteles;
+use app\modules\admin\models\Aspirantes;
 use app\modules\soporte\models\InvEquipos;
 use app\modules\soporte\models\InvImpresoras;
 use app\modules\soporte\models\InvNobreak;
@@ -34,10 +34,56 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
               <i class="ion ion-stats-bars"></i>
             </div>
 
-            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
 
          
         
         <!-- ./col -->
       </div>
+
+       <!-- ./col -->
+        <div class="col-lg-4 col-xs-5">
+         
+          <table class="table table-striped table-bordered" >
+          <tr>
+          	<th>Num</th>
+          	<th>Plantel</th>
+          	<th>Aspirantes</th>
+          </tr>
+
+            <?php
+
+              $resultado = \Yii::$app->db3->createCommand('SELECT COUNT(id_plantel) as cuenta, id_plantel FROM aspirantes group by id_plantel order by id_plantel')->queryAll();
+              $i=1;
+              $suma =0;
+              foreach ($resultado as $value) {
+
+              $plantel = \Yii::$app->db3->createCommand('SELECT * FROM planteles WHERE id_plantel='.$value['id_plantel'].'')->queryOne();
+
+            ?>
+            <tr>
+            <td><?=$value['id_plantel']?></td>
+            <td><?=$plantel['descripcion']?></td>
+           <td><?=$value['cuenta']?></td>
+            </tr>
+
+            <?
+            $suma = $suma + $value['cuenta'];
+        }
+        ?>
+			<tr>
+			<td><b>Total</b></td>
+			<td><b><?=$suma?></b></td>
+
+			</tr>
+          	
+          </table>
+         
+        
+        <!-- ./col -->
+      </div>
+</div>
+<br>
+<br>
+<br>
+<br>
