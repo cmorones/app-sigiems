@@ -32,7 +32,7 @@ class SiteController extends Controller
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','logout'],
+                        'actions' => ['index','logout','registro'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -191,6 +191,19 @@ class SiteController extends Controller
         //else
         //    return $this->render('user-dashboard', ['holidayData'=>$holidayData]);
     }
+    }
+
+    public function actionRegistro()
+    {
+  
+  // $this->layout = 'homePage';
+    if (\Yii::$app->user->isGuest)
+        return $this->redirect(['site/login']);
+        else {
+            
+
+            return $this->render('info_reg');
+  }
     }
 
 

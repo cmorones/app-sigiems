@@ -73,6 +73,10 @@ Yii::$app->name = "APP";
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Avisos',['/site/avisos'])?>
                         </li>
+
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Registro 2017',['/site/registro'])?>
+                        </li>
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos',['/site/equipos'])?>
                         </li>
