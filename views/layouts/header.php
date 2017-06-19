@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 
 AppAsset::register($this);
 
-Yii::$app->name = "APP";
+Yii::$app->name = "APP-SIGIEMS";
 
 
 ?>
@@ -102,6 +102,9 @@ Yii::$app->name = "APP";
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos IEMS',['/site/equipos'])?>
                         </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias',['/soporte/inv-baterias/informe']) ?>
+                        </li>
                     </ul>
                 </div>
             </div>                                   
@@ -148,6 +151,10 @@ Yii::$app->name = "APP";
 
                          <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i>Prestamo de Equipos',['/soporte/solicitud-presta/index']) ?>
                         </li>
                          <?php
                             }

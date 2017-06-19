@@ -1,11 +1,8 @@
 <?php
 /* @var $this yii\web\View */$this->title = 'APP-SISMA';
 use yii\helpers\Html;
-use app\modules\soporte\models\InvBajas;
 use app\modules\admin\models\Aspirantes;
-use app\modules\soporte\models\InvEquipos;
-use app\modules\soporte\models\InvImpresoras;
-use app\modules\soporte\models\InvNobreak;
+
 
 
 //$plantel = @Yii::$app->user->identity->id_plantel;
@@ -64,7 +61,7 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
             <tr>
             <td><?=$value['id_plantel']?></td>
             <td><?=$plantel['descripcion']?></td>
-           <td><?=$value['cuenta']?></td>
+            <td><?=$value['cuenta']?></td>
             </tr>
 
             <?
@@ -75,7 +72,6 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
 			<td></td>
 			<td><b>Total</b></td>
 			<td><b><?=$suma?></b></td>
-
 			</tr>
           	
           </table>

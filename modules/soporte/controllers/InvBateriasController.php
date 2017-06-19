@@ -44,6 +44,18 @@ class InvBateriasController extends Controller
         ]);
     }
 
+       public function actionInforme()
+    {
+        $searchModel = new InvBateriasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('informe', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
     /**
      * Displays a single InvBaterias model.
      * @param integer $id
@@ -61,6 +73,18 @@ class InvBateriasController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
 
         return $this->render('periodo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'idp' => $idp,
+        ]);
+    }
+
+    public function actionPeriodot($idp)
+    {
+        $searchModel = new InvBateriasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+
+        return $this->render('periodot', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'idp' => $idp,

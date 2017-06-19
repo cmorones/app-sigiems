@@ -54,12 +54,12 @@ class ExportToPdf extends Component
 		$mpdf->autoScriptToLang = true;
 		$mpdf->autoLangToFont = true;
 		//$org = Organization::find()->asArray()->one();
-		$src = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
-		$org_image=Html::img($src,['alt'=>'No Image','width'=>90, 'height'=>70]); 
+		//$src = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
+		$org_image=Html::img('images/logo.png',['alt'=>'No Image','width'=>220, 'height'=>70]); 
 		$org_name=$org['org_name'];
 		$org_add=$org['org_address_line1']."<br/>".$org['org_address_line2'];
 
-		$mpdf->SetHTMLHeader('<table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr style="border:hidden"><td vertical-align="center" style="width:35px;border:hidden" align="left">'.$org_image.'</td><td style="border:hidden;text-align:left;color:#555555;"><b style="font-size:22px;">'.$org_name.'</b><br/><span style="font-size:10.2px">'.$org_add.'</td></tr></table>');
+		$mpdf->SetHTMLHeader('<table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr style="border:hidden"></td><td style="border:hidden;text-align: right;color:#555555;"><b style="font-size:22px;">'.$org_name.'</b><br/><span style="font-size:10.2px">'.$org_add.'</td><td vertical-align="right" style="width:35px;border:hidden"position:absolute;>'.$org_image.'</tr></table>');
 		$stylesheet = file_get_contents('css/pdf.css'); // external css
 		$mpdf->WriteHTML($stylesheet,0);
 		//$mpdf->WriteHTML('<watermarkimage src='.$src.' alpha="0.33" size="50,30"/>');

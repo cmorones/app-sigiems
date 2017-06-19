@@ -15,10 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 
+<div class="col-xs-12" style="padding-top: 10px;">
+  <div class="box">
+   <div class="box-body table-responsive">
+     <div class="assignment-index">
 <div class="inv-baterias-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 
     <?= GridView::widget([
@@ -56,7 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+              [
+             'class' => 'app\components\CustomActionColumn',
+      'template' => '{view} {delete}',
+      'buttons' => [
+        'view' => function ($url, $model) {
+                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'View'),]));
+            },
+        'delete' => function ($url, $model) {
+                return ((Yii::$app->user->can("/soporte/inv-baterias/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
+            }
+      ],
+            ],
         ],
     ]); ?>
 </div>
@@ -64,4 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
         
          <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
     </p>
+</div>
+</div>
+</div>
+</div>
 

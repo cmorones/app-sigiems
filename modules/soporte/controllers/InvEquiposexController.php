@@ -17,7 +17,7 @@ use yii\helpers\Html;
 /**
  * InvEquiposController implements the CRUD actions for InvEquipos model.
  */
-class InvEquiposController extends Controller
+class InvEquiposexController extends Controller
 {
     /**
      * @inheritdoc

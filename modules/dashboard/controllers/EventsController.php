@@ -97,18 +97,16 @@ class EventsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) || isset($_POST['Events'])) {
 
-		/*$eventList = Events::find()->where(['LIKE', 'event_start_date', Yii::$app->dateformatter->getDateFormat($_POST['Events']['event_start_date'])])->andwhere(['is_status'=> 0])->count();
+		$eventList = Events::find()->where(['LIKE', 'event_start_date', Yii::$app->dateformatter->getDateFormat($_POST['Events']['event_start_date'])])->andwhere(['is_status'=> 0])->count();
 
 		if($eventList > 6) {
 			Yii::$app->session->setFlash('maxEvent', "<b><i class='fa fa-warning'></i> Maximum Events Limit Reached, you can not add more event for this day</b>");
 			return $this->redirect(['index']);
-		}*/
+		}
 		$model->attributes = $_POST['Events'];
 		$model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_start_date']);
 		$model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_end_date']);
-        $model->event_all_day = 0;
-        $model->is_status=0;
-		$model->created_by = 1; //Yii::$app->getid->getId();
+		$model->created_by = Yii::$app->getid->getId();
 		$model->created_at = new \yii\db\Expression('NOW()');
 
 		if($model->save()) {
@@ -196,7 +194,7 @@ class EventsController extends Controller
     {
         $model = Events::findOne($e_id);
 	$model->is_status = 2;
-	$model->updated_by = 1;//Yii::$app->getid->getId();
+	$model->updated_by = Yii::$app->getid->getId();
 	$model->updated_at = new \yii\db\Expression('NOW()');
 	$model->save();
 

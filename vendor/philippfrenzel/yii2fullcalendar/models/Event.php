@@ -30,6 +30,8 @@ class Event extends Model
    */
   public $description;
 
+  
+
   /**
    * the event type of the shown event
    * @var integer

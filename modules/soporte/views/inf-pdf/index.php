@@ -86,7 +86,7 @@ margin: auto;
           <th colspan="4" rowspan="" headers="" scope="">Inventario de Equipos</th>
         </tr>
          <tr>
-         <th>Plantel</th>
+         <th>Marca</th>
             <th>Equipos que funcionan</th>
             <th>Equipos que no funcionan</th>
             <th>Total</th></tr>
@@ -128,7 +128,7 @@ margin: auto;
           <th colspan="4" rowspan="" headers="" scope="">Inventario de Impresoras</th>
         </tr>
          <tr>
-         <th>Plantel</th>
+         <th>Marca</th>
             <th>Equipos que funcionan</th>
             <th>Equipos que no funcionan</th>
             <th>Total</th></tr>
@@ -170,7 +170,7 @@ margin: auto;
           <th colspan="4" rowspan="" headers="" scope="">Inventario de No-Breaks</th>
         </tr>
          <tr>
-         <th>Plantel</th>
+         <th>Marca</th>
             <th>Equipos que funcionan</th>
             <th>Equipos que no funcionan</th>
             <th>Total</th></tr>

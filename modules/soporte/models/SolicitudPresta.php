@@ -48,10 +48,10 @@ class SolicitudPresta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha_presta', 'event_start_date', 'event_end_date', 'created_at', 'updated_at'], 'safe'],
+            [['fecha_presta','responsable','laptop','video_proye','mouse','exten','impresora','otro','estado_lap','estado_proye','estado_imp','estado_mouse','estado_ext','especificar','progresivo_laptop','progresivo_proyector','progresivo_impresora','id_piso'], 'safe'],
             [['responsable', 'especificar'], 'string'],
             [['laptop', 'video_proye', 'mouse', 'exten', 'impresora', 'otro', 'estado_lap', 'estado_proye', 'estado_imp', 'estado_mouse', 'estado_ext', 'progresivo_laptop', 'progresivo_proyector', 'progresivo_impresora', 'created_by', 'updated_by'], 'integer'],
-            [['event_start_date', 'event_end_date', 'created_at', 'created_by'], 'required'],
+            [['fecha_presta','responsable','laptop','video_proye','mouse','exten','impresora','otro','estado_lap','estado_proye','estado_imp','estado_mouse','estado_ext','especificar','progresivo_laptop','progresivo_proyector','progresivo_impresora','id_piso'], 'required'],
         ];
     }
 
