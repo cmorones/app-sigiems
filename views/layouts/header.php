@@ -80,6 +80,14 @@ Yii::$app->name = "APP-SIGIEMS";
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos',['/site/equipos'])?>
                         </li>
+
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Bajas IEMS',['/soporte/inv-bajas/bajas'])?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias de Desecho',['/soporte/inv-baterias/informe']) ?>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -97,14 +105,14 @@ Yii::$app->name = "APP-SIGIEMS";
                         <li>
                             <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard',['/site'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
                         </li>
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos IEMS',['/site/equipos'])?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias',['/soporte/inv-baterias/informe']) ?>
-                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['/site/externos'])?>
+                        </li
+                      
+                      
                     </ul>
                 </div>
             </div>                                   
@@ -112,7 +120,7 @@ Yii::$app->name = "APP-SIGIEMS";
                 <div class="menu-box">
                     <ul>
                         <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Soporte Técnico</a>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario IEMS</a>
                         </li>
                          <?php  
                         if(Yii::$app->user->can('mesaAyuda')) {
@@ -127,15 +135,19 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
                         </li>
 
+                    
 
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks',['/soporte/inv-nobreak/index']) ?>
                         </li>
 
+                       
+
                          <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras',['/soporte/inv-impresoras/index']) ?>
                         </li>
 
+                      
 
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
@@ -146,7 +158,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                           <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias',['/soporte/inv-baterias/index']) ?>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias de Desecho',['/soporte/inv-baterias/index']) ?>
                         </li>
 
                          <li>
@@ -157,6 +169,51 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-share-alt"></i>Prestamo de Equipos',['/soporte/solicitud-presta/index']) ?>
                         </li>
                          <?php
+                            }
+
+
+
+                        }
+                         
+                        ?>
+
+
+                    </ul>
+                </div>
+            </div>
+
+             <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario Externo</a>
+                        </li>
+                         <?php  
+                        if(Yii::$app->user->can('mesaAyuda')) {
+                         ?>
+                        
+                        <?php
+                       
+                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
+                        ?>
+
+                  
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos Externos',['/soporte/inv-equipos-ex/index']) ?>
+                        </li>
+
+
+                            <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks Externos',['/soporte/inv-nobreak-ex/index']) ?>
+                        </li>
+
+                     
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras Externos',['/soporte/inv-impresoras-ex/index']) ?>
+                        </li>
+
+
+                          <?php
                             }
 
 
@@ -180,14 +237,16 @@ Yii::$app->name = "APP-SIGIEMS";
             <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="menu-box">
                     <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Telecomunicaciones</a>
-                        </li>
+                   
                          <?php  
                         if(Yii::$app->user->can('mesaAyuda')) {
                                                     
                          if(Yii::$app->user->can('/soporte/inv-telecom/index')) {
                         ?>
+
+                          <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Telecomunicaciones</a>
+                        </li>
 
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom',['/soporte/inv-telecom/index']) ?>
@@ -229,7 +288,12 @@ Yii::$app->name = "APP-SIGIEMS";
 
                         <li>
 
-                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe PDF',['/soporte/inf-pdf/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos IEMS-PDF',['/soporte/inf-pdf/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+              
+                        </li>
+                        <li>
+
+                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos Externos-PDF',['/soporte/inf-pdfex/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
               
                         </li>
                         <?php

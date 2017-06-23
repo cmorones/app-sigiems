@@ -35,7 +35,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/main.js',
-        '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js',
+        '//momentjs.com/downloads/moment-with-locales.min.js',
         '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
        // 'assets/js/jquery.min.js',
         /*'assets/js/bootstrap.min.js',

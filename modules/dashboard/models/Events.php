@@ -68,7 +68,7 @@ class Events extends \yii\db\ActiveRecord
   
     public static function find()
     {
-	return parent::find()->andWhere(['<>', 'is_status', 2]);
+    return parent::find()->andWhere(['<>', 'is_status', 2]);
     }
 
     /**
@@ -91,19 +91,19 @@ class Events extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-			'event_id' => Yii::t('dash', 'Event ID'),
-            'event_title' => Yii::t('dash', 'Title'),
-            'event_detail' => Yii::t('dash', 'Detail'),
-            'event_start_date' => Yii::t('dash', 'Start Date'),
-            'event_end_date' => Yii::t('dash', 'End Date'),
-            'event_type' => Yii::t('dash', 'Event Type'),
-            'event_url' => Yii::t('dash', 'Url'),
-            'event_all_day' => Yii::t('dash', 'All Day'),
-            'created_at' => Yii::t('dash', 'Created At'),
-            'created_by' => Yii::t('dash', 'Created By'),
-            'updated_at' => Yii::t('dash', 'Updated At'),
-            'updated_by' => Yii::t('dash', 'Updated By'),
-            'is_status' => Yii::t('dash', 'Is Status'),
+            'event_id' => Yii::t('app', 'Event ID'),
+            'event_title' => Yii::t('app', 'Title'),
+            'event_detail' => Yii::t('app', 'Detail'),
+            'event_start_date' => Yii::t('app', 'Start Date'),
+            'event_end_date' => Yii::t('app', 'End Date'),
+            'event_type' => Yii::t('app', 'Event Type'),
+            'event_url' => Yii::t('app', 'Url'),
+            'event_all_day' => Yii::t('app', 'All Day'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'updated_by' => Yii::t('app', 'Updated By'),
+            'is_status' => Yii::t('app', 'Is Status'),
         ];
     }
 }

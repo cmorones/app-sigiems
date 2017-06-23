@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
 <div class="row">
   <div class="col-xs-12">
     <h2 class="page-header">    
-        <i class="fa fa-user"></i>Información equipo
+        <i class="fa fa-user"></i>Información equipos propiedad del IEMS
         <div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 
             <?= Html::a('<i class="fa fa-file-pdf-o"></i> '.Yii::t('app', 'Regresar'), ['/soporte/inv-equipos'], ['class' => 'btn-sm btn btn-warning', 'id' => 'export-pdf']) ?>

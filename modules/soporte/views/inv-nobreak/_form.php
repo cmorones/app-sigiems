@@ -21,7 +21,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
 
 <div class="inv-impresoras-form">
 <div class="<?php echo $model->isNewRecord ? 'box-success' : 'box-info'; ?> box view-item col-xs-12 col-lg-12">
-<div class="col-lg-8 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title"></h3>
+<div class="col-lg-8 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title">No-breaks Externos</h3>
   </div>
   <div class="col-lg-4 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
     <div class="col-xs-4 edusecArLangHide"></div>
@@ -62,7 +62,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                              'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
                                                    'onchange'=>'
                                                         $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-nobreak/modelos?id=').'"+$(this).val(), function( data ) {
-                                                          $( "select#invnobreak-modelo" ).html( data );
+                                                          $( "select#invnobreakex-modelo" ).html( data );
                                                         });
 
 

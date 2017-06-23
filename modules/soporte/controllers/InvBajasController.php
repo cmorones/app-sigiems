@@ -31,7 +31,7 @@ class InvBajasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos'],
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -75,6 +75,17 @@ class InvBajasController extends Controller
         ]);
     }
 
+       public function actionBajas()
+    {
+       // $searchModel = new InvBajasSearch();
+      //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$id_p);
+
+        return $this->render('bajas_iems', [
+            //'searchModel' => $searchModel,
+            //'dataProvider' => $dataProvider,
+        ]);
+    }
+
      public function actionValidacion()
     {
        // $searchModel = new InvBajasSearch();
@@ -97,6 +108,19 @@ class InvBajasController extends Controller
             'idp' => $idp,
         ]);
     }
+
+      public function actionPeriodototal($idp)
+    {
+        $searchModel = new InvBajasSearch();
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$idp);
+
+        return $this->render('periodototal', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'idp' => $idp,
+        ]);
+    }
+
 
     /**
      * Displays a single InvBajas model.

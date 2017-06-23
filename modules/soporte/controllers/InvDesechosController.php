@@ -4,6 +4,8 @@ namespace app\modules\soporte\controllers;
 
 use Yii;
 use app\modules\soporte\models\InvDesechos;
+use app\modules\soporte\models\MarcaDesecho;
+use app\modules\soporte\models\ModeloDesecho;
 use app\modules\soporte\models\InvDesechosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -112,12 +114,29 @@ class InvDesechosController extends Controller
     }
           public function actionModelos($id)
     {
-        $cuentaModelos = CatModelo::find()->where(['id'=>$id])->count();
-        $modelos = CatModelo::find()->where(['id'=>$id])->all();
+        $cuentaModelos = ModeloDesecho::find()->where(['id_marca'=>$id])->count();
+        $modelos = ModeloDesecho::find()->where(['id_marca'=>$id])->all();
 
         if ($cuentaModelos > 0) {
             foreach ($modelos as $key => $value) {
-                echo "<option value=". $value->id . ">". $value->modelo. "</option>";
+                echo "<option value=". $value->id . ">". $value->nombre. "</option>";
+            }
+        }else{
+            echo "<option>-</option>";
+        }
+    }
+
+         public function actionMarcas($id)
+    {
+        $cuentaModelos = MarcaDesecho::find()->where(['tipo'=>$id])->count();
+        $modelos = MarcaDesecho::find()->where(['tipo'=>$id])->all();
+
+         echo "<option>Selecciona Marca</option>";
+
+        if ($cuentaModelos > 0) {
+
+            foreach ($modelos as $key => $value) {
+                echo "<option value=". $value->id . ">". $value->nombre. "</option>";
             }
         }else{
             echo "<option>-</option>";
@@ -152,4 +171,32 @@ class InvDesechosController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSubcat() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+        if ($parents != null) {
+            $cat_id = $parents[0];
+            $out = self::getSubCatList($cat_id); 
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+            echo Json::encode(['output'=>$out, 'selected'=>'']);
+            return;
+        }
+    }
+    echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+
+public function getSubCatList($cat_id){
+
+    $modelos = CatMarca::find()->where(['id'=>$cat_id])->all();
+
+    return $modelos;
+
+}
 }

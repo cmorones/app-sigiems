@@ -57,9 +57,21 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
             'kartik\\alert\\' => 13,
             'kartik\\affix\\' => 13,
         ),
+        'd' => 
+        array (
+            'dosamigos\\datetimepicker\\' => 25,
+        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
+        ),
+        'b' => 
+        array (
+            'bs\\dbManager\\' => 13,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Component\\Process\\' => 26,
         ),
         'F' => 
         array (
@@ -212,9 +224,21 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-affix',
         ),
+        'dosamigos\\datetimepicker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-date-time-picker-widget/src',
+        ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'bs\\dbManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beaten-sect0r/yii2-db-manager/src',
+        ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
         ),
         'Faker\\' => 
         array (

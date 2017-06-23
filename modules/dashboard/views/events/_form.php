@@ -15,14 +15,14 @@ if(isset($_REQUEST['start_date']) && isset($_REQUEST['end_date'])) {
 if(isset($_REQUEST['event_id'])) {
 	echo '<div class="visible-xs-4 col-sm-3 col-lg-3 pull-right">';
 	if(isset($_GET['return_dashboard'])) {
-		echo Html::a('<i class="fa fa-trash-o"></i> '.Yii::t('dash', 'Remove'), ['events/event-delete', 'e_id' => $_REQUEST['event_id'], 'return_dashboard'=>1], ['class' => 'btn btn-danger btn-block', 'title' => Yii::t('dash', 'Remove/Delete Event'), 'data' => ['confirm' => Yii::t('dash', 'Are you sure you want to delete this item?'), 'method' => 'post'],]);
+		echo Html::a('<i class="fa fa-trash-o"></i> '.Yii::t('app', 'Remove'), ['events/event-delete', 'e_id' => $_REQUEST['event_id'], 'return_dashboard'=>1], ['class' => 'btn btn-danger btn-block', 'title' => Yii::t('app', 'Remove/Delete Event'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],]);
 	} else {
-		echo Html::a('<i class="fa fa-trash-o"></i> '.Yii::t('dash', 'Remove'), ['events/event-delete', 'e_id' => $_REQUEST['event_id']], ['class' => 'btn btn-danger btn-block', 'title' => Yii::t('dash', 'Remove/Delete Event'), 'data' => ['confirm' => Yii::t('dash', 'Are you sure you want to delete this item?'), 'method' => 'post'],]);
+		echo Html::a('<i class="fa fa-trash-o"></i> '.Yii::t('app', 'Remove'), ['events/event-delete', 'e_id' => $_REQUEST['event_id']], ['class' => 'btn btn-danger btn-block', 'title' => Yii::t('app', 'Remove/Delete Event'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],]);
 	} 
 	echo '</div>';
 	
-	$model->event_start_date = Yii::$app->formatter->asDateTime($model->event_start_date);
-	$model->event_end_date = Yii::$app->formatter->asDateTime($model->event_end_date);
+//	$model->event_start_date = Yii::$app->formatter->asDateTime($model->event_start_date);
+//$model->event_end_date = Yii::$app->formatter->asDateTime($model->event_end_date);
 }
 ?>
 <div class="col-xs-12 col-lg-12">
@@ -31,7 +31,7 @@ if(isset($_REQUEST['event_id'])) {
     <?php $form = ActiveForm::begin([
 			'id' => 'events-form',
 			'fieldConfig' => [
-			    'template' => "{label}{input}{error}",
+			    'template' => "{label}{input}",
 			],
     ]); ?>
 
@@ -51,7 +51,7 @@ if(isset($_REQUEST['event_id'])) {
 				'autoclose' => true,
 				'maxView' => 0,
 				'startView' => 0,
-				'format' => 'dd-mm-yyyy hh:ii:ss',
+				'format' => 'yyyy-mm-dd hh:ii:ss',
 			], 
 		]);
     ?>
@@ -63,27 +63,21 @@ if(isset($_REQUEST['event_id'])) {
 			'options' => ['placeholder' => '', 'readOnly' => true],
 			'pluginOptions' => [
 				'autoclose' => true,
-				'format' => 'dd-mm-yyyy hh:ii:ss',
+				'format' => 'yyyy-mm-dd hh:ii:ss',
 			], 
 		]);
     ?>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-lg-12">
-    <?= $form->field($model, 'event_type')->dropDownList([1 => 'Holiday', 2 => 'Important Notice', 3 => 'Meeting', 4 => 'Messages'],['prompt'=> Yii::t('dash', '--- Select Type ---')]); ?>
+    <?= $form->field($model, 'event_type')->dropDownList([1 => 'Urgente', 2 => 'Importante', 3 => 'Media', 4 => 'Baja'],['prompt'=> Yii::t('app', '--- Select Type ---')]); ?>
     </div>
 
-    <div class="form-group col-xs-12 col-sm-6 col-lg-5 no-padding edusecArLangCss">
+    <div class="form-group col-xs-12 col-sm-6 col-lg-5 no-padding">
 	<div class="col-xs-6">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('dash', 'Create') : Yii::t('dash', 'Update'), ['class' => $model->isNewRecord  ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Agregar') : Yii::t('app', 'Modificar'), ['class' => 'btn btn-success']) ?> 
 	</div>
-	<div class="col-xs-6">
-	<?php if(isset($_GET['return_dashboard'])) 
-		echo Html::a(Yii::t('dash', 'Cancel'), ['/dashboard'], ['class' => 'btn btn-default btn-block']);
-	      else
-		echo Html::a(Yii::t('dash', 'Cancel'), ['index'], ['class' => 'btn btn-default btn-block']);
-	?>
-	</div>
+	
     </div>
 
     <?php ActiveForm::end(); ?>

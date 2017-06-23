@@ -6,6 +6,7 @@ namespace app\modules\soporte\models;
 use Yii;
 use app\modules\soporte\models\EstadoEquipo;
 use app\modules\soporte\models\CatAntiguedad;
+use app\modules\soporte\models\CatProcedencia;
 use app\modules\admin\models\CatPlanteles;
 use app\modules\admin\models\CatAreas;
 use app\modules\admin\models\CatPisos;
@@ -151,4 +152,6 @@ class InvImpresoras extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CatModelo::className(),['id'=>'modelo']);
     }
+
+    
 }

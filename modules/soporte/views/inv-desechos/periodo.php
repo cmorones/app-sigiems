@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             //'id_plantel',
              [
               'attribute'=>'tipo',
@@ -39,11 +39,23 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatMarca::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             //'marca',
-            //'modelo',
-            // 'serie',
+            [
+              'attribute'=>'modelo',
+              'value' => 'catModelo.modelo',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatModelo::find()->orderBy('id')->asArray()->all(),'id','modelo')
+            ],
+            'serie',
             // 'id_periodo',
-            // 'id_area',
-            // 'id_piso',
+            [
+              'attribute'=>'id_area',
+              'value' => 'catAreas.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+            [
+              'attribute'=>'id_piso',
+              'value' => 'catPiso.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatPiso::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             // 'observaciones',
             // 'created_at',
             // 'created_by',
@@ -54,7 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-        <p>
-        <?= Html::a('Agregar Desecho', ['create'], ['class' => 'btn btn-success']) ?>
+    <p>
+        
+         <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

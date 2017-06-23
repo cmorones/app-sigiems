@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
 use app\modules\admin\models\EstadoBaja;
+use app\modules\admin\models\CatPlanteles;
 
 /**
  * This is the model class for table "inv_bajas".
@@ -39,6 +40,7 @@ class InvBajas extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    var $validacion;
     public static function tableName()
     {
         return 'inv_bajas';
@@ -86,6 +88,7 @@ class InvBajas extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
             'certificado' => 'Certificado',
+            'validacion' => 'ValidarItem'
 
         ];
     }

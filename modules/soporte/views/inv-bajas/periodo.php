@@ -91,12 +91,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                [
              'class' => 'app\components\CustomActionColumn',
-             'template' => '{update} {delete}',
+             'template' => '{dictaminar} {delete}',
              'buttons' => [
              'update' => function ($url, $model, $idp) {
                
                 $url .= '&idp=' . $idp;
-                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'Update')]));
+                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'Dictaminar')]));
             },
         'delete' => function ($url, $model) {
                 return ((Yii::$app->user->can("/soporte/inv-bajas/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');

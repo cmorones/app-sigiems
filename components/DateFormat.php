@@ -37,6 +37,7 @@
  * @package EduSec.components 
  */
 
+
 namespace app\components;
 
 use Yii;
@@ -50,25 +51,25 @@ class DateFormat extends Component
                 return $datef;
         }
 
-	public function getDTFormat($param) // for event date
+        public function getDTFormat($param) // for event date
         {
                 $datef = (!empty($param) ? date("d-m-Y H:i:s", $param) : NULL);
                 return $datef;
         }
 
-	public function getDateTimeFormat($param)
+        public function getDateTimeFormat($param)
         {
                 $datet = (!empty($param) ? Yii::$app->formatter->asDateTime($param) : NULL);
                 return $datet;
         }
 
-	public function storeDateTimeFormat($param)
+        public function storeDateTimeFormat($param)
         {
                 $datet = (!empty($param) ? date('Y-m-d H:i:s',strtotime($param)) : NULL);
                 return $datet;
         }
 
-	public function getDateDisplay($param)
+        public function getDateDisplay($param)
         {
                 $datef = (!empty($param) ? Yii::$app->formatter->asDate($param) : NULL);
                 return $datef;

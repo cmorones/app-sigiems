@@ -13,12 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 <br>
-<div class="inv-impresoras-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
+<div class="col-xs-12" style="padding-top: 10px;">
+  <div class="box">
+   <div class="box-body table-responsive">
+     <div class="assignment-index">
+  <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>
+   
+     </div>
+   </div>
+  </div>

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace app\modules\soporte\models;
 
 use yii\db\ActiveRecord;
@@ -17,12 +18,10 @@ use app\modules\admin\models\CatPlanteles;
 use app\modules\admin\models\CatAreas;
 use app\modules\admin\models\CatPisos;
 
-
 /**
- * This is the model class for table "inv_equipos".
+ * This is the model class for table "inv_equipos_ex".
  *
  * @property integer $id
- * @property integer $progresivo
  * @property integer $id_tipo
  * @property integer $marca
  * @property integer $modelo
@@ -32,7 +31,17 @@ use app\modules\admin\models\CatPisos;
  * @property string $ram
  * @property string $disco_duro
  * @property integer $id_plantel
+ * @property integer $id_area
+ * @property integer $id_piso
+ * @property integer $clasif
+ * @property string $usuario
  * @property string $observaciones
+ * @property string $monitor
+ * @property string $monitor_serie
+ * @property string $teclado
+ * @property string $teclado_serie
+ * @property string $mouse
+ * @property string $mouse_serie
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
@@ -41,7 +50,7 @@ use app\modules\admin\models\CatPisos;
  * @property Users $createdBy
  * @property Users $updatedBy
  */
-class InvEquipos extends ActiveRecord
+class InvEquiposEx extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -50,7 +59,6 @@ class InvEquipos extends ActiveRecord
     {
         return 'inv_equipos_ex';
     }
- 
 
     /**
      * @inheritdoc
@@ -58,34 +66,14 @@ class InvEquipos extends ActiveRecord
     public function rules()
     {
         return [
-            //[['progresivo'], 'progresivovalido'],
-           // [['progresivo'], 'unique', 'message'=>'Progresivo ya registrado'],
-            [['id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'clasif', 'created_by', 'updated_by'], 'integer'],
-
-            [['serie', 'procesador', 'ram', 'disco_duro', 'observaciones', 'monitor', 'monitor_serie', 'teclado', 'teclado_serie', 'mouse', 'mouse_serie'], 'string'],
-            [[ 'serie', 'procesador', 'ram', 'id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'clasif', 'created_at', 'created_by'], 'required', 'message'=>''],
-            [['usuario', 'id_area', 'id_piso'], 'required', 'on'=>'upuser'],
-          
+            [['id_tipo', 'marca', 'modelo', 'estado', 'id_plantel', 'id_area', 'id_piso', 'clasif', 'created_by', 'updated_by','procedencia'], 'integer'],
+            [['serie', 'procesador', 'ram', 'disco_duro', 'usuario', 'observaciones', 'monitor', 'monitor_serie', 'teclado', 'teclado_serie', 'mouse', 'mouse_serie'], 'string'],
+            [['clasif','created_at', 'created_by'], 'required'],
+             [['usuario', 'id_area', 'id_piso', 'observaciones2'], 'required', 'on'=>'upuser'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
-    }
-
-    public function progresivovalido($attribute, $params){
-
-
-       $cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(progresivo) FROM bienes_muebles where id_situacion_bien=1 and clave_cabms=\'5151000138\' and progresivo='.$this->progresivo.'')->queryColumn();
-
-       // $cuenta_inv[0] =0;
-
-                if ($cuenta_inv[0] == 0) {
-
-                    return $this->addError("progresivo", "Este progresivo no existe en invetario");
-                   //return true;
-            }
-           
-            
     }
 
     /**
@@ -95,19 +83,19 @@ class InvEquipos extends ActiveRecord
     {
         return [
             'id' => 'ID',
-           // 'progresivo' => 'Progresivo',
-            'id_tipo' => 'Tipo',
+            'id_tipo' => 'Id Tipo',
             'marca' => 'Marca',
             'modelo' => 'Modelo',
             'serie' => 'Serie',
-            'estado' => 'Estado Actual',
+            'estado' => 'Estado',
             'procesador' => 'Procesador',
             'ram' => 'Ram',
             'disco_duro' => 'Disco Duro',
-            'id_plantel' => 'Plantel',
-            'id_area' => 'Area',
-            'id_piso' => 'Piso',
-            'clasif' => 'Antiguedad',
+            'id_plantel' => 'Id Plantel',
+            'id_area' => 'Id Area',
+            'id_piso' => 'Id Piso',
+            'clasif' => 'Clasif',
+            'usuario' => 'Usuario',
             'observaciones' => 'Observaciones',
             'monitor' => 'Monitor',
             'monitor_serie' => 'Monitor Serie',
@@ -119,6 +107,8 @@ class InvEquipos extends ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'procedencia' => 'Procedencia',
+
         ];
     }
 
@@ -138,7 +128,7 @@ class InvEquipos extends ActiveRecord
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
 
-    public function getTipoEquipo()
+     public function getTipoEquipo()
     {
         return $this->hasOne(TipoEquipo::className(),['id'=>'id_tipo']);
     }
@@ -176,6 +166,8 @@ class InvEquipos extends ActiveRecord
         return $this->hasOne(CatPisos::className(),['id'=>'id_piso']);
     }
 
-    
-
+      public function getCatProcedencia()
+    {
+        return $this->hasOne(CatProcedencia::className(),['id'=>'procedencia']);
+    }
 }
