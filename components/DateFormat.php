@@ -37,7 +37,6 @@
  * @package EduSec.components 
  */
 
-
 namespace app\components;
 
 use Yii;

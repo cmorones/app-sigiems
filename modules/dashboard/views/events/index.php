@@ -8,8 +8,8 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\EventsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Manage Events');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['default/index']];
+$this->title = Yii::t('dash', 'Manage Events');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('dash', 'Dashboard'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
   <div class="col-xs-12">
 	<h2 class="page-header">
-		<?php echo Yii::t('app', 'Manage Events') ?>
+		<?php echo Yii::t('dash', 'Manage Events') ?>
 	</h2>
   </div><!-- /.col -->
 </div>
@@ -41,14 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-solid box-warning">
   <div class="box-header">
-    <h3 class="box-title"><i class="ion ion-calendar"></i> <?php echo Yii::t('app', 'Event Schedule') ?></h3>
+    <h3 class="box-title"><i class="ion ion-calendar"></i> <?php echo Yii::t('dash', 'Event Schedule') ?></h3>
   </div><!-- /.box-header -->
   <div class="box-body">
    <div class="events-index">
     <?php
 	$AEurl = Url::to(["events/add-event"]);
 	$UEurl = Url::to(["events/update-event"]);
-	$AddEvent = Yii::t('app', 'Add Event');
+	$AddEvent = Yii::t('dash', 'Add Event');
 	$JSEvent = <<<EOF
 function(start, end, allDay) {
 	var start = moment(start).unix();
@@ -66,7 +66,7 @@ function(start, end, allDay) {
    	});
 		}
 EOF;
-$updateEvent = Yii::t('app', 'Update Event');
+$updateEvent = Yii::t('dash', 'Update Event');
 	$JSEventClick = <<<EOF
 function(calEvent, jsEvent, view) {
     var eventId = calEvent.id;
@@ -108,7 +108,7 @@ EOF;
     ?>
 
     <?= \yii2fullcalendar\yii2fullcalendar::widget([
-			'options' => ['language' => 'en'],
+			'options' => ['language' => 'es'],
 			'clientOptions' => [
 				'fixedWeekCount' => false,
 				'weekNumbers'=>true,
@@ -133,10 +133,10 @@ EOF;
    </div>
    <div class="row">
 	<ul class="legend">
-	    <li><span class="holiday"></span> <?php echo Yii::t('app', 'Holiday') ?></li>
-	    <li><span class="importantnotice"></span> <?php echo Yii::t('app', 'Important Notice') ?></li>
-	    <li><span class="meeting"></span> <?php echo Yii::t('app', 'Meeting') ?></li>
-	    <li><span class="messages"></span> <?php echo Yii::t('app', 'Messages') ?></li>
+	    <li><span class="holiday"></span> <?php echo Yii::t('dash', 'Holiday') ?></li>
+	    <li><span class="importantnotice"></span> <?php echo Yii::t('dash', 'Important Notice') ?></li>
+	    <li><span class="meeting"></span> <?php echo Yii::t('dash', 'Meeting') ?></li>
+	    <li><span class="messages"></span> <?php echo Yii::t('dash', 'Messages') ?></li>
 	</ul>
    </div>
   </div>
@@ -164,7 +164,7 @@ EOF;
 	yii\bootstrap\Modal::begin([
 		'id' => 'eventModal',
 		//'header' => "<div class='row'><div class='col-xs-6'><h3>Add Event</h3></div><div class='col-xs-6'>".Html::a('Delete', ['#'], ['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:5px'])."</div></div>",
-		'header' => "<h3>".Yii::t('app', 'Add Event')."</h3>",
+		'header' => "<h3>".Yii::t('dash', 'Add Event')."</h3>",
 	]);
 
 	yii\bootstrap\Modal::end();

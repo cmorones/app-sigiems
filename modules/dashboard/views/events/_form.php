@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datetime\DateTimePicker;
+//use kartik\widgets\DateTimePicker
 /* @var $this yii\web\View */
 /* @var $model app\models\Events */
 /* @var $form yii\widgets\ActiveForm */
@@ -21,8 +22,8 @@ if(isset($_REQUEST['event_id'])) {
 	} 
 	echo '</div>';
 	
-//	$model->event_start_date = Yii::$app->formatter->asDateTime($model->event_start_date);
-//$model->event_end_date = Yii::$app->formatter->asDateTime($model->event_end_date);
+	$model->event_start_date = Yii::$app->formatter->asDateTime($model->event_start_date);
+	$model->event_end_date = Yii::$app->formatter->asDateTime($model->event_end_date);
 }
 ?>
 <div class="col-xs-12 col-lg-12">
@@ -31,7 +32,7 @@ if(isset($_REQUEST['event_id'])) {
     <?php $form = ActiveForm::begin([
 			'id' => 'events-form',
 			'fieldConfig' => [
-			    'template' => "{label}{input}",
+			    'template' => "{label}{input}{error}",
 			],
     ]); ?>
 
@@ -51,7 +52,7 @@ if(isset($_REQUEST['event_id'])) {
 				'autoclose' => true,
 				'maxView' => 0,
 				'startView' => 0,
-				'format' => 'yyyy-mm-dd hh:ii:ss',
+				'format' => 'dd-mm-yyyy hh:ii:ss',
 			], 
 		]);
     ?>
@@ -63,21 +64,27 @@ if(isset($_REQUEST['event_id'])) {
 			'options' => ['placeholder' => '', 'readOnly' => true],
 			'pluginOptions' => [
 				'autoclose' => true,
-				'format' => 'yyyy-mm-dd hh:ii:ss',
+				'format' => 'dd-mm-yyyy hh:ii:ss',
 			], 
 		]);
     ?>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-lg-12">
-    <?= $form->field($model, 'event_type')->dropDownList([1 => 'Urgente', 2 => 'Importante', 3 => 'Media', 4 => 'Baja'],['prompt'=> Yii::t('app', '--- Select Type ---')]); ?>
+    <?= $form->field($model, 'event_type')->dropDownList([1 => 'Holiday', 2 => 'Important Notice', 3 => 'Meeting', 4 => 'Messages'],['prompt'=> Yii::t('app', '--- Select Type ---')]); ?>
     </div>
 
-    <div class="form-group col-xs-12 col-sm-6 col-lg-5 no-padding">
+    <div class="form-group col-xs-12 col-sm-6 col-lg-5 no-padding edusecArLangCss">
 	<div class="col-xs-6">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Agregar') : Yii::t('app', 'Modificar'), ['class' => 'btn btn-success']) ?> 
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord  ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
 	</div>
-	
+	<div class="col-xs-6">
+	<?php if(isset($_GET['return_dashboard'])) 
+		echo Html::a(Yii::t('app', 'Cancel'), ['/dashboard'], ['class' => 'btn btn-default btn-block']);
+	      else
+		echo Html::a(Yii::t('app', 'Cancel'), ['index'], ['class' => 'btn btn-default btn-block']);
+	?>
+	</div>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -68,7 +68,7 @@ class Events extends \yii\db\ActiveRecord
   
     public static function find()
     {
-    return parent::find()->andWhere(['<>', 'is_status', 2]);
+	return parent::find()->andWhere(['<>', 'is_status', 2]);
     }
 
     /**
@@ -91,7 +91,7 @@ class Events extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'event_id' => Yii::t('app', 'Event ID'),
+			'event_id' => Yii::t('app', 'Event ID'),
             'event_title' => Yii::t('app', 'Title'),
             'event_detail' => Yii::t('app', 'Detail'),
             'event_start_date' => Yii::t('app', 'Start Date'),

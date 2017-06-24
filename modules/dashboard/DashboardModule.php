@@ -2,10 +2,19 @@
 
 namespace app\modules\dashboard;
 
+/**
+ * dashboard module definition class
+ */
 class DashboardModule extends \yii\base\Module
 {
+    /**
+     * @inheritdoc
+     */
     public $controllerNamespace = 'app\modules\dashboard\controllers';
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
