@@ -23,13 +23,18 @@ class Event extends Model
    * @var string
    */
   public $title;
-  
+
   /**
-   * The description text for an event
+   * The text on an event's element
    * @var string
    */
-   public $description;
+  public $description;
 
+  /**
+   * the event type of the shown event
+   * @var integer
+   */
+  public $event_type;
   /**
    * Whether an event occurs at a specific time-of-day. This property affects whether an event's time is shown. Also, in the agenda views, determines if it is displayed in the "all-day" section.
    * If this value is not explicitly specified, allDayDefault will be used if it is defined.
@@ -53,20 +58,6 @@ class Event extends Model
    * @var datetime
    */
   public $end;
-  
-  /**
-   * The range of dates that an event is to show on the calendar.
-   * Used with a function to check the dates in eventRender against the range and only render
-   * the dates that fall within the range.
-   * @var range
-   */
-  public $ranges;
-
-  /**
-   * Day of Week settings for repeating events. Enter the numerical days of the week ex. [1,4] would repeat on Monday and Thursday.
-   * @var array
-   */
-   public $dow;
   
   /**
    * A URL that will be visited when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
@@ -127,17 +118,12 @@ class Event extends Model
    * @var [type]
    */
   public $textColor;
-  
-  /**
-   * the unique resource for the event
-   */
-  public $resourceId;
 
   public function rules()
   {
     return [
-      [['id', 'resourceId'], 'integer'],
-      ['title, allDay, start, end, url, className, source, color, backgroundColor, borderColor, textColor', 'safe'],
+      ['id', 'integer'],
+      ['title, description, event_type, allDay, start, end, url, className, source, color, backgroundColor, borderColor, textColor', 'safe'],
       ['editable, startEditable, durationEditable', 'boolean'],
     ];
   }

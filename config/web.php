@@ -76,14 +76,14 @@ $config = [
                 ],
             ],
         ],
-        'formatter' => [
-            'dateFormat' => 'yyyy-MM-dd',
-            'datetimeFormat' => 'php:Y-m-d H:i:s',
+          'formatter' => [
+            'dateFormat' => 'dd-MM-yyyy',
+            'datetimeFormat' => 'php:d-m-Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'Rs.',
-          //  'class' => 'yii\i18n\Formatter',
+            'class' => 'yii\i18n\Formatter',
         ],
         'db' => require(__DIR__ . '/db.php'),
         
