@@ -102,7 +102,7 @@ EOF;
 ?>
 
   <div class="row">
-     <div class="col-sm-6 col-xs-6">
+     <div class="col-sm-12 col-xs-12">
          <?= \yii2fullcalendar\yii2fullcalendar::widget([
       'options' => ['language' => 'en'],
       'clientOptions' => [
@@ -127,7 +127,13 @@ EOF;
       'ajaxEvents' => Url::toRoute(['/dashboard/events/view-events'])
   ]); ?>
      </div>
-     <div class="col-sm-6 col-xs-6">
+
+   </div> <!-- /.End ROW -->
+   <br>
+   <br>
+   <br>
+   <div class="row">
+      <div class="col-sm-8 col-xs-8">
            <h1>Listado de Activiades y/o eventos</h1> 
          <table class="table table-striped table-bordered">
       <tr>
@@ -170,13 +176,6 @@ foreach ($resultado as $value) {
      </table>
    
      </div>
-
-   </div> <!-- /.End ROW -->
-   <br>
-   <br>
-   <br>
-   <div class="row">
-      
    </div>
  
 </div><!-- /.box-body -->
