@@ -86,6 +86,12 @@ class EventsController extends Controller
         ]);
     }
 
+      public function actionEventos($id)
+    {
+        return $this->render('eventos');
+    }
+
+
     /**
      * Creates a new Events model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -142,10 +148,10 @@ class EventsController extends Controller
 	      $Event->description = $event->event_detail;
 	      $Event->start = $event->event_start_date;
 	      $Event->end = $event->event_end_date;
-	      $Event->color = (($event->event_type == 1) ? '#00A65A' : (($event->event_type == 2) ? '#00C0EF' : (($event->event_type == 3) ? '#F39C12' : '#074979')));
+	      $Event->color = (($event->event_type == 1) ? '#00C0EF' : (($event->event_type == 2) ? '#F39C12' : (($event->event_type == 3) ? '#00A65A' : '#ff0000')));
 	      $Event->textColor = '#FFF';
 	      $Event->borderColor = '#000';
-	      $Event->event_type = (($event->event_type == 1) ? 'Holiday' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
+	      $Event->event_type = (($event->event_type == 1) ? 'Pendiente' : (($event->event_type == 2) ? 'En Proceso' : (($event->event_type == 3) ? 'Termiando' : 'Fuera de Tiempo')));
 	      $Event->allDay = ($event->event_all_day == 1) ? true : false;
 	     // $Event->url = $event->event_url;
 	      $events[] = $Event;

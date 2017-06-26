@@ -71,12 +71,12 @@ if(isset($_REQUEST['event_id'])) {
     </div>
 
     <div class="col-xs-12 col-sm-12 col-lg-12">
-    <?= $form->field($model, 'event_type')->dropDownList([1 => 'Holiday', 2 => 'Important Notice', 3 => 'Meeting', 4 => 'Messages'],['prompt'=> Yii::t('app', '--- Select Type ---')]); ?>
+    <?= $form->field($model, 'event_type')->dropDownList([1 => 'Pendiente', 2 => 'En Proceso', 3 => 'Terminado', 4 => 'Fuera de Tiempo'],['prompt'=> Yii::t('app', '--- Select Type ---')]); ?>
     </div>
 
     <div class="form-group col-xs-12 col-sm-6 col-lg-5 no-padding edusecArLangCss">
 	<div class="col-xs-6">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord  ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Agregar') : Yii::t('app', 'Modificar'), ['class' => $model->isNewRecord  ? 'btn btn-success btn-block' : 'btn btn-info btn-block']) ?> 
 	</div>
 	<div class="col-xs-6">
 	<?php if(isset($_GET['return_dashboard'])) 
