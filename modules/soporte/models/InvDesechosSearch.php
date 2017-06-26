@@ -18,8 +18,9 @@ class InvDesechosSearch extends InvDesechos
     public function rules()
     {
         return [
-            [['id', 'id_plantel', 'marca', 'modelo', 'tipo', 'id_periodo', 'id_area', 'id_piso', 'created_by', 'updated_by'], 'integer'],
-            [['serie', 'observaciones', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'id_plantel', 'tipo', 'id_periodo', 'id_area', 'id_piso', 'created_by', 'updated_by'], 'integer'],
+            [[ 'marca', 'modelo'], 'string'],
+            [['serie', 'observaciones', 'created_at', 'updated_at', 'marca', 'modelo'], 'safe'],
 
         ];
     }
@@ -58,12 +59,12 @@ class InvDesechosSearch extends InvDesechos
             return $dataProvider;
         }
 
-         $id_p = Yii::$app->user->identity->id_plantel;
+         $id_plantel = Yii::$app->user->identity->id_plantel;
 
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_plantel' => $id_p,
+            'id_plantel' => $id_plantel,
             'marca' => $this->marca,
             'modelo' => $this->modelo,
             'tipo' => $this->tipo,

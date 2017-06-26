@@ -74,15 +74,26 @@ class InvDesechosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($idp)
     {
         $model = new InvDesechos();
 
                 if ($model->load(Yii::$app->request->post())){
             $model->created_at=new \yii\db\Expression('NOW()');
             $model->created_by=@Yii::$app->user->identity->user_id;
+            $model->id_plantel=Yii::$app->user->identity->id_plantel;
+            $model->id_periodo = $idp;
 
          $model->save() ;
+          if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -91,57 +102,42 @@ class InvDesechosController extends Controller
         }
     }
 
+    
+
     /**
      * Updates an existing InvDesechos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idp)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at=new \yii\db\Expression('NOW()');
-            $model->updated_by=@Yii::$app->user->identity->user_id;
-         $model->save();
-            return $this->redirect(['index', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->updated_by=Yii::$app->user->identity->user_id;
+            $model->updated_at = new Expression('NOW()');
+
+              if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+               // Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 //return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
+            return $this->redirect(['periodo', 'id' => $model->id,  'idp' => $idp]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
-          public function actionModelos($id)
-    {
-        $cuentaModelos = ModeloDesecho::find()->where(['id_marca'=>$id])->count();
-        $modelos = ModeloDesecho::find()->where(['id_marca'=>$id])->all();
 
-        if ($cuentaModelos > 0) {
-            foreach ($modelos as $key => $value) {
-                echo "<option value=". $value->id . ">". $value->nombre. "</option>";
-            }
-        }else{
-            echo "<option>-</option>";
-        }
-    }
 
-         public function actionMarcas($id)
-    {
-        $cuentaModelos = MarcaDesecho::find()->where(['tipo'=>$id])->count();
-        $modelos = MarcaDesecho::find()->where(['tipo'=>$id])->all();
 
-         echo "<option>Selecciona Marca</option>";
-
-        if ($cuentaModelos > 0) {
-
-            foreach ($modelos as $key => $value) {
-                echo "<option value=". $value->id . ">". $value->nombre. "</option>";
-            }
-        }else{
-            echo "<option>-</option>";
-        }
-    }
 
     /**
      * Deletes an existing InvDesechos model.
@@ -172,31 +168,6 @@ class InvDesechosController extends Controller
         }
     }
 
-    public function actionSubcat() {
-    $out = [];
-    if (isset($_POST['depdrop_parents'])) {
-        $parents = $_POST['depdrop_parents'];
-        if ($parents != null) {
-            $cat_id = $parents[0];
-            $out = self::getSubCatList($cat_id); 
-            // the getSubCatList function will query the database based on the
-            // cat_id and return an array like below:
-            // [
-            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-            // ]
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
-            return;
-        }
-    }
-    echo Json::encode(['output'=>'', 'selected'=>'']);
-}
 
-public function getSubCatList($cat_id){
 
-    $modelos = CatMarca::find()->where(['id'=>$cat_id])->all();
-
-    return $modelos;
-
-}
 }

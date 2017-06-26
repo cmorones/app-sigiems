@@ -17,6 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <p>
+        <?= Html::a('<i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>Regresar', ['index', 'idp'=>$idp], ['class' => 'btn btn-info btn-sm']) ?>
+    </p>
 <div class=" box view-item col-xs-12 col-lg-12">
 <br>
 
@@ -33,17 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'catDesechos.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatDesechos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            [
-              'attribute'=>'marca',
-              'value' => 'catMarca.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatMarca::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
-            //'marca',
-            [
-              'attribute'=>'modelo',
-              'value' => 'catModelo.modelo',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatModelo::find()->orderBy('id')->asArray()->all(),'id','modelo')
-            ],
+            'marca',
+            'modelo',
             'serie',
             // 'id_periodo',
             [
@@ -66,8 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <p>
-        
-         <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
+        <p>
+        <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Desecho', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

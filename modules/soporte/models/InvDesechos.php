@@ -3,6 +3,8 @@
 namespace app\modules\soporte\models;
 
 use Yii;
+use app\modules\soporte\models\CatDesechos;
+use app\modules\soporte\models\CatMarca;
 
 /**
  * This is the model class for table "inv_desechos".
@@ -39,9 +41,9 @@ class InvDesechos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_plantel', 'marca', 'modelo', 'tipo', 'id_periodo', 'id_area', 'id_piso', 'created_by', 'updated_by'], 'integer'],
-            [['serie', 'observaciones'], 'string'],
-            [['id_plantel','marca','modelo','tipo','serie','id_periodo','id_area','id_piso','observaciones'], 'required'],
+            [['id_plantel', 'tipo', 'id_periodo', 'id_area', 'id_piso', 'created_by', 'updated_by'], 'integer'],
+            [['serie', 'observaciones', 'marca', 'modelo'], 'string'],
+            [['marca','modelo','tipo','serie','id_area','id_piso','observaciones'], 'required'],
             [['id_plantel','marca','modelo','tipo','serie','id_periodo','id_area','id_piso','observaciones'], 'safe'],
         ];
     }
@@ -69,12 +71,24 @@ class InvDesechos extends \yii\db\ActiveRecord
             
         ];
     }
-            public function getcatDesechos()
+          public function getCatDesechos()
     {
         return $this->hasOne(CatDesechos::className(),['id'=>'tipo']);
     }
-                public function getcatMarca()
+              public function getCatMarca()
     {
         return $this->hasOne(CatMarca::className(),['id'=>'marca']);
+    }
+                  public function getCatModelo()
+    {
+        return $this->hasOne(CatModelo::className(),['id'=>'modelo']);
+    }
+                      public function getCatAreas()
+    {
+        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
+    }
+                          public function getCatPiso()
+    {
+        return $this->hasOne(CatPiso::className(),['id'=>'id_piso']);
     }
 }

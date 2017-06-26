@@ -76,7 +76,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                          <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['/site/externos'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['ext'])?>
                         </li>
 
                         <li>
@@ -129,9 +129,10 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
                         </li>
 
-                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['/site/externos'])?>
-                        </li
+                             <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['ext'])?>
+                        </li>
+
                       
                       
                     </ul>
@@ -314,7 +315,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
                         <li>
 
-                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos Externos-PDF',['/soporte/inf-pdfex/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos Externos-PDF',['/soporte/inf-pdf/index2'],['id' => 'export-pdf', 'target' => 'blank']) ?>
               
                         </li>
                         <?php

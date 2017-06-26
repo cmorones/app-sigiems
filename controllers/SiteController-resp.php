@@ -164,11 +164,6 @@ class SiteController extends Controller
     }
     }
 
-            public function actionExt()
-    {
-        return $this->render('ext');
-    }
-
 
      public function actionEquipos()
     {
