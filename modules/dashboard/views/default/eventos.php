@@ -68,6 +68,7 @@ if ($value->event_type==4) {
         </tr>
 
         <?php
+        $i++;
       }
 
       ?>

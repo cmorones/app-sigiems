@@ -31,7 +31,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
                 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            <i class="fa fa-dashboard"></i> Dashboard |<small> Inventario de Equipos porpiedad del IEMS</small>        </h1>
+            <i class="fa fa-dashboard"></i> Dashboard |<small> Inventario de Equipos propiedad del IEMS</small>        </h1>
         <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
 <li class="active">Inicio</li>
 </ul>    </section>
@@ -163,7 +163,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
   
         <table class="table table-striped table-bordered" >
         <tr>
-          <th colspan="4" rowspan="" headers="" scope="">Inventario de Equipos</th>
+          <th colspan="4" rowspan="" headers="" scope="">Inventario de Equipos propiedad del IEMS</th>
         </tr>
          <tr>
          <th>Plantel</th>
