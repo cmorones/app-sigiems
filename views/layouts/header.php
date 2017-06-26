@@ -66,14 +66,33 @@ Yii::$app->name = "APP-SIGIEMS";
                     <ul>
                         <li>
                             <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard',['/site'])?>
+                        
+  <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Calendario',['/dashboard'])?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['/site/externos'])?>
                         </li>
 
                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Avisos',['/site/avisos'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Notificaciones',['/site/avisos'])?>
                         </li>
 
+                     
+                    </ul>
+                </div>
+            </div>
+
+               <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Seguimiento DIT</a></li>
                           <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Registro 2017',['/site/registro'])?>
                         </li>
@@ -88,9 +107,11 @@ Yii::$app->name = "APP-SIGIEMS";
                           <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias de Desecho',['/soporte/inv-baterias/informe']) ?>
                         </li>
+                      
+                      
                     </ul>
                 </div>
-            </div>
+            </div> 
             <?php
                 }
             ?>
@@ -327,7 +348,7 @@ Yii::$app->name = "APP-SIGIEMS";
                 }
             ?>
             <?php  
-             if(Yii::$app->user->can('menuAdmin')) {
+             if(Yii::$app->user->can('MenuSuper')) {
             ?>
 
             <div class="col-md-3 col-sm-4 col-xs-12">
@@ -384,7 +405,7 @@ Yii::$app->name = "APP-SIGIEMS";
 
         
         <?php  
-              if(Yii::$app->user->can('menuAdmin')) {
+              if(Yii::$app->user->can('MenuSuper')) {
             ?>
         <div class="col-md-3 col-sm-4 col-xs-12">
             <div class="menu-box">
