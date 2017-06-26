@@ -93,10 +93,10 @@ class Events extends \yii\db\ActiveRecord
         return [
 			'event_id' => Yii::t('app', 'Event ID'),
             'event_title' => Yii::t('app', 'Actividad'),
-            'event_detail' => Yii::t('app', 'Dettalle'),
+            'event_detail' => Yii::t('app', 'Detalle'),
             'event_start_date' => Yii::t('app', 'Fecha Inicio'),
             'event_end_date' => Yii::t('app', 'Fecha Termino'),
-            'event_type' => Yii::t('app', 'Prioridad'),
+            'event_type' => Yii::t('app', 'Estado'),
             'event_url' => Yii::t('app', 'Url'),
             'event_all_day' => Yii::t('app', 'All Day'),
             'created_at' => Yii::t('app', 'Created At'),

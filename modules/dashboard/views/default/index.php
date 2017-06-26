@@ -78,7 +78,7 @@ $JSEventClick = <<<EOF
   }
 EOF;
 $eDetail = 'Detalle  del evento';
-$eType = 'tipo evento';
+$eType = 'Estado';
 $eStart = 'Inicio';
 $eEnd = 'Termino';
 $JsF = <<<EOF
