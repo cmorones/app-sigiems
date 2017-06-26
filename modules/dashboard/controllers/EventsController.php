@@ -108,7 +108,7 @@ class EventsController extends Controller
 		$model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_end_date']);
         $model->event_all_day = 0;
         $model->is_status=0;
-		$model->created_by = 1; //Yii::$app->getid->getId();
+		$model->created_by = Yii::$app->user->identity->user_id; //Yii::$app->getid->getId();
 		$model->created_at = new \yii\db\Expression('NOW()');
 
 		if($model->save()) {
@@ -167,7 +167,7 @@ class EventsController extends Controller
 		$model->attributes = $_POST['Events'];
 		$model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_start_date']);
 		$model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_end_date']);
-		$model->updated_by = Yii::$app->getid->getId();
+		$model->updated_by = Yii::$app->user->identity->user_id;
 		$model->updated_at = new \yii\db\Expression('NOW()');
 
 		if($model->save()) {

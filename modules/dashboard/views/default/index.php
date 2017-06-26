@@ -1,6 +1,7 @@
 <?php 
 use yii\helpers\Html; 
 use yii\helpers\Url;
+use app\modules\dashboard\models\Events;
 //$this->title = Yii::t('app', 'appboard Modules');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(".popover{max-width:500px}");
@@ -15,12 +16,14 @@ $this->registerCss(".popover{max-width:500px}");
   <div class="row">
     <div class="col-md-6 col-sm-6 col-xs-12">
           
-
+<?= Html::a(Yii::t('app', 'listado de eventos'), ['dashboard/eventos'], ['class' => 'btn btn-primary btn-sm']) ?>
 
     </div>
 
     <div class="col-md-6 col-sm-6 col-xs-12">
-         
+             <div class="col-xs-4 left-padding">
+    
+    </div>
     </div>
 
   </div> <!-- /. End Row--> 
@@ -99,7 +102,7 @@ EOF;
 ?>
 
   <div class="row">
-     <div class="col-sm-12 col-xs-12">
+     <div class="col-sm-6 col-xs-6">
          <?= \yii2fullcalendar\yii2fullcalendar::widget([
       'options' => ['language' => 'en'],
       'clientOptions' => [
@@ -124,11 +127,56 @@ EOF;
       'ajaxEvents' => Url::toRoute(['/dashboard/events/view-events'])
   ]); ?>
      </div>
-   </div> <!-- /.End ROW -->
-   <div class="row">
-      <div class="col-sm-12 col-xs-12">
+     <div class="col-sm-6 col-xs-6">
+           <h1>Listado de Activiades y/o eventos</h1> 
+         <table class="table table-striped table-bordered">
+      <tr>
+        <th>Num</th>
+        <th>Fecha de Inicio</th>
+        <th>Fecha de Termino</th>
+        <th>Titulo</th>  
+        <th>Detalle</th>
+        <th>Tipo</th>
+        </tr>
 
+        <?php 
+
+//$plantel = Yii::$app->user->identity->id_plantel;
+//$resultado = \Yii::$app->db->createCommand('SELECT * FROM inv_bajas where estado_baja=1 and id_plantel='.$plantel)->queryAll();
+
+//$resultado = InvBajas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('modelo')->all();
+
+$resultado = Events::find()->where(['is_status'=> 0])->all();
+$i=1;
+foreach ($resultado as $value) {
+
+
+
+?>
+        <tr>
+        <td><?=$i?></td>
+        <td><?=$value->event_start_date?></td>
+        <td><?=$value->event_end_date?></td>
+        <td><?=$value->event_title?></td>
+        <td><?=$value->event_detail?></td>
+        <td><span><?=$value->event_type?></span></td>
+        </tr>
+
+        <?php
+      }
+
+      ?>
+
+     </table>
+   
      </div>
+
+   </div> <!-- /.End ROW -->
+   <br>
+   <br>
+   <br>
+   <div class="row">
+      
    </div>
  
 </div><!-- /.box-body -->
@@ -143,3 +191,11 @@ EOF;
 
   yii\bootstrap\Modal::end(); 
 ?>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
