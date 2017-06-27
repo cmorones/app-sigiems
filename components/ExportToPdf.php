@@ -48,7 +48,7 @@ use mPDF;
  
 class ExportToPdf extends Component
 {
-	public function exportData($title='',$filename='Informe Pdf',$html=NULL)
+	public function exportData($title='Listado',$filename='Informe Pdf',$html=NULL)
 	{
 		$mpdf = new mPDF('utf-8', 'A4',0,'',15,15,25,16,4,9,'P');
 		$mpdf->autoScriptToLang = true;

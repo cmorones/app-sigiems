@@ -47,6 +47,15 @@ class InvImpresorasSearch extends InvImpresoras
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+              'pagination' => [
+                  'pageSize' => 20,
+             ],
+             'sort' => [
+                 'defaultOrder' => [
+               'progresivo' => SORT_ASC,
+               //'title' => SORT_ASC, 
+          ]
+          ],
         ]);
 
         $this->load($params);

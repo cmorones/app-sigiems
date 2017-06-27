@@ -47,6 +47,15 @@ class InvEquiposExSearch extends InvEquiposEx
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+              'pagination' => [
+                  'pageSize' => 20,
+             ],
+             'sort' => [
+                'defaultOrder' => [
+               'id' => SORT_ASC,
+               //'title' => SORT_ASC, 
+          ]
+          ],
         ]);
 
         $this->load($params);

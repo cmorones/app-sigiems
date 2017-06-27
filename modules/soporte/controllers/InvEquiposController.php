@@ -55,11 +55,15 @@ class InvEquiposController extends Controller
             echo "No tienes permiso para entrar aqui";
         }
         $searchModel = new InvEquiposSearch();
+        $searchModel2 = new InvEquiposSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider2 = $searchModel2->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+             'searchModel2' => $searchModel2,
             'dataProvider' => $dataProvider,
+            'dataProvider2' => $dataProvider2,
         ]);
     }
 

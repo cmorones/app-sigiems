@@ -20,6 +20,9 @@ $config = [
         'pdf'=>[
             'class'=>'app\components\ExportToPdf',
         ],
+        'excel'=>[
+            'class'=>'app\components\ExportToExcel',
+        ],
         'aes'=>[
             'class'=>'app\components\Aes',
         ],
