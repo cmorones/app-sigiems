@@ -58,7 +58,7 @@ class ExportToPdf extends Component
 		$org_image=Html::img('images/logo.png',['alt'=>'No Image','width'=>220, 'height'=>70]); 
 		$org_name=$org['org_name'];
 		$org_add="Instituto de Eduación Media Superior";
-		$org_p="Plantel Coyoacan";
+		$org_p=" ";
 		$mpdf->SetHTMLHeader('<table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr style="border:hidden"></td><td style="border:hidden;text-align: left;color:#555555;"><b style="font-size:22px;">'.$org_add.'</b><br/><span style="font-size:11px">'.$org_p.'</td><td vertical-align="right" style="width:35px;border:hidden"position:absolute;>'.$org_image.'</tr></table>');
 		$stylesheet = file_get_contents('css/pdf.css'); // external css
 		$mpdf->WriteHTML($stylesheet,0);
