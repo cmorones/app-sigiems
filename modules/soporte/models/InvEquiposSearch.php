@@ -51,7 +51,7 @@ class InvEquiposSearch extends InvEquipos
                   'pageSize' => 20,
              ],
              'sort' => [
-         'defaultOrder' => [
+                 'defaultOrder' => [
                'progresivo' => SORT_ASC,
                //'title' => SORT_ASC, 
           ]

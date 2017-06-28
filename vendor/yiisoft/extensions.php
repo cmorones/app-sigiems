@@ -57,6 +57,15 @@ return array (
       '@kartik/typeahead' => $vendorDir . '/kartik-v/yii2-widget-typeahead',
     ),
   ),
+   'pheme/yii2-toggle-column' => 
+  array (
+    'name' => 'pheme/yii2-toggle-column',
+    'version' => '0.1.0.0',
+    'alias' => 
+    array (
+      '@pheme/grid' => $vendorDir . '/pheme/yii2-toggle-column',
+    ),
+  ),
   'kartik-v/yii2-widget-touchspin' => 
   array (
     'name' => 'kartik-v/yii2-widget-touchspin',

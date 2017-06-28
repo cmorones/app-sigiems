@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use app\modules\telefonia\models\CatMarca;
 use app\modules\telefonia\models\CatModelo;
 use yii\db\Expression;
+use pheme\grid\actions\ToggleAction;
 
 
 
@@ -31,7 +32,7 @@ class InvBajasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal'],
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal','toggle'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -45,6 +46,21 @@ class InvBajasController extends Controller
             ],
         ];
     }
+
+   public function actions() 
+    {
+        return [
+        'toggle' => [
+            'class' => ToggleAction::className(),
+            'modelClass' => 'app\modules\soporte\models\InvBajas',
+            'attribute' => 'bloq',
+            // Uncomment to enable flash messages
+           // 'setFlash' => true,
+        ],
+        ];
+    }
+
+
 
  public function actionModelos($id)
     {

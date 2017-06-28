@@ -21,7 +21,7 @@ use yii\helpers\Url;
     </div>
     </div>
    <div class="row">
-      <div class="col-sm-8 col-xs-8">
+      <div class="col-sm-12 col-xs-12">
            <h1>Listado de Actividades y/o eventos</h1> 
          <table class="table table-striped table-bordered">
       <tr>
@@ -51,7 +51,7 @@ if ($value->event_type==2) {
 	$valor = "<span class='label bg-blue'>Pendiente</span>";
 }
 if ($value->event_type==3) {
-	$valor = "<span class='label bg-green'>Termiando</span>";
+	$valor = "<span class='label bg-green'>Terminando</span>";
 }
 if ($value->event_type==4) {
 	$valor = "<span class='label bg-red>Fuera de Tiempo</span>";

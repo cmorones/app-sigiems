@@ -10,6 +10,7 @@ use app\modules\soporte\models\EstadoEquipo;
 use app\modules\admin\models\CatPisos;
 use app\modules\admin\models\CatMarca;
 use app\modules\admin\models\CatModelo;
+use app\modules\soporte\models\CatAntiguedad;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\soporte\models\InvImpresoras */
@@ -121,6 +122,13 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                               
 
                                              <?= $form->field($model, 'id_piso', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPisos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un piso'])->label(false); ?>
+                                            </div>
+                                        </div>
+
+                                           <div class="form-group">
+                                            <label for="ccomment" class="control-label col-lg-2">Antiguedad aproximada</label>
+                                            <div class="col-lg-4">
+                                                 <?= $form->field($model, 'antiguedad', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'modelo'] ] )->dropDownList(ArrayHelper::map(CatAntiguedad::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona antiguedad ---')])->label(false); ?>
                                             </div>
                                         </div>
            

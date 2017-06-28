@@ -93,8 +93,27 @@ class InvImpresorasExController extends Controller
     {
         $model = new InvImpresorasEx();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+                $fecha2 = date('Y-m-d');
+
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = $fecha = date("Y-m-d");//new Expressi
+         //   $fecha1 = $this->traerFechaInv($model->progresivo);
+            $model->id_plantel=Yii::$app->user->identity->id_plantel;
+       //     $model->antiguedad = 1; //$this->antiguedad($fecha1,$fecha2);
+         //   $model->id_tipo=2;
+
+             if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                //Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 //return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -112,8 +131,20 @@ class InvImpresorasExController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+        $model->updated_by=Yii::$app->user->identity->user_id;
+        $model->updated_at = $fecha = date("Y-m-d");//new Expressi
+          if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                //Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 //return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

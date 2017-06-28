@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'class' => 'app\components\CustomActionColumn',
              'template' => '{dictaminar} {delete}',
              'buttons' => [
-             'update' => function ($url, $model, $idp) {
+             'dictaminar' => function ($url, $model, $idp) {
                
                 $url .= '&idp=' . $idp;
                 return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'Dictaminar')]));

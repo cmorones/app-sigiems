@@ -6,6 +6,29 @@ use app\modules\dashboard\models\Events;
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(".popover{max-width:500px}");
 ?>
+<script>
+$(document).ready(function() {
+
+  $('#calendar').fullCalendar('option', 'locale', 'es';
+
+  $.each($.fullCalendar.locales, function(localeCode) {
+      $('#locale-selector').append(
+        $('<option/>')
+          .attr('value', localeCode)
+          .prop('selected', localeCode == initialLocaleCode)
+          .text(localeCode)
+      );
+    });
+
+    // when the selected option changes, dynamically change the calendar option
+    $('#locale-selector').on('change', function() {
+      if (this.value) {
+        $('#calendar').fullCalendar('option', 'locale', this.value);
+      }
+    });
+
+};
+</script>
 
 <div class="box box-default">
   <div class="box-header with-border">
@@ -22,7 +45,14 @@ $this->registerCss(".popover{max-width:500px}");
 
     <div class="col-md-6 col-sm-6 col-xs-12">
              <div class="col-xs-4 left-padding">
-    
+    <div id='top'>
+
+    Locales:
+    <select id='locale-selector'></select>
+
+  </div>
+
+
     </div>
     </div>
 
@@ -104,9 +134,10 @@ EOF;
   <div class="row">
      <div class="col-sm-12 col-xs-12">
          <?= \yii2fullcalendar\yii2fullcalendar::widget([
-      'options' => ['language' => 'en'],
+      'options' => ['language' => 'es'],
       'clientOptions' => [
         'fixedWeekCount' => false,
+        'language' => 'es',
         'weekNumbers'=>true,
         'editable' => true,
         'selectable' => true,
@@ -128,7 +159,16 @@ EOF;
   ]); ?>
      </div>
 
-   </div> <!-- /.End ROW -->
+   </div> 
+   <div class="row">
+      <ul class="legend">
+          <li><span class="holiday"></span> <?php echo Yii::t('app', 'Pendiente') ?></li>
+          <li><span class="importantnotice"></span> <?php echo Yii::t('app', 'En proceso') ?></li>
+          <li><span class="meeting"></span> <?php echo Yii::t('app', 'Termiando') ?></li>
+          <li><span class="messages"></span> <?php echo Yii::t('app', 'Fuera de Tiempo') ?></li>
+      </ul>
+       </div>
+   <!-- /.End ROW -->
    <br>
    <br>
    <br>

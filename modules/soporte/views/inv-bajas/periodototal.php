@@ -86,8 +86,14 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'catPlanteles.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            'validacion',
-            // 'observaciones',
+           // 'validacion',
+            [
+            'class' => '\pheme\grid\ToggleColumn',
+            'attribute'=>'bloq',
+            'enableAjax' => true,
+            'filter'=>['1'=>'Validado', '0'=>'No Validado']
+            ],
+             // 'observaciones',
           // 'dictamen',
            // 'certificado',
             // 'bloq',
