@@ -88,9 +88,20 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'estadoEquipo.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            'procesador',
+           // 'procesador',
             'ram',
             'disco_duro',
+                [
+              'attribute'=>'id_area',
+              'value' => 'catAreas.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+
+             [
+              'attribute'=>'id_piso',
+              'value' => 'catPisos.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPisos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             /*'id_plantel',
             'id_area',
             'id_piso',*/
