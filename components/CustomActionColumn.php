@@ -132,6 +132,8 @@ class CustomActionColumn extends ActionColumn
                 ]);
             };
         }
+
+
         if (!isset($this->buttons['delete'])) {
             $this->buttons['delete'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, [
@@ -158,7 +160,9 @@ class CustomActionColumn extends ActionColumn
         if ($this->urlCreator instanceof Closure) {
             return call_user_func($this->urlCreator, $action, $model, $key, $index);
         } else {
-            $params = is_array($key) ? $key : ['id' => (string) $key];
+            $session = Yii::$app->session;
+            $idp = $session->get('idp');
+            $params = is_array($key) ? $key : ['id' => (string) $key, 'idp'=>$idp ];
             $params[0] = $this->controller ? $this->controller . '/' . $action : $action;
 
             return Url::toRoute($params);

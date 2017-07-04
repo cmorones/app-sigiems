@@ -59,7 +59,7 @@ echo AlertBlock::widget([
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'usuario', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Usuario'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'usuario', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Usuario'] ] )->textInput(['maxlength' => 100])->label(false); ?>
                                             </div>
                                         </div>
                                          <div class="form-group">

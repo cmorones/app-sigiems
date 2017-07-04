@@ -9,6 +9,11 @@ use yii\grid\GridView;
 
 $this->title = 'Inventario de Desechos';
 $this->params['breadcrumbs'][] = $this->title;
+
+  $session = Yii::$app->session;
+  $session->set('idp', $idp);
+
+
 ?>
 <br>
 <br>
@@ -57,7 +62,18 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_by',
             // 'Voltaje',
 
-            ['class' => 'yii\grid\ActionColumn'],
+              [
+             'class' => 'app\components\CustomActionColumn',
+      'template' => '{update} {delete}',
+      'buttons' => [
+        'view' => function ($url, $model, $idp) {
+                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url,  ['idp'=>$idp, 'title' => Yii::t('app', 'Update')]));
+            },
+        'delete' => function ($url, $model) {
+                return ((Yii::$app->user->can("/soporte/inv-desechos/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
+            }
+      ],
+            ],
         ],
     ]); ?>
         <p>
