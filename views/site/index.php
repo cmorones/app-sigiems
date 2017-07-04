@@ -9,7 +9,7 @@ use app\modules\soporte\models\InvNobreak;
 
 
 //$plantel = @Yii::$app->user->identity->id_plantel;
-$countt = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos")->queryScalar();
+$count1t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos")->queryScalar();
 $count1 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=1")->queryScalar();
 $count21 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=2")->queryScalar();
 $count31t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras")->queryScalar();
@@ -61,7 +61,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
           <!-- small box -->
            <div class="small-box bg-blue">
             <div class="inner">
-              <h3><? echo $countt ?></h3>
+              <h3><? echo $count1t ?></h3>
 
               <p>Equipos Totales</p>
             </div>
