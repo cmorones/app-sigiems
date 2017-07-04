@@ -62,7 +62,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                              'prompt'=>Yii::t('app', '--- Selecciona Marca ---'),
                                                    'onchange'=>'
                                                         $.post( "'.Yii::$app->urlManager->createUrl('soporte/inv-nobreak/modelos?id=').'"+$(this).val(), function( data ) {
-                                                          $( "select#invnobreakex-modelo" ).html( data );
+                                                          $( "select#invnobreak-modelo" ).html( data );
                                                         });
 
 

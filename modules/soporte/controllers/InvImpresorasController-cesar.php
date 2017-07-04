@@ -28,7 +28,7 @@ class InvImpresorasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update', 'delete','modelos','impresoras'],
+                        'actions' => ['index','create','view','update', 'delete','modelos', 'impresoras'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -57,8 +57,7 @@ class InvImpresorasController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-         public function actionImpresoras()
+        public function actionImpresoras()
     {
         $searchModel = new InvImpresorasSearch();
         $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);

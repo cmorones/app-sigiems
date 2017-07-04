@@ -3,6 +3,7 @@
 namespace app\modules\soporte\models;
 
 use Yii;
+use app\modules\admin\models\CatPlanteles;
 
 /**
  * This is the model class for table "inv_nobreak".
@@ -79,14 +80,14 @@ class InvNobreak extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'progresivo' => 'Progresivo',
-            'id_tipo' => 'Id Tipo',
+            'id_tipo' => 'Tipo',
             'marca' => 'Marca',
             'modelo' => 'Modelo',
             'serie' => 'Serie',
             'estado' => 'Estado',
-            'id_plantel' => 'Id Plantel',
-            'id_area' => 'Id Area',
-            'id_piso' => 'Id Piso',
+            'id_plantel' => 'Plantel',
+            'id_area' => 'Area',
+            'id_piso' => 'Piso',
             'antiguedad' => 'Antiguedad',
             'observaciones' => 'Observaciones',
             'created_at' => 'Created At',

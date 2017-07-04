@@ -30,7 +30,7 @@ class InvEquiposController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','update2', 'delete','modelos', 'equipos'],
+                        'actions' => ['index','create','view','update','update2', 'delete','modelos', 'equipos', 'dictaminar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -55,19 +55,15 @@ class InvEquiposController extends Controller
             echo "No tienes permiso para entrar aqui";
         }
         $searchModel = new InvEquiposSearch();
-        $searchModel2 = new InvEquiposSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider2 = $searchModel2->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-             'searchModel2' => $searchModel2,
             'dataProvider' => $dataProvider,
-            'dataProvider2' => $dataProvider2,
         ]);
     }
 
-         public function actionEquipos()
+        public function actionEquipos()
     {
         if(!Yii::$app->user->can('ListarEquipos')) { 
             echo "No tienes permiso para entrar aqui";
@@ -80,7 +76,6 @@ class InvEquiposController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
 
     /**
      * Displays a single InvEquipos model.

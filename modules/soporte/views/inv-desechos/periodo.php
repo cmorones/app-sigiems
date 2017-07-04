@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'modelo',
             'serie',
             // 'id_periodo',
-            [
+           /* [
               'attribute'=>'id_area',
               'value' => 'catAreas.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
@@ -54,8 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute'=>'id_piso',
               'value' => 'catPiso.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatPiso::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
-            // 'observaciones',
+            ],*/
+            'observaciones',
             // 'created_at',
             // 'created_by',
             // 'updated_at',

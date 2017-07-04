@@ -3,8 +3,8 @@
 namespace app\modules\soporte\controllers;
 
 use Yii;
-use app\modules\soporte\models\InvImpresoras;
-use app\modules\soporte\models\InvImpresorasSearch;
+use app\modules\soporte\models\InvNobreak;
+use app\modules\soporte\models\InvNobreakSearch;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -13,9 +13,9 @@ use app\modules\admin\models\CatMarca;
 use app\modules\admin\models\CatModelo;
 
 /**
- * InvImpresorasController implements the CRUD actions for InvImpresoras model.
+ * InvNobreakController implements the CRUD actions for InvNobreak model.
  */
-class InvImpresorasController extends Controller
+class InvNobreakController extends Controller
 {
     /**
      * @inheritdoc
@@ -23,12 +23,12 @@ class InvImpresorasController extends Controller
     public function behaviors()
     {
         return [
-              'access' => [
+        'access' => [
                 'class' => AccessControl::className(),
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update', 'delete','modelos','impresoras'],
+                        'actions' => ['index','create','view','update', 'delete', 'modelos', 'nobreak'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -44,12 +44,12 @@ class InvImpresorasController extends Controller
     }
 
     /**
-     * Lists all InvImpresoras models.
+     * Lists all InvNobreak models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new InvImpresorasSearch();
+        $searchModel = new InvNobreakSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,18 +57,18 @@ class InvImpresorasController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-         public function actionImpresoras()
+        public function actionNobreak()
     {
-        $searchModel = new InvImpresorasSearch();
+        $searchModel = new InvNobreakSearch();
         $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);
 
-        return $this->render('impresoras', [
+        return $this->render('nobreak', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-    public function actionModelos($id)
+
+       public function actionModelos($id)
     {
         $cuentaModelos = CatModelo::find()->where(['id_marca'=>$id])->count();
         $modelos = CatModelo::find()->where(['id_marca'=>$id])->all();
@@ -82,8 +82,9 @@ class InvImpresorasController extends Controller
         }
     }
 
+
     /**
-     * Displays a single InvImpresoras model.
+     * Displays a single InvNobreak model.
      * @param integer $id
      * @return mixed
      */
@@ -95,24 +96,24 @@ class InvImpresorasController extends Controller
     }
 
     /**
-     * Creates a new InvImpresoras model.
+     * Creates a new InvNobreak model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new InvImpresoras();
+        $model = new InvNobreak();
 
-        if ($model->load(Yii::$app->request->post())) {
+       if ($model->load(Yii::$app->request->post())) {
 
                 $fecha2 = date('Y-m-d');
 
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = $fecha = date("Y-m-d");//new Expressi
-            $fecha1 = $this->traerFechaInv($model->progresivo);
+           // $fecha1 = $this->traerFechaInv($model->progresivo);
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
             $model->antiguedad = 1; //$this->antiguedad($fecha1,$fecha2);
-            $model->id_tipo=2;
+            $model->id_tipo=5;
 
              if (!$model->save()) {
                 echo "<pre>";
@@ -132,7 +133,7 @@ class InvImpresorasController extends Controller
     }
 
     /**
-     * Updates an existing InvImpresoras model.
+     * Updates an existing InvNobreak model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -151,7 +152,7 @@ class InvImpresorasController extends Controller
     }
 
     /**
-     * Deletes an existing InvImpresoras model.
+     * Deletes an existing InvNobreak model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -164,62 +165,22 @@ class InvImpresorasController extends Controller
     }
 
     /**
-     * Finds the InvImpresoras model based on its primary key value.
+     * Finds the InvNobreak model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InvImpresoras the loaded model
+     * @return InvNobreak the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InvImpresoras::findOne($id)) !== null) {
+        if (($model = InvNobreak::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
-     public function antiguedad($fechaInicio,$fechaFin)
-{
-    $fecha1 = new \DateTime($fechaInicio);
-    $fecha2 = new \DateTime($fechaFin);
-    $fecha = $fecha1->diff($fecha2);
-    $tiempo = "";
-         
-    //años
-    if($fecha->y > 0)
-    {
-        $tiempo .= $fecha->y;
-             
-        if($fecha->y == 1)
-            $tiempo .= " año, ";
-        else
-            $tiempo .= " años, ";
-    }
-         
-   if ($tiempo==1) {
-       $rest=1;
-   }
-   if ($tiempo>1 && $tiempo < 4) {
-       $rest=2;
-   }
-
-   if ($tiempo>3 && $tiempo < 7) {
-       $rest=3;
-   }
-
-   if ($tiempo>6 && $tiempo < 11) {
-       $rest=4;
-   }
-
-     if ($tiempo>10) {
-       $rest=5;
-   }
-         
-    return $rest;
-}
-
- public function traerFechaInv($progresivo){
+     public function traerFechaInv($progresivo){
 
     $sql = "SELECT 
    bienes_muebles.fecha_alta 

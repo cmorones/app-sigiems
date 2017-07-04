@@ -9,20 +9,26 @@ use app\modules\soporte\models\InvNobreak;
 
 
 //$plantel = @Yii::$app->user->identity->id_plantel;
+$countt = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos")->queryScalar();
 $count1 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=1")->queryScalar();
 $count21 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=2")->queryScalar();
+$count31t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras")->queryScalar();
 $count31 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras WHERE inv_impresoras.estado=1")->queryScalar();
 $count41 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras WHERE inv_impresoras.estado=2")->queryScalar();
+$count51t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak")->queryScalar();
 $count51 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE inv_nobreak.estado=1")->queryScalar();
 $count61 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE inv_nobreak.estado=2")->queryScalar();
 
 
 
 $plantel = @Yii::$app->user->identity->id_plantel;
+$countt = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.id_plantel=$plantel")->queryScalar();
 $count = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=1 AND inv_equipos.id_plantel=$plantel")->queryScalar();
 $count2 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos WHERE inv_equipos.estado=2 AND inv_equipos.id_plantel=$plantel")->queryScalar();
+$count3t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras WHERE inv_impresoras.id_plantel=$plantel")->queryScalar();
 $count3 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras WHERE inv_impresoras.estado=1 AND inv_impresoras.id_plantel=$plantel")->queryScalar();
 $count4 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_impresoras WHERE inv_impresoras.estado=2 AND inv_impresoras.id_plantel=$plantel")->queryScalar();
+$count5t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE inv_nobreak.id_plantel=$plantel")->queryScalar();
 $count5 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE inv_nobreak.estado=1 AND inv_nobreak.id_plantel=$plantel")->queryScalar();
 $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE inv_nobreak.estado=2 AND inv_nobreak.id_plantel=$plantel")->queryScalar();
 
@@ -32,17 +38,17 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
     <section class="content-header">
         <h1>
             <i class="fa fa-dashboard"></i> Dashboard |<small> Inventario de Equipos propiedad del IEMS</small>        </h1>
-        <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
-<li class="active">Inicio</li>
-</ul>    </section>
-    <section class="content">
-        
+       
+
+    </section>
+  
 	<div class="callout callout-info show msg-of-day" >
 	    <h4><i class="fa fa-bullhorn"></i> Mensaje del dia</h4>
 	    <marquee onmouseout="this.setAttribute('scrollamount', 6, 0);" onmouseover="this.setAttribute('scrollamount', 0, 0);" scrollamount="6" behavior="scroll" direction="left">Bienvenido al Sistema Integral de Gestion IEMS </marquee>
 	</div>
 
-
+  <section class="content">
+        
 
      <?php  
               if(Yii::$app->user->can('mostrarEstadistcosTodos')) {
@@ -53,6 +59,20 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
         <!-- ./col -->
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
+           <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><? echo $countt ?></h3>
+
+              <p>Equipos Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+
+     
+            <?= Html::a('Mas Información<i class="fa fa-arrow-circle-right"></i>',['/soporte/inv-equipos/equipos'],['class' => 'small-box-footer'])?>
+          </div>
+
           <div class="small-box bg-green">
             <div class="inner">
               <h3><? echo $count1 ?></h3>
@@ -63,28 +83,11 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
               <i class="ion ion-stats-bars"></i>
             </div>
 
-            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+     
+            <?= Html::a('Mas Información<i class="fa fa-arrow-circle-right"></i>',['/soporte/inv-equipos/equipos'],['class' => 'small-box-footer'])?>
           </div>
 
-          <!-- small box -->
-         <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->count(); ?></h3>
-
-              <p>Bajas</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
+           <div class="small-box bg-red">
             <div class="inner">
 
                <h3><? echo $count21 ?></h3>
@@ -93,12 +96,30 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            <?= Html::a('Mas Información<i class="fa fa-arrow-circle-right"></i>',['/soporte/inv-equipos/equipos'],['class' => 'small-box-footer'])?>
           </div>
+
+          <!-- small box -->
+         
         </div>
+        <!-- ./col -->
+
+        <!-- ./col -->
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><? echo $count31t ?></h3>
+
+              <p>Impresoras Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
             <div class="inner">
               <h3><? echo $count31 ?></h3>
 
@@ -109,11 +130,8 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
+
+            <div class="small-box bg-red">
             <div class="inner">
               <h3><? echo $count41 ?></h3>
 
@@ -124,10 +142,22 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
+
         </div>
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><? echo $count51t ?></h3>
+
+              <p>No-Breaks Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+           <div class="small-box bg-green">
             <div class="inner">
               <h3><? echo $count51 ?></h3>
 
@@ -138,11 +168,8 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
+
+              <div class="small-box bg-red">
             <div class="inner">
               <h3><? echo $count61 ?></h3>
 
@@ -150,6 +177,123 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+           <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->count(); ?></h3>
+
+              <p>Bajas Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['bloq'=>1])->count(); ?></h3>
+
+              <p>Bajas Validadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['bloq'=>0])->count(); ?></h3>
+
+              <p>Bajas sin validar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        
+        </div>
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>1])->count(); ?></h3>
+
+              <p>Desechos Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>1])->andWhere(['bloq'=>1])->count(); ?></h3>
+
+              <p>Desechos Validadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>1])->andWhere(['bloq'=>0])->count(); ?></h3>
+
+              <p>Desechos sin validar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+         <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBaterias::find()->where(['id_periodo'=>1])->sum('cantidad'); ?></h3>
+
+              <p>Baterias de Desecho Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?=intval(app\modules\soporte\models\InvBaterias::find()->where(['id_periodo'=>1])->andWhere(['bloq'=>1])->sum('cantidad')); ?></h3>
+
+              <p>Baterias de Desecho Validadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBaterias::find()->where(['id_periodo'=>1])->andWhere(['bloq'=>0])->sum('cantidad'); ?></h3>
+
+              <p>Baterias de Desecho sin validar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -282,9 +426,7 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
     <section class="content-header">
         <h1>
             <i class="fa fa-dashboard"></i> Bajas |<small> Inventario de Bajas </small>        </h1>
-        <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
-<li class="active">Inicio</li>
-</ul>    </section>
+       </section>
 
 <div class="row">
     <section class="col-lg-8">
@@ -531,14 +673,24 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
  <section class="content-header">
         <h1>
             <i class="fa fa-dashboard"></i> Equipos |<small> Inventario de Equipos IEMS</small>        </h1>
-        <ul class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i>Dashboard</a></li>
-<li class="active">Inicio</li>
-</ul>    </section>
+           </section>
 <div class="row">
 
         <!-- ./col -->
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
+           <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><? echo $countt ?></h3>
+
+              <p>Equipos Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
           <div class="small-box bg-green">
             <div class="inner">
               <h3><? echo $count ?></h3>
@@ -552,39 +704,39 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
 
-          <!-- small box -->
-         <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></h3>
-
-              <p>Bajas 2017</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
+               <div class="small-box bg-red">
             <div class="inner">
 
                <h3><? echo $count2 ?></h3>
-              <p>Equipos que No Funcionan</p>
+              <p>Equipos que no funcionan</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
+
+          <!-- small box -->
+   
         </div>
+        <!-- ./col -->
+
+        <!-- ./col -->
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><? echo $count3t ?></h3>
+
+              <p>Impresoras Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+            <div class="small-box bg-green">
             <div class="inner">
               <h3><? echo $count3 ?></h3>
 
@@ -595,11 +747,8 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
+
+           <div class="small-box bg-red">
             <div class="inner">
               <h3><? echo $count4 ?></h3>
 
@@ -610,10 +759,24 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
+
+
         </div>
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+               <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><? echo $count5t ?></h3>
+
+              <p>No-Breaks Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+               <div class="small-box bg-green">
             <div class="inner">
               <h3><? echo $count5 ?></h3>
 
@@ -624,11 +787,8 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             </div>
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
+
+             <div class="small-box bg-red">
             <div class="inner">
               <h3><? echo $count6 ?></h3>
 
@@ -640,6 +800,128 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        <!-- ./col -->
+    
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+           <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->count(); ?></h3>
+
+              <p>Bajas Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['bloq'=>1])->count(); ?></h3>
+
+              <p>Bajas Validadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvBajas::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['bloq'=>0])->count(); ?></h3>
+
+              <p>Bajas sin validar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        
+        </div>
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->count(); ?></h3>
+
+              <p>Desechos Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['bloq'=>1])->count(); ?></h3>
+
+              <p>Desechos Validadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?=app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['bloq'=>0])->count(); ?></h3>
+
+              <p>Desechos sin validar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+         <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><?=intval(app\modules\soporte\models\InvBaterias::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->sum('cantidad')); ?></h3>
+
+              <p>Baterias de Desecho Totales</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?=intval(app\modules\soporte\models\InvBaterias::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['bloq'=>1])->sum('cantidad')); ?></h3>
+
+              <p>Baterias de Desecho Validadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+           <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?=intval(app\modules\soporte\models\InvBaterias::find()->where(['id_periodo'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['bloq'=>0])->sum('cantidad')); ?></h3>
+
+              <p>Baterias de Desecho sin validar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+
+      
         <!-- ./col -->
       </div>
 

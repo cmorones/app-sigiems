@@ -28,7 +28,7 @@ class InvNobreakController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update', 'delete', 'modelos'],
+                        'actions' => ['index','create','view','update', 'delete', 'modelos','nobreak'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -53,6 +53,17 @@ class InvNobreakController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+        public function actionNobreak()
+    {
+        $searchModel = new InvNobreakSearch();
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);
+
+        return $this->render('nobreak', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

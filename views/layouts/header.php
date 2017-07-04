@@ -97,7 +97,15 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Registro 2017',['/site/registro'])?>
                         </li>
                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos',['/site/equipos'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos IEMS',['/soporte/inv-equipos/equipos'])?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Impresoras IEMS',['/soporte/inv-impresoras/impresoras'])?>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Np-breaks IEMS',['/soporte/inv-nobreak/nobreak'])?>
                         </li>
 
                         <li>
