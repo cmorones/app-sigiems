@@ -73,10 +73,10 @@ class ToggleColumn extends DataColumn
         $value = $model->$attribute;
 	
         if ($value === null || $value == 0 ) {		// 4-5-2015   $value=true replace with $value=0
-            $icon = 'ok';
+            $icon = 'remove';
             $title = Yii::t('yii', 'Active');
         } else {
-            $icon = 'remove';
+            $icon = 'ok';
             $title = Yii::t('yii', 'InActive');
         }
         return Html::a(

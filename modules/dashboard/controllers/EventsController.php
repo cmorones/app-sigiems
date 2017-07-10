@@ -158,6 +158,32 @@ class EventsController extends Controller
 	    }
 	    return $events;
     }
+
+     public function actionViewEvents2($start=NULL,$end=NULL,$_=NULL) {
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $eventList = EventsPrestamos::find()->where(['is_status'=> 0])->all();
+
+        $events = [];
+
+        foreach ($eventList as $event) {
+          $Event = new \yii2fullcalendar\models\Event();
+          $Event->id = $event->event_id;
+          $Event->title = $event->event_title;
+          $Event->description = $event->event_detail;
+          $Event->start = $event->event_start_date;
+          $Event->end = $event->event_end_date;
+          $Event->color = (($event->event_type == 1) ? '#00C0EF' : (($event->event_type == 2) ? '#F39C12' : (($event->event_type == 3) ? '#00A65A' : '#ff0000')));
+          $Event->textColor = '#FFF';
+          $Event->borderColor = '#000';
+          $Event->event_type = (($event->event_type == 1) ? 'Pendiente' : (($event->event_type == 2) ? 'En Proceso' : (($event->event_type == 3) ? 'Termiando' : 'Fuera de Tiempo')));
+          $Event->allDay = ($event->event_all_day == 1) ? true : false;
+         // $Event->url = $event->event_url;
+          $events[] = $Event;
+        }
+        return $events;
+    }
     /**
      * Updates an existing Events model.
      * If update is successful, the browser will be redirected to the 'view' page.

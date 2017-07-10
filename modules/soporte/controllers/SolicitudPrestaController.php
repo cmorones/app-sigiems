@@ -65,8 +65,33 @@ class SolicitudPrestaController extends Controller
     {
         $model = new SolicitudPresta();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //    return $this->redirect(['view', 'id' => $model->id]);
+          if ($model->load(Yii::$app->request->post())) {
+
+                $fecha2 = date('Y-m-d');
+
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = $fecha = date("Y-m-d");//new Expressi
+           // $model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['solicitudpresta']['event_start_date']);
+           // $model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['solicitudpresta']['event_end_date']);
+            $model->fecha_presta = $fecha2;
+            $model->id_plantel=Yii::$app->user->identity->id_plantel;
+            //$model->antiguedad = 1; //$this->antiguedad($fecha1,$fecha2);
+           // $model->id_tipo=2;
+
+             if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                //Yii::$app->session->setflash("error","Error: Progresivo No existe en el sistema inventarial y/o progresivo ya fue registrado ");
+                 //return $this->redirect(['create']);
+                //exit;
+                # code...
+            }
+            return $this->redirect(['index', 'id' => $model->id]);
+
+
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -58,7 +58,7 @@ class CustomActionColumn extends ActionColumn
      *
      * @see buttons
      */
-    public $template = '{view} {update} {delete}';
+    public $template = '{view} {update} {delete} {dictaminar}';
     /**
      * @var array button rendering callbacks. The array keys are the button names (without curly brackets),
      * and the values are the corresponding button rendering callbacks. The callbacks should use the following
@@ -118,6 +118,15 @@ class CustomActionColumn extends ActionColumn
         if (!isset($this->buttons['update'])) {
             $this->buttons['update'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
+                    'title' => Yii::t('yii', 'Update'),
+                    'data-pjax' => '0',
+                ]);
+            };
+        }
+
+         if (!isset($this->buttons['dictaminar'])) {
+            $this->buttons['dictaminar'] = function ($url, $model, $key) {
+                return Html::a('<span class="glyphicon glyphicon-share"></span>', $url, [
                     'title' => Yii::t('yii', 'Update'),
                     'data-pjax' => '0',
                 ]);

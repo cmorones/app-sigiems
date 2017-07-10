@@ -31,7 +31,90 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'emptyCell'=>'-',
+        'rowOptions'=> function($data){
 
+           $clabe_cabs = "";       
+
+
+if ($data->id_tipo==2) {
+  $clabe_cabs = '5151000096';
+}
+
+
+
+
+if ($data->id_tipo==1) {
+  $clabe_cabs = '5151000138';
+}
+
+if ($data->id_tipo==3) {
+  $clabe_cabs = '5151000192';
+}
+
+if ($data->id_tipo==4) {
+  $clabe_cabs = '5151000138';
+}
+if ($data->id_tipo==5) {
+  $clabe_cabs = '5151000152';
+}
+
+if ($data->id_tipo==6) {
+  $clabe_cabs = '5651000018';
+}
+
+if ($data->id_tipo==7) {
+  $clabe_cabs = '5651000172';
+}
+//echo ":";
+//echo $clabe_cabs;
+//echo "<br>";
+
+if ($clabe_cabs <>"") {
+  # code...
+
+$sql = "SELECT 
+  bienes_muebles.clave_cabms, 
+  bienes_muebles.progresivo, 
+  bienes_muebles.marca, 
+  bienes_muebles.modelo, 
+  bienes_muebles.serie,
+  bienes_muebles.clave_cabms,
+  bienes_muebles.id_situacion_bien, 
+  resguardos.id_bien_mueble, 
+  personal.nombre_empleado, 
+  personal.apellidos_empleado, 
+  personal.rfc,
+  bienes_muebles.fecha_alta,
+  situacion_bienes.descripcion 
+FROM 
+  public.bienes_muebles, 
+  public.resguardos, 
+  public.personal,
+  public.situacion_bienes
+WHERE
+  bienes_muebles.clave_cabms = '".$clabe_cabs."' and 
+  bienes_muebles.progresivo = '$data->progresivo' and
+  bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
+  resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
+  personal.id_empleado = resguardos.id_personal";
+
+
+$clase ="";
+$inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
+
+if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data->serie) {
+  $img = ['class'=> 'success'];
+}else {
+  $img = ['class'=> 'danger'];
+}
+
+}else{
+   $img = ['class'=> 'danger'];
+}
+
+ return $img;
+
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -74,13 +157,125 @@ $this->params['breadcrumbs'][] = $this->title;
              [
               'attribute'=>'estado_baja',
               'value' => 'estadoBaja.nombre',
-              'contentOptions' => function($model)
+              /*'contentOptions' => function($model)
                     {
                         return ['style' => 'color:' . $model->estadoBaja->color];
-                    },
+                    },*/
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\EstadoBaja::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            // 'observaciones',
+           //  'valida_almacen',
+                [
+              'attribute'=>'valida_almacen',
+              'format' => 'raw',
+              'value' => function ($data)
+    {
+ 
+ $clabe_cabs = "";       
+
+
+if ($data->id_tipo==2) {
+  $clabe_cabs = '5151000096';
+}
+
+
+
+
+if ($data->id_tipo==1) {
+  $clabe_cabs = '5151000138';
+}
+
+if ($data->id_tipo==3) {
+  $clabe_cabs = '5151000192';
+}
+
+if ($data->id_tipo==4) {
+  $clabe_cabs = '5151000138';
+}
+if ($data->id_tipo==5) {
+  $clabe_cabs = '5151000152';
+}
+
+if ($data->id_tipo==6) {
+  $clabe_cabs = '5651000018';
+}
+
+if ($data->id_tipo==7) {
+  $clabe_cabs = '5651000172';
+}
+//echo ":";
+//echo $clabe_cabs;
+//echo "<br>";
+
+if ($clabe_cabs <>"") {
+  # code...
+
+$sql = "SELECT 
+  bienes_muebles.clave_cabms, 
+  bienes_muebles.progresivo, 
+  bienes_muebles.marca, 
+  bienes_muebles.modelo, 
+  bienes_muebles.serie,
+  bienes_muebles.clave_cabms,
+  bienes_muebles.id_situacion_bien, 
+  resguardos.id_bien_mueble, 
+  personal.nombre_empleado, 
+  personal.apellidos_empleado, 
+  personal.rfc,
+  bienes_muebles.fecha_alta,
+  situacion_bienes.descripcion 
+FROM 
+  public.bienes_muebles, 
+  public.resguardos, 
+  public.personal,
+  public.situacion_bienes
+WHERE
+  bienes_muebles.clave_cabms = '".$clabe_cabs."' and 
+  bienes_muebles.progresivo = '$data->progresivo' and
+  bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
+  resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
+  personal.id_empleado = resguardos.id_personal";
+
+
+$clase ="";
+$inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
+
+if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data->serie) {
+  $img = Html::img('@web/images/checked.png');
+}else {
+  $img = Html::img('@web/images/unchecked.png');
+}
+
+}else{
+   $img = Html::img('@web/images/unchecked.png');
+}
+
+
+
+
+
+
+//$this->valida_almacen =1;//$img;*/
+        return $img;
+    },
+              //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+
+            [
+              'attribute'=>'Autorizado',
+              'format' => 'raw',
+              'value' => function ($data)
+    {
+        if ($data->bloq==0) {
+          $img = Html::img('@web/images/unchecked.png');
+        }else{
+          $img = Html::img('@web/images/checked.png');
+        }
+
+         return $img;
+    }
+    ],
+
+
           // 'dictamen',
            // 'certificado',
             // 'bloq',
@@ -89,20 +284,52 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-               [
+            [ 'attribute' => 'validacion',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+              //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";}
+              if ($data->bloq ==1) {
+                return (Html::a('<span class="glyphicon glyphicon-share"></span>', ['dictaminar'], ['title' => 'Dictaminar']));
+              }
+
+               if ($data->bloq ==0) {
+                return (Html::a('<span class="glyphicon glyphicon-edit"></span>', ['update', 'id'=>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Modificar']));
+              }
+              
+            }
+              ],
+
+              [
+              'attribute'=>'Documentos',
+              'format' => 'raw',
+              'value' => function ($data)
+    {
+        if ($data->bloq==0) {
+          $img = Html::img('@web/images/unchecked.png');
+        }else{
+          $img = Html::img('@web/images/checked.png');
+        }
+
+         return $img;
+    }
+    ],
+          
+
+              /* [
              'class' => 'app\components\CustomActionColumn',
              'template' => '{dictaminar} {delete}',
+            // 'attribute' =>'validacion',
              'buttons' => [
              'dictaminar' => function ($url, $model, $idp) {
                
                 $url .= '&idp=' . $idp;
-                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'Dictaminar')]));
-            },
+                return (Html::a('<span class="glyphicon glyphicon-share"></span>', $url, ['title' => 'Dictaminar']));
+           },
         'delete' => function ($url, $model) {
                 return ((Yii::$app->user->can("/soporte/inv-bajas/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
             }
       ],
-            ],
+            ],*/
         ],
         'tableOptions' =>['class' => 'table table-striped table-bordered'],
 

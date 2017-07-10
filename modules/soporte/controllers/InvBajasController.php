@@ -54,6 +54,9 @@ class InvBajasController extends Controller
             'class' => ToggleAction::className(),
             'modelClass' => 'app\modules\soporte\models\InvBajas',
             'attribute' => 'bloq',
+            //'type'=> 'toggle-status',
+            // Uncomment to enable flash messages
+            //'setFlash' => true,
             // Uncomment to enable flash messages
            // 'setFlash' => true,
         ],
@@ -129,6 +132,25 @@ class InvBajasController extends Controller
     {
         $searchModel = new InvBajasSearch();
         $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$idp);
+
+        if (Yii::$app->request->post('hasEditable')) {
+
+            $branchId = Yii::$app->request->post('editablekey');
+            $branch = InvBajas::findOne($branchId);
+
+            $out = Json::encode(['output'=>'', 'message'=>'']);
+            $post =[];
+            $posted = current($_POST['BRANCH']);
+            $post['BRANCH'] = $posted;
+            if ($branch->load($post)) {
+
+                $branch->save();
+
+            }
+            echo $out;
+            return;
+            # code...
+        }
 
         return $this->render('periodototal', [
             'searchModel' => $searchModel,
