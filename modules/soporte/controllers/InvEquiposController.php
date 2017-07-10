@@ -137,6 +137,7 @@ class InvEquiposController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                
             ]);
         }
     }
