@@ -17,7 +17,7 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     //public $baseUrl = '@web';
-    public $sourcePath = '@bower/rudra-lte';
+    public $sourcePath = '@bower/iems-lte';
     public $css = [
         'css/style.css',
         /*'assets/css/bootstrap.min.css',
