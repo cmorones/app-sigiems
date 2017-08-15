@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    //public $baseUrl = '@web';
+    public $baseUrl = '@web';
     public $sourcePath = '@bower/iems-lte';
     public $css = [
         'css/style.css',
@@ -36,7 +36,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/main.js', 
         '//momentjs.com/downloads/moment-with-locales.min.js',
-        'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',
+       'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',
        '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
         '//fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.js',
         '//fullcalendar.io/js/fullcalendar-3.4.0/locale-all.js',
