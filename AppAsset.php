@@ -2,7 +2,7 @@
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/ hola mundo
+ * @license http://www.yiiframework.com/license/
  */
 
 namespace app\assets_b;
@@ -17,7 +17,7 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     //public $baseUrl = '@web';
-    public $sourcePath = '@bower/iems-lte';
+    public $sourcePath = '@bower/rudra-lte';
     public $css = [
         'css/style.css',
         /*'assets/css/bootstrap.min.css',
@@ -34,10 +34,10 @@ class AppAsset extends AssetBundle
         'css/EdusecCustome.css',*/
     ];
     public $js = [
-        'js/main.js', 
+        'js/main.js',
         '//momentjs.com/downloads/moment-with-locales.min.js',
-        'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',
-       '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
+       // 'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',
+        //'//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
         '//fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.js',
         '//fullcalendar.io/js/fullcalendar-3.4.0/locale-all.js',
        // 'assets/js/jquery.min.js',
