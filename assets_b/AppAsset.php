@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    //public $baseUrl = '@web';
     public $sourcePath = '@bower/iems-lte';
     public $css = [
         'css/style.css',
