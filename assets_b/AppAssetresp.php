@@ -2,7 +2,7 @@
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @license http://www.yiiframework.com/license/ hola mundo
  */
 
 namespace app\assets_b;
@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    //public $baseUrl = '@web';
+    public $baseUrl = '@web';
     public $sourcePath = '@bower/iems-lte';
     public $css = [
         'css/style.css',
@@ -34,16 +34,16 @@ class AppAsset extends AssetBundle
         'css/EdusecCustome.css',*/
     ];
     public $js = [
-     //   'js/main.js',
-     //   '//momentjs.com/downloads/moment-with-locales.min.js',
-       // 'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',
-        //'//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
-       // '//fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.js',
-       // '//fullcalendar.io/js/fullcalendar-3.4.0/locale-all.js',
+       'js/main.js', 
+       '//momentjs.com/downloads/moment-with-locales.min.js',
+       'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',
+       '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
+       '//fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.js',
+       '//fullcalendar.io/js/fullcalendar-3.4.0/locale-all.js',
        // 'assets/js/jquery.min.js',
         /*'assets/js/bootstrap.min.js',
         'assets/js/detect.js',
-        'assets/js/fastclick.js',
+        assets/js/fastclick.js',
         'assets/js/jquery.blockUI.js',
         'ssets/js/waves.js',
         'assets/js/wow.min.js',
@@ -65,7 +65,7 @@ class AppAsset extends AssetBundle
         'assets/pages/jquery.todo.js',
         'ssets/pages/jquery.chat.js',
         'assets/pages/jquery.dashboard.js',
-       /* 'js/AdminLTE/app.js',
+       /*  cesa 'js/AdminLTE/app.js',
         //'//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
         'js/plugins/slimScroll/jquery.slimscroll.min.js',
         'js/bootstrap-multiselect.js',
