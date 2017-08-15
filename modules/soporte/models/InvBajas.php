@@ -44,6 +44,9 @@ class InvBajas extends \yii\db\ActiveRecord
     public $valida_almacen;
     public $autoriza;
     public $documentos;
+    public $imprimir;
+    public $certificar;
+
 
 
     public static function tableName()
@@ -95,7 +98,9 @@ class InvBajas extends \yii\db\ActiveRecord
             'certificado' => 'Certificado',
             'valida_almacen'=>'Revision DIT',
             'Autorizado' => 'Autorizado DIT',
-            'validacion' => 'Acciones'
+            'validacion' => 'Dictaminar',
+            'certificar' => 'Certificar',
+            'imprimir' => 'Imprimir'
 
         ];
     }

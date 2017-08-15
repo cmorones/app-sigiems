@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
+
 use yii\widgets\Pjax;
 use kartik\editable\Editable;
 
@@ -27,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-
+<?php Pjax::begin(['id' => 'countries']) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'emptyCell'=>'-',
-        'pjax' => true,
+      //  'pjax' => true,
         'rowOptions'=> function($data){
 
            $clabe_cabs = "";       
@@ -165,12 +166,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
                     },
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\EstadoBaja::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            [
-              'class' => 'kartik\grid\EditableColumn',
-               'header' => 'BRANCH',
-               'attribute'=>'estado_baja',
-               'value' => 'estadoBaja.nombre',
-            ],
+           
 
                [
               'attribute'=>'id_plantel',
@@ -200,6 +196,8 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
 
 
     ?>
+
+    <?php Pjax::end() ?>
 
        
 </div>

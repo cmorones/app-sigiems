@@ -1,4 +1,5 @@
 <?php
+
 /*****************************************************************************************
  * EduSec  Open Source Edition is a School / College management system developed by
  * RUDRA SOFTECH. Copyright (C) 2010-2015 RUDRA SOFTECH.
@@ -45,11 +46,37 @@ use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use mPDF;
- 
+
+
+
+
+	
+
 class ExportToPdf extends Component
 {
+
+
+
 	public function exportData($title='Listado',$filename='Informe Pdf',$html=NULL)
 	{
+
+	$plant = Yii::$app->user->identity->id_plantel;
+	$plantel = \app\modules\admin\models\CatPlanteles::find()->where(['id' => $plant])->one();
+  	$domicilio=$plantel->domicilio1;
+  	$domicilio2=$plantel->domicilio2;
+  	$telefono=$plantel->telefono;
+  	$email=$plantel->email;
+
+  	if($plant == 23){
+  		$area='Dirección de Informática y Telecomunicaciones';
+  	}else{
+  		$area=$plantel->nombre;
+  	}
+  	if($plant==23){
+  		$nombre='JUD DE SOPORTE TECNICO';
+  	}else{
+  		$nombre='JUD DE APOYO TECNICO';
+  	}
 		$mpdf = new mPDF('utf-8', 'A4',0,'',15,15,25,16,4,9,'P');
 		$mpdf->autoScriptToLang = true;
 		$mpdf->autoLangToFont = true;
@@ -57,6 +84,8 @@ class ExportToPdf extends Component
 		//$src = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
 		$org_image=Html::img('images/logo.png',['alt'=>'No Image','width'=>220, 'height'=>70]); 
 		$org_name=$org['org_name'];
+		$org_imagef=Html::img('images/IEMS.jpg',['alt'=>'No Image','width'=>220, 'height'=>70]);
+		$org_namef=$orgf['org_namef'];
 		$org_add="Instituto de Eduación Media Superior";
 		$org_p=" ";
 		$mpdf->SetHTMLHeader('<table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr style="border:hidden"></td><td style="border:hidden;text-align: left;color:#555555;"><b style="font-size:22px;">'.$org_add.'</b><br/><span style="font-size:11px">'.$org_p.'</td><td vertical-align="right" style="width:35px;border:hidden"position:absolute;>'.$org_image.'</tr></table>');
@@ -66,22 +95,12 @@ class ExportToPdf extends Component
 		$mpdf->showWatermarkImage = true;
 		$arr = [
 		  'odd' => [
-		    'L' => [
-		      'content' => $title,
-		      'font-size' => 10,
-		      'font-style' => 'B',
-		      'font-family' => 'serif',
-		      'color'=>'#27292b'
-		    ],
-		    'C' => [
-		      'content' => 'pagina - {PAGENO}/{nbpg}',
-		      'font-size' => 10,
-		      'font-style' => 'B',
-		      'font-family' => 'serif',
-		      'color'=>'#27292b'
-		    ],
+		    
+		   
 		    'R' => [ 
-		      'content' => 'fecha de impresión @ {DATE d-m-Y}',
+		      'content' => '<div><img ALIGN="rigth" HEIGHT="50" WIDTH="50" src="images/IEMS.jpg"></div>'.'<small><small><small>Instituto de Educación Media Superior del Distrito Federal <br>'
+.$area. '<br>'.$nombre.'<br>'.$domicilio.' <br>'.$domicilio2.' <br>'.$telefono.' <br>'.$email.'
+</small></small></small></small>',
 		      'font-size' => 10,
 		      'font-style' => 'B',
 		      'font-family' => 'serif',
@@ -96,7 +115,10 @@ class ExportToPdf extends Component
 		$mpdf->WriteHTML($html);
 		$mpdf->Output($filename.'.pdf',"I");
 
+
 	}
+
+
 }
 
 ?>
