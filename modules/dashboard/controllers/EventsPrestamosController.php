@@ -124,7 +124,7 @@ class EventsPrestamosController extends Controller
 			return $this->redirect(['index']);
 		}
 		else {
-                    return $this->renderAjax('_form', ['model' => $model,]);
+                    return $this->renderAjax('/_form', ['model' => $model,]);
         	}
         } else {
             return $this->renderAjax('_form', [

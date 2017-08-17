@@ -32,7 +32,7 @@ class InvBajasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal','toggle'],
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal','toggle','autorizar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -114,6 +114,43 @@ class InvBajasController extends Controller
             //'searchModel' => $searchModel,
             //'dataProvider' => $dataProvider,
         ]);
+    }
+
+          public function actionAutorizar()
+    {
+        //$actCourseData = \app\modules\dashboard\models\Events::find()->where(['is_status'=>0])->all();
+
+        if(isset($_POST['update'])){
+
+         //print_r($_POST['qty']);
+
+        /* 
+            pobacion_esperada
+            pobacion_atendida
+        */
+
+       
+
+         foreach ($_POST['qty'] as $idc){ 
+          $sql="UPDATE inv_bajas SET bloq='1' WHERE id='$idc'"; 
+            \Yii::$app->db ->createCommand($sql)->execute();
+          }  
+
+          
+          if(isset($_POST['remove'])){
+             
+            foreach ($_POST['remove'] as $removeid) {
+          //   $delete = "Delete from consumo_lab where id=$removeid";
+
+            // \Yii::$app->db ->createCommand($delete)->execute();
+            }
+          }
+        }
+
+
+        return $this->render('seg', [
+          //  'id' => $id,
+                    ]);
     }
 
        public function actionPeriodo($idp)

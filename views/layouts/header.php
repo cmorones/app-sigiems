@@ -111,10 +111,16 @@ Yii::$app->name = "APP-SIGIEMS";
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Bajas IEMS',['/soporte/inv-bajas/bajas'])?>
                         </li>
+                           <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i>Autorizar Dictaminación de Bajas',['/soporte/inv-bajas/autorizar']) ?>
+                        </li>
 
+                     
                           <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias de Desecho',['/soporte/inv-baterias/informe']) ?>
                         </li>
+
+
                       
                       
                     </ul>

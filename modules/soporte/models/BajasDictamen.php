@@ -32,6 +32,7 @@ class BajasDictamen extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
     public static function tableName()
     {
         return 'bajas_dictamen';
@@ -46,6 +47,9 @@ class BajasDictamen extends \yii\db\ActiveRecord
             [['id_baja', 'causa_baja', 'opciona', 'opcionb', 'opcionc', 'opciond', 'bloq', 'created_by', 'updated_by'], 'integer'],
             [['clabe_cabms', 'opcione_detalle', 'justificar_baja', 'autorizo'], 'string'],
             [['created_at', 'created_by'], 'required'],
+            [['file'], 'file', 'on'=>'updoc'],
+            [['file'], 'file', 'skipOnEmpty' => false, 'uploadRequired' => 'No has seleccionado ningún archivo', 'on'=>'updoc'],
+          //  [['file'], 'file', 'extensions' => 'pdf', 'on'=>'updoc'],
             [['id_baja','clabe_cabms','causa_baja','opciona','opcionb','opcionc','opciond','opcione_detalle','justificar_baja','autorizo'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
@@ -75,6 +79,7 @@ class BajasDictamen extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'file'=> 'Subir Dictamen',
         ];
     }
 

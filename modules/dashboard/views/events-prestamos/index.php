@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-solid box-warning">
   <div class="box-header">
-    <h3 class="box-title"><i class="ion ion-calendar"></i> <?php echo Yii::t('app', 'Event Schedule') ?></h3>
+    <h3 class="box-title"><i class="ion ion-calendar"></i> <?php echo Yii::t('app', 'Prestamos de Equips') ?></h3>
   </div><!-- /.box-header -->
   <div class="box-body">
    <div class="events-index">
@@ -132,12 +132,7 @@ EOF;
 	]); ?>
    </div>
    <div class="row">
-	<ul class="legend">
-	    <li><span class="holiday"></span> <?php echo Yii::t('app', 'Holiday') ?></li>
-	    <li><span class="importantnotice"></span> <?php echo Yii::t('app', 'Important Notice') ?></li>
-	    <li><span class="meeting"></span> <?php echo Yii::t('app', 'Meeting') ?></li>
-	    <li><span class="messages"></span> <?php echo Yii::t('app', 'Messages') ?></li>
-	</ul>
+	
    </div>
   </div>
 </div>

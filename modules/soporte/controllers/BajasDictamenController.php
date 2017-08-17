@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\db\Expression;
 use app\modules\soporte\models\InvBajas;
 use app\modules\admin\models\CatTipoEquipo;
+use yii\web\UploadedFile;
 
 /**
  * BajasDictamenController implements the CRUD actions for BajasDictamen model.
@@ -32,7 +33,7 @@ class BajasDictamenController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create', 'update'],
+                        'actions' => ['index','create', 'update','docto','pdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -88,14 +89,41 @@ class BajasDictamenController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($idb)
+    public function actionCreate($idb,$idp)
     {
         $model = new BajasDictamen();
          $model2 = InvBajas::findOne($idb);
+
+
+            if ($model2->id_tipo==2) {
+                $clabe_cabs = '5151000096';
+            }
+            if ($model2->id_tipo==1) {
+              $clabe_cabs = '5151000138';
+            }
+
+            if ($model2->id_tipo==3) {
+              $clabe_cabs = '5151000192';
+            }
+
+            if ($model2->id_tipo==4) {
+              $clabe_cabs = '5151000138';
+            }
+            if ($model2->id_tipo==5) {
+              $clabe_cabs = '5151000152';
+            }
+
+            if ($model2->id_tipo==6) {
+              $clabe_cabs = '5651000018';
+            }
+
+            if ($model2->id_tipo==7) {
+              $clabe_cabs = '5651000172';
+            }
         if ($model->load(Yii::$app->request->post()) ) {
              $model->bloq=0;
              $model->id_baja = $idb;
-             $model->clabe_cams = 1;
+             $model->clabe_cabms = $clabe_cabs;
              $model->created_by=Yii::$app->user->identity->user_id;
              $model->created_at = $fecha = date("Y-m-d");//new Expressi
 
@@ -122,6 +150,8 @@ class BajasDictamenController extends Controller
             ]);
         }
     }
+
+
 
     /**
      * Updates an existing BajasDictamen model.
@@ -156,6 +186,52 @@ class BajasDictamenController extends Controller
             ]);
         }
     }
+
+       public function actionDocto($id,$idb,$idp)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = 'updoc';
+
+       
+        $model2 = InvBajas::findOne($idb);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+        
+        $model->file = UploadedFile::getInstance($model,'file');
+        $model->file->saveAs('dictamenes/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->documento = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+        $model->docto=1;
+        $model->updated_by=@Yii::$app->user->identity->user_id;
+        $model->updated_at = new Expression('NOW()');    
+       if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+            }
+            return $this->redirect(['/soporte/inv-bajas/periodo', 'idp' => $idp]);
+         
+
+        } else {
+            return $this->render('docto', [
+                'model' => $model,
+                'idb' => $idb,
+                'model2' => $model2,
+
+            ]);
+        }
+    }
+
+    public function actionPdf($id) {
+    $model = $this->findModel($id);
+
+    // This will need to be the path relative to the root of your app.
+    $filePath = '/dictamenes';
+    // Might need to change '@app' for another alias
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->documento);
+
+    return Yii::$app->response->sendFile($completePath, $model->documento);
+}
 
     /**
      * Deletes an existing BajasDictamen model.

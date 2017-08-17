@@ -31,6 +31,7 @@ class BajasCertificado extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
     public static function tableName()
     {
         return 'bajas_certificado';
@@ -46,6 +47,9 @@ class BajasCertificado extends \yii\db\ActiveRecord
             [['clabe_cabms', 'actividad1', 'actividad2', 'actividad3', 'resultado1', 'resultado2', 'resultado3'], 'string'],
             [['funcion_actual','actividad1','actividad2','actividad3','resultado1','resultado2','resultado3'], 'required'],
             [['funcion_actual','actividad1','actividad2','actividad3','resultado1','resultado2','resultado3'], 'safe'],
+            [['file'], 'file', 'on'=>'updoc'],
+             [['file'], 'file', 'skipOnEmpty' => false, 'uploadRequired' => 'No has seleccionado ningún archivo', 'on'=>'updoc'],
+           // [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'on'=>'updoc'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -72,6 +76,7 @@ class BajasCertificado extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'file'=> 'Subir Certificado',
         ];
     }
 
