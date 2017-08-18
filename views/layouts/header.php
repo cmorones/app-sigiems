@@ -287,6 +287,8 @@ Yii::$app->name = "APP-SIGIEMS";
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom',['/soporte/inv-telecom/index']) ?>
                         </li>
+
+
                         <?php
                     }
                       if(Yii::$app->user->can('/soporte/inv-telecom/index')) {
@@ -304,6 +306,52 @@ Yii::$app->name = "APP-SIGIEMS";
                 </div>
             </div>
               <?php
+                }
+            ?>
+
+            <?php  
+              if(Yii::$app->user->can('modTelecom')) {
+            ?>
+
+              <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                     <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario</a>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
+                        </li>
+
+                           <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos Externos',['/soporte/inv-equipos-ex/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom',['/soporte/inv-telecom/index']) ?>
+                        </li>
+
+
+                    
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-list"></i> Telecomunicaciones</a>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Telefonia',['/telefonia/telefonia/index']) ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+             <?php
                 }
             ?>
 
@@ -399,24 +447,7 @@ Yii::$app->name = "APP-SIGIEMS";
                }
             ?>
 
-            <?php  
-              if(Yii::$app->user->can('menuTelecom')) {
-            ?>
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-list"></i> Telecomunicaciones</a>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Telefonia',['/telefonia/telefonia/index']) ?>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <?php
-            }
-            ?>
+            
 
         
         <?php  
