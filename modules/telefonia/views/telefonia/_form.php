@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use app\modules\admin\models\CatAreas;
+use app\modules\admin\models\Users;
 use app\modules\admin\models\CatPlanteles;
 use app\modules\soporte\models\EstadoEquipo;
 use app\modules\soporte\models\CatPiso;
@@ -54,6 +55,26 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                               
 
                                              <?= $form->field($model, 'progresivo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Progresivo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                            </div>
+                                        </div>
+
+            <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Nodo:</label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'nodo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Nodo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                            </div>
+                                        </div>                            
+
+            <div class="form-group">
+                                          
+                                        
+                                             <label for="cname" class="control-label col-lg-2">Responsable:</label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'responsable', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Responsable'] ] )->textInput(['maxlength' => 35])->label(false); ?>
                                             </div>
                                         </div>
                <div class="form-group">

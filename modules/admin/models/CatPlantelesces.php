@@ -28,8 +28,6 @@ class CatPlanteles extends \yii\db\ActiveRecord
     {
         return [
             [['status'], 'integer'],
-            [['domicilio1','domicilio2','telefono', 'responsable', 'nombre','email'], 'required'],
-           // ['email', 'email'],
             [['nombre'], 'string', 'max' => 255],
         ];
     }
@@ -43,11 +41,6 @@ class CatPlanteles extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nombre' => 'Nombre',
             'status' => 'Status',
-            'domicilio1' => 'Domicilio',
-            'domicilio2' => 'Colonia y C.P',
-            'telefono' => 'Teléfono',
-            'email' => 'Correo',
-            'responsable' => 'Responsable',
         ];
     }
 }

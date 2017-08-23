@@ -3,7 +3,10 @@
 namespace app\modules\telefonia\models;
 
 use Yii;
-
+use app\modules\admin\models\CatPlanteles;
+use app\modules\admin\models\CatAreas;
+use app\modules\telefonia\models\CatMarcatel;
+use app\modules\soporte\models\EstadoEquipo;
 /**
  * This is the model class for table "inv_telefonia".
  *
@@ -39,7 +42,7 @@ class InvTelefonia extends \yii\db\ActiveRecord
         return [
             [['progresivo', 'marca', 'modelo', 'num_ext', 'id_usuario', 'estado', 'id_plantel', 'id_area'], 'integer'],
             [['id','progresivo','serie', 'marca','modelo','num_ext','id_usuario','estado','id_plantel','id_area','observaciones'], 'safe'],
-            [['progresivo','serie', 'marca','modelo','num_ext', 'id_usuario','estado','id_area'], 'required'],
+            [['progresivo','serie', 'marca','modelo','num_ext', 'id_usuario','estado','id_area','responsable', 'nodo'], 'required'],
             [['serie'], 'string', 'max' => 255],
         ];
     }
@@ -59,6 +62,8 @@ class InvTelefonia extends \yii\db\ActiveRecord
             'id_usuario' => 'Usuario',
             'estado' => 'Estado',
             'id_plantel' => 'Plantel',
+            'responsable' => 'Responsable',
+            'nodo' => 'Nodo',
             'id_area' => 'Area',
             'observaciones' => 'Obervaciones',
         ];
@@ -69,11 +74,19 @@ class InvTelefonia extends \yii\db\ActiveRecord
     }
       public function getCatAreas()
     {
-        return $this->hasOne(CatAreas::className(),['id'=>'id_area']);
+        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
     }
-      public function getCatEstado()
+      public function getEstadoEquipo()
     {
-        return $this->hasOne(CatEstado::className(),['id'=>'id_estado']);
+        return $this->hasOne(EstadoEquipo::className(),['id'=>'estado']);
+    }
+          public function getCatMarcatel()
+    {
+        return $this->hasOne(CatMarcatel::className(),['id'=>'marca']);
+    }
+          public function getCatModelotel()
+    {
+        return $this->hasOne(CatModelotel::className(),['id'=>'modelo']);
     }
 
 }

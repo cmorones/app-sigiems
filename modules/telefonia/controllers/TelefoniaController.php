@@ -6,6 +6,7 @@ use Yii;
 use app\modules\telefonia\models\InvTelefonia;
 use app\modules\telefonia\models\TelefoniaSearch;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\modules\telefonia\models\CatMarca;
@@ -38,6 +39,31 @@ class TelefoniaController extends Controller
         }
     }
     */
+
+
+
+  public function behaviors()
+    {
+        return [
+             'access' => [
+                'class' => AccessControl::className(),
+               // 'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','modelos', 'internos', 'telefonos', 'create','update', 'view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 public function actionModelos($id)
     {
         $cuentaModelos = CatModelotel::find()->where(['id_marca'=>$id])->count();
@@ -51,6 +77,18 @@ public function actionModelos($id)
             echo "<option>-</option>";
         }
     }
+
+       public function actionInternos()
+    {
+        $searchModel = new TelefoniaSearch();
+        $dataProvider = $searchModel->search3(Yii::$app->request->queryParams);
+
+        return $this->render('internos', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Lists all InvTelefonia models.
      * @return mixed
@@ -58,10 +96,13 @@ public function actionModelos($id)
     public function actionIndex()
     {
         $searchModel = new TelefoniaSearch();
+        $searchModel = new TelefoniaSearch();
+        $dataProvider2 = $searchModel->search2(Yii::$app->request->queryParams); 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'dataProvider2' => $dataProvider2,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -75,6 +116,16 @@ public function actionModelos($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+    public function actionTelefonos()
+    {
+        $searchModel = new TelefoniaSearch();
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);
+
+        return $this->render('telefonos', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

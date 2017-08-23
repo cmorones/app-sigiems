@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="col-xs-4 right-padding">
 
            
-
+    <p>
+        <?= Html::a('Agregar telefonia', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
   </div>
   <div class="col-xs-4 right-padding">
@@ -67,11 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
 
-            [
-              'attribute'=>'id_plantel',
-              'value' => 'catPlanteles.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
+
              //'id_area',
              [
               'attribute'=>'id_area',
@@ -80,6 +78,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
              'nodo',
 
+                [
+             'class' => 'app\components\CustomActionColumn',
+      'template' => '{update} {delete}',
+      'buttons' => [
+        'update' => function ($url, $model) {
+                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'update'),]));
+            },
+        'delete' => function ($url, $model) {
+                return ((Yii::$app->user->can("/telefonia/telefonia/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
+            }
+      ],
+            ],
         ],
     ]); ?>
 

@@ -63,6 +63,7 @@ class InvTelecomSearch extends InvTelecom
             'id_equipo' => $this->id_equipo,
             'estado' => $this->estado,
             'id_plantel' => $id_p,
+            'proxy' => $this->proxy,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
@@ -71,7 +72,6 @@ class InvTelecomSearch extends InvTelecom
 
         $query->andFilterWhere(['like', 'ip', $this->ip])
             ->andFilterWhere(['like', 'mac', $this->mac])
-            ->andFilterWhere(['like', 'proxy', $this->proxy])
             ->andFilterWhere(['like', 'observaciones', $this->observaciones]);
 
         return $dataProvider;

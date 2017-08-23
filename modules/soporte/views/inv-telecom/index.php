@@ -43,7 +43,12 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'puerto_sw',
            // 'nodo',
             'mac',
-            'proxy',
+            //'proxy',
+            [
+              'attribute'=>'proxy',
+              'value' => 'proxyNivel.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\ProxyNivel::find()->orderBy('nombre')->asArray()->all(),'clave','nombre')
+            ],
              [
               'attribute'=>'estado',
               'value' => 'estadoEquipo.nombre',
@@ -56,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_by',
             // 'updated_at',
             // 'updated_by',
-             ['class' => 'yii\grid\ActionColumn'],
+         
 
            
         ],

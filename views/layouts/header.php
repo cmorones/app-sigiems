@@ -83,6 +83,22 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Notificaciones',['/site/avisos'])?>
                         </li>
 
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias',['/soporte/inv-baterias/informe2']) ?>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Información de Telefonia IEMS',['/telefonia/telefonia/telefonos']) ?>
+                        </li>
+                                                <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Información de Desechos IEMS',['/soporte/inv-desechos/desechos']) ?>
+                        </li>
+                        
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Información de Bajas No Autorizadas IEMS',['/soporte/inv-bajas/porconfirmar']) ?>
+                        </li>
+
                      
                     </ul>
                 </div>
@@ -114,9 +130,7 @@ Yii::$app->name = "APP-SIGIEMS";
                            <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i>Autorizar Dictaminación de Bajas',['/soporte/inv-bajas/autorizar']) ?>
                         </li>
-
-                     
-                          <li>
+                        <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias de Desecho',['/soporte/inv-baterias/informe']) ?>
                         </li>
 
@@ -344,9 +358,16 @@ Yii::$app->name = "APP-SIGIEMS";
                         <li>
                             <a href="#"><i class="fa fa-list"></i> Telecomunicaciones</a>
                         </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Telefonia',['/telefonia/telefonia/index']) ?>
+                      
+
+                                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Area Central ',['/telefonia/telefonia/internos']) ?>
                         </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia IEMS',['/telefonia/telefonia/index']) ?>
+                        </li>
+
                     </ul>
                 </div>
             </div>

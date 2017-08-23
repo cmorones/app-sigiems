@@ -32,7 +32,7 @@ class InvBajasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal','toggle','autorizar'],
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal','toggle','autorizar', 'porconfirmar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -62,6 +62,21 @@ class InvBajasController extends Controller
         ],
         ];
     }
+
+    public function actionPorconfirmar()
+    {
+        $searchModel = new InvBajasSearch();
+        $searchModel2 = new InvBajasSearch();
+        $dataProvider = $searchModel->search3(Yii::$app->request->queryParams);
+
+        return $this->render('porconfirmar', [
+            'searchModel' => $searchModel,
+            'searchModel' => $searchModel2,
+            'dataProvider' => $dataProvider,
+
+        ]);
+    }
+
 
 
 

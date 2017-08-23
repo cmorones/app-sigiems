@@ -141,6 +141,82 @@ class InvBajasSearch extends InvBajas
         return $dataProvider;
     }
 
+    public function search3($params)
+    {
+        $query = InvBajas::find();
+
+
+        // add conditions that should always apply here
+
+$dataProvider = new ActiveDataProvider([
+            'query' => $query,
+             'pagination' => [
+                  'pageSize' => 1500,
+             ],
+             'sort' => [
+         'defaultOrder' => [
+               'id' => SORT_ASC,
+               //'title' => SORT_ASC, 
+          ]
+          ],
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        //$confirm = InvBajas::find()->where(['bloq' => 0])->all();
+
+      
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'progresivo' => $this->progresivo,
+            'id_tipo' => $this->id_tipo,
+            'marca' => $this->marca,
+            'modelo' => $this->modelo,
+            'estado_baja' => $this->estado_baja,
+            'tipo_baja' => $this->tipo_baja,
+             'id_plantel' => $this->id_plantel,
+            'id_area' => $this->id_area,
+            'id_piso' => $this->id_piso,
+            'fecha_baja' => $this->fecha_baja,
+            'bloq' => 0,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
+            'updated_at' => $this->updated_at,
+            'updated_by' => $this->updated_by,
+        ]);
+
+        $query->andFilterWhere(['like', 'serie', $this->serie])
+            ->andFilterWhere(['like', 'observaciones', $this->observaciones])
+            ->andFilterWhere(['like', 'dictamen', $this->dictamen])
+            ->andFilterWhere(['like', 'certificado', $this->certificado]);
+
+   $session = Yii::$app->session;
+    $session->set('exportData', $dataProvider);
+
+        return $dataProvider;
+    }
+
+     public static function getExportData() 
+    {
+        $session = Yii::$app->session;
+        $data = [
+            'data'=>$session->get('exportData'),
+            'fileName'=>'Listado de Bajas', 
+            'title'=>'Listado de Bajas',
+            'exportFile'=>'@app/modules/soporte/views/inv-bajas/InvBajasExportPdfExcel',
+        ];
+        //print_r($data);exit;
+
+    return $data;
+    }
+
       public function valida()
     {
         
