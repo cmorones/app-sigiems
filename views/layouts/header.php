@@ -343,7 +343,11 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom',['/soporte/inv-telecom/index']) ?>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom Area Central',['/soporte/inv-telecom/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom IEMS',['/soporte/inv-telecom/externos']) ?>
                         </li>
 
 
@@ -360,11 +364,14 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
                       
 
-                                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Area Central ',['/telefonia/telefonia/internos']) ?>
-                        </li>
+                           
+
 
                           <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia Area Central',['/telefonia/telefonia/internos']) ?>
+                        </li>
+
+                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia IEMS',['/telefonia/telefonia/index']) ?>
                         </li>
 
@@ -460,6 +467,10 @@ Yii::$app->name = "APP-SIGIEMS";
 
                          <li>
                             <?= Html::a('<i class="fa fa-male"></i> Catalogos',['/catalogos']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Sistemas',['/inv-sistemas']) ?>
                         </li>
                     </ul>
                 </div>

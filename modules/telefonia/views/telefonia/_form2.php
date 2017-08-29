@@ -35,7 +35,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
     <div class="col-xs-4 edusecArLangHide"></div>
     <div class="col-xs-4 edusecArLangHide"></div>
     <div class="col-xs-4 left-padding">
-    <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+    <?= Html::a(Yii::t('app', 'Regresar'), ['internos', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
 </div>

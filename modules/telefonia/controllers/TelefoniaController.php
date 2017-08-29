@@ -6,7 +6,6 @@ use Yii;
 use app\modules\telefonia\models\InvTelefonia;
 use app\modules\telefonia\models\TelefoniaSearch;
 use yii\web\Controller;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\modules\telefonia\models\CatMarca;
@@ -39,31 +38,6 @@ class TelefoniaController extends Controller
         }
     }
     */
-
-
-
-  public function behaviors()
-    {
-        return [
-             'access' => [
-                'class' => AccessControl::className(),
-               // 'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['index','modelos', 'internos', 'telefonos', 'create','update', 'view'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 public function actionModelos($id)
     {
         $cuentaModelos = CatModelotel::find()->where(['id_marca'=>$id])->count();
@@ -77,18 +51,6 @@ public function actionModelos($id)
             echo "<option>-</option>";
         }
     }
-
-       public function actionInternos()
-    {
-        $searchModel = new TelefoniaSearch();
-        $dataProvider = $searchModel->search3(Yii::$app->request->queryParams);
-
-        return $this->render('internos', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
     /**
      * Lists all InvTelefonia models.
      * @return mixed
@@ -129,6 +91,17 @@ public function actionModelos($id)
         ]);
     }
 
+        public function actionInternos()
+    {
+        $searchModel = new TelefoniaSearch();
+        $dataProvider = $searchModel->search3(Yii::$app->request->queryParams);
+
+        return $this->render('internos', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Creates a new InvTelefonia model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -157,6 +130,29 @@ public function actionModelos($id)
         }
     }
 
+    public function actionCreate2()
+    {
+        $model = new InvTelefonia();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_usuario=Yii::$app->user->identity->user_id;
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = new Expression('NOW()');
+            $model->id_plantel=Yii::$app->user->identity->id_plantel;
+             if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                # code...
+            }
+            return $this->redirect(['internos', 'id' => $model->id]);
+        } else {
+            return $this->render('create2', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     /**
      * Updates an existing InvTelefonia model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -176,6 +172,18 @@ public function actionModelos($id)
         }
     }
 
+public function actionUpdate2($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['internos', 'id' => $model->id]);
+        } else {
+            return $this->render('update2', [
+                'model' => $model,
+            ]);
+        }
+    }
     /**
      * Deletes an existing InvTelefonia model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\soporte\models\EstadoEquipo;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\telefonia\models\TelefoniaSearch */
@@ -22,9 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="col-xs-4 right-padding">
 
            
-    <p>
-        <?= Html::a('Agregar telefonia', ['create2'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
   </div>
   <div class="col-xs-4 right-padding">
@@ -40,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
 </div>
 
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -47,10 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
+                                                 [
+              'attribute'=>'id_plantel',
+              'value' => 'catPlanteles.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             'progresivo',
-            'responsable',
             'serie',
-            [
+             [
               'attribute'=>'marca',
               'value' => 'catMarcatel.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\telefonia\models\CatMarcatel::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
@@ -60,42 +62,36 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'catModelotel.modelo',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\telefonia\models\CatModelotel::find()->orderBy('modelo')->asArray()->all(),'id','modelo')
             ],
-             'num_ext',
-             //'id_usuario',
-             //'estado',
-             [
-              'attribute'=>'estado',
-              'value' => 'estadoEquipo.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
-
-
-             //'id_area',
-             [
+            [
               'attribute'=>'id_area',
               'value' => 'catAreas.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
             ],
-            [
-              'attribute'=>'id_piso',
-              'value' => 'catPisos.nombre',
-              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPisos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+             'num_ext',
+             //'id_usuario',
+              [
+              'attribute'=>'estado',
+              'value' => 'catEstado.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-             'nodo',
 
-                [
-             'class' => 'app\components\CustomActionColumn',
-      'template' => '{update2} {delete}',
-      'buttons' => [
-        'update' => function ($url, $model) {
-                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'update2'),]));
-            },
-        'delete' => function ($url, $model) {
-                return ((Yii::$app->user->can("/telefonia/telefonia/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
-            }
-      ],
-            ],
+
         ],
     ]); ?>
 
 </div>
+
+
+
+
+
+
+
+</table>
+   
+     </div>
+   </div>
+  </div>
+</div>
+
+

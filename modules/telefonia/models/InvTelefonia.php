@@ -7,6 +7,7 @@ use app\modules\admin\models\CatPlanteles;
 use app\modules\admin\models\CatAreas;
 use app\modules\telefonia\models\CatMarcatel;
 use app\modules\soporte\models\EstadoEquipo;
+use app\modules\admin\models\CatPisos;
 /**
  * This is the model class for table "inv_telefonia".
  *
@@ -40,7 +41,7 @@ class InvTelefonia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['progresivo', 'marca', 'modelo', 'num_ext', 'id_usuario', 'estado', 'id_plantel', 'id_area'], 'integer'],
+            [['progresivo', 'marca', 'modelo', 'num_ext', 'id_usuario', 'estado', 'id_plantel', 'id_area','id_piso'], 'integer'],
             [['id','progresivo','serie', 'marca','modelo','num_ext','id_usuario','estado','id_plantel','id_area','observaciones'], 'safe'],
             [['progresivo','serie', 'marca','modelo','num_ext', 'id_usuario','estado','id_area','responsable', 'nodo'], 'required'],
             [['serie'], 'string', 'max' => 255],
@@ -87,6 +88,11 @@ class InvTelefonia extends \yii\db\ActiveRecord
           public function getCatModelotel()
     {
         return $this->hasOne(CatModelotel::className(),['id'=>'modelo']);
+    }
+
+       public function getCatPisos()
+    {
+        return $this->hasOne(CatPisos::className(),['id'=>'id_piso']);
     }
 
 }

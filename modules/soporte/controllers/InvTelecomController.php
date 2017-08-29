@@ -27,7 +27,7 @@ class InvTelecomController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','update'],
+                        'actions' => ['index','create','update', 'externos'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -50,10 +50,25 @@ class InvTelecomController extends Controller
     {
         $searchModel = new InvTelecomSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider2 = $searchModel->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider2,            
+        ]);
+    }
+
+        public function actionExternos()
+    {
+        $searchModel = new InvTelecomSearch();
+        $dataProvider = $searchModel->search3(Yii::$app->request->queryParams);
+
+
+        return $this->render('externos', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+          
         ]);
     }
 

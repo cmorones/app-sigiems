@@ -5,6 +5,7 @@ namespace app\modules\soporte\models;
 use Yii;
 use app\modules\soporte\models\InvEquipos;
 use app\modules\admin\models\ProxyNivel;
+use app\modules\admin\models\CatPlanteles;
   
 /**
  * This is the model class for table "inv_telecom".
@@ -68,7 +69,7 @@ class InvTelecom extends \yii\db\ActiveRecord
             'mac' => 'Mac',
             'proxy' => 'Proxy',
             'estado' => 'Estado',
-            'id_plantel' => 'Id Plantel',
+            'id_plantel' => 'Plantel',
             'observaciones' => 'Observaciones',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
@@ -106,5 +107,9 @@ class InvTelecom extends \yii\db\ActiveRecord
      public function getProxyNivel()
     {
         return $this->hasOne(ProxyNivel::className(),['clave'=>'proxy']);
+    }
+    public function getCatPlanteles()
+    {
+        return $this->hasOne(CatPlanteles::className(),['id'=>'id_plantel']);
     }
 }
