@@ -77,4 +77,69 @@ class InvSistemasSearch extends InvSistemas
 
         return $dataProvider;
     }
+
+     public function search2($params)
+    {
+        $query = InvSistemas::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider2 = new ActiveDataProvider([
+            'query' => $query,
+             'pagination' => [
+                  'pageSize' => 1000,
+             ],
+             'sort' => [
+         'defaultOrder' => [
+               'id' => SORT_ASC,
+               //'title' => SORT_ASC, 
+          ]
+          ],
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider2;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'clasificacion' => $this->clasificacion,
+            'anio_dev' => $this->anio_dev,
+            'tipo' => $this->tipo,
+            //'ult_act' => $this->ult_act,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
+            'updated_at' => $this->updated_at,
+            'updated_by' => $this->updated_by,
+        ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'fundamento', $this->fundamento])
+            ->andFilterWhere(['like', 'objetivo', $this->objetivo])
+            ->andFilterWhere(['like', 'desarrollado', $this->desarrollado]);
+
+    $session = Yii::$app->session;
+    $session->set('exportData', $dataProvider2);
+
+        return $dataProvider2;
+    }
+
+    public static function getExportData() 
+    {
+        $session = Yii::$app->session;
+        $data = [
+            'data'=>$session->get('exportData'),
+            'fileName'=>'InventarioSistemas--List', 
+            'title'=>'Listado de Sistemas',
+            'exportFile'=>'@app/modules/admin/views/inv-sistemas/InvSistemasExportPdfExcel',
+        ];
+        //print_r($data);exit;
+
+    return $data;
+    }
 }

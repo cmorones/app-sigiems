@@ -14,13 +14,31 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 <div class="inv-sistemas-index">
+<div class="col-xs-12">
+  <div class="col-lg-7 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title"><i class="fa fa-th-list"></i> 
+  <?php echo $this->title ?></h3></div>
+  <div class="col-lg-5 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
+  <div class="col-xs-4 right-padding">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
+           
+<p>
         <?= Html::a('Agregar Sistema', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+  </div>
+  <div class="col-xs-4 right-padding">
+ 
+      <?= Html::a(Yii::t('app', 'PDF'), ['/export-data/export-to-pdf', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-warning', 'target'=>'_blank']) ?>
+
+  </div>
+  <div class="col-xs-4 right-padding">
+ 
+      <?= Html::a(Yii::t('app', 'EXCEL'), ['/export-data/export-excel', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-primary', 'target'=>'_blank']) ?>
+
+  </div>
+  </div>
+</div>
+ 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
