@@ -37,12 +37,15 @@ class InvSistemasController extends Controller
     {
         $searchModel = new InvSistemasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider2 = $searchModel->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'dataProvider2' => $dataProvider2,
         ]);
     }
+
 
     /**
      * Displays a single InvSistemas model.
