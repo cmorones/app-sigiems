@@ -470,7 +470,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                          <li>
-                            <?= Html::a('<i class="fa fa-male"></i> Sistemas',['/inv-sistemas']) ?>
+                            <?= Html::a('<i class="fa fa-male"></i> Sistemas',['/admin/inv-sistemas']) ?>
                         </li>
                     </ul>
                 </div>

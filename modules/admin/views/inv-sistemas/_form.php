@@ -41,7 +41,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'nombre', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Nombre'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'nombre', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Nombre'] ] )->textInput(['maxlength' => 255])->label(false); ?>
                                             </div>
                                         </div>
 
@@ -50,7 +50,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'fundamento', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Fundamento'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'fundamento', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Fundamento'] ] )->textInput(['maxlength' => 255])->label(false); ?>
                                             </div>
                                         </div>
 
@@ -59,7 +59,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'objetivo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Objetivo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'objetivo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Objetivo'] ] )->textInput(['maxlength' => 255])->label(false); ?>
                                             </div>
                                         </div>
 
@@ -76,7 +76,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'anio_dev', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Año de Desarrollo'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'anio_dev', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Año de Desarrollo'] ] )->textInput(['maxlength' => 255])->label(false); ?>
                                             </div>
                                         </div>
             <div class="form-group">
@@ -96,7 +96,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'desarrollado', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Desarrollado'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'desarrollado', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Desarrollado'] ] )->textInput(['maxlength' => 255])->label(false); ?>
                                             </div>
                                         </div>                                        
             <div class="col-lg-offset-2 col-lg-10">
