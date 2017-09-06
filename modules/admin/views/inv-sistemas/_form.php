@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\modules\admin\models\CatClasificacion;
 use app\modules\admin\models\CatTiposSis;
+use app\modules\soporte\models\EstadoEquipo;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\InvSistemas */
@@ -45,23 +46,7 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                             </div>
                                         </div>
 
-            <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Fundamento: </label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'fundamento', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Fundamento'] ] )->textInput(['maxlength' => 255])->label(false); ?>
-                                            </div>
-                                        </div>
-
-            <div class="form-group">
-                                            <label for="cname" class="control-label col-lg-2">Objetivo: </label>
-                                            <div class="col-lg-4">
-                                              
-
-                                             <?= $form->field($model, 'objetivo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Objetivo'] ] )->textInput(['maxlength' => 255])->label(false); ?>
-                                            </div>
-                                        </div>
+            
 
             <div class="form-group">
                                              <label for="cname" class="control-label col-lg-2">Clasificacion:</label>
@@ -97,6 +82,33 @@ $plantel = @Yii::$app->user->identity->id_plantel;
                                               
 
                                              <?= $form->field($model, 'desarrollado', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Desarrollado'] ] )->textInput(['maxlength' => 255])->label(false); ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                             <label for="cname" class="control-label col-lg-2">Estado:</label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'status', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(EstadoEquipo::find()->orderBy('nombre')->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Estado'])->label(false); ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Fundamento: </label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'fundamento', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Fundamento'] ] )->textArea(['class'=>'form-control','rows' => '6'])->label(false); ?>
+                                            </div>
+                                        </div>
+
+            <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Objetivo: </label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'objetivo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Objetivo'] ] )->textArea(['class'=>'form-control','rows' => '6'])->label(false); ?>
                                             </div>
                                         </div>                                        
             <div class="col-lg-offset-2 col-lg-10">

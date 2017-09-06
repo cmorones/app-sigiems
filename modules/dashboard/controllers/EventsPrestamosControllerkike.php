@@ -44,8 +44,6 @@ use app\modules\dashboard\models\EventsPrestamosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\db\Expression;
-use yii\web\UploadedFile;
 
 class EventsPrestamosController extends Controller
 {
@@ -98,36 +96,6 @@ class EventsPrestamosController extends Controller
         return $this->render('prestaequipos');
     }
 
-       public function actionDocto($event_id)
-    {
-        $model = $this->findModel($event_id);
-
-        if ($model->load(Yii::$app->request->post()) || isset($_POST['EventsPrestamos'])) {
-
-        $model->file = UploadedFile::getInstance($model,'file');
-        $model->file->saveAs('pdfprestamos/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
-       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-        $model->documento = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
-       // $model->docto=1;
-        $model->updated_by=@Yii::$app->user->identity->user_id;
-        $model->updated_at = new Expression('NOW()');
-
-        if($model->save()) {
-                if(isset($_GET['return_dashboard']))
-                    return $this->redirect(['/dashboard/events-prestamos']);
-            else 
-            return $this->redirect(['index']);
-        }
-        else {
-                    return $this->render('_form2', ['model' => $model,]);
-            }
-        } else {
-            return $this->render('_form2', [
-                'model' => $model,
-            ]);
-        }
-    }
-
 
     /**
      * Creates a new Events model.
@@ -153,13 +121,10 @@ class EventsPrestamosController extends Controller
         $model->event_detail='El Tiempo de Prestamo se Define en el Formato';
         $model->event_all_day = 0;
         $model->is_status=0;
-        $model->folio= $model->event_id;
 		$model->created_by = Yii::$app->user->identity->user_id; //Yii::$app->getid->getId();
 		$model->created_at = new \yii\db\Expression('NOW()');
 
         if (!$model->save()) {
-
-                
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
@@ -167,11 +132,6 @@ class EventsPrestamosController extends Controller
                  //return $this->redirect(['create']);
                 //exit;
                 # code...
-            }else{
-                Yii::$app->telegram->sendMessage([
-                'chat_id' => -224731334,
-                'text' => "Prestamo de Equipo hora inicial:$model->event_start_date fecha_final:$model->event_end_date",
-                ]);
             }
 
 		if($model->save()) {

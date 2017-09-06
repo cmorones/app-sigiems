@@ -22,6 +22,10 @@ class DefaultController extends Controller
     {
         return $this->render('prestamos');
     }
+    public function actionPrestaequipos()
+    {
+        return $this->render('prestaequipos');
+    }
 
      public function actionEventos()
     {

@@ -51,6 +51,7 @@ return array(
     'dosamigos\\datetimepicker\\' => array($vendorDir . '/2amigos/yii2-date-time-picker-widget/src'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'bs\\dbManager\\' => array($vendorDir . '/beaten-sect0r/yii2-db-manager/src'),
+    'aki\\telegram\\' => array($vendorDir . '/aki/yii2-bot-telegram'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

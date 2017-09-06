@@ -39,6 +39,11 @@ use yii\helpers\ArrayHelper;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatTiposSis::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             'anio_dev',
+            [
+              'attribute'=>'status',
+              'value' => 'estadoEquipo.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             // 'tipo',
             // 'desarrollado',
             // 'ult_act',

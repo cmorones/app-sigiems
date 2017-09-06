@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */$this->title = 'APP-SISMA';
 use yii\helpers\Html;
 use app\modules\soporte\models\InvBajas;
+use app\modules\dashboard\models\EventsPrestamos;
 use app\modules\admin\models\Users;
 use app\modules\admin\models\CatPlanteles;
 use app\modules\soporte\models\InvEquipos;
@@ -68,6 +69,11 @@ margin: auto;
 
 	$usuaurio = Users::find()->where(['user_id' => Yii::$app->user->identity->user_id])->one();
   $fecha = date("Y-m-d");
+  $presta = EventsPrestamos::find()->where(['event_id' => $idp])->one();
+
+
+
+
 ?>
 <!------------Start Employee Details Block---------------->
 
@@ -76,15 +82,17 @@ margin: auto;
 
   <div class="row">
 <div align="right">
- FOLIO:        36<br>
-                 FOLIO SISMA:     IEMS-0003231 <br>
+ FOLIO:<?= $presta->folio ?><br>
+                 FOLIO SISMA:     <?= $presta->ticket ?> <br>
                  FECHA:     <?= $fecha ?>
 
 </div>
 </div>
 
-<h4>SOLICITANTE:  ____________________________________________________________________________________ </h4>
-<h4>UBICACIÓN DEL PRÉSTAMO:  ___________________________________________________________________</h4>
+
+
+<h4>SOLICITANTE: <?= $presta->responsable ?></h4>
+<h4>UBICACIÓN DEL PRÉSTAMO: <?= $presta->catAreas->nombre?>
 
 
 <div class="row">
@@ -108,6 +116,10 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.backred {
+	color:green;
+}
 </style>
 </thead>
 <tbody>
@@ -116,17 +128,17 @@ tr:nth-child(even) {
   <th style="background-color:lightgray;" colspan="2" align="center">HORA</th>
 </tr>
   <tr align="center" valign="middle"> 
-    <th rowspan="2" style="background-color:white;"></th>
+    <th rowspan="2" style="background-color:white;" align="center"><?= $presta->users->nombre ?></th>
     <th style="background-color:white;">ENTREGA:</th>
-    <th style="background-color:white;"></th>
+    <th style="background-color:white;"><?= $presta->event_start_date ?></th>
 
   </tr>
   <tr align="center" valign="middle" class="col-xs-12"> 
     <th>DEVOLUCIÓN:</th>
-    <th></th>
+    <th><?= $presta->event_end_date ?></th>
   </tr>
 <tr align="center" valign="middle" class="col-xs-12">
-<td colspan="3"><b>NOTA:</b>&nbsp;EN CASO DE QUE EL PRÉSTAMO SE EXTIENDA DESPUÉS DE LAS 18:00 HRS. <br> EL RESPONSABLE DEBERA RESGUARDAR EL EQUIPO EN PRÉSTAMO <br> HASTA EL DÍA SIGUIENTE A LAS 10:00 HRS. Y ENTREGARLO EN LA JUD DE SOPORTE TÉCNICO</td>
+<td colspan="3" style="background-color:lightgray"><b>NOTA:</b>&nbsp;EN CASO DE QUE EL PRÉSTAMO SE EXTIENDA DESPUÉS DE LAS 18:00 HRS. <br> EL RESPONSABLE DEBERA RESGUARDAR EL EQUIPO EN PRÉSTAMO <br> HASTA EL DÍA SIGUIENTE A LAS 10:00 HRS. Y ENTREGARLO EN LA JUD DE SOPORTE TÉCNICO</td>
 
  
     
@@ -152,47 +164,87 @@ tr:nth-child(even) {
 
 
 
-<div class="row" align="left">
-<input type= “text” size="3">
-LAPTOP PROG.
-<input type= “text” size="23">
-<small>ESTADO:_______________________________________________________________________</small>
+<div class="row" >
+<?php
+if ($presta->laptop>0) {
+	?>
+<textarea rows="1" cols="1">X</textarea>
+LAPTOP PROGRESIVO.
+<textarea rows="1" cols="15" align="center">&nbsp;<?= $presta->progresivo_laptop ?></textarea><br>
+<small>ESTADO:&nbsp;&nbsp;&nbsp;<span class='backred'><?= $presta->estadoPresta2->nombre ?></span></small>
+	<?php
+}
+?>
 <br>
-<input type= “text” size="3">
+<?php
+if ($presta->video_proye>0) {
+	?>
+<textarea rows="1" cols="1">X</textarea>
 VIDEO PROYECTOR PROG.
-<input type= “text” size="25">
+<textarea rows="1" cols="15" align="center">&nbsp;<?= $presta->progresivo_proyector ?></textarea><br>
 
-<small>ESTADO:_______________________________________________________</small>
+<small>ESTADO:&nbsp;&nbsp;&nbsp;<span class='backred'><?= $presta->estadoPresta6->nombre ?></span></small>
+	<?php
+}
+?>
 <br>
-<input type= “text” size="3">
-MOUSE PROG.
+<?php
+if ($presta->exten>0) {
+	?>
+<textarea rows="1" cols="1">X</textarea>
+EXTENSIÓN <br>
 
-<small>ESTADO:__________________________________________________________________________________________</small>
+<small>ESTADO:&nbsp;&nbsp;&nbsp;<span class='backred'><?= $presta->estadoPresta5->nombre ?></span></small>
+	<?php
+}
+?>
 <br>
-<input type= “text” size="3">
-EXTENSIÓN PROG.
 
-<small>ESTADO:____________________________________________________________________________________</small>
+<?php
+if ($presta->mouse>0) {
+	?>
+<textarea rows="1" cols="1">X</textarea>
+MOUSE
+
+<small>ESTADO:&nbsp;&nbsp;&nbsp;<span class='backred'><?= $presta->estadoPresta4->nombre ?></span></small>
+	<?php
+}
+?>
+
 <br>
-<input type= “text” size="3">
+<?php
+if ($presta->impresora>0) {
+	?>
+<textarea rows="1" cols="1">X</textarea>
 IMPRESORA PROG.
-<input type= “text” size="23">
-
-<small>ESTADO:__________________________________________________________________</small>
+<textarea rows="1" cols="15">&nbsp;<?= $presta->progresivo_impresora?></textarea>
 <br>
-<input type= “text” size="3">
-OTRO ESPECIFICAR.
+<small>ESTADO:&nbsp;&nbsp;&nbsp;<span class='backred'><?= $presta->estadoPresta3->nombre ?></span></small>
+	<?php
+}
+?>
 
 
-<small>ESTADO:__________________________________________________________________________________</small>
+<br>
+<?php
+if ($presta->otro>0) {
+	?>
+<textarea rows="1" cols="1">X</textarea>
+OTRO. ESPECIFICAR: <?= $presta->especificar ?>
+<br>
+<small>ESTADO:<span class='backred'><?= $presta->estadoPresta->nombre ?></span></small>
+	<?php
+}
+?>
+
 </div>
 
 <br>
 
         <!-- ./col -->
-<div class="row" align="center">
-&nbsp;&nbsp;&nbsp;&nbsp;__________________________________________                         
-<h5 align="center">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE Y FIRMA DE QUIEN RECIBE EL EQUIPO  </h5>
+<div class="row" align="right">
+__________________________________________&nbsp;&nbsp;&nbsp;&nbsp;                         
+<h5 align="right">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE Y FIRMA DE QUIEN RECIBE EL EQUIPO  </h5>
 </div>
 
 
@@ -208,44 +260,67 @@ OTRO ESPECIFICAR.
 
 <div class="row">
 
+<?php
+if ($presta->laptop>0) {
+	?>
 <input type= “text” size="3">
 LAPTOP &nbsp;                             
 <small>ESTADO:______________________________________________________________________________________________</small>
+	<?php
+}
+?>
 
-
-
+<?php
+if ($presta->video_proye>0) {
+	?>
 <input type= “text” size="3">
 VIDEO PROYECTOR &nbsp; &nbsp; &nbsp; 
 <small>ESTADO:____________________________________________________________________________</small>
-
-
-
+	<?php
+}
+?>
+<?php
+if ($presta->mouse>0) {
+	?>
 <input type= “text” size="3">
 MOUSE &nbsp; &nbsp; &nbsp;
 <small>ESTADO:___________________________________________________________________________________________</small>
-
-
-
+	<?php
+}
+?>
+<?php
+if ($presta->exten>0) {
+	?>
 <input type= “text” size="3">
 EXTENSIÓN &nbsp; &nbsp; &nbsp;
 <small>ESTADO:_____________________________________________________________________________________</small>
-
-
-
+	<?php
+}
+?>
+<?php
+if ($presta->impresora>0) {
+	?>
 <input type= “text” size="3">
 IMPRESORA &nbsp; &nbsp; &nbsp;
 <small>ESTADO:_____________________________________________________________________________________</small>
-
-
-
+	<?php
+}
+?>
+<?php
+if ($presta->otro>0) {
+	?>
 <input type= “text” size="3">
 OTRO ESPECIFICAR.&nbsp; &nbsp; &nbsp;
 
 <small>ESTADO:___________________________________________________________________________</small>
-
+	<?php
+}
+?>
 
 <h4 align="left"><b>OBSERVACIONES:</b></h4>
-_______________________________________________________________________________________________________ <br><br>
+________________________________________________________________________________________<br><br>
+<br>
+<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;__________________________________________ <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> VoBo. SOPORTE TECNICO </b>                        
 

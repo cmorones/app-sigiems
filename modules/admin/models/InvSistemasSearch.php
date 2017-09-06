@@ -18,7 +18,7 @@ class InvSistemasSearch extends InvSistemas
     public function rules()
     {
         return [
-            [['id', 'clasificacion', 'anio_dev', 'tipo', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'clasificacion', 'anio_dev', 'tipo', 'created_by', 'updated_by', 'status'], 'integer'],
             [['nombre', 'fundamento', 'objetivo', 'desarrollado', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -68,6 +68,7 @@ class InvSistemasSearch extends InvSistemas
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
@@ -116,6 +117,7 @@ class InvSistemasSearch extends InvSistemas
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

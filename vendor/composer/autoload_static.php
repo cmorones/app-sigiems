@@ -75,6 +75,10 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
         array (
             'bs\\dbManager\\' => 13,
         ),
+        'a' => 
+        array (
+            'aki\\telegram\\' => 13,
+        ),
         'S' => 
         array (
             'Symfony\\Component\\Process\\' => 26,
@@ -265,6 +269,10 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
         'bs\\dbManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/beaten-sect0r/yii2-db-manager/src',
+        ),
+        'aki\\telegram\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aki/yii2-bot-telegram',
         ),
         'Symfony\\Component\\Process\\' => 
         array (

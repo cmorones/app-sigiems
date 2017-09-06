@@ -36,9 +36,19 @@ Yii::$app->name = "APP-SIGIEMS";
 
 
                                            <li>
-                                            <a href="#academics"><i class="fa fa-calendar-o"></i> Direccion de Informática</a>
+                                            <a href="#dit"><i class="fa fa-calendar-o"></i> Direccion de Informática</a>
                                         </li>
-                                      
+
+                                         <?php  
+                                     if(Yii::$app->user->can('menuAdmin')) {
+                                          ?>
+
+                                           <li>
+                                            <a href="#academics"><i class="fa fa-calendar-o"></i> Direccion Academica</a>
+                                        </li>
+                                      <?php 
+                                  }
+                                  ?>
                                   
                                       
                                     </ul>
@@ -46,10 +56,46 @@ Yii::$app->name = "APP-SIGIEMS";
                                 <div class="col-md-9 menu-sub-items">
                                     <div class="tab-content">
 
+ <div id="academics" class="tab-pane">
+        <div class="visible-sm visible-xs menu-box-header">
+            <button aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h4><i class="fa fa-calendar-o"></i> Academics</h4>
+        </div>
+
+         <div class="row">
+
+              <?php  
+              if(Yii::$app->user->can('menuAdmin')) {
+            ?>
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Catalogos</a></li>
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Calendario',['/dashboard'])?>
+                        </li>
 
 
 
-   <div id="academics" class="tab-pane">
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
+                        </li>
+                    </ul>
+            </div>
+         </div>
+
+           <?php 
+                                  }
+                                  ?>
+         </div>
+
+</div>
+
+
+   <div id="dit" class="tab-pane">
         <div class="visible-sm visible-xs menu-box-header">
             <button aria-label="Close" class="close" type="button">
             <span aria-hidden="true">×</span>
@@ -503,6 +549,10 @@ Yii::$app->name = "APP-SIGIEMS";
                     <li>
                         <a href="/login-details/index"><i class="fa fa-history"></i>Bitacora</a>
                     </li>
+
+                    <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Prestamos de Equipo',['/dashboard/events-prestamos'])?>
+                        </li>
                 </ul>
             </div>
         </div>

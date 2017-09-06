@@ -373,4 +373,13 @@ return array (
       '@kartik/datecontrol' => $vendorDir . '/kartik-v/yii2-datecontrol',
     ),
   ),
+  'aki/yii2-bot-telegram' => 
+  array (
+    'name' => 'aki/yii2-bot-telegram',
+    'version' => '1.5.4.0',
+    'alias' => 
+    array (
+      '@aki/telegram' => $vendorDir . '/aki/yii2-bot-telegram',
+    ),
+  ),
 );

@@ -61,6 +61,11 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatTiposSis::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             'anio_dev',
+            [
+              'attribute'=>'status',
+              'value' => 'estadoEquipo.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\EstadoEquipo::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             // 'tipo',
             // 'desarrollado',
             // 'ult_act',
@@ -73,3 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+
+
+
+<link rel="icon" type="image/x-icon" href="http://example.com/favicon-vfl8qSV2F.ico" />

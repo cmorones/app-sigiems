@@ -50,41 +50,6 @@ class InfPdfController extends \yii\web\Controller
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
     
-    public function actionTelefon()
-    {
-        //return $this->renderPartial('index');
-
-        $html = $this->renderPartial('/inf-pdf/telefon',
-			[
-				/*'empDocs'=>$empDocs,
-				'empMaster'=>$empMaster,
-				'empInfo'=>$empInfo,
-				'nationality'=>$nationality,
-				'empAdd'=>$empAdd,*/
-			]);
-
-       // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('Informe',$fName,$html);
-    }
-
-    public function actionTelgen()
-    {
-        //return $this->renderPartial('index');
-
-        $html = $this->renderPartial('/inf-pdf/telgen',
-			[
-				/*'empDocs'=>$empDocs,
-				'empMaster'=>$empMaster,
-				'empInfo'=>$empInfo,
-				'nationality'=>$nationality,
-				'empAdd'=>$empAdd,*/
-			]);
-
-       // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('Informe',$fName,$html);
-    }
 
     public function actionIndex4($idb)
     {
@@ -124,13 +89,13 @@ class InfPdfController extends \yii\web\Controller
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 
-    public function actionIndex6($idp)
+    public function actionIndex6()
     {
         //return $this->renderPartial('index');
 
         $html = $this->renderPartial('/inf-pdf/index6',
 			[
-				'idp'=>$idp,
+
 				/*'empDocs'=>$empDocs,
 				'empMaster'=>$empMaster,
 				'empInfo'=>$empInfo,
@@ -199,62 +164,6 @@ class InfPdfController extends \yii\web\Controller
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 
-    public function actionBateriast($idp)
-    {
-        //return $this->renderPartial('index');
-
-        $html = $this->renderPartial('/inf-pdf/bateriast',
-			[
-				'idp'=>$idp,
-				/*'empDocs'=>$empDocs,
-				'empMaster'=>$empMaster,
-				'empInfo'=>$empInfo,
-				'nationality'=>$nationality,
-				'empAdd'=>$empAdd,*/
-			]);
-
-       // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('Informe',$fName,$html);
-    }
-
-public function actionDesechos($idp)
-    {
-        //return $this->renderPartial('index');
-
-        $html = $this->renderPartial('/inf-pdf/desechos',
-			[
-				'idp'=>$idp,
-				/*'empDocs'=>$empDocs,
-				'empMaster'=>$empMaster,
-				'empInfo'=>$empInfo,
-				'nationality'=>$nationality,
-				'empAdd'=>$empAdd,*/
-			]);
-
-       // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('Informe',$fName,$html);
-    }
-
-    public function actionDesechost($idp)
-    {
-        //return $this->renderPartial('index');
-
-        $html = $this->renderPartial('/inf-pdf/desechost',
-			[
-				'idp'=>$idp,
-				/*'empDocs'=>$empDocs,
-				'empMaster'=>$empMaster,
-				'empInfo'=>$empInfo,
-				'nationality'=>$nationality,
-				'empAdd'=>$empAdd,*/
-			]);
-
-       // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('Informe',$fName,$html);
-    }
 
 
 }

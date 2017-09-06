@@ -13,6 +13,17 @@ $config = [
          'assetManager' => [
         'linkAssets' => true,
         ], 
+        'telegram' => [
+           'class' => 'aki\telegram\Telegram',
+           'botToken' => '356897096:AAE2JV6u3kjQwI9trHXCUh1WhGp8nR0OxKk',
+           'botUsername' => 'sigiems_bot'
+        ],
+
+          'telegram2' => [
+           'class' => 'aki\telegram\Telegram',
+           'botToken' => '400277493:AAETFEVDWFl_iWXhgOZB0VmHPEq-WuApCuw',
+           'botUsername' => 'Judats_bot'
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JDqkJaMgIITAKcsJY6yvLQdM9jf7WghX',

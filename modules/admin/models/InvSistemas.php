@@ -5,6 +5,7 @@ namespace app\modules\admin\models;
 use Yii;
 use app\modules\admin\models\CatClasificacion;
 use app\modules\admin\models\CatTiposSis; 
+use app\modules\soporte\models\EstadoEquipo;
 /**
  * This is the model class for table "inv_sistemas".
  *
@@ -39,7 +40,7 @@ class InvSistemas extends \yii\db\ActiveRecord
     {
         return [
             [['nombre','fundamento','objetivo','clasificacion','anio_dev','tipo','desarrollado'], 'required'],
-            [['clasificacion', 'anio_dev', 'tipo', 'created_by', 'updated_by'], 'integer'],
+            [['clasificacion', 'anio_dev', 'tipo', 'created_by', 'updated_by', 'status'], 'integer'],
             [['nombre', 'fundamento', 'objetivo', 'desarrollado'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];
@@ -64,6 +65,7 @@ class InvSistemas extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Ultima Actualizacion',
             'updated_by' => 'Actualizado Por:',
+            'status' => 'Estado'
         ];
     }
 
@@ -75,5 +77,9 @@ class InvSistemas extends \yii\db\ActiveRecord
     public function getCatTiposSis()
     {
         return $this->hasOne(CatTiposSis::className(), ['id' => 'tipo']);
+    }
+    public function getEstadoEquipo()
+    {
+        return $this->hasOne(EstadoEquipo::className(), ['id' => 'status']);
     }
 }

@@ -3303,5 +3303,47 @@
             "yii",
             "yii2"
         ]
+    },
+    {
+        "name": "aki/yii2-bot-telegram",
+        "version": "1.5.4",
+        "version_normalized": "1.5.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/akbarjoudi/yii2-bot-telegram.git",
+            "reference": "e115bb1266203687c105fc354385a82d94c5dad1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/akbarjoudi/yii2-bot-telegram/zipball/e115bb1266203687c105fc354385a82d94c5dad1",
+            "reference": "e115bb1266203687c105fc354385a82d94c5dad1",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2017-04-01T05:02:10+00:00",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "aki\\telegram\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "akbarjoudi",
+                "email": "akbar.joody@gmail.ocm"
+            }
+        ],
+        "description": "bot telegram",
+        "keywords": [
+            "extension",
+            "yii2"
+        ]
     }
 ]

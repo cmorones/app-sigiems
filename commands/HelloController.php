@@ -8,6 +8,7 @@
 namespace app\commands;
 
 use yii\console\Controller;
+use app\modules\soporte\models\InvBajas;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -26,5 +27,19 @@ class HelloController extends Controller
     public function actionIndex($message = 'hello world')
     {
         echo $message . "\n";
+    }
+
+     public function actionCesar($message = 'hola Cesar')
+    {
+        
+		
+		$resultado = InvBajas::find()->orderBy('modelo')->all();
+
+$i=1;
+foreach ($resultado as $value) {
+        echo $value->id .'-'.$value->progresivo. "\n";
+
+        echo "inserta en la nueba base". "\n";
+    }
     }
 }

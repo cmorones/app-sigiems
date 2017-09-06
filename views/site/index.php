@@ -7,6 +7,22 @@ use app\modules\soporte\models\InvEquipos;
 use app\modules\soporte\models\InvImpresoras;
 use app\modules\soporte\models\InvNobreak;
 
+/*Yii::$app->telegram->sendMessage([
+  'chat_id' => -224731334,
+  'text' => "mensaje de prueba",
+  ]);*/
+
+
+
+
+/*ii::$app->telegram2->sendMessage([
+  'chat_id' => 445074022,//425116723,
+  'text' => "0pZTsBqHyym+enDc=|yyIQkt20X3gPVJLJa3yvpk0bymI= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIcMq8ePkK7HAIF4bc4X6yvlQ+CG9lAzyGc7LQ7Apruuh+Oazb+4DKZkJz07yjyFCAIMSeehRKAz9jjPW3+99xQ=
+|1|mqXBCVm7aUWDifjZwxbChvJ5EO4=|xix0juTU+SQd9Co4jrbQntBxm2U= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOP4UMxX8y2Ua4lmLwxrmU700mHa9u5w+6NG/7WCl+Nb5yYvi9+suelSHGMGydvDGyD4NUFrMUNk+Qn14hbAZD4=
+|1|luVyWi8HYJz3y1OhxJ/KeHa5H0M=|N5pweB5cjyxgKBaqrps8BHo/UO8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDspavrFxfoR/15mUUFV1tf5zRS5EthpbIxrtm0vM7jucTurA7FI9/DS60NpM8YKFjbAt4PoPqeDIXkJsJ2sVRkyVT4AH2BZLIPBMn+dx/K18jtNpg+07/YZSxKYWWNXxRzhLi1Bx/6JmmL5Y3+R+USOhMBVwyAp6CHAVMyhebu9oNXP6AFQHlu56/Fml5w4yj3GsPke8YaY5Bg2mEFlqshKLQ2ffBwRAt/8EDngXbhyzVSAy0mgcBNXBJI25xy/8GkA7Oq7ZV/8REFWJp950UdYbW7nrp7vOfb+XdypCnBuiU+BAXMKEDmcq+HV1jNVnqVYzfgeQV1PlQ1d6Tb7bm9",
+  ]);*/
+
+
 
 //$plantel = @Yii::$app->user->identity->id_plantel;
 $count1t = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_equipos")->queryScalar();
@@ -34,6 +50,10 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
 
 
 ?>
+
+  
+
+
                 <div class="content-wrapper">
     <section class="content-header">
         <h1>

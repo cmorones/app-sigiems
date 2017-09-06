@@ -353,9 +353,9 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               }else {
 
                 if ($data->bloq ==1 && $dictaminado == 0) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span></center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id], ['title' => 'Dictaminar']));
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span></center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Dictaminar']));
                 }elseif ($data->bloq ==1 && $dictaminado > 0) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id], ['title' => 'Imprimir', 'target'=>'_blank']));
+                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
                 }
 
                  if ($data->bloq ==0) {

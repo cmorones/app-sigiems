@@ -12,16 +12,19 @@ $this->title = Yii::t('app', 'Manage Events');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<br><br>
 <section class="content-header">
 <div class="row">
   <div class="col-xs-12">
+
 	<h2 class="page-header">
 		<?php echo Yii::t('app', 'Manage Events') ?>
 	</h2>
+		<?= Html::a(Yii::t('app', 'Listado de Prestamos'), ['/dashboard/default/prestaequipos'], ['class' => 'btn btn-primary btn-sm']) ?>
   </div><!-- /.col -->
 </div>
 </section>
+
 
 
 
@@ -41,14 +44,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-solid box-warning">
   <div class="box-header">
-    <h3 class="box-title"><i class="ion ion-calendar"></i> <?php echo Yii::t('app', 'Prestamos de Equips') ?></h3>
+    <h3 class="box-title"><i class="ion ion-calendar"></i> <?php echo Yii::t('app', 'Event Schedule') ?></h3>
   </div><!-- /.box-header -->
   <div class="box-body">
    <div class="events-index">
     <?php
 	$AEurl = Url::to(["events-prestamos/add-event"]);
 	$UEurl = Url::to(["events-prestamos/update-event"]);
-	$AddEvent = Yii::t('app', 'Add Event');
+	$AddEvent = Yii::t('app', 'Prestamo');
 	$JSEvent = <<<EOF
 function(start, end, allDay) {
 	var start = moment(start).unix();
@@ -66,7 +69,7 @@ function(start, end, allDay) {
    	});
 		}
 EOF;
-$updateEvent = Yii::t('app', 'Update Event');
+$updateEvent = Yii::t('app', 'Actualizar Prestamo');
 	$JSEventClick = <<<EOF
 function(calEvent, jsEvent, view) {
     var eventId = calEvent.id;
@@ -84,10 +87,10 @@ function(calEvent, jsEvent, view) {
 	$(this).css('border-color', 'red');
 }
 EOF;
-	$eDetail = Yii::t('app', 'Event Detail');
-	$eType = Yii::t('app', 'Event Type');
-	$eStart = Yii::t('app', 'Start Time');
-	$eEnd = Yii::t('app', 'End Time');
+	$eDetail = Yii::t('app', 'Detalle');
+	$eType = Yii::t('app', 'Status');
+	$eStart = Yii::t('app', 'Hora de Entrega');
+	$eEnd = Yii::t('app', 'Hora de Devolución');
 	$JsF = <<<EOF
 		function (event, element) {
 			var start_time = moment(event.start).format("DD-MM-YYYY, h:mm:ss a");
@@ -132,7 +135,12 @@ EOF;
 	]); ?>
    </div>
    <div class="row">
-	
+	<ul class="legend">
+	    <li><span class="holiday"></span> <?php echo Yii::t('app', 'Holiday') ?></li>
+	    <li><span class="importantnotice"></span> <?php echo Yii::t('app', 'Important Notice') ?></li>
+	    <li><span class="meeting"></span> <?php echo Yii::t('app', 'Meeting') ?></li>
+	    <li><span class="messages"></span> <?php echo Yii::t('app', 'Messages') ?></li>
+	</ul>
    </div>
   </div>
 </div>
@@ -158,8 +166,9 @@ EOF;
 <?php
 	yii\bootstrap\Modal::begin([
 		'id' => 'eventModal',
-		//'header' => "<div class='row'><div class='col-xs-6'><h3>Add Event</h3></div><div class='col-xs-6'>".Html::a('Delete', ['#'], ['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:5px'])."</div></div>",
-		'header' => "<h3>".Yii::t('app', 'Add Event')."</h3>",
+		'size'=>'modal-lg',
+		'header' => "<div class='row'><div class='col-xs-10'><h3>Evento</h3></div><div class='col-xs-10'>".Html::a('Delete', ['#'], ['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:5px'])."</div></div>",
+		'header' => "<h3>".Yii::t('app', 'Evento')."</h3>",
 	]);
 
 	yii\bootstrap\Modal::end();
