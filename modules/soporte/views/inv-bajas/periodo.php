@@ -294,7 +294,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               }else {
                   
                     if ($data->bloq ==1 && $dicta == 0) {
-                      return (Html::a('<center><span class="glyphicon glyphicon-share"><bR>Generar</span><center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id], ['title' => 'Captura Dictaminar']));
+                      return (Html::a('<center><span class="glyphicon glyphicon-share"><bR>Generar</span><center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id,'idp'=>$data->id_periodo], ['title' => 'Captura Dictaminar']));
                     }elseif ($data->bloq ==1 && $dicta > 0) {
                       $dato = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
                       return (Html::a('<center><span class="glyphicon glyphicon-share"><bR>Modificar</span><center>', ['/soporte/bajas-dictamen/update', 'id'=>$dato->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Modificar Dictamen']));
@@ -347,16 +347,26 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               $certificado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
               $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
               $dicta = intval($dictaminado);
+              $data->bloq;
 
                 if ($docto['docto']==1) {
                 return ('<center>'.Html::img('@web/images/checked.png').'</center>');
               }else {
 
-                if ($data->bloq ==1 && $dictaminado == 0) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span></center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Dictaminar']));
-                }elseif ($data->bloq ==1 && $dictaminado > 0) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
+                if ($data->bloq ==1 && $dictaminado > 0) {
+                   $dato = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
+                   echo $data->id;
+                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
+                }else{
+                  return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
                 }
+
+            /*  if ($data->bloq ==1 && $dictaminado == 0) {
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span></center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Dictaminar']));
+                }elseif ($data->bloq == 0 && $dictaminado > 0) {
+                   $dato = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
+                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
+                }*/
 
                  if ($data->bloq ==0) {
                   return (Html::a('<span class="glyphicon glyphicon-edit"></span>', ['update', 'id'=>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Modificar']));
@@ -366,7 +376,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
             }
               ],
 
-               [ 'attribute' => 'imprimir',
+              [ 'attribute' => 'imprimir',
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
@@ -396,30 +406,35 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
             }
               ],
 
-               [ 'attribute' => 'Subir Dictamen',
+              [ 'attribute' => 'Subir Dictamen',
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
               $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
              
-              if($docto['docto'] == 0){
+              if($docto['docto'] == 1){
                 
                   
                  return (Html::a('<center><span class="glyphicon glyphicon-floppy-open"></span></center>', ['/soporte/bajas-dictamen/docto','id'=>$docto['id'], 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Subir']));
-              }else{
-                return (Html::a('<center><span class="glyphicon glyphicon-download"></span> PDF</center>', [
+              }elseif ($docto['docto'] > 0) {
+                 return (Html::a('<center><span class="glyphicon glyphicon-download"></span> PDF</center>', [
                             '/soporte/bajas-dictamen/pdf',
                             'id' => $docto['id'],
                         ], [
                             'class' => 'btn btn-success btn-sm',
                             'target' => '_blank',
                         ]));
+              }
+              else{
+
+                 return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
+               
                                       }
                        }
               ],
 
 
-               [ 'attribute' => 'Subir Certificado',
+            [ 'attribute' => 'Subir Certificado',
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
@@ -439,8 +454,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
                         ]));
                                       }
                        }
-              ],
-          
+              ],         
           
 
               /* [

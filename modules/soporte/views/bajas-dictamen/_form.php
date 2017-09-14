@@ -74,7 +74,9 @@ if ($model2->id_tipo==7) {
   $clabe_cabs = '5651000172';
 }
 ?>
-<div class="col-xs-12" style="padding-top: 10px;">
+<div class="col-xs-2" style="padding-top: 10px;">
+</div>
+<div class="col-xs-8" style="padding-top: 10px;">
 <div class="box view-item col-xs-12 col-lg-12">
 
 

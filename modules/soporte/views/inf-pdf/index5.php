@@ -116,7 +116,7 @@ margin: auto;
                       $resu = 'NO ENCIENDE';
                     }
 
-                    if ($baja_certi->tipo_baja==1) {
+                /*    if ($baja_certi->tipo_baja==1) {
                       $nombre = 'COMPUTADORA PERSONAL';
                     }
                     if ($baja_certi->tipo_baja==2) {
@@ -149,10 +149,11 @@ margin: auto;
                     }
                     if ($baja_certi->tipo_baja==7) {
                       $nombre = 'UPS';
-                    }
+                    }*/
 
                     if ($baja_certi->id_tipo==2) {
   $clabe_cabs = '5151000096';
+   $nombre = 'IMPRESORA';
 }
 
 
@@ -160,6 +161,7 @@ margin: auto;
 
 if ($baja_certi->id_tipo==1) {
   $clabe_cabs = '5151000138';
+  $nombre = 'COMPUTADORA PERSONAL';
 }
 
 if ($baja_certi->id_tipo==3) {
@@ -171,6 +173,7 @@ if ($baja_certi->id_tipo==4) {
 }
 if ($baja_certi->id_tipo==5) {
   $clabe_cabs = '5151000152';
+  $nombre = 'NO-BREAK';
 }
 
 if ($baja_certi->id_tipo==6) {

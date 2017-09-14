@@ -100,7 +100,7 @@ margin: auto;
                           $res = 'INUTILIDAD';
                       }
 
-                    if ($baja->tipo_baja==1) {
+            /*        if ($baja->tipo_baja==1) {
                       $nombre = 'COMPUTADORA PERSONAL';
                     }
                     if ($baja->tipo_baja==2) {
@@ -115,7 +115,7 @@ margin: auto;
                       $nombre = 'LAP-TOP';
                     }
                     if ($baja->tipo_baja==5) {
-                      $nombre = 'NO-BREAK';
+                     
                     }
 
                     if ($baja->tipo_baja==6) {
@@ -133,10 +133,11 @@ margin: auto;
                     }
                     if ($baja->tipo_baja==7) {
                       $nombre = 'UPS';
-                    }
+                    }*/
 
                     if ($baja->id_tipo==2) {
   $clabe_cabs = '5151000096';
+  $nombre = 'IMPRESORA';
 }
 
 
@@ -155,6 +156,7 @@ if ($baja->id_tipo==4) {
 }
 if ($baja->id_tipo==5) {
   $clabe_cabs = '5151000152';
+   $nombre = 'NO-BREAK';
 }
 
 if ($baja->id_tipo==6) {
@@ -277,7 +279,7 @@ tr:nth-child(even) {
     <tr class="col-sm-4">
 
         <td class="col-sm-3"><b>CAUSA DE LA BAJA:</b></td>
-        <td class="col-sm-15"><?= $res ?> </td>
+        <td class="col-sm-15"><span style="color:red"><?= $res ?></span></td>
 
     </tr>
 
@@ -316,23 +318,49 @@ tr:nth-child(even) {
 </style>
 </thead>
 <tbody>
+<?php 
 
-    
+if ($dicta->opciona==1) {
+  $valoropca = "<b>X</b>";
+}else{
+  $valoropca = "";
+}
+
+if ($dicta->opcionb==1) {
+  $valoropcb = "<b>X</b>";
+}else{
+  $valoropcb = "";
+}
+
+if ($dicta->opcionc==1) {
+  $valoropcc = "<b>X</b>";
+}else{
+  $valoropcc = "";
+}
+
+if ($dicta->opciond==1) {
+  $valoropcd = "<b>X</b>";
+}else{
+  $valoropcd = "";
+}
+
+
+ ?>
     <tr>
         <td>A) DESCOMPOSTURA Y NO SER SUCEPTIBLE LA REPARACIÓN</td>
-        <td><?= $dicta->opciona ?> </td>
+        <td><span style="color:red"><?= $valoropca ?></span> </td>
     </tr>
     <tr>
         <td>B) DESCOMPOSTURA Y SU REPARACIÓN NO RESULTA RENTABLE</td>
-        <td><?= $dicta->opcionb ?> </td>
+        <td><span style="color:red"><?= $valoropcb ?></span> </td>
     </tr>
     <tr>
         <td>C) OBSOLECENCIA QUE IMPIDE SU APROVECHAMIENTO EN EL SERVICIO</td>
-        <td><?= $dicta->opcionc ?> </td>
+        <td><span style="color:red"><?= $valoropcc ?></span> </td>
     </tr>
     <tr>
         <td>D) GRADO DE DETERIORO POR LO QUE ES IMPOSIBLE SU REAPROVECHAMIENTO</td>
-        <td><?= $dicta->opciond ?> </td>
+        <td><span style="color:red"><?= $valoropcd ?> </span></td>
     </tr>
     <tr>
 
@@ -341,7 +369,7 @@ tr:nth-child(even) {
         </tr>
         <tr>
       
-    <td><?= $dicta->opcione_detalle; ?> </td>
+    <td><span style="color:red"><?= $dicta->opcione_detalle; ?></span> </td>
 
 
     </tr>
@@ -378,7 +406,7 @@ tr:nth-child(even) {
 </td>
     </tr>
     <tr>
-      <td colspan="2"><b>JUSTIFICACIÓN DE LA BAJA:</b> <?= $dicta->justificar_baja ?></td>
+      <td colspan="2"><b>JUSTIFICACIÓN DE LA BAJA:</b><span style="color:red"> <?= $dicta->justificar_baja ?></span></td>
 
     </tr>
     </tbody>

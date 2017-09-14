@@ -98,7 +98,9 @@ if ($model2->id_tipo==7) {
 
 
 <div class="row">
-<div class="col-sm-10">
+<div class="col-sm-2">
+</div>
+<div class="col-sm-8">
 
      <table class="table table-bordered table-striped border bgcolor=#ffffff">
 <thead>
@@ -173,7 +175,9 @@ tr:nth-child(even) {
 
 
     <div class="row">
-<div class="col-sm-10">
+    <div class="col-sm-2">
+</div>
+<div class="col-sm-8">
      <table class="table table-bordered table-striped border bgcolor=#ffffff">
 <thead>
 <style>
@@ -205,22 +209,22 @@ tr:nth-child(even) {
 
     <tr>
         <td>1:</td>
-        <td><?= $form->field($model, 'actividad1', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Actividad '] ] )->textInput(['maxlength' => 35])->label(false); ?></td>
+        <td><?= $form->field($model, 'actividad1', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Actividad '] ] )->textInput(['maxlength' => 100])->label(false); ?></td>
         <td>
-            <?= $form->field($model, 'resultado1', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Resultado'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+            <?= $form->field($model, 'resultado1', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Resultado'] ] )->textInput(['maxlength' => 100])->label(false); ?>
         </td>
 
     </tr>
         <tr>
         <td>2:</td>
-        <td><?= $form->field($model, 'actividad2', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Actividad'] ] )->textInput(['maxlength' => 35])->label(false); ?></td>
-        <td><?= $form->field($model, 'resultado2', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Resultado'] ] )->textInput(['maxlength' => 35])->label(false); ?></td>
+        <td><?= $form->field($model, 'actividad2', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Actividad'] ] )->textInput(['maxlength' => 100])->label(false); ?></td>
+        <td><?= $form->field($model, 'resultado2', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Resultado'] ] )->textInput(['maxlength' => 100])->label(false); ?></td>
 
     </tr>
         <tr>
         <td>3:</td>
-        <td><?= $form->field($model, 'actividad3', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Actividad'] ] )->textInput(['maxlength' => 35])->label(false); ?></td>
-        <td><?= $form->field($model, 'resultado3', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Resultado'] ] )->textInput(['maxlength' => 35])->label(false); ?></td>
+        <td><?= $form->field($model, 'actividad3', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Actividad'] ] )->textInput(['maxlength' => 100])->label(false); ?></td>
+        <td><?= $form->field($model, 'resultado3', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Resultado'] ] )->textInput(['maxlength' => 100])->label(false); ?></td>
 
     </tr>
      </tbody>

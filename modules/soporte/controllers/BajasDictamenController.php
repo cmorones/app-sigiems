@@ -122,6 +122,7 @@ class BajasDictamenController extends Controller
             }
         if ($model->load(Yii::$app->request->post()) ) {
              $model->bloq=0;
+             $model->docto=0;
              $model->id_baja = $idb;
              $model->clabe_cabms = $clabe_cabs;
              $model->created_by=Yii::$app->user->identity->user_id;
