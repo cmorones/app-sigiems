@@ -7,8 +7,11 @@
 
 namespace app\commands;
 
+use Yii;
 use yii\console\Controller;
-use app\modules\soporte\models\InvBajas;
+use app\models\CatPlanteles;
+  
+
 
 /**
  * This command echoes the first argument that you have entered.
@@ -18,8 +21,10 @@ use app\modules\soporte\models\InvBajas;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class HelloController extends Controller
+class SiratController extends Controller
 {
+              
+
     /**
      * This command echoes what you have entered as the message.
      * @param string $message the message to be echoed.
@@ -29,17 +34,15 @@ class HelloController extends Controller
         echo $message . "\n";
     }
 
-     public function actionCesar($message = 'hola Cesar')
+    public function actionOtro()
     {
-        
-		
-		$resultado = InvBajas::find()->orderBy('modelo')->all();
 
-$i=1;
-foreach ($resultado as $value) {
-        echo $value->id .'-'.$value->progresivo. "\n";
+$model = CatPlanteles::find()->orderBy('nombre')->all(); 
+foreach($model as $field){
+            echo $field->nombre . "\n";
 
-        echo "inserta en la nueba base". "\n";
     }
-    }
+  }
 }
+
+

@@ -33,14 +33,17 @@ Yii::$app->name = "APP-SIGIEMS";
                                 <div class="col-md-3">
                                     <ul class="nav nav-pills nav-stacked">
 
-
+                                          <?php  
+                                     if(Yii::$app->user->can('menuAdmin')) {
+                                          ?>
 
                                            <li>
                                             <a href="#dit"><i class="fa fa-calendar-o"></i> Direccion de Informática</a>
                                         </li>
 
                                          <?php  
-                                     if(Yii::$app->user->can('menuAdmin')) {
+                                       }
+                                     if(Yii::$app->user->can('mostrarSILAC')) {
                                           ?>
 
                                            <li>
@@ -64,9 +67,90 @@ Yii::$app->name = "APP-SIGIEMS";
             <h4><i class="fa fa-calendar-o"></i> Academics</h4>
         </div>
 
-         <div class="row">
+
+        <div class="row">
+
+
+        <?php 
+
+          if(Yii::$app->user->can('mostrarSILAC')) {
+                                          ?>
+
+ <div class="col-md-2 col-sm-4 col-xs-12">
+            <div class="menu-box">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-cog"></i> Administracion</a>
+                    </li>
+                    <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Catalogos</a>
+                    </li>
+              
+                </ul>
+            </div>
+</div>
+
+ <div class="col-md-2 col-sm-4 col-xs-12">
+            <div class="menu-box">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-cog"></i> Inventario</a>
+                    </li>
+                    <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Entradas</a>
+                    </li>
+
+                    <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Salidas</a>
+                    </li>
+
+                     <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Existencia</a>
+                    </li>
+              
+              
+                </ul>
+            </div>
+</div>
+
+ <div class="col-md-2 col-sm-4 col-xs-12">
+            <div class="menu-box">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-cog"></i> Sesiones</a>
+                    </li>
+                    <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Escolar</a>
+                    </li>
+
+                     <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Semiescolar</a>
+                    </li>
+              
+                </ul>
+            </div>
+</div>
+
+ <div class="col-md-2 col-sm-4 col-xs-12">
+            <div class="menu-box">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-cog"></i> Informes</a>
+                    </li>
+                    <li>
+                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i>Materiales</a>
+                    </li>
+              
+                </ul>
+            </div>
+</div>
+
+
+         
+ 
 
               <?php  
+            }
               if(Yii::$app->user->can('menuAdmin')) {
             ?>
             <div class="col-md-3 col-sm-4 col-xs-12">
@@ -525,10 +609,12 @@ Yii::$app->name = "APP-SIGIEMS";
                }
             ?>
 
-            
-
+ 
+      
         
-        <?php  
+        <?php 
+
+
               if(Yii::$app->user->can('MenuSuper')) {
             ?>
         <div class="col-md-3 col-sm-4 col-xs-12">

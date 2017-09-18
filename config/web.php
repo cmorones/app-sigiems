@@ -144,6 +144,9 @@ $config = [
         // 'downloadAction' => 'gridview/export/download',
         // 'i18n' => []
         ],
+         'silac' => [
+            'class' => 'app\modules\silac\SilacModule',
+        ],
         'catalogos' => [
             'class' => 'app\modules\catalogos\CatalgosModule',
         ],
