@@ -34,7 +34,7 @@ Yii::$app->name = "APP-SIGIEMS";
                                     <ul class="nav nav-pills nav-stacked">
 
                                           <?php  
-                                     if(Yii::$app->user->can('menuAdmin')) {
+                                     if(Yii::$app->user->can('menuAdmin') || Yii::$app->user->can('menuSoporte') || Yii::$app->user->can('modTelecom')) {
                                           ?>
 
                                            <li>
