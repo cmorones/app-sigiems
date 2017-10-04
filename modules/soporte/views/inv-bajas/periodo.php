@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'emptyCell'=>'-',
-        'rowOptions'=> function($data){
+      /*  'rowOptions'=> function($data){
 
-           $clabe_cabs = "";       
+      /*     $clabe_cabs = "";       
 
 
 if ($data->id_tipo==2) {
@@ -114,7 +114,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
 
  return $img;
 
-        },
+        },*/
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -159,7 +159,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\EstadoBaja::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
            //  'valida_almacen',
-                [
+              /*  [
               'attribute'=>'valida_almacen',
               'format' => 'raw',
               'value' => function ($data)
@@ -250,11 +250,11 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
 
 
 //$this->valida_almacen =1;//$img;*/
-        return $img;
+        /*return $img;
     },
               //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
-            ],
-
+            ],*/
+/// Verifica si esta Autorizado
             [
               'attribute'=>'Autorizado',
               'format' => 'raw',
@@ -289,7 +289,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
             
               $dicta = intval($dictaminado);
 
-              if ($docto['docto']==1) {
+              if ($docto['docto']==1 && $docto['bloq']==1 && $dicta > 0 ) {
                 return ('<center>'.Html::img('@web/images/checked.png').'</center>');
               }else {
                   
@@ -298,9 +298,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
                     }elseif ($data->bloq ==1 && $dicta > 0) {
                       $dato = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
                       return (Html::a('<center><span class="glyphicon glyphicon-share"><bR>Modificar</span><center>', ['/soporte/bajas-dictamen/update', 'id'=>$dato->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Modificar Dictamen']));
-                    }
-
-                     if ($data->bloq ==0) {
+                    }elseif($data->bloq ==0) {
                       return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
                     }
               }
@@ -315,10 +313,10 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
 
               
               $certificado = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->count();
-              $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
+              $docto = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
               $cert = intval($certificado);
 
-                if ($docto['docto']==1) {
+                if ($docto['docto']==1 && $docto['bloq']==1 && $cert > 0) {
                 return ('<center>'.Html::img('@web/images/checked.png').'</center>');
               }else {
                   
@@ -327,9 +325,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
                   }elseif ($data->bloq ==1 && $cert > 0) {
                     $dato = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
                     return (Html::a('<center><span class="glyphicon glyphicon-share"><bR>Modificar</span><center>', ['/soporte/bajas-certificado/update', 'id'=>$dato->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Modificar Dictamen']));
-                  }
-
-                   if ($data->bloq ==0) {
+                  }elseif($data->bloq ==0) {
                     return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
                   }
 
@@ -344,16 +340,16 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
 
               $dictaminado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
-              $certificado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
+            //  $certificado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
               $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
               $dicta = intval($dictaminado);
               $data->bloq;
 
-                if ($docto['docto']==1) {
+                if ($docto['docto']==1 && $dicta > 0) {
                 return ('<center>'.Html::img('@web/images/checked.png').'</center>');
               }else {
 
-                if ($data->bloq ==1 && $dictaminado > 0) {
+                if ($data->bloq ==1 && $dicta > 0) {
                    $dato = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
                    echo $data->id;
                   return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
@@ -381,24 +377,19 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               'format' => 'raw', 'value' => function($data){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
 
-              $dictaminado = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->count();
+            //  $dictaminado = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->count();
               $certificado = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->count();
-              $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
+              $docto = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
               $cert = intval($certificado);
 
-                if ($docto['docto']==1) {
+                if ($docto['docto']==1  && $cert > 0 ) {
                 return ('<center>'.Html::img('@web/images/checked.png').'</center>');
               }else {
 
-                if ($data->bloq ==1 && $cert == 0) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span></center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id], ['title' => 'Dictaminar']));
-                }elseif ($data->bloq ==1 && $cert > 0) {
+                if ($data->bloq ==1 && $cert > 0) {
                   return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Certifcado</span></center>', ['/soporte/inf-pdf/index5', 'idb' =>$data->id], ['title' => 'Imprimir', 'target'=>'_blank']));
-                }
-
-                 if ($data->bloq ==0) {
-
-                  return (Html::a('<span class="glyphicon glyphicon-edit"></span>', ['update', 'id'=>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Modificar']));
+                }else{
+                  return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
                 }
 
             }
@@ -411,12 +402,15 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               'format' => 'raw', 'value' => function($data){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
               $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
+              $dictaminado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
+              $dicta = intval($dictaminado);
              
-              if($docto['docto'] == 1){
+              if($data->bloq ==1 && $dicta > 0 && $docto['docto'] == 0){
                 
                   
                  return (Html::a('<center><span class="glyphicon glyphicon-floppy-open"></span></center>', ['/soporte/bajas-dictamen/docto','id'=>$docto['id'], 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Subir']));
-              }elseif ($docto['docto'] > 0) {
+              }elseif($data->bloq ==1 && $dicta > 0 && $docto['docto'] > 0) {
+ 
                  return (Html::a('<center><span class="glyphicon glyphicon-download"></span> PDF</center>', [
                             '/soporte/bajas-dictamen/pdf',
                             'id' => $docto['id'],
@@ -439,12 +433,14 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               'format' => 'raw', 'value' => function($data){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
               $doctoc = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
+              $certificado = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->count();
+              $cert = intval($certificado);
              
-              if($doctoc['docto'] == 0){
+                          if($data->bloq ==1 && $cert > 0 && $doctoc['docto'] == 0){
                 
                   
                  return (Html::a('<center><span class="glyphicon glyphicon-floppy-open"></span></center>', ['/soporte/bajas-certificado/docto','id'=>$doctoc['id'], 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Subir']));
-              }else{
+              }elseif ($doctoc['docto'] > 0) {
                 return (Html::a('<center><span class="glyphicon glyphicon-download"></span> PDF</center>', [
                             '/soporte/bajas-certificado/pdf',
                             'id' => $doctoc['id'],
@@ -452,6 +448,10 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
                             'class' => 'btn btn-success btn-sm',
                             'target' => '_blank',
                         ]));
+                                      } else{
+
+                 return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
+               
                                       }
                        }
               ],         

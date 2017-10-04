@@ -145,14 +145,17 @@ margin: auto;
 
 if ($baja->id_tipo==1) {
   $clabe_cabs = '5151000138';
+  $nombre = 'COMPUTADORA PERSONAL';
 }
 
 if ($baja->id_tipo==3) {
   $clabe_cabs = '5151000192';
+  $nombre = 'SERVIDOR';
 }
 
 if ($baja->id_tipo==4) {
   $clabe_cabs = '5151000138';
+  $nombre = 'LAP-TOP';
 }
 if ($baja->id_tipo==5) {
   $clabe_cabs = '5151000152';
@@ -161,10 +164,12 @@ if ($baja->id_tipo==5) {
 
 if ($baja->id_tipo==6) {
   $clabe_cabs = '5651000018';
+  $nombre = 'APARATO TELEFONICO';
 }
 
 if ($baja->id_tipo==7) {
   $clabe_cabs = '5651000172';
+  $nombre = 'VIDEOPROYECTOR';
 }
 ?>
 <div class="col-xs-12" style="padding-top: 10px;">

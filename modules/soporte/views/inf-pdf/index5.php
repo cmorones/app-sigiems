@@ -281,7 +281,7 @@ tr:nth-child(even) {
 </tr>
 <tr>
   <td>UBICACIÓN:</td>
-  <td><?= $baja_certi->catAreas->nombre ?></td>
+  <td><?= $plantel->nombre ?></td>
 </tr>
 
 

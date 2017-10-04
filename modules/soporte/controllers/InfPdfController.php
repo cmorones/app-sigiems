@@ -101,7 +101,7 @@ class InfPdfController extends \yii\web\Controller
 			]);
 
        // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
+        $fName = "Dictamen-".$idb. "_".date('Ymd_His');
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 
@@ -120,7 +120,7 @@ class InfPdfController extends \yii\web\Controller
 			]);
 
        // $html = "Hola Mundo";
-        $fName = "Cesar Morones_".date('Ymd_His');
+        $fName = "Certificado-".$idb. "_".date('Ymd_His');
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 

@@ -169,8 +169,26 @@ if ($inventario['id_situacion_bien'] == 1) {
     <td><?=$inventario['serie']?> <?=$img3?></td>
     <td><?= $inv?></td>
     <td><?=$inventario['nombre_empleado']?> <?=$inventario['apellidos_empleado']?> </td>
+<?php 
+    if ($inventario['serie']==$value->serie) {
+
+      ?>
+
+       <td><?=Html::img('@web/images/checked.png'); ?></td>
+   
+
+<?php
+}else {
+
+  ?>
+
     <td><?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Modificar', ['update', 'id' => $value['id'], 'idp' => $value['id_periodo']], ['class' => 'btn btn-info']) ?></td>
-                
+   
+  <?php
+}
+
+?>
+             
 </tr>
     <?php
     $i++;

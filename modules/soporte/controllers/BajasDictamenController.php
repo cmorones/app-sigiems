@@ -203,6 +203,7 @@ class BajasDictamenController extends Controller
        //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
         $model->documento = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
         $model->docto=1;
+        $model->bloq=1;
         $model->updated_by=@Yii::$app->user->identity->user_id;
         $model->updated_at = new Expression('NOW()');    
        if (!$model->save()) {
