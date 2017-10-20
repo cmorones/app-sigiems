@@ -108,7 +108,7 @@ $usuario = Users::find()->where(['user_id' => Yii::$app->user->identity->user_id
 </tr>
 
 <tr>
-	<th><div class="col-md-3 col-sm-3 col-xs-3 edusec-profile-label edusecArLangCss"><strong>Observaciones:</strong></div></th>
+	<th><div class="col-md-3 col-sm-3 col-xs-3 edusec-profile-label edusecArLangCss"><strong>Equipamiento Adicional:</strong></div></th>
 	<td><div class="col-md-9 col-sm-9 col-xs-9 edusec-profile-text"><?= $datos["observaciones"]?></div></td>
 </tr>
 </table>
