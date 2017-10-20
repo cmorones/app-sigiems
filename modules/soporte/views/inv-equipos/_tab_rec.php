@@ -55,6 +55,7 @@ $sql ="SELECT
   cat_planteles.nombre as plantel, 
   cat_motivo.nombre, 
   inv_alterno.ubicacion, 
+  inv_alterno.id, 
   inv_alterno.usuario, 
   inv_alterno.observaciones,
   cat_areas.nombre as area
@@ -71,6 +72,11 @@ WHERE
   $datos = \Yii::$app->db->createCommand($sql)->queryOne();
 
 ?>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong>Folio</strong></div>
+		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $datos["id"]?></div>
+	</div>
+
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong><?= $model->getAttributeLabel('progresivo') ?></strong></div>
 		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->progresivo ?></div>
