@@ -33,7 +33,7 @@ $usuario = Users::find()->where(['user_id' => Yii::$app->user->identity->user_id
 
 
 <!------------Start Employee Details Block---------------->
-<h3 class="title">Formato Movimiento de Equipo Temporal</h3>
+<h3 class="title">Formato Movimiento de Equipo Temporal S19</h3>
 <br>
 <br>
 <br>
