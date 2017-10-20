@@ -106,7 +106,7 @@ WHERE
 
 <div class="col-md-12 col-sm-12 col-xs-12">
 <div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"></div>
-		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Imprimir'), ['/soporte/inf-pdf/tempo', 'id' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?></div>
+		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Imprimir'), ['/soporte/inf-pdf/tempo', 'id' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data', 'target'=>'_blank']) ?></div>
 	
 </div>
 		<?php 
