@@ -200,6 +200,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
             <li id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-file-text"></i>Software Instalado</a></li>
              <li id = "user-tab"><a href="#user" data-toggle="tab"><i class="fa fa-street-view"></i>Usuario</a></li>
              <li id = "user-tab"><a href="#inv" data-toggle="tab"><i class="fa fa-street-view"></i>Inventario</a></li>
+              <li id = "user-tab"><a href="#reu" data-toggle="tab"><i class="fa fa-street-view"></i>Ubicacion Temporal</a></li>
            <!-- <li id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-street-view"></i>Licenciamiento</a></li>
             <li id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-street-view"></i>Usuario</a></li>
             <li id = "documents-tab"><a href="#documents" data-toggle="tab"><i class="fa fa-file-text"></i>Mantenimiento Preventivo</a></li>
@@ -226,8 +227,12 @@ $this->params['breadcrumbs'][] = $this->title;*/
                 <?= $this->render('_tab_us', ['count3' => $count3, 'info' => $info, 'model' => $model]) ?>  
             </div>
 
+             <div class="tab-pane" id="reu">
+                <?= $this->render('_tab_rec', ['count3' => $count3, 'info' => $info, 'model' => $model]) ?>  
+            </div>
+
              <div class="tab-pane" id="inv">
-                <?= $this->render('_tab_inv', ['count3' => $count3, 'info' => $info, 'model' => $model]) ?>  
+                <?//= $this->render('_tab_inv', ['count3' => $count3, 'info' => $info, 'model' => $model]) ?>  
             </div>
             <div class="tab-pane" id="documents">
                 <?//= $this->render('_tab_stu_documents', ['stu_docs' => $stu_docs, 'model'=>$model]) ?>  

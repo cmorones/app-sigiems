@@ -68,6 +68,25 @@ class InfPdfController extends \yii\web\Controller
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 
+      public function actionTempo($id)
+    {
+        //return $this->renderPartial('index');
+
+        $html = $this->renderPartial('/inf-pdf/tempo',
+			[
+				'id'=>$id,
+				/*'empDocs'=>$empDocs,
+				'empMaster'=>$empMaster,
+				'empInfo'=>$empInfo,
+				'nationality'=>$nationality,
+				'empAdd'=>$empAdd,*/
+			]);
+
+       // $html = "Hola Mundo";
+        $fName = "DIT_".date('Ymd_His');
+		return Yii::$app->pdf->exportData('InformeTemporal',$fName,$html);
+    }
+
     public function actionTelgen()
     {
         //return $this->renderPartial('index');
