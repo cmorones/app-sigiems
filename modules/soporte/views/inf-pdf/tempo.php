@@ -10,7 +10,8 @@ $sql ="SELECT
   cat_motivo.nombre, 
   inv_alterno.ubicacion, 
   inv_alterno.usuario,
-  inv_alterno.id,  
+  inv_alterno.id,
+  inv_alterno.fecha,  
   inv_alterno.observaciones,
   inv_alterno.observaciones2,
   cat_areas.nombre as area
@@ -45,6 +46,10 @@ $usuario = Users::find()->where(['user_id' => Yii::$app->user->identity->user_id
 <tr>
   <th><div class="col-md-3 col-sm-3 col-xs-3 "><strong>Folio:</strong></div></th>
   <td><div class="col-md-9 col-sm-9 col-xs-9 edusec-profile-text"><?= $datos["id"]?></div></td>
+</tr>
+<tr>
+  <th><div class="col-md-3 col-sm-3 col-xs-3 "><strong>Fecha:</strong></div></th>
+  <td><div class="col-md-9 col-sm-9 col-xs-9 edusec-profile-text"><?= $datos["fecha"]?></div></td>
 </tr>
 <tr>
 	<th><div class="col-md-3 col-sm-3 col-xs-3 "><strong><?= $model->getAttributeLabel('progresivo') ?>:</strong></div></th>
