@@ -232,7 +232,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
             </div>
 
              <div class="tab-pane" id="inv">
-                <?//= $this->render('_tab_inv', ['count3' => $count3, 'info' => $info, 'model' => $model]) ?>  
+                <?= $this->render('_tab_inv', ['count3' => $count3, 'info' => $info, 'model' => $model]) ?>  
             </div>
             <div class="tab-pane" id="documents">
                 <?//= $this->render('_tab_stu_documents', ['stu_docs' => $stu_docs, 'model'=>$model]) ?>  
