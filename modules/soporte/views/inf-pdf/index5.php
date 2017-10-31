@@ -293,7 +293,7 @@ tr:nth-child(even) {
 <br>
 
 
-    <h3>Las pruebas que se realizaron al No-break por parte de <?= $user->nombre ?> son las que se describen a continuación:</h3>
+    <h3>Las pruebas que se realizaron al equipo por parte de <?= $user->nombre ?> son las que se describen a continuación:</h3>
 
 
 

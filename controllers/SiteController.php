@@ -32,7 +32,7 @@ class SiteController extends Controller
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','logout','registro'],
+                        'actions' => ['index','logout','registro','info'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -167,6 +167,11 @@ class SiteController extends Controller
             public function actionExt()
     {
         return $this->render('ext');
+    }
+
+           public function actionInfo()
+    {
+        return $this->render('info');
     }
 
 

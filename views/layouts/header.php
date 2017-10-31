@@ -639,6 +639,9 @@ Yii::$app->name = "APP-SIGIEMS";
                     <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Prestamos de Equipo',['/dashboard/events-prestamos'])?>
                         </li>
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Informe Equipos',['/site/info'])?>
+                        </li>
                 </ul>
             </div>
         </div>
