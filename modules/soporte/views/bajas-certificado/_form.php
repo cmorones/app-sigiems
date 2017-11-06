@@ -38,7 +38,7 @@ use app\modules\soporte\models\FunBajasCer;
                     }
                     if ($model2->id_tipo==8) {
                       $nombre = 'SWITCH';
-                    }id_tipo
+                    }
                     if ($model2->id_tipo==9) {
                       $nombre = 'SCANNER';
                     }
