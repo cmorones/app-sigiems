@@ -11,38 +11,38 @@ use app\modules\soporte\models\FunBajasCer;
 
 
 <?
-                    if ($model2->tipo_baja==1) {
+                    if ($model2->id_tipo==1) {
                       $nombre = 'COMPUTADORA PERSONAL';
                     }
-                    if ($model2->tipo_baja==2) {
+                    if ($model2->id_tipo==2) {
                       $nombre = 'IMPRESORA';
                     }
 
-                    if ($model2->tipo_baja==3) {
+                    if ($model2->id_tipo==3) {
                       $nombre = 'SERVIDOR';
                     }
 
-                    if ($model2->tipo_baja==4) {
+                    if ($model2->id_tipo==4) {
                       $nombre = 'LAP-TOP';
                     }
-                    if ($model2->tipo_baja==5) {
+                    if ($model2->id_tipo==5) {
                       $nombre = 'NO-BREAK';
                     }
 
-                    if ($model2->tipo_baja==6) {
+                    if ($model2->id_tipo==6) {
                         $nombre = 'APARATO TELEFONICO';
                     }
 
-                    if ($model2->tipo_baja==7) {
+                    if ($model2->id_tipo==7) {
                       $nombre = 'VIDEOPROYECTOR';
                     }
-                    if ($model2->tipo_baja==8) {
+                    if ($model2->id_tipo==8) {
                       $nombre = 'SWITCH';
-                    }
-                    if ($model2->tipo_baja==9) {
+                    }id_tipo
+                    if ($model2->id_tipo==9) {
                       $nombre = 'SCANNER';
                     }
-                    if ($model2->tipo_baja==10) {
+                    if ($model2->id_tipo==10) {
                       $nombre = 'UPS';
                     }
 
