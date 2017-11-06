@@ -169,7 +169,7 @@ tr:nth-child(even) {
     </div>
 
 
-    <h2>Las pruebas que se realizaron al No-break por parte de <? echo Yii::$app->user->identity->nombre;?> son las que se describen a continuación:</h2>
+    <h2>Las pruebas que se realizaron al equipo por parte de <? echo Yii::$app->user->identity->nombre;?> son las que se describen a continuación:</h2>
     <br>
     <br>
 
