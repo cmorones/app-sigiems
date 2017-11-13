@@ -166,6 +166,7 @@ if ($baja_certi->id_tipo==1) {
 
 if ($baja_certi->id_tipo==3) {
   $clabe_cabs = '5151000192';
+  $nombre = 'SERVIDOR';
 }
 
 if ($baja_certi->id_tipo==4) {
