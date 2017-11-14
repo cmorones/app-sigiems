@@ -172,12 +172,12 @@ if ($baja->id_tipo==7) {
   $nombre = 'VIDEOPROYECTOR';
 }
 
-if ($baja_certi->id_tipo==8) {
+if ($baja->id_tipo==8) {
   $clabe_cabs = '5151000018';
   $nombre = 'SWITCH';
 }
 
-if ($baja_certi->id_tipo==9) {
+if ($baja->id_tipo==9) {
   $clabe_cabs = '5151000184';
   $nombre = 'ESCANER';
 }
