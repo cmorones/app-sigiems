@@ -83,6 +83,14 @@ if ($value->id_tipo==7) {
   $clabe_cabs = '5651000172';
 }
 
+if ($value->id_tipo==8) {
+  $clabe_cabs = '5651000018';
+}
+
+if ($value->id_tipo==9) {
+  $clabe_cabs = '5651000184';
+}
+
 //echo ":";
 //echo $clabe_cabs;
 //echo "<br>";
