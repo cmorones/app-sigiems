@@ -184,12 +184,12 @@ if ($baja_certi->id_tipo==6) {
 if ($baja_certi->id_tipo==7) {
   $clabe_cabs = '5651000172';
 }
-if ($value->id_tipo==8) {
+if ($baja_certi->id_tipo==8) {
   $clabe_cabs = '5151000018';
   $nombre = 'SWITCH';
 }
 
-if ($value->id_tipo==9) {
+if ($baja_certi->id_tipo==9) {
   $clabe_cabs = '5151000184';
   $nombre = 'ESCANER';
 }
