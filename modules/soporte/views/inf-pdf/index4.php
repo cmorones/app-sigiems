@@ -171,6 +171,16 @@ if ($baja->id_tipo==7) {
   $clabe_cabs = '5651000172';
   $nombre = 'VIDEOPROYECTOR';
 }
+
+if ($baja_certi->id_tipo==8) {
+  $clabe_cabs = '5151000018';
+  $nombre = 'SWITCH';
+}
+
+if ($baja_certi->id_tipo==9) {
+  $clabe_cabs = '5151000184';
+  $nombre = 'ESCANER';
+}
 ?>
 <div class="col-xs-12" style="padding-top: 10px;">
 <div class="box view-item col-xs-12 col-lg-12">
