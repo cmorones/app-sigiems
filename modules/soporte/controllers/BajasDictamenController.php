@@ -120,6 +120,13 @@ class BajasDictamenController extends Controller
             if ($model2->id_tipo==7) {
               $clabe_cabs = '5651000172';
             }
+            if ($model2->id_tipo==8) {
+              $clabe_cabs = '5151000018';
+            }
+
+            if ($model2->id_tipo==9) {
+              $clabe_cabs = '5151000184';
+            }
         if ($model->load(Yii::$app->request->post()) ) {
              $model->bloq=0;
              $model->docto=0;
