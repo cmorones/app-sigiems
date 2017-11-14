@@ -76,7 +76,7 @@ if ($value->id_tipo==5) {
 }
 
 if ($value->id_tipo==6) {
-  $clabe_cabs = '5151000018';
+  $clabe_cabs = '5651000018';
 }
 
 if ($value->id_tipo==7) {
