@@ -34,15 +34,13 @@ use yii\helpers\ArrayHelper;
                     if ($model2->id_tipo==7) {
                       $nombre = 'VIDEOPROYECTOR';
                     }
-                    if ($model2->id_tipo==7) {
+                    if ($model2->id_tipo==8) {
                       $nombre = 'SWITCH';
                     }
-                    if ($model2->id_tipo==7) {
+                    if ($model2->id_tipo==9) {
                       $nombre = 'SCANNER';
                     }
-                    if ($model2->id_tipo==7) {
-                      $nombre = 'UPS';
-                    }
+                   
 
                     if ($model2->id_tipo==2) {
   $clabe_cabs = '5151000096';
@@ -72,6 +70,15 @@ if ($model2->id_tipo==6) {
 
 if ($model2->id_tipo==7) {
   $clabe_cabs = '5651000172';
+}
+
+
+if ($value->id_tipo==8) {
+  $clabe_cabs = '5151000018';
+}
+
+if ($value->id_tipo==9) {
+  $clabe_cabs = '5151000184';
 }
 ?>
 <div class="col-xs-2" style="padding-top: 10px;">
