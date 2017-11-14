@@ -172,7 +172,7 @@ if ($inventario['id_situacion_bien'] == 1) {
     <td><?=$value->progresivo?>(<?=$inventario['progresivo']?>)<?=$img?></td>
     <td><?=$value->tipoBaja->nombre?></td>
     <td><?=$value->catMarca->nombre?>(<?=$inventario['marca']?>)<?=$img2?></td>
-    <td><?=$value->catModelo->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
+    <td><?//=$value->catModelo->modelo?>(<?=$inventario['modelo']?>)<?=$img3?></td>
     <td><?=$value->serie?> <?=$img3?></td>
     <td><?=$inventario['serie']?> <?=$img3?></td>
     <td><?= $inv?></td>
