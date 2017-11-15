@@ -179,10 +179,12 @@ if ($baja_certi->id_tipo==5) {
 
 if ($baja_certi->id_tipo==6) {
   $clabe_cabs = '5651000018';
+  $nombre = 'APARATO TELEFONICO';
 }
 
 if ($baja_certi->id_tipo==7) {
   $clabe_cabs = '5651000172';
+  $nombre = 'VIDEOPROYECTOR';
 }
 if ($baja_certi->id_tipo==8) {
   $clabe_cabs = '5151000018';
