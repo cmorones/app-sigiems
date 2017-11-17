@@ -32,7 +32,7 @@ class InvBajasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo','modelos','bajas','periodototal','toggle','autorizar', 'porconfirmar'],
+                        'actions' => ['index','create','view','update','validacion', 'delete', 'periodo', 'periodotot','modelos','bajas','bajastot','periodototal','toggle','autorizar', 'porconfirmar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -120,6 +120,17 @@ class InvBajasController extends Controller
         ]);
     }
 
+     public function actionBajastot()
+    {
+       // $searchModel = new InvBajasSearch();
+      //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$id_p);
+
+        return $this->render('bajas_iemstot', [
+            //'searchModel' => $searchModel,
+            //'dataProvider' => $dataProvider,
+        ]);
+    }
+
      public function actionValidacion()
     {
        // $searchModel = new InvBajasSearch();
@@ -179,6 +190,19 @@ class InvBajasController extends Controller
             'idp' => $idp,
         ]);
     }
+
+     public function actionPeriodotot($idp)
+    {
+        $searchModel = new InvBajasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+
+        return $this->render('periodotot', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'idp' => $idp,
+        ]);
+    }
+
 
       public function actionPeriodototal($idp)
     {

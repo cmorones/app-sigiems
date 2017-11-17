@@ -255,7 +255,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Bajas IEMS',['/soporte/inv-bajas/bajas'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Bajas IEMS',['/soporte/inv-bajas/bajastot'])?>
                         </li>
                            <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i>Autorizar Dictaminación de Bajas',['/soporte/inv-bajas/autorizar']) ?>

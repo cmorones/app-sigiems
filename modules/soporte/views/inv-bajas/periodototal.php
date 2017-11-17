@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'emptyCell'=>'-',
       //  'pjax' => true,
-        'rowOptions'=> function($data){
+    /*    'rowOptions'=> function($data){
 
            $clabe_cabs = "";       
 
@@ -67,6 +67,14 @@ if ($data->id_tipo==6) {
 
 if ($data->id_tipo==7) {
   $clabe_cabs = '5651000172';
+}
+
+if ($data->id_tipo==8) {
+  $clabe_cabs = '5151000018';
+}
+
+if ($data->id_tipo==9) {
+  $clabe_cabs = '5151000184';
 }
 //echo ":";
 //echo $clabe_cabs;
@@ -117,7 +125,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
 
  return $img;
 
-        },
+        },*/
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -144,11 +152,11 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
             ],
             // 'id_periodo',
             // 'id_plantel',
-               [
+             /*  [
               'attribute'=>'id_area',
               'value' => 'catAreas.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
-            ],
+            ],*/
 
              [
               'attribute'=>'id_piso',
@@ -157,7 +165,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
             ],
             'fecha_baja',
             //'tipo_baja',
-             [
+           /*  [
               'attribute'=>'estado_baja',
               'value' => 'estadoBaja.nombre',
               'contentOptions' => function($model)
@@ -165,7 +173,7 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
                         return ['style' => 'color:' . $model->estadoBaja->color];
                     },
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\EstadoBaja::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
+            ],*/
            
 
                [
@@ -173,13 +181,15 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
               'value' => 'catPlanteles.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
+
+
            // 'validacion',
-            [
+         /*   [
             'class' => '\pheme\grid\ToggleColumn',
             'attribute'=>'bloq',
             'enableAjax' => true,
             'filter'=>['1'=>'Validado', '0'=>'No Validado']
-            ],
+            ],*/
              // 'observaciones',
           // 'dictamen',
            // 'certificado',
@@ -190,6 +200,45 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
             // 'updated_by',
 
         ],
+        [ 'attribute' => 'imprimir',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+              //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
+
+              $dictaminado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
+            //  $certificado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
+              $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
+              $dicta = intval($dictaminado);
+              $data->bloq;
+
+                if ($docto['docto']==1 && $dicta > 0) {
+                return ('<center>'.Html::img('@web/images/checked.png').'</center>');
+              }else {
+
+                if ($data->bloq ==1 && $dicta > 0) {
+                   $dato = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
+                   echo $data->id;
+                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
+                }else{
+                  return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
+                }
+
+            /*  if ($data->bloq ==1 && $dictaminado == 0) {
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span></center>', ['/soporte/bajas-dictamen/create', 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Dictaminar']));
+                }elseif ($data->bloq == 0 && $dictaminado > 0) {
+                   $dato = app\modules\soporte\models\BajasCertificado::find()->where(['id_baja'=>$data->id])->one();
+                  return (Html::a('<center><span class="glyphicon glyphicon-print"><br>Dictamen</span></center>', ['/soporte/inf-pdf/index4', 'idb' =>$data->id, 'idb' =>$dato->id_baja, 'idp'=>$data->id_periodo], ['title' => 'Imprimir', 'target'=>'_blank']));
+                }*/
+
+                 if ($data->bloq ==0) {
+                  return (Html::a('<span class="glyphicon glyphicon-edit"></span>', ['update', 'id'=>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Modificar']));
+                }
+              }
+              
+            }
+              ],
+
+
         'tableOptions' =>['class' => 'table table-striped table-bordered'],
 
     ]); 
