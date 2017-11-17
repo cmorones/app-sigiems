@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="col-lg-12 col-sm-12 col-xs-12 no-padding"><h1 class="box-title"><i class="fa fa-list-alt"></i> <?php echo $this->title ?></h1></div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 <p>
-        <?= Html::a('<i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>Regresar', ['index', 'idp'=>$idp], ['class' => 'btn btn-info btn-sm']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>Regresar', ['bajastot', 'idp'=>$idp], ['class' => 'btn btn-info btn-sm']) ?>
     </p>
   <div class=" box view-item col-xs-12 col-lg-12">
    
