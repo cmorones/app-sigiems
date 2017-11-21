@@ -89,7 +89,7 @@ margin: auto;
          <tr>
          <th>Area</th>
             <th>Cantidad</th>
-            <th>Peso</th>
+            <th>Peso aproximado</th>
            </tr>
 
             <?php
