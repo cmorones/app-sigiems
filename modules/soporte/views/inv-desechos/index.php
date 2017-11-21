@@ -39,7 +39,12 @@ foreach ($resultado as $value) {
 <tr>
     <td><?=$value['nombre']?></td>
     <td><?= app\modules\soporte\models\InvDesechos::find()->where(['id_periodo'=>$value['id']])->andWhere(['id_plantel'=>Yii::$app->user->identity->id_plantel])->count(); ?></td>
-    <td> <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Mostrar', ['periodo', 'idp' => $value['id']], ['class' => 'btn btn-success']) ?></td>            
+    <td> <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Mostrar', ['periodo', 'idp' => $value['id']], ['class' => 'btn btn-success']) ?>
+      
+  <?= Html::a('<i class="fa fa-file-pdf" aria-hidden="true"></i>Imprimir', ['/soporte/inf-pdf/desechos', 'idp' => $value['id'] ], ['class' => 'btn btn-info', 'target' => 'blank']) ?>  
+     <?//= Html::a('<i class="fa fa-file-pdf-o"></i> Informe PDF',['/soporte/inf-pdf/baterias'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+
+    </td>            
 </tr>
     <?php
     # code...
