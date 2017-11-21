@@ -117,7 +117,7 @@ margin: auto;
              <tr>
             <td><b>Total</b></td>
             <td><b><?=app\modules\soporte\models\InvDesechos::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->andWhere(['id_periodo'=>$idp])->count('id'); ?></b></td>
-            <td><b><?=$pesot?></b></td>
+            <td><b><?//=$pesot?></b></td>
            
           </tr>
         </table>
