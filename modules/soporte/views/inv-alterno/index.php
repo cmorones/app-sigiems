@@ -7,38 +7,83 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\soporte\models\InvAlternoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inv Alternos';
+$this->title = 'Equipos en sedes alternas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="inv-alterno-index">
+<br>
+<br>
+<br>
+<br>
+<div class="inv-equipos-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+  <div class="col-xs-12">
+  <div class="col-lg-8 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title"><i class="fa fa-th-list"></i> 
+  <?php echo $this->title ?></h3></div>
+  <div class="col-lg-4 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
+  <div class="col-xs-4 left-padding">
 
-    <p>
-        <?= Html::a('Create Inv Alterno', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+           
+         
+
+  </div>
+  <div class="col-xs-4 left-padding">
+ 
+      <?//= Html::a(Yii::t('app', 'PDF'), ['/export-data/export-to-pdf', 'model'=>get_class($searchModel2)], ['class' => 'btn btn-block btn-warning', 'target'=>'_blank']) ?>
+
+  </div>
+  <div class="col-xs-4 left-padding">
+ 
+      <?//= Html::a(Yii::t('app', 'EXCEL'), ['/export-data/export-excel', 'model'=>get_class($searchModel2)], ['class' => 'btn btn-block btn-primary', 'target'=>'_blank']) ?>
+
+  </div>
+  </div>
+</div>
+
+ 
+</div>
+
+<div class="col-xs-12" style="padding-top: 10px;">
+  <div class="box">
+   <div class="box-body table-responsive">
+     <div class="assignment-index">
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'id_equipo',
-            'id_motivo',
-            'id_plantel',
+          // 'catProgresivo.progresivo',
+                    [
+         'attribute' => 'progresivo',
+         'value' => 'catProgresivo.progresivo'
+         ],
+                       
+                        //'id_motivo',
+                                [
+              'attribute'=>'id_plantel',
+              'value' => 'catPlanteles.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             'ubicacion',
-            'id_area',
+             [
+              'attribute'=>'id_area',
+              'value' => 'catAreas.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>23])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
             'usuario',
-            // 'observaciones',
+            'observaciones2',
+            'observaciones',
             // 'created_at',
             // 'created_by',
             // 'updated_at',
             // 'updated_by',
-            // 'observaciones2',
+            
 
-            ['class' => 'yii\grid\ActionColumn'],
+          //  ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
+</div>
+</div>
+</div>

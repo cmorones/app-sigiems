@@ -36,13 +36,19 @@ class InvAlternoController extends Controller
     public function actionIndex()
     {
         $searchModel = new InvAlternoSearch();
+        $searchModel2 = new InvAlternoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider2 = $searchModel2->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'searchModel2' => $searchModel2,
             'dataProvider' => $dataProvider,
+            'dataProvider2' => $dataProvider2,
         ]);
     }
+
+  
 
     /**
      * Displays a single InvAlterno model.

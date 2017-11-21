@@ -392,6 +392,10 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras Externos',['/soporte/inv-impresoras-ex/index']) ?>
                         </li>
 
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacin de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
+                        </li>
+
 
                           <?php
                             }
@@ -641,6 +645,10 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
                          <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Informe Equipos',['/site/info'])?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacin de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
                         </li>
                 </ul>
             </div>

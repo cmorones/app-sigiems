@@ -1,6 +1,8 @@
 <?php
 
 namespace app\modules\soporte\models;
+use app\modules\admin\models\CatPlanteles;
+use app\modules\admin\models\CatAreas;
 
 use Yii;
 
@@ -29,6 +31,8 @@ class InvAlterno extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $progresivo;
+
     public static function tableName()
     {
         return 'inv_alterno';
@@ -56,9 +60,9 @@ class InvAlterno extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_equipo' => 'Id Equipo',
-            'id_motivo' => 'Id Motivo',
-            'id_plantel' => 'Id Plantel',
+            'id_equipo' => 'Equipo',
+            'id_motivo' => 'Motivo',
+            'id_plantel' => 'Plantel',
             'ubicacion' => 'Ubicacion',
             'id_area' => 'Id Area',
             'usuario' => 'Usuario',
@@ -68,6 +72,7 @@ class InvAlterno extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
             'observaciones2' => 'Cargo',
+            'progresivo' => 'Progresivo',
         ];
     }
 
@@ -85,5 +90,21 @@ class InvAlterno extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
+    }
+
+
+    public function getCatPlanteles()
+    {
+        return $this->hasOne(CatPlanteles::className(),['id'=>'id_plantel']);
+    }
+
+      public function getCatAreas()
+    {
+        return $this->hasOne(CatAreas::className(),['id_area'=>'id_area']);
+    }
+
+    public function getCatProgresivo()
+    {
+        return $this->hasOne(InvEquipos::className(),['id'=>'id_equipo']);
     }
 }
