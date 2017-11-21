@@ -49,7 +49,7 @@ class InvDesechosController extends Controller
     public function actionPeriodo($idp)
     {
         $searchModel = new InvDesechosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$idp);
 
         return $this->render('periodo', [
             'searchModel' => $searchModel,

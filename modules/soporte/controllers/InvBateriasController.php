@@ -70,7 +70,7 @@ class InvBateriasController extends Controller
     public function actionPeriodo($idp)
     {
         $searchModel = new InvBateriasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$idp);
 
         return $this->render('periodo', [
             'searchModel' => $searchModel,

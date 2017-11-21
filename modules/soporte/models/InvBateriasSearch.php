@@ -64,6 +64,47 @@ class InvBateriasSearch extends InvBaterias
         $query->andFilterWhere([
             'id' => $this->id,
             'id_plantel' =>  $id_p,
+           // 'id_periodo' =>  $idp,
+            'tipo' => $this->tipo,
+            'voltaje' => $this->voltaje,
+            'cantidad' => $this->cantidad,
+            'peso' => $this->peso,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
+            'updated_at' => $this->updated_at,
+            'updated_by' => $this->updated_by,
+        ]);
+
+        $query->andFilterWhere(['like', 'observaciones', $this->observaciones]);
+
+        return $dataProvider;
+    }
+
+        public function search2($params,$idp)
+    {
+        $query = InvBaterias::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+         $id_p = Yii::$app->user->identity->id_plantel;
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'id_plantel' =>  $id_p,
+            'id_periodo' =>  $idp,
             'tipo' => $this->tipo,
             'voltaje' => $this->voltaje,
             'cantidad' => $this->cantidad,
