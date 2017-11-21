@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-              [
+              /*[
              'class' => 'app\components\CustomActionColumn',
       'template' => '{view} {delete}',
       'buttons' => [
@@ -68,13 +68,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 return ((Yii::$app->user->can("/soporte/inv-baterias/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
             }
       ],
-            ],
+            ],*/
         ],
     ]); ?>
 </div>
     <p>
         
-         <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
+         <?//= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
     </p>
 </div>
 </div>

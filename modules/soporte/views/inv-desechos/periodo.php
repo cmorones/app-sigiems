@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_by',
             // 'Voltaje',
 
-              [
+             /* [
              'class' => 'app\components\CustomActionColumn',
       'template' => '{update} {delete}',
       'buttons' => [
@@ -73,10 +73,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 return ((Yii::$app->user->can("/soporte/inv-desechos/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
             }
       ],
-            ],
+            ],*/
         ],
     ]); ?>
         <p>
-        <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Desecho', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
+        <?//= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Desecho', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
     </p>
 </div>
