@@ -253,7 +253,7 @@ public function actionDesechos($idp)
 
        // $html = "Hola Mundo";
         $fName = "Cesar Morones_".date('Ymd_His');
-		return Yii::$app->pdf->exportData('Informe',$fName,$html);
+		return Yii::$app->pdf->exportData2('Informe',$fName,$html);
     }
 
     public function actionDesechost($idp)
