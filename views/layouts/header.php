@@ -393,7 +393,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                           <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacin de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
                         </li>
 
 
@@ -648,7 +648,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                          <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacin de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
                         </li>
                 </ul>
             </div>
