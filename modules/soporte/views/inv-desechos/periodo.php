@@ -77,6 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
         <p>
-        <?//= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Desecho', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
+        <? 
+         if(Yii::$app->user->can("JUD")){
+        echo  Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Desecho', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']); }?>
     </p>
 </div>
