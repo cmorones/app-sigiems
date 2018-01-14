@@ -3,21 +3,17 @@
 namespace app\modules\soporte\controllers;
 
 use Yii;
-use app\modules\soporte\models\InvEquipos;
-use app\modules\soporte\models\InvTelecom;
-use app\modules\soporte\models\InvEquiposSearch;
-use app\modules\soporte\models\CatModelo;
+use app\modules\soporte\models\InvServers;
+use app\modules\soporte\models\InvServersSearch;
 use yii\web\Controller;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\db\Expression;
-use yii\helpers\Html; 
+use app\modules\soporte\models\CatModserver;
 
 /**
- * InvEquiposController implements the CRUD actions for InvEquipos model.
+ * InvServersController implements the CRUD actions for InvServers model.
  */
-class InvEquiposController extends Controller
+class InvServersController extends Controller
 {
     /**
      * @inheritdoc
@@ -46,98 +42,52 @@ class InvEquiposController extends Controller
     }
 
     /**
-     * Lists all InvEquipos models.
+     * Lists all InvServers models.
      * @return mixed
      */
     public function actionIndex()
     {
-        if(!Yii::$app->user->can('ListarEquipos')) { 
-            echo "No tienes permiso para entrar aqui";
-        }
-        $searchModel = new InvEquiposSearch();
-        $searchModel2 = new InvEquiposSearch();
+        $searchModel = new InvServersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider2 = $searchModel2->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-             'searchModel2' => $searchModel2,
-            'dataProvider' => $dataProvider,
-            'dataProvider2' => $dataProvider2,
-        ]);
-    }
-
-         public function actionEquipos()
-    {
-        if(!Yii::$app->user->can('ListarEquipos')) { 
-            echo "No tienes permiso para entrar aqui";
-        }
-        $searchModel = new InvEquiposSearch();
-        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);
-
-        return $this->render('equipos', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-
-
-         public function actionRevision()
-    {
-      /*  if(!Yii::$app->user->can('ListarEquipos')) { 
-            echo "No tienes permiso para entrar aqui";
-        }
-        $searchModel = new InvEquiposSearch();
-        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);*/
-
-        return $this->render('_revision');
-    }
-
-
 
     /**
-     * Displays a single InvEquipos model.
+     * Displays a single InvServers model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        //$telecom = InvTelecom::findOne($model->stu_master_stu_info_id);
-        $telecom =  InvTelecom::find()->where(['id_equipo' => $model->id])->one();
-        $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_telecom where id_equipo='.$id.'')->queryScalar();
-        $count2 = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_so where id_equipo='.$id.'')->queryScalar();
-        $count3 = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_sw where id_equipo='.$id.'')->queryScalar();
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'info' => $telecom,
-            'count' => $count,
-            'count2' => $count2,
-            'count3' => $count3,
         ]);
     }
 
     /**
-     * Creates a new InvEquipos model.
+     * Creates a new InvServers model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new InvEquipos();
-        
-        $fecha2 = date('Y-m-d');
+        $model = new InvServers();
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->created_by=Yii::$app->user->identity->user_id;
+             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = $fecha = date("Y-m-d");//new Expression('NOW()');
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
             $model->id_area=1;
             $model->id_piso=1;
             $fecha1 = $this->traerFechaInv($model->progresivo);
             $model->clasif = $this->antiguedad($fecha1,$fecha2);
-            if (!$model->save()) {
+
+              if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
@@ -150,13 +100,12 @@ class InvEquiposController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-                
             ]);
         }
     }
 
     /**
-     * Updates an existing InvEquipos model.
+     * Updates an existing InvServers model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -164,16 +113,8 @@ class InvEquiposController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())) {
-            $model->updated_by=Yii::$app->user->identity->user_id;
-            $model->updated_at = new Expression('NOW()');
-            if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-                # code...
-            }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -182,45 +123,8 @@ class InvEquiposController extends Controller
         }
     }
 
-     public function actionUpdate2($id)
-    {
-        $model = $this->findModel($id);
-        $model->scenario = 'upuser';
-
-
-        if ($model->load(Yii::$app->request->post())) {
-            $model->updated_by=Yii::$app->user->identity->user_id;
-            $model->updated_at = new Expression('NOW()');
-            if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-                # code...
-            }
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update2', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-      public function actionModelos($id)
-    {
-        $cuentaModelos = CatModelo::find()->where(['id_marca'=>$id])->count();
-        $modelos = CatModelo::find()->where(['id_marca'=>$id])->all();
-
-        if ($cuentaModelos > 0) {
-            foreach ($modelos as $key => $value) {
-                echo "<option value=". $value->id . ">". $value->modelo. "</option>";
-            }
-        }else{
-            echo "<option>-</option>";
-        }
-    }
-
     /**
-     * Deletes an existing InvEquipos model.
+     * Deletes an existing InvServers model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -232,24 +136,37 @@ class InvEquiposController extends Controller
         return $this->redirect(['index']);
     }
 
+        public function actionModelos($id)
+    {
+        $cuentaModelos = CatModserver::find()->where(['id_marca'=>$id])->count();
+        $modelos = CatModserver::find()->where(['id_marca'=>$id])->all();
+
+        if ($cuentaModelos > 0) {
+            foreach ($modelos as $key => $value) {
+                echo "<option value=". $value->id . ">". $value->modelo. "</option>";
+            }
+        }else{
+            echo "<option>-</option>";
+        }
+    }
+
     /**
-     * Finds the InvEquipos model based on its primary key value.
+     * Finds the InvServers model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InvEquipos the loaded model
+     * @return InvServers the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InvEquipos::findOne($id)) !== null) {
+        if (($model = InvServers::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
-
-  public function antiguedad($fechaInicio,$fechaFin)
+     public function antiguedad($fechaInicio,$fechaFin)
 {
     $fecha1 = new \DateTime($fechaInicio);
     $fecha2 = new \DateTime($fechaFin);
@@ -304,6 +221,4 @@ $inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
 
 
  }
-
-
 }

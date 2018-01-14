@@ -311,6 +311,11 @@ Yii::$app->name = "APP-SIGIEMS";
                         if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
                         ?>
 
+                        
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Servidores',['/soporte/inv-servers/index']) ?>
+                        </li>
+
                         <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
                         </li>
@@ -394,6 +399,10 @@ Yii::$app->name = "APP-SIGIEMS";
 
                           <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos faltantes en sistema',['/soporte/inv-equipos/revision'])?>
                         </li>
 
 
@@ -649,6 +658,10 @@ Yii::$app->name = "APP-SIGIEMS";
 
                          <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos faltantes en sistema',['/soporte/inv-equipos/revision'])?>
                         </li>
                 </ul>
             </div>
