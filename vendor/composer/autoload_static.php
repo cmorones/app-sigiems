@@ -47,6 +47,7 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\plugins\\depdrop\\' => 23,
             'kartik\\plugins\\dateformatter\\' => 29,
+            'kartik\\plugins\\checkbox\\' => 24,
             'kartik\\mpdf\\' => 12,
             'kartik\\growl\\' => 13,
             'kartik\\grid\\' => 12,
@@ -59,6 +60,7 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
             'kartik\\datecontrol\\' => 19,
             'kartik\\date\\' => 12,
             'kartik\\color\\' => 13,
+            'kartik\\checkbox\\' => 16,
             'kartik\\base\\' => 12,
             'kartik\\alert\\' => 13,
             'kartik\\affix\\' => 13,
@@ -198,6 +200,10 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
         array (
             0 => __DIR__ . '/..' . '/kartik-v/php-date-formatter',
         ),
+        'kartik\\plugins\\checkbox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-checkbox-x',
+        ),
         'kartik\\mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-mpdf',
@@ -245,6 +251,10 @@ class ComposerStaticInitba577f35326f0d97556aa8c71b3fef23
         'kartik\\color\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-colorinput',
+        ),
+        'kartik\\checkbox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-checkbox-x',
         ),
         'kartik\\base\\' => 
         array (

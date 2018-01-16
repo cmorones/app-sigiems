@@ -382,4 +382,13 @@ return array (
       '@aki/telegram' => $vendorDir . '/aki/yii2-bot-telegram',
     ),
   ),
+  'kartik-v/yii2-checkbox-x' => 
+  array (
+    'name' => 'kartik-v/yii2-checkbox-x',
+    'version' => '1.0.3.0',
+    'alias' => 
+    array (
+      '@kartik/checkbox' => $vendorDir . '/kartik-v/yii2-checkbox-x',
+    ),
+  ),
 );

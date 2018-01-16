@@ -419,6 +419,42 @@ Yii::$app->name = "APP-SIGIEMS";
                     </ul>
                 </div>
             </div>
+
+             <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i>Procesos Soporte Técnicos</a>
+                        </li>
+                         <?php  
+                        if(Yii::$app->user->can('mesaAyuda')) {
+                         ?>
+                        
+                        <?php
+                       
+                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
+                        ?>
+
+                  
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Movimientos de Bienes',['/soporte/mov-bienes/index']) ?>
+                        </li>
+
+
+
+                          <?php
+                            }
+
+
+
+                        }
+                         
+                        ?>
+
+
+                    </ul>
+                </div>
+            </div>
               <?php
                 }
             ?>
