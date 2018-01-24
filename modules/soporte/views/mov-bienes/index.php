@@ -34,10 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="col-xs-4 left-padding">
 
            
-             <?//= Html::a('Agregar Equipos', ['create'], ['class' => 'btn btn-block btn-success']) ?>
+             <?= Html::a('Agregar Movimientos', ['create'], ['class' => 'btn btn-block btn-success']) ?>
 
 
-<?= Html::button('Agregar Equipos', ['id' => 'modelButton', 'value' => \yii\helpers\Url::to(['mov-bienes/create']), 'class' => 'btn btn-success']) ?>
+<?//= Html::button('Agregar Equipos', ['id' => 'modelButton', 'value' => \yii\helpers\Url::to(['mov-bienes/create']), 'class' => 'btn btn-success']) ?>
 
 <?//= Html::a('Create List', ['create'], ['class' => 'btn btn-success']) ?>
 
@@ -72,8 +72,29 @@ $this->params['breadcrumbs'][] = $this->title;
           //  'id_plantel',
             'sfolio',
             'fecha',
-            'area_origen',
-            'area_destino',
+            [
+              'attribute'=>'id_plantel',
+              'value' => 'catPlanteles.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+
+            [
+              'attribute'=>'area_origen',
+              'value' => 'catAreas1.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+          //  'area_origen',
+            [
+              'attribute'=>'plantel',
+              'value' => 'catPlanteles2.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+          //  'area_destino',
+             [
+              'attribute'=>'area_destino',
+              'value' => 'catAreas2.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatAreas::find()->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
             // 'suministro',
             // 'prestamo',
             // 'salida',
@@ -89,13 +110,97 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'autoriza',
             // 'entrega',
             // 'recibe',
-            // 'estado',
+             [
+              'attribute'=>'estado',
+              'value' => 'catEstado.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatEstado::find()->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
             // 'created_at',
             // 'created_by',
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+               [ 'attribute' => 'imprimir',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+
+
+                  return (Html::a('<center><span class="glyphicon glyphicon-print"></span> PDF</center>', [
+                            '/soporte/inf-pdf/movs',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+              
+            }
+              ],
+
+               [ 'attribute' => 'Agregar Item',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+
+
+           
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Agregar</center>', [
+                            '/soporte/mov-detalle/index',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-info btn-sm',
+                           // 'target' => '_blank',
+                        ]));
+             
+              
+            }
+              ],
+
+               [ 'attribute' => 'Modificar',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+
+
+           
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar</center>', [
+                            '/soporte/mov-bienes/update',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-info btn-sm',
+                           // 'target' => '_blank',
+                        ]));
+             
+              
+            }
+              ],
+
+            /*  [ 'attribute' => 'Subir Archivo',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+              //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
+              //$docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
+              //$dictaminado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
+              //$dicta = intval($dictaminado);
+             
+              if($data->estado ==1){
+                
+                  
+                 return (Html::a('<center><span class="glyphicon glyphicon-floppy-open"></span></center>', ['/soporte/mov-bienes/docto','id'=>$docto['id'], 'idb' =>$data->id, 'idp'=>$data->id_periodo], ['title' => 'Subir']));
+              }elseif($data->estado ==2 ) {
+ 
+                 return (Html::a('<center><span class="glyphicon glyphicon-download"></span> PDF</center>', [
+                            '/soporte/bajas-dictamen/pdf',
+                            'id' => $docto['id'],
+                        ], [
+                            'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+              }
+              else{
+
+                 return ('<center>'.Html::img('@web/images/unchecked.png').'</center>');
+               
+                                      }
+                       }
+              ],*/
         ],
     ]); ?>
 <?php Pjax::end(); ?>
@@ -105,27 +210,4 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<?php
-    Modal::begin([
-        'id' => 'eventModal',
-       // 'size'=>'modal-lg',
-        'header' => "<h3>Registro</h3>",
-    ]);
 
-     echo "<div id='modelContent'></div>";
-
-    yii\bootstrap\Modal::end();
-?>
-  
-
-<script type="text/javascript" charset="utf-8">
-
-$(function(){
-    $('#modelButton').click(function(){
-        $('.modal').modal('show')
-            .find('#modelContent')
-            .load($(this).attr('value'));
-    });
-        
-});
-</script>

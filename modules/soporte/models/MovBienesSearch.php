@@ -18,7 +18,7 @@ class MovBienesSearch extends MovBienes
     public function rules()
     {
         return [
-            [['id', 'id_plantel', 'folio', 'area_origen', 'area_destino', 'suministro', 'prestamo', 'salida', 'equipo', 'refaccion', 'material', 'tipo_manto', 'actualizacion', 'distribucion', 'garantia', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'id_plantel', 'folio', 'area_origen', 'area_destino', 'suministro', 'prestamo', 'salida', 'equipo', 'refaccion', 'material', 'tipo_manto', 'actualizacion', 'distribucion', 'garantia', 'estado', 'created_by', 'updated_by','plantel'], 'integer'],
             [['fecha', 'condiciones', 'observaciones', 'autoriza', 'entrega', 'recibe', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -65,6 +65,7 @@ class MovBienesSearch extends MovBienes
             'fecha' => $this->fecha,
             'area_origen' => $this->area_origen,
             'area_destino' => $this->area_destino,
+            'plantel' => $this->plantel,
             'suministro' => $this->suministro,
             'prestamo' => $this->prestamo,
             'salida' => $this->salida,

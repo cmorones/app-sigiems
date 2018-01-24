@@ -66,19 +66,6 @@ if (Yii::$app->controller->action->id === 'login') {
       
     <?php $this->endBody() ?>
 
-    <!-- Start of oct8ne code --> 
-  <script type="text/javascript"> 
-   var oct8ne = document.createElement("script"); 
-   oct8ne.type = "text/javascript"; 
-   oct8ne.async = true; 
-   oct8ne.license ="EACD5AB40E8480DF3BE9FE8B51777CED"; 
-   oct8ne.src = (document.location.protocol == "https:" ? "https://" : "http://") + "static.oct8ne.com/api/v2/oct8ne-api-2.3.js?" + (Math.round(new Date().getTime() / 86400000)); 
-   oct8ne.locale = "es-ES"; 
-   oct8ne.baseUrl ="//app.iems.edu.mx/app-sigiems"; 
-   var s = document.getElementsByTagName("script")[0]; 
-   s.parentNode.insertBefore(oct8ne, s); 
-  </script> 
-<!--End of oct8ne code -->
 
     </body>
       <script type="text/javascript">

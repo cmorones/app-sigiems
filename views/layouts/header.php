@@ -440,6 +440,11 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Movimientos de Bienes',['/soporte/mov-bienes/index']) ?>
                         </li>
 
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Contadores',['/soporte/inv-contadores/index']) ?>
+                        </li>
+
+
 
 
                           <?php

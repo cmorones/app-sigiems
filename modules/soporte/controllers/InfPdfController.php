@@ -49,6 +49,22 @@ class InfPdfController extends \yii\web\Controller
         $fName = "Cesar Morones_".date('Ymd_His');
 		return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
+
+      public function actionMovs($id)
+    {
+        //return $this->renderPartial('index');
+
+        $html = $this->renderPartial('/inf-pdf/movs',
+			[
+				'id'=>$id,
+				
+			]);
+
+       // $html = "Hola Mundo";
+        $fName = "Cesar Morones_".date('Ymd_His');
+		return Yii::$app->pdf->exportData('Informe',$fName,$html);
+    }
+    
     
     public function actionTelefon()
     {

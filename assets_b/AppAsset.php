@@ -34,7 +34,8 @@ class AppAsset extends AssetBundle
         'css/EdusecCustome.css',*/
     ];
     public $js = [
-        'js/main.js', 
+      //  'js/main.js', 
+        'js/menu.js',
         'js/check.js', 
         '//momentjs.com/downloads/moment-with-locales.min.js',
        'fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js',

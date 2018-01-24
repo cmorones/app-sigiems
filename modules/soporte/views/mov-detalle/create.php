@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
      <div class="assignment-index">
   <?= $this->render('_form', [
         'model' => $model,
+        'id' => $id,
     ]) ?>
    
      </div>

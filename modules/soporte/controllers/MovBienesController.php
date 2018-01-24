@@ -3,11 +3,13 @@
 namespace app\modules\soporte\controllers;
 
 use Yii;
+use app\modules\soporte\models\CatAreas;
 use app\modules\soporte\models\MovBienes;
 use app\modules\soporte\models\MovBienesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * MovBienesController implements the CRUD actions for MovBienes model.
@@ -17,9 +19,20 @@ class MovBienesController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+       public function behaviors()
     {
         return [
+               'access' => [
+                'class' => AccessControl::className(),
+               // 'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -70,6 +83,7 @@ class MovBienesController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = $fecha = date("Y-m-d");//new Expression('NOW()');
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
+            $model->estado=1;
             $model->folio = $this->ultimoFolio(Yii::$app->user->identity->id_plantel);
             $model->sfolio = "MBI-".$this->ultimoFolio(Yii::$app->user->identity->id_plantel)."-2018";
             if (!$model->save()) {
@@ -81,7 +95,7 @@ class MovBienesController extends Controller
 
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
@@ -98,11 +112,25 @@ class MovBienesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+      public function actionAreas($id)
+    {
+        $cuentaModelos = CatAreas::find()->where(['id_plantel'=>$id])->count();
+        $modelos = CatAreas::find()->where(['id_plantel'=>$id])->all();
+
+        if ($cuentaModelos > 0) {
+            foreach ($modelos as $key => $value) {
+                echo "<option value=". $value->id_area . ">". $value->nombre. "</option>";
+            }
+        }else{
+            echo "<option>-</option>";
         }
     }
 
@@ -117,6 +145,42 @@ class MovBienesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+     public function actionDocto($id,$idb,$idp)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = 'updoc';
+
+       
+        $model2 = InvBajas::findOne($idb);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+        
+        $model->file = UploadedFile::getInstance($model,'file');
+        $model->file->saveAs('dictamenes/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->documento = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+        $model->docto=1;
+        $model->bloq=1;
+        $model->updated_by=@Yii::$app->user->identity->user_id;
+        $model->updated_at = new Expression('NOW()');    
+       if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+            }
+            return $this->redirect(['/soporte/inv-bajas/periodo', 'idp' => $idp]);
+         
+
+        } else {
+            return $this->render('docto', [
+                'model' => $model,
+                'idb' => $idb,
+                'model2' => $model2,
+
+            ]);
+        }
     }
 
     /**

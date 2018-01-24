@@ -69,14 +69,14 @@ if (Yii::$app->controller->action->id === 'login') {
     <!-- Start of oct8ne code --> 
   <script type="text/javascript"> 
   
-$(function(){
+/*$(function(){
     $('#modelButton').click(function(){
         $('.modal').modal('show')
             .find('#modelContent')
             .load($(this).attr('value'));
     });
         
-}); 
+}); */
   </script> 
 <!--End of oct8ne code -->
 

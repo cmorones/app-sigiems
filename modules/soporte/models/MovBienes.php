@@ -3,6 +3,8 @@
 namespace app\modules\soporte\models;
 
 use Yii;
+use app\modules\admin\models\CatAreas;
+use app\modules\admin\models\CatPlanteles;
 
 /**
  * This is the model class for table "mov_bienes".
@@ -50,10 +52,12 @@ class MovBienes extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    
+
     public function rules()
     {
         return [
-            [['id_plantel', 'folio', 'area_origen', 'area_destino', 'suministro', 'prestamo', 'salida', 'equipo', 'refaccion', 'material', 'tipo_manto', 'actualizacion', 'distribucion', 'garantia', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id_plantel', 'folio', 'area_origen', 'area_destino', 'suministro', 'prestamo', 'salida', 'equipo', 'refaccion', 'material', 'tipo_manto', 'actualizacion', 'distribucion', 'garantia', 'estado', 'created_by', 'updated_by', 'plantel'], 'integer'],
             [['fecha', 'created_at', 'updated_at'], 'safe'],
             [['condiciones', 'observaciones', 'autoriza', 'entrega', 'recibe'], 'string'],
             [['created_at', 'created_by'], 'required'],
@@ -71,9 +75,11 @@ class MovBienes extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_plantel' => 'Id Plantel',
             'folio' => 'Folio',
+            'sfolio' => 'Folio Movimiento',
             'fecha' => 'Fecha',
             'area_origen' => 'Area Origen',
             'area_destino' => 'Area Destino',
+            'plantel' => 'Plantel Destino',
             'suministro' => 'Suministro',
             'prestamo' => 'Prestamo',
             'salida' => 'Salida',
@@ -111,5 +117,31 @@ class MovBienes extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
+    }
+
+    public function getCatAreas1()
+    {
+        return $this->hasOne(CatAreas::className(),['id_area'=>'area_origen']);
+    }
+
+
+    public function getCatAreas2()
+    {
+        return $this->hasOne(CatAreas::className(),['id_area'=>'area_destino']);
+    }
+
+     public function getCatPlanteles()
+    {
+        return $this->hasOne(CatPlanteles::className(),['id'=>'id_plantel']);
+    }
+
+    public function getCatPlanteles2()
+    {
+        return $this->hasOne(CatPlanteles::className(),['id'=>'plantel']);
+    }
+
+    public function getCatEstado()
+    {
+        return $this->hasOne(CatEstado::className(),['id'=>'estado']);
     }
 }
