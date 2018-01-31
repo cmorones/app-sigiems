@@ -46,6 +46,14 @@ use app\modules\soporte\models\FunBajasCer;
                       $nombre = 'UPS';
                     }
 
+                       if ($model2->id_tipo==11) {
+                      $nombre = 'PLOTTER';
+                    }
+                    if ($model2->id_tipo==12) {
+                      $nombre = 'FAX';
+                    }
+                   
+
                                             if ($model2->id_tipo==2) {
   $clabe_cabs = '5151000096';
 }
@@ -83,6 +91,14 @@ if ($model2->id_tipo==8) {
 if ($model2->id_tipo==9) {
   $clabe_cabs = '5151000184';
 }
+
+if ($value->id_tipo==11) {
+  $clabe_cabs = '5151000166';
+}
+if ($value->id_tipo==12) {
+  $clabe_cabs = '5651000094';
+}
+
 ?>
 
 <div class="col-xs-12" style="padding-top: 10px;">
