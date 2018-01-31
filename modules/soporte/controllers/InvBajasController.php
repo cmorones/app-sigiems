@@ -264,7 +264,7 @@ class InvBajasController extends Controller
            // $model->updated_at = new Expression('NOW()');
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
             $model->id_periodo = $idp;
-            $model->estado_baja = 1;
+            $model->estado_baja = $model->tipo_baja;
             $model->id_tipo = 1;
             $model->bloq = 0;
            // $fecha1 = $this->traerFechaInv($model->progresivo);

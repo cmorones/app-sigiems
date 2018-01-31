@@ -291,6 +291,10 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['ext'])?>
                         </li>
 
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Revision de  Equipos IEMS',['/petic/default/revision'])?>
+                        </li>
+
                       
                       
                     </ul>

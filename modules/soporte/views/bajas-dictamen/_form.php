@@ -40,6 +40,18 @@ use yii\helpers\ArrayHelper;
                     if ($model2->id_tipo==9) {
                       $nombre = 'SCANNER';
                     }
+
+                     if ($model2->id_tipo==10) {
+                      $nombre = 'UPS';
+                    }
+
+
+                       if ($model2->id_tipo==11) {
+                      $nombre = 'PLOTTER';
+                    }
+                    if ($model2->id_tipo==12) {
+                      $nombre = 'FAX';
+                    }
                    
 
                     if ($model2->id_tipo==2) {

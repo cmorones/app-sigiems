@@ -95,6 +95,13 @@ if ($value->id_tipo==9) {
   $clabe_cabs = '5151000184';
 }
 
+if ($value->id_tipo==11) {
+  $clabe_cabs = '5151000166';
+}
+if ($value->id_tipo==12) {
+  $clabe_cabs = '5651000094';
+}
+
 //echo ":";
 //echo $clabe_cabs;
 //echo "<br>";

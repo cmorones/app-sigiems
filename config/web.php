@@ -177,6 +177,9 @@ $config = [
         'telefonia' => [
             'class' => 'app\modules\telefonia\TelefoniaModule',
         ],
+        'petic' => [
+            'class' => 'app\modules\petic\PeticModule',
+        ],        
         'rights' => [
         'class' => 'mdm\admin\Module',
         'controllerMap' => [

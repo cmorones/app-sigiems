@@ -17,11 +17,47 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="inv-impresoras-index">
 
-      <div class="col-lg-12 col-sm-12 col-xs-12 no-padding"><h1 class="box-title"><i class="fa fa-list-alt"></i> <?php echo $this->title ?></h1></div>
+     <div class="col-xs-12">
+  <div class="col-lg-7 col-sm-8 col-xs-12 no-padding edusecArLangCss"><h3 class="box-title"><i class="fa fa-th-list"></i> 
+  <?php echo $this->title ?></h3></div>
+  <div class="col-lg-5 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
+  <div class="col-xs-4 right-padding">
+
+           
+
+
+  </div>
+  <div class="col-xs-4 right-padding">
+
+  
+ 
+      <?= Html::a(Yii::t('app', 'PDF'), ['/export-data/export-to-pdf', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-warning', 'target'=>'_blank']) ?>
+
+  </div>
+  <div class="col-xs-4 right-padding">
+ 
+      <?= Html::a(Yii::t('app', 'EXCEL'), ['/export-data/export-excel', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-primary', 'target'=>'_blank']) ?>
+
+  </div>
+  </div>
+</div>
+</div>
+
+
+<div class="inv-impresoras-index">
+
+   
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 <p>
+    
+  <div class=" box view-item col-xs-6 col-lg-6">
+
         <?= Html::a('<i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>Regresar', ['index', 'idp'=>$idp], ['class' => 'btn btn-info btn-sm']) ?>
+
+
     </p>
+
+    
   <div class=" box view-item col-xs-12 col-lg-12">
    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
