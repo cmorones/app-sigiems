@@ -181,6 +181,13 @@ if ($baja->id_tipo==9) {
   $clabe_cabs = '5151000184';
   $nombre = 'ESCANER';
 }
+
+          if ($baja->id_tipo==11) {
+              $clabe_cabs = '5151000166';
+            }
+            if ($baja->id_tipo==12) {
+              $clabe_cabs = '5651000094';
+            }
 ?>
 <div class="col-xs-12" style="padding-top: 10px;">
 <div class="box view-item col-xs-12 col-lg-12">
