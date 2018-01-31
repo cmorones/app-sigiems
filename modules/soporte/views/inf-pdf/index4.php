@@ -184,9 +184,11 @@ if ($baja->id_tipo==9) {
 
           if ($baja->id_tipo==11) {
               $clabe_cabs = '5151000166';
+              $nombre = 'PLOTTER';
             }
             if ($baja->id_tipo==12) {
               $clabe_cabs = '5651000094';
+              $nombre = 'FAX';
             }
 ?>
 <div class="col-xs-12" style="padding-top: 10px;">
