@@ -73,8 +73,8 @@ class SolicitudPrestaController extends Controller
 
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = $fecha = date("Y-m-d");//new Expressi
-           // $model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['solicitudpresta']['event_start_date']);
-           // $model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['solicitudpresta']['event_end_date']);
+            $model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['SolicitudPresta']['event_start_date']);
+            $model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['SolicitudPresta']['event_end_date']);
             $model->fecha_presta = $fecha2;
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
             //$model->antiguedad = 1; //$this->antiguedad($fecha1,$fecha2);

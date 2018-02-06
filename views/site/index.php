@@ -465,11 +465,12 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
             <th>LAP-TOP</th>
             <th>IMPRESORA</th>
             <th>NO-BREAK</th>
-            <th>TELEFONO</th>
             <th>VIDEOPROYECTOR</th>
             <th>SWITCH</th>
             <th>SCANNERS</th>
-            <th>TOTAL</th>
+             <th>PLOTTER</th>
+             <th>FAX</th>
+           
           
 
             <?php
@@ -485,12 +486,13 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'2'])->count(); ?></td>
               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'3'])->count(); ?></td>
               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'4'])->count(); ?></td>
-              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'5'])->count(); ?></td> 
               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'6'])->count(); ?></td>    
               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'7'])->count(); ?></td>    
               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'8'])->count(); ?></td> 
-               <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'9'])->count(); ?></td>          
-              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->count(); ?></td>  
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'9'])->count(); ?></td>
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'11'])->count(); ?></td> 
+              <td><?=app\modules\soporte\models\InvBajas::find()->where(['id_plantel'=>$value['id']])->andWhere(['id_periodo'=>'1'])->andWhere(['id_tipo'=>'12'])->count(); ?></td>           
+              
            </tr>
             <?php 
           }
