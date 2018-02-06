@@ -461,10 +461,10 @@ $count6 = \Yii::$app->db->createCommand("SELECT COUNT(*) FROM inv_nobreak WHERE 
          <tr>
             <th>Plantel</th>
             <th>CPU</th>
-            <th>SERVIDORES</th>
+            <th>IMPRESORAS</th>
+            <TH>SERVIDORES</th>
             <th>LAP-TOP</th>
-            <th>IMPRESORA</th>
-            <th>NO-BREAK</th>
+            <th>TELEFONO</th>
             <th>VIDEOPROYECTOR</th>
             <th>SWITCH</th>
             <th>SCANNERS</th>
