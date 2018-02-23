@@ -23,6 +23,7 @@ $sql = "select
  bm.modelo,
  bm.serie,
  bm.fecha_baja,
+ bm.fecha_alta,
  bm.id_unidad_procedencia,
  bm.id_causa,
  bm.no_factura,
@@ -66,7 +67,7 @@ $sql = "select
  LEFT JOIN ubicaciones u ON z.id_ubicacion=u.id_ubicacion 
  LEFT JOIN niveles n ON z.id_nivel=n.id_nivel  
  where 
- bm.id_situacion_bien IN(1)  and z.id_plantel=2 and bm.clave_cabms='5151000138' order by bm.id_bien_mueble";
+ bm.id_situacion_bien IN(1)  and bm.clave_cabms='5151000184' and (bm.fecha_factura BETWEEN '2014-01-01' and '2014-12-31') order by bm.id_bien_mueble";
 $inventario = \Yii::$app->db2->createCommand($sql)->queryAll();
 
 
@@ -91,9 +92,11 @@ $inventario = \Yii::$app->db2->createCommand($sql)->queryAll();
         <th>Marca(Inventario)</th>
         <th>Modelo(Inventario)</th>
         <th>Serie</th>
-      
+        <th>Descripcion</th>
         <th>Estado</th>
         <th>Plantel</th>
+        <th>Fecha Alta</th>
+        <th>Empleado</th>
 
     </tr>
 
@@ -114,9 +117,11 @@ foreach ($inventario as $key => $value) {
     <td><?=$value['marca']?></td>
     <td><?=$value['modelo']?></td>
     <td><?=$value['serie']?></td>
+    <td><?=$value['cbsdllelargo']?></td>
     <td><?=$value['id_situacion_bien']?></td>
     <td><?=$value['pdescrip']?> <?//=$value['apellidos_empleado']?></td>
-
+    <td><?=$value['fecha_alta']?></td>
+    <td><?=$value['nombre_empleado']?> <?=$value['apellidos_empleado']?></td>
     <td>
     <?//=$revisado?> 
       <?php

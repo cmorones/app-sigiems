@@ -41,35 +41,8 @@ Yii::$app->name = "APP-SIGIEMS";
                                             <a href="#dit"><i class="fa fa-calendar-o"></i> Direccion de Informática</a>
                                         </li>
 
-                                         <li>
-                                            <a href="#inventario"><i class="fa fa-calendar-o"></i> Inventario de bienes</a>
-                                        </li>
-
-
-                                       <!--  <li>
-                                            <a href="#opiniones"><i class="fa fa-calendar-o"></i> Opiniones Técnicas</a>
-                                        </li> -->
-
-                                         <?php  
-              if(Yii::$app->user->can('Mov-bienes')) {
-            ?>
-   
-
-
-                                          <li>
-                                            <a href="#movs"><i class="fa fa-calendar-o"></i> Movimiento de Bienes</a>
-                                        </li>
-
-                                          <?php
-
-            }
-
-            ?>
-
                                          <?php  
                                        }
-
-
                                      if(Yii::$app->user->can('mostrarSILAC')) {
                                           ?>
 
@@ -96,97 +69,6 @@ Yii::$app->name = "APP-SIGIEMS";
                                 </div><!-- end col -->
                                 <div class="col-md-9 menu-sub-items">
                                     <div class="tab-content">
-
-
-
- <div id="inventario" class="tab-pane">
-        <div class="visible-sm visible-xs menu-box-header">
-            <button aria-label="Close" class="close" type="button">
-            <span aria-hidden="true">×</span>
-            </button>
-            <h4><i class="fa fa-calendar-o"></i> Opiniones Técnicas</h4>
-        </div>
-
-        <?= $this->render('_inventarios.php')?>
-</div>       
-
-
-
-
-
-
- <div id="opiniones" class="tab-pane">
-        <div class="visible-sm visible-xs menu-box-header">
-            <button aria-label="Close" class="close" type="button">
-            <span aria-hidden="true">×</span>
-            </button>
-            <h4><i class="fa fa-calendar-o"></i> Opiniones Técnicas</h4>
-        </div>
-                <div class="row">
-
-                 <div class="col-md-2 col-sm-4 col-xs-12">
-            <div class="menu-box">
-                <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Opiniones Técnicas</a></li>
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Agregar Solicitudes',['/soporte/opiniones'])?>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Autorizar Solicitudes',['/soporte/autoriza-opiniones'])?>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Segumiento Opiniones',['/soporte/seg-opiniones'])?>
-                        </li>
-
-
-                        
-              
-                </ul>
-            </div>
-</div>
-
-                </div>
-                </div>
-
- <?php  
-              if(Yii::$app->user->can('Mov-bienes')) {
-            ?>
- <div id="movs" class="tab-pane">
-        <div class="visible-sm visible-xs menu-box-header">
-            <button aria-label="Close" class="close" type="button">
-            <span aria-hidden="true">×</span>
-            </button>
-            <h4><i class="fa fa-calendar-o"></i> Movimiento de Bienes</h4>
-        </div>
-                <div class="row">
-
-                 <div class="col-md-2 col-sm-4 col-xs-12">
-            <div class="menu-box">
-                <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Movimientos</a></li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Movimientos de Bienes',['/soporte/mov-bienes/index']) ?>
-                        </li>
-
-
-                        
-              
-                </ul>
-            </div>
-</div>
-
-                </div>
-                </div>
-
-                  <?php
-
-            }
-
-            ?>
 
 
  <div id="consumibles" class="tab-pane">
@@ -468,15 +350,313 @@ Yii::$app->name = "APP-SIGIEMS";
                     </ul>
                 </div>
             </div>                                   
-          
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario IEMS</a>
+                        </li>
+                         <?php  
+                        if(Yii::$app->user->can('mesaAyuda')) {
+                         ?>
+                        
+                        <?php
+                       
+                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
+                        ?>
 
+                        
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Servidores',['/soporte/inv-servers/index']) ?>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
+                        </li>
+
+                    
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks',['/soporte/inv-nobreak/index']) ?>
+                        </li>
+
+                       
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras',['/soporte/inv-impresoras/index']) ?>
+                        </li>
+
+                      
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Validacion de Bajas vs Almacen',['/soporte/inv-bajas/validacion']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias de Desecho',['/soporte/inv-baterias/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i>Prestamo de Equipos',['/soporte/solicitud-presta/index']) ?>
+                        </li>
+                         <?php
+                            }
+
+
+
+                        }
+                         
+                        ?>
+
+
+                    </ul>
+                </div>
+            </div>
+
+             <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario Externo</a>
+                        </li>
+                         <?php  
+                        if(Yii::$app->user->can('mesaAyuda')) {
+                         ?>
+                        
+                        <?php
+                       
+                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
+                        ?>
+
+                  
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos Externos',['/soporte/inv-equipos-ex/index']) ?>
+                        </li>
+
+
+                            <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks Externos',['/soporte/inv-nobreak-ex/index']) ?>
+                        </li>
+
+                     
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras Externos',['/soporte/inv-impresoras-ex/index']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos en Sedes Alternas',['/soporte/inv-alterno'])?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Relacion de Equipos faltantes en sistema',['/soporte/inv-equipos/revision'])?>
+                        </li>
+
+
+                          <?php
+                            }
+
+
+
+                        }
+                         
+                        ?>
+
+
+                    </ul>
+                </div>
+            </div>
+
+             <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i>Procesos Soporte Técnicos</a>
+                        </li>
+                         <?php  
+                        if(Yii::$app->user->can('mesaAyuda')) {
+                         ?>
+                        
+                        <?php
+                       
+                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
+                        ?>
+
+                  
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Movimientos de Bienes',['/soporte/mov-bienes/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Contadores',['/soporte/inv-contadores/index']) ?>
+                        </li>
+
+
+
+
+                          <?php
+                            }
+
+
+
+                        }
+                         
+                        ?>
+
+
+                    </ul>
+                </div>
+            </div>
               <?php
                 }
             ?>
 
-         
+             <!-- Menu Soporte Técnico --> 
+             <?php  
+              if(Yii::$app->user->can('menuSoporte')) {
+            ?>                                    
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                   
+                         <?php  
+                        if(Yii::$app->user->can('mesaAyuda')) {
+                                                    
+                         if(Yii::$app->user->can('/soporte/inv-telecom/index')) {
+                        ?>
 
-          
+                          <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Telecomunicaciones</a>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom',['/soporte/inv-telecom/index']) ?>
+                        </li>
+
+
+                        <?php
+                    }
+                      if(Yii::$app->user->can('/soporte/inv-telecom/index')) {
+                        ?>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telefonia',['/telefonia/telefonia']) ?>
+                        </li>
+                        <?php
+                    }
+                }
+                        ?>
+
+                    </ul>
+                </div>
+            </div>
+              <?php
+                }
+            ?>
+
+            <?php  
+              if(Yii::$app->user->can('modTelecom')) {
+            ?>
+
+              <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                     <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario</a>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
+                        </li>
+
+                           <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos Externos',['/soporte/inv-equipos-ex/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom Area Central',['/soporte/inv-telecom/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom IEMS',['/soporte/inv-telecom/externos']) ?>
+                        </li>
+
+
+                    
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-list"></i> Telecomunicaciones</a>
+                        </li>
+                      
+
+                           
+
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia Area Central',['/telefonia/telefonia/internos']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia IEMS',['/telefonia/telefonia/index']) ?>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+             <?php
+                }
+            ?>
+
+                 <!-- Menu Soporte Técnico --> 
+             <?php  
+              if(Yii::$app->user->can('menuReportes')) {
+            ?>                                    
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="menu-box">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Reportes</a>
+                        </li>
+
+                       <?php 
+                    //  if(Yii::$app->user->can('informeEquipos')) {
+                        ?>
+
+                        <li>
+
+                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos IEMS-PDF',['/soporte/inf-pdf/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+              
+                        </li>
+                        <li>
+
+                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos Externos-PDF',['/soporte/inf-pdf/index2'],['id' => 'export-pdf', 'target' => 'blank']) ?>
+              
+                        </li>
+                        <?php
+                   // }
+
+                    ?>
+                        
+                    </ul>
+                </div>
+            </div>
+              <?php
+                }
+            ?>
             <?php  
               if(Yii::$app->user->can('menuSistemas')) {
             ?>

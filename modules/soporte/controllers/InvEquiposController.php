@@ -25,6 +25,7 @@ class InvEquiposController extends Controller
     public function behaviors()
     {
         return [
+        
                'access' => [
                 'class' => AccessControl::className(),
                // 'only' => ['logout'],

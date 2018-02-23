@@ -179,6 +179,9 @@ $config = [
         ],
         'petic' => [
             'class' => 'app\modules\petic\PeticModule',
+        ],
+         'consumibles' => [
+            'class' => 'app\modules\consumibles\ConsumiblesModule',
         ],        
         'rights' => [
         'class' => 'mdm\admin\Module',
