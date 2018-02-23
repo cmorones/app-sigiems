@@ -87,7 +87,9 @@ $i1++;
 
    $sumbaj = app\modules\soporte\models\InvBajas::find()->where(['bloq'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['id_tipo'=>1])->count();
   
-$diferencia =  $i1 - $sumequipos - $sumbaj;
+$diferencia =  $i1 - ($sumequipos + $sumbaj);
+
+$totaldit = $sumequipos + $sumbaj;
 
  ?>
 <br>
@@ -121,7 +123,13 @@ $diferencia =  $i1 - $sumequipos - $sumbaj;
     </tr>
 
      <tr>
-        <th style="color:red;">Diferencia</th> <td style="color:red;"><b><?=$diferencia?></b></td>
+        <th>Total de Equipos DIT</th> <td style="color:red;"><b><?=$totaldit?></b></td>
+      
+       
+    </tr>
+
+     <tr>
+        <th style="color:red;">Diferencia Almacen - DIT </th> <td style="color:red;"><b><?=$diferencia?></b></td>
       
        
     </tr>
