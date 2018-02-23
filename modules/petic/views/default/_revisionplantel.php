@@ -83,7 +83,7 @@ foreach ($inventario as $key => $value) {
 $i1++;
 }
 
-  $sumequipos = app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>$plantel])->count();
+  $sumequipos = app\modules\soporte\models\InvEquipos::find()->where(['id_plantel'=>$plantel])->andWhere(['id_tipo'=>1])->count();
 
    $sumbaj = app\modules\soporte\models\InvBajas::find()->where(['bloq'=>1])->andWhere(['id_plantel'=>$plantel])->andWhere(['id_tipo'=>1])->count();
   
