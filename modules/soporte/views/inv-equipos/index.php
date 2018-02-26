@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'View'),]));
             },
         'delete' => function ($url, $model) {
-                return ((Yii::$app->user->can("/soporte/inv-equipos/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
+                return ((Yii::$app->user->can("borrarEquipos")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'estas seguro de eliminar el Equipo?'),'method' => 'post'],]) : '');
             }
       ],
             ],
