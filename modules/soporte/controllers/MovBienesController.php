@@ -10,6 +10,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
+use yii\db\Expression;
 
 /**
  * MovBienesController implements the CRUD actions for MovBienes model.
@@ -27,7 +29,7 @@ class MovBienesController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update'],
+                        'actions' => ['index','create','view','update','docto','pdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -147,22 +149,21 @@ class MovBienesController extends Controller
         return $this->redirect(['index']);
     }
 
-     public function actionDocto($id,$idb,$idp)
+     public function actionDocto($id)
     {
         $model = $this->findModel($id);
         $model->scenario = 'updoc';
 
        
-        $model2 = InvBajas::findOne($idb);
+   //     $model2 = InvBajas::findOne($idb);
 
         if ($model->load(Yii::$app->request->post()) ) {
         
         $model->file = UploadedFile::getInstance($model,'file');
-        $model->file->saveAs('dictamenes/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+        $model->file->saveAs('movimientos/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
        //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-        $model->documento = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
-        $model->docto=1;
-        $model->bloq=1;
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+        $model->estado=2;
         $model->updated_by=@Yii::$app->user->identity->user_id;
         $model->updated_at = new Expression('NOW()');    
        if (!$model->save()) {
@@ -170,15 +171,12 @@ class MovBienesController extends Controller
                 print_r($model->getErrors());
                 exit;
             }
-            return $this->redirect(['/soporte/inv-bajas/periodo', 'idp' => $idp]);
+            return $this->redirect(['/soporte/mov-bienes/index']);
          
 
         } else {
             return $this->render('docto', [
                 'model' => $model,
-                'idb' => $idb,
-                'model2' => $model2,
-
             ]);
         }
     }
@@ -211,4 +209,16 @@ class MovBienesController extends Controller
                 return 0+1;
             }
     }
+
+     public function actionPdf($id) {
+    $model = $this->findModel($id);
+
+    // This will need to be the path relative to the root of your app.
+    $filePath = '/movimientos';
+    // Might need to change '@app' for another alias
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->documento);
+
+    return Yii::$app->response->sendFile($completePath, $model->documento);
+}
+
 }

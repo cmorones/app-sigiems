@@ -44,6 +44,8 @@ class MovBienes extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+public $file;
+
     public static function tableName()
     {
         return 'mov_bienes';
@@ -59,6 +61,7 @@ class MovBienes extends \yii\db\ActiveRecord
         return [
             [['id_plantel', 'folio', 'area_origen', 'area_destino', 'suministro', 'prestamo', 'salida', 'equipo', 'refaccion', 'material', 'tipo_manto', 'actualizacion', 'distribucion', 'garantia', 'estado', 'created_by', 'updated_by', 'plantel'], 'integer'],
             [['fecha', 'created_at', 'updated_at'], 'safe'],
+            [['file'], 'file', 'on'=>'updoc'],
             [['condiciones', 'observaciones', 'autoriza', 'entrega', 'recibe'], 'string'],
             [['created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -100,6 +103,7 @@ class MovBienes extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+             'file'=> 'Subir Archivo',
         ];
     }
 

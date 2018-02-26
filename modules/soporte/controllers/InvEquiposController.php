@@ -230,9 +230,9 @@ class InvEquiposController extends Controller
     {
         $this->findModel($id)->delete();
 
-        Yii::$app->db->createCommand('DELETE FROM inv_telecom where id_equipo='.$id.'');
-        Yii::$app->db->createCommand('DELETE FROM inv_so where id_equipo='.$id.'');
-        Yii::$app->db->createCommand('DELETE FROM inv_sw where id_equipo='.$id.'');
+        \Yii::$app->db ->createCommand("DELETE FROM inv_telecom where id_equipo  = " . $id)->execute();
+        \Yii::$app->db ->createCommand("DELETE FROM inv_so where id_equipo  = " . $id)->execute();
+        \Yii::$app->db ->createCommand("DELETE FROM inv_sw where id_equipo  = " . $id)->execute();
 
 
         return $this->redirect(['index']);
