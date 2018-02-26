@@ -216,9 +216,9 @@ class MovBienesController extends Controller
     // This will need to be the path relative to the root of your app.
     $filePath = '/movimientos';
     // Might need to change '@app' for another alias
-    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->documento);
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->docto);
 
-    return Yii::$app->response->sendFile($completePath, $model->documento);
+    return Yii::$app->response->sendFile($completePath, $model->docto);
 }
 
 }
