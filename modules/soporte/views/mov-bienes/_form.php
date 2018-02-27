@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\CatAreas;
+use app\modules\soporte\models\CatManto;
 
 //use kartik\checkbox\CheckboxX;
 //se kartik\widgets\ActiveForm;
@@ -131,7 +132,11 @@ use app\modules\admin\models\CatAreas;
                                             <label for="cname" class="control-label col-lg-2">Actividad</label>
                                             <div class="col-lg-4">
                                               
-                                                     <?= $form->field($model, 'tipo_manto')->textInput() ?>
+                                                   
+
+                                                    <?= $form->field($model, 'tipo_manto', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatManto::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona tipo']); ?>
+
+
    <?= $form->field($model, "actualizacion")->checkbox(['value' => "1"]); ?>
    <?= $form->field($model, "distribucion")->checkbox(['value' => "1"]); ?>
    <?= $form->field($model, "garantia")->checkbox(['value' => "1"]); ?>
