@@ -5,12 +5,13 @@ namespace app\modules\consumibles\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\consumibles\models\Consumibles;
+use app\modules\consumibles\models\InvConsumibles;
+use  yii\web\Session;
 
 /**
- * ConsumiblesSearch represents the model behind the search form about `app\modules\consumibles\models\Consumibles`.
+ * InvConsumiblesSearch represents the model behind the search form about `app\modules\consumibles\models\InvConsumibles`.
  */
-class ConsumiblesSearch extends Consumibles
+class InvConsumiblesSearch extends InvConsumibles
 {
     /**
      * @inheritdoc
@@ -18,9 +19,8 @@ class ConsumiblesSearch extends Consumibles
     public function rules()
     {
         return [
-            [['id', 'id_medida',  'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by'], 'integer'],
-            [['nombre', 'detalle', 'imagen', 'created_at', 'updated_at'], 'safe'],
-            [['precio'], 'number'],
+            [['id', 'id_consumible', 'id_ubicacion',  'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -42,7 +42,7 @@ class ConsumiblesSearch extends Consumibles
      */
     public function search($params)
     {
-        $query = Consumibles::find();
+        $query = InvConsumibles::find();
 
         // add conditions that should always apply here
 
@@ -61,22 +61,32 @@ class ConsumiblesSearch extends Consumibles
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_medida' => $this->id_medida,
-            'precio' => $this->precio,
-            'status' => $this->status,
-            'existencia_min' => $this->existencia_min,
-            'existencia_max' => $this->existencia_max,
-            'id_area' => $this->id_area,
+            'id_consumible' => $this->id_consumible,
+            'id_ubicacion' => $this->id_ubicacion,
+            'existencia' => $this->existencia,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'detalle', $this->detalle])
-            ->andFilterWhere(['like', 'imagen', $this->imagen]);
+    $session = Yii::$app->session;
+    $session->set('exportData', $dataProvider);
 
         return $dataProvider;
+    }
+
+     public static function getExportData() 
+    {
+        $session = Yii::$app->session;
+        $data = [
+            'data'=>$session->get('exportData'),
+            'fileName'=>'Ordenes--List', 
+            'title'=>'Listado de Ordenes',
+            'exportFile'=>'@app/modules/consumibles/views/inv-consumibles/InvConsumiblesExportPdfExcel',
+        ];
+        //print_r($data);exit;
+
+    return $data;
     }
 }

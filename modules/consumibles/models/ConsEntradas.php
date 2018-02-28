@@ -5,16 +5,14 @@ namespace app\modules\consumibles\models;
 use Yii;
 
 /**
- * This is the model class for table "consumibles".
+ * This is the model class for table "cons_entradas".
  *
  * @property integer $id
- * @property integer $id_medida
- * @property integer $id_categoria
- * @property string $nombre
- * @property string $detalle
- * @property string $imagen
- * @property double $precio
- * @property integer $status
+ * @property integer $id_consumible
+ * @property string $fecha
+ * @property integer $cantidad
+ * @property string $observaciones
+ * @property integer $estado
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
@@ -23,14 +21,14 @@ use Yii;
  * @property Users $createdBy
  * @property Users $updatedBy
  */
-class Consumibles extends \yii\db\ActiveRecord
+class ConsEntradas extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'consumibles';
+        return 'cons_entradas';
     }
 
     /**
@@ -39,11 +37,10 @@ class Consumibles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_medida', 'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by'], 'integer'],
-            [['nombre', 'detalle', 'imagen'], 'string'],
-            [['precio'], 'number'],
+            [['id_consumible', 'cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['fecha', 'created_at', 'updated_at'], 'safe'],
+            [['observaciones'], 'string'],
             [['created_at', 'created_by'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -56,15 +53,11 @@ class Consumibles extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_medida' => 'Id Medida',
-            'nombre' => 'Nombre',
-            'detalle' => 'Detalle',
-            'imagen' => 'Imagen',
-            'precio' => 'Precio',
-            'status' => 'Status',
-            'existencia_min' => 'Existencia Minima',
-            'existencia_man' => 'Existencia Minima',
-            'id_area' => 'Area',
+            'id_consumible' => 'Id Consumible',
+            'fecha' => 'Fecha',
+            'cantidad' => 'Cantidad',
+            'observaciones' => 'Observaciones',
+            'estado' => 'Estado',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
@@ -86,10 +79,5 @@ class Consumibles extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
-    }
-
-     public function getCatMedidas()
-    {
-        return $this->hasOne(CatMedidas::className(),['id'=>'id_medida']);
     }
 }

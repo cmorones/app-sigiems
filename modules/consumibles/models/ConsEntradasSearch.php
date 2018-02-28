@@ -5,12 +5,12 @@ namespace app\modules\consumibles\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\consumibles\models\Consumibles;
+use app\modules\consumibles\models\ConsEntradas;
 
 /**
- * ConsumiblesSearch represents the model behind the search form about `app\modules\consumibles\models\Consumibles`.
+ * ConsEntradasSearch represents the model behind the search form about `app\modules\consumibles\models\ConsEntradas`.
  */
-class ConsumiblesSearch extends Consumibles
+class ConsEntradasSearch extends ConsEntradas
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class ConsumiblesSearch extends Consumibles
     public function rules()
     {
         return [
-            [['id', 'id_medida',  'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by'], 'integer'],
-            [['nombre', 'detalle', 'imagen', 'created_at', 'updated_at'], 'safe'],
-            [['precio'], 'number'],
+            [['id', 'id_consumible', 'cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['fecha', 'observaciones', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class ConsumiblesSearch extends Consumibles
      */
     public function search($params)
     {
-        $query = Consumibles::find();
+        $query = ConsEntradas::find();
 
         // add conditions that should always apply here
 
@@ -61,21 +60,17 @@ class ConsumiblesSearch extends Consumibles
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_medida' => $this->id_medida,
-            'precio' => $this->precio,
-            'status' => $this->status,
-            'existencia_min' => $this->existencia_min,
-            'existencia_max' => $this->existencia_max,
-            'id_area' => $this->id_area,
+            'id_consumible' => $this->id_consumible,
+            'fecha' => $this->fecha,
+            'cantidad' => $this->cantidad,
+            'estado' => $this->estado,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'detalle', $this->detalle])
-            ->andFilterWhere(['like', 'imagen', $this->imagen]);
+        $query->andFilterWhere(['like', 'observaciones', $this->observaciones]);
 
         return $dataProvider;
     }

@@ -3,17 +3,16 @@
 namespace app\modules\consumibles\controllers;
 
 use Yii;
-use app\modules\consumibles\models\Consumibles;
-use app\modules\consumibles\models\ConsumiblesSearch;
+use app\modules\consumibles\models\InvConsumibles;
+use app\modules\consumibles\models\InvConsumiblesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\db\Expression;
 
 /**
- * ConsumiblesController implements the CRUD actions for Consumibles model.
+ * InvConsumiblesController implements the CRUD actions for InvConsumibles model.
  */
-class ConsumiblesController extends Controller
+class InvConsumiblesController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class ConsumiblesController extends Controller
     }
 
     /**
-     * Lists all Consumibles models.
+     * Lists all InvConsumibles models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ConsumiblesSearch();
+        $searchModel = new InvConsumiblesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class ConsumiblesController extends Controller
     }
 
     /**
-     * Displays a single Consumibles model.
+     * Displays a single InvConsumibles model.
      * @param integer $id
      * @return mixed
      */
@@ -58,28 +57,16 @@ class ConsumiblesController extends Controller
     }
 
     /**
-     * Creates a new Consumibles model.
+     * Creates a new InvConsumibles model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Consumibles();
+        $model = new InvConsumibles();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $model->created_by=Yii::$app->user->identity->user_id;
-            $model->created_at = new Expression('NOW()');
-            $model->status = 1;
-
-              if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-            
-            }
-
-            return $this->redirect(['index', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -88,7 +75,7 @@ class ConsumiblesController extends Controller
     }
 
     /**
-     * Updates an existing Consumibles model.
+     * Updates an existing InvConsumibles model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -98,7 +85,7 @@ class ConsumiblesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -107,7 +94,7 @@ class ConsumiblesController extends Controller
     }
 
     /**
-     * Deletes an existing Consumibles model.
+     * Deletes an existing InvConsumibles model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -120,15 +107,15 @@ class ConsumiblesController extends Controller
     }
 
     /**
-     * Finds the Consumibles model based on its primary key value.
+     * Finds the InvConsumibles model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Consumibles the loaded model
+     * @return InvConsumibles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Consumibles::findOne($id)) !== null) {
+        if (($model = InvConsumibles::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

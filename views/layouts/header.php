@@ -212,7 +212,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Entradas Consumibles',['/consumibles/inv-consumibles'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Entradas Consumibles',['/consumibles/cons-entradas'])?>
                         </li>
 
                         <li>

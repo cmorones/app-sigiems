@@ -16,8 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Consumibles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Consumibles', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+<div class="col-xs-12" style="padding-top: 10px;">
+  <div class="box">
+   <div class="box-body table-responsive">
+     <div class="assignment-index">
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -31,10 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\consumibles\models\CatMedidas::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             'nombre',
-            'detalle',
+           // 'detalle',
             // 'imagen',
-            // 'precio',
-            // 'status',
+             'precio',
+             'status',
+             'id_area',
             // 'created_at',
             // 'created_by',
             // 'updated_at',
@@ -44,3 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
+</div>
+</div>
+</div>
