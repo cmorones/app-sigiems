@@ -7,12 +7,10 @@ use yii\data\ArrayDataProvider;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\web\Controller;
 use bs\dbManager\models\Dump;
 use bs\dbManager\models\Restore;
-use bs\dbManager\Module;
-use PDO;
-use PDOException;
 use Symfony\Component\Process\Process;
 
 /**
@@ -72,24 +70,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $dbname
-     * @return \yii\web\Response
-     * @throws \yii\base\UserException
-     */
-    public function actionTestConnection($dbname)
-    {
-        $info = $this->getModule()->getDbInfo($dbname);
-        try {
-            new PDO($info['dsn'], $info['username'], $info['password']);
-            Yii::$app->session->setFlash('sussess', 'Connection success:');
-        } catch (PDOException $e) {
-            Yii::$app->session->setFlash('error', 'Connection failed: ' . $e->getMessage());
-        }
-
-        return $this->redirect('index');
-    }
-
-    /**
      * @inheritdoc
      */
     public function actionCreate()
@@ -119,7 +99,7 @@ class DefaultController extends Controller
      */
     public function actionDownload($id)
     {
-        $dumpPath = $this->getModule()->path . basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
+        $dumpPath = $this->getModule()->path . StringHelper::basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
 
         return Yii::$app->response->sendFile($dumpPath);
     }
@@ -129,7 +109,7 @@ class DefaultController extends Controller
      */
     public function actionRestore($id)
     {
-        $dumpFile = $this->getModule()->path . basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
+        $dumpFile = $this->getModule()->path . StringHelper::basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
         $model = new Restore($this->getModule()->dbList, $this->getModule()->customRestoreOptions);
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -158,9 +138,31 @@ class DefaultController extends Controller
     /**
      * @inheritdoc
      */
+    public function actionStorage($id)
+    {
+        if (Yii::$app->has('backupStorage')) {
+            $dumpname = StringHelper::basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
+            $dumpPath = $this->getModule()->path . $dumpname;
+            $exists = Yii::$app->backupStorage->has($dumpname);
+            if ($exists) {
+                Yii::$app->backupStorage->delete($dumpname);
+                Yii::$app->session->setFlash('success', Yii::t('dbManager', 'Dump deleted from storage.'));
+            } else {
+                $stream = fopen($dumpPath, 'r+');
+                Yii::$app->backupStorage->writeStream($dumpname, $stream);
+                Yii::$app->session->setFlash('success', Yii::t('dbManager', 'Dump uploaded to storage.'));
+            }
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function actionDelete($id)
     {
-        $dumpFile = $this->getModule()->path . basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
+        $dumpFile = $this->getModule()->path . StringHelper::basename(ArrayHelper::getValue($this->getModule()->getFileList(), $id));
         if (unlink($dumpFile)) {
             Yii::$app->session->setFlash('success', Yii::t('dbManager', 'Dump deleted successfully.'));
         } else {
@@ -265,12 +267,11 @@ class DefaultController extends Controller
      */
     protected function prepareFileData()
     {
-        $dataArray = [];
         foreach ($this->getModule()->getFileList() as $id => $file) {
             $columns = [];
             $columns['id'] = $id;
             $columns['type'] = pathinfo($file, PATHINFO_EXTENSION);
-            $columns['name'] = basename($file);
+            $columns['name'] = StringHelper::basename($file);
             $columns['size'] = Yii::$app->formatter->asSize(filesize($file));
             $columns['create_at'] = Yii::$app->formatter->asDatetime(filectime($file));
             $dataArray[] = $columns;

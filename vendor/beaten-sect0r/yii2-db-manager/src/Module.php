@@ -95,8 +95,6 @@ class Module extends BaseModule
      */
     public function init()
     {
-        parent::init();
-
         if (!empty($this->dbList)) {
             if (!ArrayHelper::isIndexed($this->dbList)) {
                 throw  new InvalidConfigException('Property dbList must be as indexed array');
@@ -127,6 +125,8 @@ class Module extends BaseModule
             throw new InvalidConfigException('Path is not writable! Check chmod!');
         }
         $this->fileList = FileHelper::findFiles($this->path, ['only' => ['*.sql', '*.gz']]);
+
+        parent::init();
     }
 
     /**
@@ -140,7 +140,7 @@ class Module extends BaseModule
     {
         $info = ArrayHelper::getValue($this->dbInfo, $db, null);
         if (!$info) {
-            throw new UserException('Db with name ' . $db . ' not configured for dump');
+            throw new UserException('Database with name ' . $db . ' not configured for dump.');
         }
 
         return $info;

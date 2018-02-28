@@ -2,6 +2,7 @@
 
 namespace bs\dbManager\models;
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\StringHelper;
 
 /**
@@ -18,16 +19,16 @@ class PostgresDumpManager extends BaseDumpManager
     public function makeDumpCommand($path, array $dbInfo, array $dumpOptions)
     {
         if ($this->isWindows()) {
-            $arguments[] = 'set PGPASSWORD=' . $dbInfo['password'];
+            $arguments[] = "set PGPASSWORD='{$dbInfo['password']}'";
             $arguments[] = '&';
         } else {
-            $arguments[] = 'PGPASSWORD=' . $dbInfo['password'];
+            $arguments[] = "PGPASSWORD='{$dbInfo['password']}'";
         }
         // default port
         if (empty($dbInfo['port'])) {
             $dbInfo['port'] = '5432';
         }
-        $arguments = array_merge($arguments, [
+        $arguments = ArrayHelper::merge($arguments, [
             'pg_dump',
             '--host=' . $dbInfo['host'],
             '--port=' . $dbInfo['port'],
@@ -66,16 +67,16 @@ class PostgresDumpManager extends BaseDumpManager
             $arguments[] = '|';
         }
         if ($this->isWindows()) {
-            $arguments[] = 'set PGPASSWORD=' . $dbInfo['password'];
+            $arguments[] = "set PGPASSWORD='{$dbInfo['password']}'";
             $arguments[] = '&';
         } else {
-            $arguments[] = 'PGPASSWORD=' . $dbInfo['password'];
+            $arguments[] = "PGPASSWORD='{$dbInfo['password']}'";
         }
         // default port
         if (empty($dbInfo['port'])) {
             $dbInfo['port'] = '5432';
         }
-        $arguments = array_merge($arguments, [
+        $arguments = ArrayHelper::merge($arguments, [
             'psql',
             '--host=' . $dbInfo['host'],
             '--port=' . $dbInfo['port'],

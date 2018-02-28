@@ -57,6 +57,7 @@ class Dump extends Model
     {
         $this->dbList = $dbList;
         $this->customOptions = $customOptions;
+
         parent::__construct($config);
     }
 
@@ -111,8 +112,8 @@ class Dump extends Model
         return [
             'isArchive' => $this->isArchive,
             'schemaOnly' => $this->schemaOnly,
-            'preset' => $this->preset?$this->preset : false,
-            'presetData' => $this->preset?$this->customOptions[$this->preset] : '',
+            'preset' => $this->preset ? $this->preset : false,
+            'presetData' => $this->preset ? $this->customOptions[$this->preset] : '',
         ];
     }
 }

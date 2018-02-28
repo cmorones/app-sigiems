@@ -48,6 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'datos.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\consumibles\models\Consumibles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
+
+
          //   'id_ubicacion',
             [
               'attribute'=>'Inicial',
@@ -60,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 FROM 
   cons_entradas
 WHERE
-   id_consumible=".$data->id_consumible."";
+   estado=2 and id_consumible=".$data->id_consumible."";
 
 
 
@@ -103,7 +105,7 @@ $inventario = \Yii::$app->db->createCommand($sql)->queryOne();
 FROM 
   cons_entradas
 WHERE
-  id_consumible=".$data->id_consumible."";
+  estado=1 and id_consumible=".$data->id_consumible."";
 
 
 
