@@ -46,7 +46,6 @@ class Restore extends Model
     {
         $this->dbList = $dbList;
         $this->customOptions = $customOptions;
-
         parent::__construct($config);
     }
 

@@ -2,7 +2,6 @@
 
 namespace bs\dbManager\models;
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\StringHelper;
 
 /**
@@ -27,7 +26,7 @@ class MysqlDumpManager extends BaseDumpManager
             '--host=' . $dbInfo['host'],
             '--port=' . $dbInfo['port'],
             '--user=' . $dbInfo['username'],
-            "--password='{$dbInfo['password']}'",
+            '--password=' . $dbInfo['password'],
         ];
         if ($dumpOptions['schemaOnly']) {
             $arguments[] = '--no-data';
@@ -64,12 +63,12 @@ class MysqlDumpManager extends BaseDumpManager
         if (empty($dbInfo['port'])) {
             $dbInfo['port'] = '3306';
         }
-        $arguments = ArrayHelper::merge($arguments, [
+        $arguments = array_merge($arguments, [
             'mysql',
             '--host=' . $dbInfo['host'],
             '--port=' . $dbInfo['port'],
             '--user=' . $dbInfo['username'],
-            "--password='{$dbInfo['password']}'",
+            '--password=' . $dbInfo['password'],
         ]);
         if ($restoreOptions['preset']) {
             $arguments[] = trim($restoreOptions['presetData']);

@@ -1,7 +1,5 @@
 # Yii2 DB manager
 
-Click on a :star:!
-
 [![Total Downloads](https://poser.pugx.org/beaten-sect0r/yii2-db-manager/downloads?format=flat-square)](https://packagist.org/packages/beaten-sect0r/yii2-db-manager)
 [![Latest Stable Version](https://poser.pugx.org/beaten-sect0r/yii2-db-manager/v/stable?format=flat-square)](https://packagist.org/packages/beaten-sect0r/yii2-db-manager)
 [![Latest Unstable Version](https://poser.pugx.org/beaten-sect0r/yii2-db-manager/v/unstable?format=flat-square)](https://packagist.org/packages/beaten-sect0r/yii2-db-manager)
@@ -28,6 +26,7 @@ or add
 ```
 
 to the require section of your `composer.json` file.
+
 
 ## Configuration
 
@@ -62,23 +61,6 @@ Advanced ```backend/config/main.php```
 ## Advanced config
 
 ```php
-    'components' => [
-        // https://github.com/creocoder/yii2-flysystem
-        'backupStorage' => [
-            'class' => 'creocoder\flysystem\FtpFilesystem',
-            'host' => 'ftp.example.com',
-            //'port' => 21,
-            //'username' => 'your-username',
-            //'password' => 'your-password',
-            //'ssl' => true,
-            //'timeout' => 60,
-            //'root' => '/path/to/root',
-            //'permPrivate' => 0700,
-            //'permPublic' => 0744,
-            //'passive' => false,
-            //'transferMode' => FTP_TEXT,
-        ],
-    ],
     'modules' => [
         'db-manager' => [
             'class' => 'bs\dbManager\Module',
@@ -119,20 +101,6 @@ Advanced ```backend/config/main.php```
     ],
 ```
 
-## Console config
-
-```php
-    'modules' => [
-        'db-manager' => [
-            'class' => 'bs\dbManager\Module',
-            // path to directory for the dumps
-            'path' => '@app/backups',
-            // list of registerd db-components
-            'dbList' => ['db'],
-        ],
-    ],
-```
-
 Make sure you create a writable directory named backup on app root directory.
 
 ## Usage
@@ -141,47 +109,8 @@ Pretty url's ```/db-manager```
 
 No pretty url's ```index.php?r=db-manager```
 
-## Console usage
-
-```-db``` - db component, default value: `db`
-
-```-gz``` - gzip archive
-
-```-s``` - file storage
-
-```-f``` - file name, default last dump
-
-Create dump
-
-```bash
-php yii dump/create
-php yii dump/create -db=db
-php yii dump/create -db=db -gz
-php yii dump/create -db=db -s
-php yii dump/create -db=db -gz -s
-```
-
-Restore dump
-
-```bash
-php yii dump/restore
-php yii dump/restore -db=db
-php yii dump/restore -db=db -s
-php yii dump/restore -db=db -f=dump.sql
-php yii dump/restore -db=db -s -f=dump.sql
-```
-
-Test database connection
-
-```bash
-php yii dump/test-connection
-php yii dump/test-connection -db=db
-```
-
 ## Changelog
 
-- [Flysystem support](https://github.com/creocoder/yii2-flysystem)
-- Console support
 - Multiple database management
 - Ability for customize dump and restore options; dump and restore processors
 - Ability for run operations asynchronously

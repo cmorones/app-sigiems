@@ -106,11 +106,10 @@ export function defineCommonLocaleTests(locale, options) {
     test('weekday parsing correctness', function (assert) {
         var i, m;
 
-        if (locale === 'tr' || locale === 'az' || locale === 'ro' || locale === 'mt') {
+        if (locale === 'tr' || locale === 'az' || locale === 'ro') {
             // tr, az: There is a lower-case letter (ı), that converted to
             // upper then lower changes to i
             // ro: there is the letter ț which behaves weird under IE8
-            // mt: letter Ħ
             expect(0);
             return;
         }
@@ -122,6 +121,7 @@ export function defineCommonLocaleTests(locale, options) {
             assert.equal(r.weekday(), m.weekday(), baseMsg + ' upper');
             r = moment(m.format(format).toLocaleLowerCase(), format);
             assert.equal(r.weekday(), m.weekday(), baseMsg + ' lower');
+
             r = moment(m.format(format), format, true);
             assert.equal(r.weekday(), m.weekday(), baseMsg + ' strict');
             r = moment(m.format(format).toLocaleUpperCase(), format, true);

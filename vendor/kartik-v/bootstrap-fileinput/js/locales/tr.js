@@ -24,7 +24,6 @@
         msgNo: 'Hayır',
         msgNoFilesSelected: '',
         msgCancelled: 'İptal edildi',
-        msgPlaceholder: 'Select {files}...',
         msgZoomModalHeading: 'Detaylı Önizleme',
         msgFileRequired: 'Yüklemek için bir dosya seçmelisiniz.',
         msgSizeTooSmall: '"{name}"(<b>{size} KB</b>) dosyası çok küçük  ve <b>{minSize} KB</b> boyutundan büyük olmalıdır.',
@@ -54,7 +53,6 @@
         msgUploadBegin: 'Başlıyor...',
         msgUploadEnd: 'Başarılı',
         msgUploadEmpty: 'Yüklemek için geçerli veri mevcut değil.',
-        msgUploadError: 'Error',
         msgValidationError: 'Doğrulama Hatası',
         msgLoading: 'Dosya yükleniyor {index} / {files} &hellip;',
         msgProgress: 'Dosya yükleniyor {index} / {files} - {name} - %{percent} tamamlandı.',
@@ -79,7 +77,6 @@
         fileActionSettings: {
             removeTitle: 'Dosyayı kaldır',
             uploadTitle: 'Dosyayı yükle',
-            uploadRetryTitle: 'Retry upload',
             zoomTitle: 'Ayrıntıları görüntüle',
             dragTitle: 'Taşı / Yeniden düzenle',
             indicatorNewTitle: 'Henüz yüklenmedi',

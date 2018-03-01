@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v6.0.7 (2018-02-16)
+ * @license Highcharts JS v5.0.12 (2017-05-24)
  *
  * (c) 2009-2017 Torstein Honsi
  *
@@ -20,10 +20,11 @@
          * License: www.highcharts.com/license
          */
         /**
-         * Highcharts module to place labels next to a series in a natural position.
+         * EXPERIMENTAL Highcharts module to place labels next to a series in a natural position.
          *
          * TODO:
          * - add column support (box collision detection, boxesToAvoid logic)
+         * - other series types, area etc.
          * - avoid data labels, when data labels above, show series label below.
          * - add more options (connector, format, formatter)
          * 
@@ -32,7 +33,6 @@
          * http://jsfiddle.net/highcharts/264Nm/
          * http://jsfiddle.net/highcharts/y5A37/
          */
-        /* eslint max-len: 0 */
 
 
         var labelDistance = 3,
@@ -40,92 +40,23 @@
             each = H.each,
             extend = H.extend,
             isNumber = H.isNumber,
-            pick = H.pick,
             Series = H.Series,
             SVGRenderer = H.SVGRenderer,
             Chart = H.Chart;
 
         H.setOptions({
-            /**
-             * @optionparent plotOptions
-             */
             plotOptions: {
                 series: {
-                    /**
-                     * Series labels are placed as close to the series as possible in a
-                     * natural way, seeking to avoid other series. The goal of this
-                     * feature is to make the chart more easily readable, like if a
-                     * human designer placed the labels in the optimal position.
-                     *
-                     * The series labels currently work with series types having a
-                     * `graph` or an `area`.
-                     *
-                     * Requires the `series-label.js` module.
-                     *
-                     * @sample highcharts/series-label/line-chart
-                     *         Line chart
-                     * @sample highcharts/demo/streamgraph
-                     *         Stream graph
-                     * @sample highcharts/series-label/stock-chart
-                     *         Stock chart
-                     * @since 6.0.0
-                     * @product highcharts highstock
-                     */
                     label: {
-                        /**
-                         * Enable the series label per series.
-                         */
                         enabled: true,
-                        /**
-                         * Allow labels to be placed distant to the graph if necessary,
-                         * and draw a connector line to the graph.
-                         */
+                        // Allow labels to be placed distant to the graph if necessary, and
+                        // draw a connector line to the graph
                         connectorAllowed: true,
-                        /**
-                         * If the label is closer than this to a neighbour graph, draw a
-                         * connector.
-                         */
-                        connectorNeighbourDistance: 24,
-                        /**
-                         * For area-like series, allow the font size to vary so that
-                         * small areas get a smaller font size. The default applies this
-                         * effect to area-like series but not line-like series.
-                         *
-                         * @type {Number}
-                         */
-                        minFontSize: null,
-                        /**
-                         * For area-like series, allow the font size to vary so that
-                         * small areas get a smaller font size. The default applies this
-                         * effect to area-like series but not line-like series.
-                         *
-                         * @type {Number}
-                         */
-                        maxFontSize: null,
-                        /**
-                         * Draw the label on the area of an area series. By default it
-                         * is drawn on the area. Set it to `false` to draw it next to
-                         * the graph instead.
-                         * 
-                         * @type {Boolean}
-                         */
-                        onArea: null,
-
-                        /**
-                         * Styles for the series label. The color defaults to the series
-                         * color, or a contrast color if `onArea`.
-                         */
-                        style: {
+                        connectorNeighbourDistance: 24, // If the label is closer than this to a neighbour graph, draw a connector
+                        styles: {
                             fontWeight: 'bold'
-                        },
-
-                        /**
-                         * An array of boxes to avoid when laying out the labels. Each 
-                         * item has a `left`, `right`, `top` and `bottom` property.
-                         *
-                         * @type {Array.<Object>}
-                         */
-                        boxesToAvoid: []
+                        }
+                        // boxesToAvoid: []
                     }
                 }
             }
@@ -153,8 +84,8 @@
         function boxIntersectLine(x, y, w, h, x1, y1, x2, y2) {
             return (
                 intersectLine(x, y, x + w, y, x1, y1, x2, y2) || // top of label
-                intersectLine(x + w, y, x + w, y + h, x1, y1, x2, y2) || // right
-                intersectLine(x, y + h, x + w, y + h, x1, y1, x2, y2) || // bottom
+                intersectLine(x + w, y, x + w, y + h, x1, y1, x2, y2) || // right of label
+                intersectLine(x, y + h, x + w, y + h, x1, y1, x2, y2) || // bottom of label
                 intersectLine(x, y, x, y + h, x1, y1, x2, y2) // left of label
             );
         }
@@ -207,11 +138,6 @@
          * interpolated positions.
          */
         Series.prototype.getPointsOnGraph = function() {
-
-            if (!this.xAxis && !this.yAxis) {
-                return;
-            }
-
             var distance = 16,
                 points = this.points,
                 point,
@@ -228,18 +154,12 @@
                 graph = this.graph || this.area,
                 node = graph.element,
                 inverted = this.chart.inverted,
-                xAxis = this.xAxis,
-                yAxis = this.yAxis,
-                paneLeft = inverted ? yAxis.pos : xAxis.pos,
-                paneTop = inverted ? xAxis.pos : yAxis.pos,
-                onArea = pick(this.options.label.onArea, !!this.area),
-                translatedThreshold = yAxis.getThreshold(this.options.threshold);
+                paneLeft = inverted ? this.yAxis.pos : this.xAxis.pos,
+                paneTop = inverted ? this.xAxis.pos : this.yAxis.pos;
 
-            // For splines, get the point at length (possible caveat: peaks are not
-            // correctly detected)
-            if (this.getPointSpline && node.getPointAtLength && !onArea) {
-                // If it is animating towards a path definition, use that briefly, and
-                // reset
+            // For splines, get the point at length (possible caveat: peaks are not correctly detected)
+            if (this.getPointSpline && node.getPointAtLength) {
+                // If it is animating towards a path definition, use that briefly, and reset
                 if (graph.toD) {
                     d = graph.attr('d');
                     graph.attr({
@@ -278,13 +198,6 @@
                     // Absolute coordinates so we can compare different panes
                     point.chartX = paneLeft + point.plotX;
                     point.chartY = paneTop + point.plotY;
-                    if (onArea) {
-                        // Vertically centered inside area
-                        point.chartCenterY = paneTop + (
-                            point.plotY +
-                            pick(point.yBottom, translatedThreshold)
-                        ) / 2;
-                    }
 
                     // Add interpolated points
                     if (i > 0) {
@@ -297,17 +210,10 @@
 
                             for (j = 1; j < n; j += 1) {
                                 interpolated.push({
-                                    chartX: last.chartX +
-                                        (point.chartX - last.chartX) * (j / n),
-                                    chartY: last.chartY +
-                                        (point.chartY - last.chartY) * (j / n),
-                                    chartCenterY: last.chartCenterY +
-                                        (point.chartCenterY - last.chartCenterY) *
-                                        (j / n),
-                                    plotX: last.plotX +
-                                        (point.plotX - last.plotX) * (j / n),
-                                    plotY: last.plotY +
-                                        (point.plotY - last.plotY) * (j / n)
+                                    chartX: last.chartX + (point.chartX - last.chartX) * (j / n),
+                                    chartY: last.chartY + (point.chartY - last.chartY) * (j / n),
+                                    plotX: last.plotX + (point.plotX - last.plotX) * (j / n),
+                                    plotY: last.plotY + (point.plotY - last.plotY) * (j / n)
                                 });
                             }
                         }
@@ -319,28 +225,7 @@
                     }
                 }
             }
-
-            // Get the bounding box so we can do a quick check first if the bounding
-            // boxes overlap.
-            /*
-            interpolated.bBox = node.getBBox();
-            interpolated.bBox.x += paneLeft;
-            interpolated.bBox.y += paneTop;
-            */
-
             return interpolated;
-        };
-
-        /**
-         * Overridable function to return series-specific font sizes for the labels. By
-         * default it returns bigger font sizes for series with the greater sum of y
-         * values.
-         */
-        Series.prototype.labelFontSize = function(minFontSize, maxFontSize) {
-            return minFontSize + (
-                (this.sum / this.chart.labelSeriesMaxSum) *
-                (maxFontSize - minFontSize)
-            ) + 'px';
         };
 
         /**
@@ -352,14 +237,12 @@
                 dist,
                 connectorPoint,
                 connectorEnabled = this.options.label.connectorAllowed,
-                onArea = pick(this.options.label.onArea, !!this.area),
+
                 chart = this.chart,
                 series,
                 points,
                 leastDistance = 16,
                 withinRange,
-                xDist,
-                yDist,
                 i,
                 j;
 
@@ -371,9 +254,9 @@
             }
 
             /**
-             * Get the weight in order to determine the ideal position. Larger distance
-             * to other series gives more weight. Smaller distance to the actual point
-             * (connector points only) gives more weight.
+             * Get the weight in order to determine the ideal position. Larger distance to
+             * other series gives more weight. Smaller distance to the actual point (connector points only)
+             * gives more weight.
              */
             function getWeight(distToOthersSquared, distToPointSquared) {
                 return distToOthersSquared - distToPointSquared;
@@ -391,99 +274,64 @@
                 }
             }
 
-            // For each position, check if the lines around the label intersect with any
-            // of the graphs.
+            // For each position, check if the lines around the label intersect with any of the 
+            // graphs
             for (i = 0; i < chart.series.length; i += 1) {
                 series = chart.series[i];
                 points = series.interpolatedPoints;
                 if (series.visible && points) {
                     for (j = 1; j < points.length; j += 1) {
-
-                        if (
-                            // To avoid processing, only check intersection if the X
-                            // values are close to the box.
-                            points[j].chartX >= x - leastDistance &&
-                            points[j - 1].chartX <= x + bBox.width + leastDistance
-                        ) {
-                            // If any of the box sides intersect with the line, return.
-                            if (boxIntersectLine(
-                                    x,
-                                    y,
-                                    bBox.width,
-                                    bBox.height,
-                                    points[j - 1].chartX,
-                                    points[j - 1].chartY,
-                                    points[j].chartX,
-                                    points[j].chartY
-                                )) {
-                                return false;
-                            }
-
-                            // But if it is too far away (a padded box doesn't
-                            // intersect), also return.
-                            if (this === series && !withinRange && checkDistance) {
-                                withinRange = boxIntersectLine(
-                                    x - leastDistance,
-                                    y - leastDistance,
-                                    bBox.width + 2 * leastDistance,
-                                    bBox.height + 2 * leastDistance,
-                                    points[j - 1].chartX,
-                                    points[j - 1].chartY,
-                                    points[j].chartX,
-                                    points[j].chartY
-                                );
-                            }
+                        // If any of the box sides intersect with the line, return
+                        if (boxIntersectLine(
+                                x,
+                                y,
+                                bBox.width,
+                                bBox.height,
+                                points[j - 1].chartX,
+                                points[j - 1].chartY,
+                                points[j].chartX,
+                                points[j].chartY
+                            )) {
+                            return false;
                         }
 
-                        // Find the squared distance from the center of the label. On
-                        // area series, avoid its own graph.
-                        if (
-                            (connectorEnabled || withinRange) &&
-                            (this !== series || onArea)
-                        ) {
-                            xDist = x + bBox.width / 2 - points[j].chartX;
-                            yDist = y + bBox.height / 2 - points[j].chartY;
+                        // But if it is too far away (a padded box doesn't intersect), also return
+                        if (this === series && !withinRange && checkDistance) {
+                            withinRange = boxIntersectLine(
+                                x - leastDistance,
+                                y - leastDistance,
+                                bBox.width + 2 * leastDistance,
+                                bBox.height + 2 * leastDistance,
+                                points[j - 1].chartX,
+                                points[j - 1].chartY,
+                                points[j].chartX,
+                                points[j].chartY
+                            );
+                        }
+
+                        // Find the squared distance from the center of the label
+                        if (this !== series) {
                             distToOthersSquared = Math.min(
                                 distToOthersSquared,
-                                xDist * xDist + yDist * yDist
+                                Math.pow(x + bBox.width / 2 - points[j].chartX, 2) + Math.pow(y + bBox.height / 2 - points[j].chartY, 2),
+                                Math.pow(x - points[j].chartX, 2) + Math.pow(y - points[j].chartY, 2),
+                                Math.pow(x + bBox.width - points[j].chartX, 2) + Math.pow(y - points[j].chartY, 2),
+                                Math.pow(x + bBox.width - points[j].chartX, 2) + Math.pow(y + bBox.height - points[j].chartY, 2),
+                                Math.pow(x - points[j].chartX, 2) + Math.pow(y + bBox.height - points[j].chartY, 2)
                             );
                         }
                     }
 
                     // Do we need a connector? 
-                    if (!onArea &&
-                        connectorEnabled &&
-                        this === series &&
-                        (
-                            (checkDistance && !withinRange) ||
-                            distToOthersSquared < Math.pow(
-                                this.options.label.connectorNeighbourDistance,
-                                2
-                            )
-                        )
-                    ) {
+                    if (connectorEnabled && this === series && ((checkDistance && !withinRange) ||
+                            distToOthersSquared < Math.pow(this.options.label.connectorNeighbourDistance, 2))) {
                         for (j = 1; j < points.length; j += 1) {
                             dist = Math.min(
-                                (
-                                    Math.pow(x + bBox.width / 2 - points[j].chartX, 2) +
-                                    Math.pow(y + bBox.height / 2 - points[j].chartY, 2)
-                                ),
-                                (
-                                    Math.pow(x - points[j].chartX, 2) +
-                                    Math.pow(y - points[j].chartY, 2)
-                                ),
-                                (
-                                    Math.pow(x + bBox.width - points[j].chartX, 2) +
-                                    Math.pow(y - points[j].chartY, 2)
-                                ),
-                                (
-                                    Math.pow(x + bBox.width - points[j].chartX, 2) +
-                                    Math.pow(y + bBox.height - points[j].chartY, 2)
-                                ),
-                                (
-                                    Math.pow(x - points[j].chartX, 2) +
-                                    Math.pow(y + bBox.height - points[j].chartY, 2)
-                                )
+                                Math.pow(x + bBox.width / 2 - points[j].chartX, 2) + Math.pow(y + bBox.height / 2 - points[j].chartY, 2),
+                                Math.pow(x - points[j].chartX, 2) + Math.pow(y - points[j].chartY, 2),
+                                Math.pow(x + bBox.width - points[j].chartX, 2) + Math.pow(y - points[j].chartY, 2),
+                                Math.pow(x + bBox.width - points[j].chartX, 2) + Math.pow(y + bBox.height - points[j].chartY, 2),
+                                Math.pow(x - points[j].chartX, 2) + Math.pow(y + bBox.height - points[j].chartY, 2)
                             );
                             if (dist < distToPointSquared) {
                                 distToPointSquared = dist;
@@ -498,10 +346,7 @@
             return !checkDistance || withinRange ? {
                 x: x,
                 y: y,
-                weight: getWeight(
-                    distToOthersSquared,
-                    connectorPoint ? distToPointSquared : 0
-                ),
+                weight: getWeight(distToOthersSquared, connectorPoint ? distToPointSquared : 0),
                 connectorPoint: connectorPoint
             } : false;
 
@@ -513,9 +358,6 @@
          * account when placing the labels.
          */
         Chart.prototype.drawSeriesLabels = function() {
-
-            // console.time('drawSeriesLabels');
-
             var chart = this,
                 labelSeries = this.labelSeries;
 
@@ -531,11 +373,6 @@
             });
 
             each(chart.series, function(series) {
-
-                if (!series.xAxis && !series.yAxis) {
-                    return;
-                }
-
                 var bBox,
                     x,
                     y,
@@ -543,46 +380,31 @@
                     clearPoint,
                     i,
                     best,
-                    labelOptions = series.options.label,
                     inverted = chart.inverted,
                     paneLeft = inverted ? series.yAxis.pos : series.xAxis.pos,
                     paneTop = inverted ? series.xAxis.pos : series.yAxis.pos,
                     paneWidth = chart.inverted ? series.yAxis.len : series.xAxis.len,
                     paneHeight = chart.inverted ? series.xAxis.len : series.yAxis.len,
                     points = series.interpolatedPoints,
-                    onArea = pick(labelOptions.onArea, !!series.area),
-                    label = series.labelBySeries,
-                    minFontSize = labelOptions.minFontSize,
-                    maxFontSize = labelOptions.maxFontSize;
+                    label = series.labelBySeries;
 
                 function insidePane(x, y, bBox) {
                     return x > paneLeft && x <= paneLeft + paneWidth - bBox.width &&
                         y >= paneTop && y <= paneTop + paneHeight - bBox.height;
                 }
 
-                if (series.visible && !series.isSeriesBoosting && points) {
+                if (series.visible && points) {
                     if (!label) {
                         series.labelBySeries = label = chart.renderer
                             .label(series.name, 0, -9999, 'connector')
                             .css(extend({
-                                color: onArea ?
-                                    chart.renderer.getContrast(series.color) : series.color
-                            }, series.options.label.style));
-
-                        // Adapt label sizes to the sum of the data
-                        if (minFontSize && maxFontSize) {
-                            label.css({
-                                fontSize: series.labelFontSize(minFontSize, maxFontSize)
-                            });
-                        }
-
-                        label
+                                color: series.color
+                            }, series.options.label.styles))
                             .attr({
                                 padding: 0,
-                                opacity: chart.renderer.forExport ? 1 : 0,
+                                opacity: 0,
                                 stroke: series.color,
-                                'stroke-width': 1,
-                                zIndex: 3
+                                'stroke-width': 1
                             })
                             .add(series.group)
                             .animate({
@@ -599,85 +421,66 @@
                     // of chart
                     for (i = points.length - 1; i > 0; i -= 1) {
 
-                        if (onArea) {
-
-                            // Centered
-                            x = points[i].chartX - bBox.width / 2;
-                            y = points[i].chartCenterY - bBox.height / 2;
-                            if (insidePane(x, y, bBox)) {
-                                best = series.checkClearPoint(
-                                    x,
-                                    y,
-                                    bBox
-                                );
-                            }
-                            if (best) {
-                                results.push(best);
-                            }
-
-
-                        } else {
-
-                            // Right - up
-                            x = points[i].chartX + labelDistance;
-                            y = points[i].chartY - bBox.height - labelDistance;
-                            if (insidePane(x, y, bBox)) {
-                                best = series.checkClearPoint(
-                                    x,
-                                    y,
-                                    bBox
-                                );
-                            }
-                            if (best) {
-                                results.push(best);
-                            }
-
-                            // Right - down
-                            x = points[i].chartX + labelDistance;
-                            y = points[i].chartY + labelDistance;
-                            if (insidePane(x, y, bBox)) {
-                                best = series.checkClearPoint(
-                                    x,
-                                    y,
-                                    bBox
-                                );
-                            }
-                            if (best) {
-                                results.push(best);
-                            }
-
-                            // Left - down
-                            x = points[i].chartX - bBox.width - labelDistance;
-                            y = points[i].chartY + labelDistance;
-                            if (insidePane(x, y, bBox)) {
-                                best = series.checkClearPoint(
-                                    x,
-                                    y,
-                                    bBox
-                                );
-                            }
-                            if (best) {
-                                results.push(best);
-                            }
-
-                            // Left - up
-                            x = points[i].chartX - bBox.width - labelDistance;
-                            y = points[i].chartY - bBox.height - labelDistance;
-                            if (insidePane(x, y, bBox)) {
-                                best = series.checkClearPoint(
-                                    x,
-                                    y,
-                                    bBox
-                                );
-                            }
-                            if (best) {
-                                results.push(best);
-                            }
+                        // Right - up
+                        x = points[i].chartX + labelDistance;
+                        y = points[i].chartY - bBox.height - labelDistance;
+                        if (insidePane(x, y, bBox)) {
+                            best = series.checkClearPoint(
+                                x,
+                                y,
+                                bBox
+                            );
                         }
+                        if (best) {
+                            results.push(best);
+                        }
+
+                        // Right - down
+                        x = points[i].chartX + labelDistance;
+                        y = points[i].chartY + labelDistance;
+                        if (insidePane(x, y, bBox)) {
+                            best = series.checkClearPoint(
+                                x,
+                                y,
+                                bBox
+                            );
+                        }
+                        if (best) {
+                            results.push(best);
+                        }
+
+                        // Left - down
+                        x = points[i].chartX - bBox.width - labelDistance;
+                        y = points[i].chartY + labelDistance;
+                        if (insidePane(x, y, bBox)) {
+                            best = series.checkClearPoint(
+                                x,
+                                y,
+                                bBox
+                            );
+                        }
+                        if (best) {
+                            results.push(best);
+                        }
+
+                        // Left - up
+                        x = points[i].chartX - bBox.width - labelDistance;
+                        y = points[i].chartY - bBox.height - labelDistance;
+                        if (insidePane(x, y, bBox)) {
+                            best = series.checkClearPoint(
+                                x,
+                                y,
+                                bBox
+                            );
+                        }
+                        if (best) {
+                            results.push(best);
+                        }
+
                     }
 
                     // Brute force, try all positions on the chart in a 16x16 grid
-                    if (!results.length && !onArea) {
+                    if (!results.length) {
                         for (x = paneLeft + paneWidth - bBox.width; x >= paneLeft; x -= 16) {
                             for (y = paneTop; y < paneTop + paneHeight - bBox.height; y += 16) {
                                 clearPoint = series.checkClearPoint(x, y, bBox, true);
@@ -704,39 +507,19 @@
                         });
 
                         // Move it if needed
-                        var dist = Math.sqrt(
-                            Math.pow(Math.abs(best.x - label.x), 2),
-                            Math.pow(Math.abs(best.y - label.y), 2)
-                        );
-
-                        if (dist) {
-
-                            // Move fast and fade in - pure animation movement is 
-                            // distractive...
-                            var attr = {
-                                    opacity: chart.renderer.forExport ? 1 : 0,
-                                    x: best.x - paneLeft,
-                                    y: best.y - paneTop
-                                },
-                                anim = {
-                                    opacity: 1
-                                };
-                            // ... unless we're just moving a short distance
-                            if (dist <= 10) {
-                                anim = {
-                                    x: attr.x,
-                                    y: attr.y
-                                };
-                                attr = {};
-                            }
+                        if (Math.round(best.x) !== Math.round(label.x) ||
+                            Math.round(best.y) !== Math.round(label.y)) {
                             series.labelBySeries
-                                .attr(extend(attr, {
-                                    anchorX: best.connectorPoint &&
-                                        best.connectorPoint.plotX,
-                                    anchorY: best.connectorPoint &&
-                                        best.connectorPoint.plotY
-                                }))
-                                .animate(anim);
+                                .attr({
+                                    opacity: 0,
+                                    x: best.x - paneLeft,
+                                    y: best.y - paneTop,
+                                    anchorX: best.connectorPoint && best.connectorPoint.plotX,
+                                    anchorY: best.connectorPoint && best.connectorPoint.plotY
+                                })
+                                .animate({
+                                    opacity: 1
+                                });
 
                             // Record closest point to stick to for sync redraw
                             series.options.kdNow = true;
@@ -758,7 +541,6 @@
                     }
                 }
             });
-            // console.timeEnd('drawSeriesLabels');
         };
 
         /**
@@ -776,7 +558,6 @@
             proceed.apply(chart, [].slice.call(arguments, 1));
 
             chart.labelSeries = [];
-            chart.labelSeriesMaxSum = 0;
 
             clearTimeout(chart.seriesLabelTimer);
 
@@ -786,23 +567,8 @@
                     label = series.labelBySeries,
                     closest = label && label.closest;
 
-                if (
-                    options.enabled &&
-                    series.visible &&
-                    (series.graph || series.area) &&
-                    !series.isSeriesBoosting
-                ) {
+                if (options.enabled && series.visible && (series.graph || series.area)) {
                     chart.labelSeries.push(series);
-
-                    if (options.minFontSize && options.maxFontSize) {
-                        series.sum = H.reduce(series.yData, function(pv, cv) {
-                            return (pv || 0) + (cv || 0);
-                        }, 0);
-                        chart.labelSeriesMaxSum = Math.max(
-                            chart.labelSeriesMaxSum,
-                            series.sum
-                        );
-                    }
 
                     // The labels are processing heavy, wait until the animation is done
                     if (initial) {
@@ -828,9 +594,9 @@
                 }
             });
 
-            chart.seriesLabelTimer = H.syncTimeout(function() {
+            chart.seriesLabelTimer = setTimeout(function() {
                 chart.drawSeriesLabels();
-            }, chart.renderer.forExport ? 0 : delay);
+            }, delay);
 
         }
         wrap(Chart.prototype, 'render', drawLabels);
