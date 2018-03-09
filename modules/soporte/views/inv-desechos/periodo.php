@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
         <p>
         <? 
-         if(Yii::$app->user->can("JUD")){
+         if(Yii::$app->user->can("add-desecho")){
         echo  Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Desecho', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']); }?>
     </p>
 </div>
