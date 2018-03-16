@@ -71,6 +71,7 @@ class ConsumiblesController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->status = 1;
+            $model->id_area =Yii::$app->user->identity->perfil;
 
               if (!$model->save()) {
                 echo "<pre>";

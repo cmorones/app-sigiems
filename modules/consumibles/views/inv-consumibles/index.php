@@ -19,16 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="row">
  <div class="col-lg-4 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
 
-  <div class="col-lg-4 right-padding">
- 
-      <?= Html::a(Yii::t('app', 'PDF'), ['/export-data/export-to-pdf', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-info', 'target'=>'_blank']) ?>
 
-  </div>
-  <div class="col-lg-4 right-padding">
- 
-      <?= Html::a(Yii::t('app', 'EXCEL'), ['/export-data/export-excel', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-primary', 'target'=>'_blank']) ?>
-
-  </div>
   </div>
   </div>
                             <div class="panel-body">
@@ -54,6 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute'=>'Inicial',
               'format' => 'raw',
+              'contentOptions' => ['class' => 'text-right'],
+              'headerOptions' => ['class' => 'text-right'],
               'value' => function ($data)
     {
  
@@ -97,6 +90,8 @@ $inventario = \Yii::$app->db->createCommand($sql)->queryOne();
             [
               'attribute'=>'entradas',
               'format' => 'raw',
+              'contentOptions' => ['class' => 'text-right'],
+              'headerOptions' => ['class' => 'text-right'],
               'value' => function ($data)
     {
  
@@ -106,6 +101,30 @@ FROM
   cons_entradas
 WHERE
   estado=1 and id_consumible=".$data->id_consumible."";
+
+
+
+$inventario = \Yii::$app->db->createCommand($sql)->queryOne();
+
+    return intval($inventario['cant']);
+    },
+              //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+
+             [
+              'attribute'=>'salidas',
+              'format' => 'raw',
+              'contentOptions' => ['class' => 'text-right'],
+              'headerOptions' => ['class' => 'text-right'],
+              'value' => function ($data)
+    {
+ 
+ $sql = "SELECT 
+  sum(cantidad) as cant 
+FROM 
+  cons_detalle
+WHERE
+  estado=1 and id_cons=".$data->id_consumible."";
 
 
 
@@ -136,7 +155,11 @@ $inventario = \Yii::$app->db->createCommand($sql)->queryOne();
     },
               //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
             ],*/
-            'existencia',
+             [
+              'attribute'=>'existencia',
+              'contentOptions' => ['class' => 'text-right'],
+              'headerOptions' => ['class' => 'text-right'],
+            ],
            // 'created_at',
 
             // 'created_by',

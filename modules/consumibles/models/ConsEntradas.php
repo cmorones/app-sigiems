@@ -37,7 +37,7 @@ class ConsEntradas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_consumible', 'cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id_consumible', 'cantidad', 'estado', 'created_by', 'updated_by', 'id_area'], 'integer'],
             [['fecha', 'created_at', 'updated_at'], 'safe'],
             [['observaciones'], 'string'],
             [['created_at', 'created_by'], 'required'],
@@ -53,7 +53,7 @@ class ConsEntradas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_consumible' => 'Id Consumible',
+            'id_consumible' => 'Consumible',
             'fecha' => 'Fecha',
             'cantidad' => 'Cantidad',
             'observaciones' => 'Observaciones',
@@ -62,6 +62,7 @@ class ConsEntradas extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'id_area' => 'Area',
         ];
     }
 
@@ -79,5 +80,10 @@ class ConsEntradas extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
+    }
+
+     public function getDatos()
+    {
+        return $this->hasOne(Consumibles::className(),['id'=>'id_consumible']);
     }
 }

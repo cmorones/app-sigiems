@@ -35,7 +35,7 @@ class InvConsumibles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_consumible', 'id_ubicacion', 'existencia', 'created_by', 'updated_by'], 'integer'],
+            [['id_consumible', 'id_ubicacion', 'existencia', 'created_by', 'updated_by', 'id_area'], 'integer'],
             [['created_at', 'created_by'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -57,6 +57,7 @@ class InvConsumibles extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+              'id_area' => 'Area',
         ];
     }
 

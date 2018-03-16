@@ -18,7 +18,7 @@ class ConsumiblesSearch extends Consumibles
     public function rules()
     {
         return [
-            [['id', 'id_medida',  'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'id_medida',  'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by', 'id_area'], 'integer'],
             [['nombre', 'detalle', 'imagen', 'created_at', 'updated_at'], 'safe'],
             [['precio'], 'number'],
         ];
@@ -48,6 +48,8 @@ class ConsumiblesSearch extends Consumibles
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             'pagination'=> ['pageSize'=>100],
+     
         ]);
 
         $this->load($params);
@@ -58,6 +60,7 @@ class ConsumiblesSearch extends Consumibles
             return $dataProvider;
         }
 
+ $perfil = Yii::$app->user->identity->perfil;
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -71,6 +74,7 @@ class ConsumiblesSearch extends Consumibles
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'id_area' => $perfil,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

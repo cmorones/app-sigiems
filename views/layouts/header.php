@@ -202,7 +202,7 @@ Yii::$app->name = "APP-SIGIEMS";
             <div class="menu-box">
                 <ul>
                       <  <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Conumibles</a></li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> Consumibles</a></li>
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Agregar Consumibles',['/consumibles/consumibles'])?>
                         </li>
@@ -216,7 +216,11 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Salidas Consumibles',['/consumibles/inv-consumibles'])?>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i>Agregar  Salidas Consumibles',['/consumibles/cons-salidas'])?>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Salidas Consumibles',['/consumibles/cons-salidas/salidas'])?>
                         </li>
               
                 </ul>

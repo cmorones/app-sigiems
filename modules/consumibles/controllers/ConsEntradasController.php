@@ -7,10 +7,12 @@ use app\modules\consumibles\models\ConsEntradas;
 use app\modules\consumibles\models\Consumibles;
 use app\modules\consumibles\models\ConsEntradasSearch;
 use app\modules\consumibles\models\InvConsumibles;
+use app\modules\consumibles\models\InvBitacora;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 /**
  * ConsEntradasController implements the CRUD actions for ConsEntradas model.
@@ -73,6 +75,7 @@ class ConsEntradasController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->estado=1;
+            $model->id_area =Yii::$app->user->identity->perfil;
 
              if (!$model->save()) {
                 echo "<pre>";
@@ -93,6 +96,17 @@ class ConsEntradasController extends Controller
                 $entrada->created_at = new Expression('NOW()');
                 $entrada->save();
 
+                $json = Json::encode($entrada);
+
+            $bitacora = new InvBitacora();
+            $bitacora->id_accion =1;
+            $bitacora->id_tabla =1;
+            $bitacora->contenido =$json;
+            $bitacora->id_area =Yii::$app->user->identity->perfil;
+            $bitacora->created_by=Yii::$app->user->identity->user_id;
+            $bitacora->created_at = new Expression('NOW()');
+            $bitacora->save();
+
             }elseif ($intprod > 0) {
                 
                 $existencia = \Yii::$app->db ->createCommand("SELECT 
@@ -105,11 +119,41 @@ class ConsEntradasController extends Controller
                 $addsum = intval($existencia['suma']);
                 
                 $table = InvConsumibles::find()->where(['id_consumible'=>$model->id_consumible])->one();
-               //  $table->existencia = $addsum + $model->cantidad;
-                // $table->save();
+                $table->existencia = $addsum + $model->cantidad;
+                $table->save();
+
+        $total = $addsum + $model->cantidad;
+              $data = [
+                   'existencia_anterior' => $addsum,
+                   'existencia_nueva' => $total,
+                ];
+
+             $json3 = Json::encode($data);
+
+            $bitacora2 = new InvBitacora();
+            $bitacora2->id_accion =3;
+            $bitacora2->id_tabla =1;
+            $bitacora2->contenido =$json3;
+            $bitacora2->id_area =Yii::$app->user->identity->perfil;
+            $bitacora2->created_by=Yii::$app->user->identity->user_id;
+            $bitacora2->created_at = new Expression('NOW()');
+            $bitacora2->save();
                          
                 
             }
+
+
+            $json2 = Json::encode($model);
+
+            $bitacora1 = new InvBitacora();
+            $bitacora1->id_accion =1;
+            $bitacora1->id_tabla =3;
+            $bitacora1->contenido =$json2;
+            $bitacora1->id_area =Yii::$app->user->identity->perfil;
+            $bitacora1->created_by=Yii::$app->user->identity->user_id;
+            $bitacora1->created_at = new Expression('NOW()');
+            $bitacora1->save();
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [

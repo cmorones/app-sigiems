@@ -7,9 +7,9 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use app\modules\consumibles\models\Consumibles;
 
+ $id_area =Yii::$app->user->identity->perfil;
 
-
-$data = ArrayHelper::map(Consumibles::find()->all(),'id', 'nombre');
+$data = ArrayHelper::map(Consumibles::find()->where(['id_area'=>$id_area])->all(),'id', 'nombre');
 
 
 /* @var $this yii\web\View */

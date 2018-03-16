@@ -18,7 +18,7 @@ class ConsEntradasSearch extends ConsEntradas
     public function rules()
     {
         return [
-            [['id', 'id_consumible', 'cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'id_consumible', 'cantidad', 'estado', 'created_by', 'updated_by', 'id_area'], 'integer'],
             [['fecha', 'observaciones', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -47,6 +47,7 @@ class ConsEntradasSearch extends ConsEntradas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination'=> ['pageSize'=>100],
         ]);
 
         $this->load($params);
@@ -56,6 +57,8 @@ class ConsEntradasSearch extends ConsEntradas
             // $query->where('0=1');
             return $dataProvider;
         }
+
+        $perfil = Yii::$app->user->identity->perfil;
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -68,6 +71,7 @@ class ConsEntradasSearch extends ConsEntradas
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'id_area' => $perfil,
         ]);
 
         $query->andFilterWhere(['like', 'observaciones', $this->observaciones]);

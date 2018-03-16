@@ -19,7 +19,7 @@ class InvConsumiblesSearch extends InvConsumibles
     public function rules()
     {
         return [
-            [['id', 'id_consumible', 'id_ubicacion',  'created_by', 'updated_by'], 'integer'],
+            [['id', 'id_consumible', 'id_ubicacion',  'created_by', 'updated_by', 'id_area'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -48,6 +48,7 @@ class InvConsumiblesSearch extends InvConsumibles
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             'pagination'=> ['pageSize'=>100],
         ]);
 
         $this->load($params);
@@ -57,6 +58,9 @@ class InvConsumiblesSearch extends InvConsumibles
             // $query->where('0=1');
             return $dataProvider;
         }
+
+         $perfil = Yii::$app->user->identity->perfil;
+ 
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -68,6 +72,7 @@ class InvConsumiblesSearch extends InvConsumibles
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+             'id_area' => $perfil,
         ]);
 
     $session = Yii::$app->session;

@@ -39,7 +39,7 @@ class Consumibles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_medida', 'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by'], 'integer'],
+            [['id_medida', 'existencia_min', 'id_area','existencia_max','status', 'created_by', 'updated_by', 'id_area'], 'integer'],
             [['nombre', 'detalle', 'imagen'], 'string'],
             [['precio'], 'number'],
             [['created_at', 'created_by'], 'required'],
@@ -69,6 +69,7 @@ class Consumibles extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+             'id_area' => 'Area',
         ];
     }
 
@@ -91,5 +92,10 @@ class Consumibles extends \yii\db\ActiveRecord
      public function getCatMedidas()
     {
         return $this->hasOne(CatMedidas::className(),['id'=>'id_medida']);
+    }
+
+    function getInfoProductBy($id){
+        $data = Consumibles::find()->asArray()->where(['id'=>$id])->one();
+        return $data;
     }
 }

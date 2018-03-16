@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@bower/iems-lte';
     public $css = [
         'css/style.css',
+        'assets/plugins/sweetalert/dist/sweetalert.css',
         /*'assets/css/bootstrap.min.css',
         'assets/css/core.css',
         'assets/css/icons.css',
@@ -42,6 +43,13 @@ class AppAsset extends AssetBundle
        '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js',
         '//fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.js',
         '//fullcalendar.io/js/fullcalendar-3.4.0/locale-all.js',
+        'assets/plugins/sweetalert/dist/sweetalert.min.js',
+        'assets/pages/jquery.sweet-alert.init.js',
+        /*
+         <script src="assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="assets/pages/jquery.sweet-alert.init.js"></script>
+
+        */
        // 'assets/js/jquery.min.js',
         /*'assets/js/bootstrap.min.js',
         'assets/js/detect.js',

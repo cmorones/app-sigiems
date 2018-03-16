@@ -88,7 +88,140 @@ if (Yii::$app->controller->action->id === 'login') {
                     time: 1200
                 });
             });
+
+
+            function itemDown(id){
+                quantity = parseInt($("#quantity_"+id).val())-1;
+                $("#quantity_"+id).val(quantity);
+                updateCart(id,quantity);
+                swal("Producto!", "Producto Eliminado del carrito!", "error");
+            }
+
+             function itemUp(id){
+                 quantity = parseInt($("#quantity_"+id).val())+1;
+                $("#quantity_"+id).val(quantity);
+                updateCart(id,quantity);
+                swal("Producto!", "Producto Agregado al carrito!", "success");
+            }
+
+             function descuento(tipo){
+                
+                updateDescuento(tipo);
+                if(tipo==1){
+                    des = "Pubico en General";
+                }
+                 if(tipo==2){
+                    des = "Comunidad UNAM 50%";
+                }
+                  if(tipo==3){
+                    des = "Proveedorees 70%";
+                }
+                  if(tipo==4){
+                    des = "Donativo  100%";
+                }
+                  if(tipo==5){
+                    des = "Producto Dañado 100%";
+                }
+
+                
+
+                swal("Producto!", "Descuento Aplicado "+des , "success");
+            }
+
+            function deleteItem(id){
+
+
+                updateCart(id,0);
+                swal("Producto!", "Producto Eliminado del carrito!", "error");
+            }
+
+             function updateDescuento(tipo){
+
+                 $.get('<?= Yii::$app->homeUrl ?>/consumibles/shopping-cart/descuento', {'tipo': tipo}, function(data){
+
+                    $("#content").html(data);
+
+          
+          });
+
+            }
+
+            function updateCart(id,quantity){
+
+                 $.get('<?= Yii::$app->homeUrl ?>/consumibles/shopping-cart/add2', {'id': id, 'quantity': quantity}, function(data){
+
+                    $("#content").html(data);
+
+          
+          });
+
+            }
+
+             function delItem(id,id_salida,cantidad){
+
+            if(confirm('Estas seguro de eliminar?')){
+
+            $.get('<?= Yii::$app->homeUrl ?>/consumibles/cons-detalle/borrar', {'id': id, 'id_salida': id_salida, 'cantidad': cantidad}, function(data){
+            swal("Consumible!", "Consumible Eliminado!", "success");
+
+          });
+
+             }else{
+                return false;
+             }
+
+          
+      
+
+            }
+
+
+
+            function addCart(id, existencia, cantidad){
+
+             // alert('#cantidad_'+id);
+          if(($('#cantidad_'+id).text() == "" || cantidad == 0)){
+             swal("Consumible!", "La cantidad no puede estar vacia!", "error");
+             
+           }
+            if(cantidad > existencia)
+                {
+                     swal("Consumible!", "La cantidad no puede ser mayor a las existencias!", "error");
+
+                }
+                else{
+
+               
+  
+           $.get('<?= Yii::$app->homeUrl ?>/consumibles/shopping-cart/add', {'id': id, 'cantidad': cantidad}, function(data){
+            swal("Consumible!", "Consumible Agregado al carrito!", "success");
+          });
+       }
+
+    
+            }
+
+
+$(function(){
+ $('#modalButton').click(function(){
+  $('#modal').modal('show')
+   .find('#modalContent')
+   .load($(this).attr('value'));
+ });
+});
+
+
+  $(document).ready(function () {
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {
+    if (console && console.log) {
+        console.log("patched");
+    }
+};
+});
+
+
         </script>
+     
     </html>
     <?php $this->endPage() ?>
 <?php } ?>

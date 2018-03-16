@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $model app\modules\consumibles\models\Consumibles */
 /* @var $form yii\widgets\ActiveForm */
 
-$areas = [ 1=>'Soporte Técnico', 2=>'Telecomunicaciones'];
+
 ?>
 
 <div class="consumibles-form">
@@ -30,8 +30,6 @@ $areas = [ 1=>'Soporte Técnico', 2=>'Telecomunicaciones'];
     <?= $form->field($model, 'existencia_min')->textInput() ?>
 
     <?= $form->field($model, 'existencia_max')->textInput() ?>
-
-    <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'tipo'] ] )->dropDownList($areas,['prompt'=>Yii::t('app', '--- Selecciona medida ---')]); ?>
 
   
     <div class="form-group">
