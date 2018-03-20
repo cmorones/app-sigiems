@@ -112,6 +112,19 @@ tr:nth-child(even) {
 
 </style>
 
+<?php 
+
+if ($model->id_area_origen == 3) {
+  # code...
+  $area_origen = "Soporte Tecnico";
+}elseif ($model->id_area_origen == 4) {
+ $area_origen = "Telecomunicaciones";
+}
+ ?>
+
+
+
+
 
 
 
@@ -141,7 +154,7 @@ tr:nth-child(even) {
                 <td class="fondo"><b>Plantel Origen:</b></td><td><?=$model->catPlanteles->nombre?></td>
                </tr>
                <tr >
-                <td class="fondo"><b>Area Origen:</b></td><td><?=$model->catPlanteles->nombre?></td>
+                <td class="fondo"><b>Area Origen:</b></td><td><?=$area_origen?></td>
                </tr>
                <tr >
                 <td class="fondo"><b>Plantel Destino:</b></td><td><?=$model->catPlanteles2->nombre?></td>
