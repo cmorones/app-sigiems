@@ -256,7 +256,7 @@ class ConsSalidasController extends Controller
 
       public function ultimoFolio($id_plantel, $area_origen){
 
-            $folio = \Yii::$app->db->createCommand("SELECT max(cons_salidas.id) as lastfolio
+            $folio = \Yii::$app->db->createCommand("SELECT max(cons_salidas.folio) as lastfolio
             FROM cons_salidas   WHERE id_plantel_origen=$id_plantel and id_area_origen = $area_origen and estado=1")->queryOne();
 
             if ($folio['lastfolio'] !=0 ){
