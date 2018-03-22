@@ -4,6 +4,7 @@ namespace app\modules\consumibles\controllers;
 
 use Yii;
 use app\modules\consumibles\models\InvConsumibles;
+use app\modules\consumibles\models\ConsEntradas;
 use app\modules\consumibles\models\InvConsumiblesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -41,6 +42,17 @@ class InvConsumiblesController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+     public function actionInforme()
+    {
+        $area = Yii::$app->user->identity->perfil;
+        $model = InvConsumibles::find()->where(['id_area'=>$area])->all();
+
+        return $this->render('informe', [
+            'model' => $model,
+           
         ]);
     }
 
