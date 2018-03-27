@@ -48,6 +48,55 @@ use yii\helpers\ArrayHelper;
             'procesador',
             'ram',
             'disco_duro',
+               [
+              'attribute'=>'id_area',
+              'value' => 'catAreas.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+
+             [
+              'attribute'=>'id_piso',
+              'value' => 'catPisos.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPisos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+            [
+      //  'label' => 'Created At',
+        'attribute' => 'resguardante',
+        'value' => function ($data) {
+
+  $sql = "SELECT 
+  bienes_muebles.clave_cabms, 
+  bienes_muebles.progresivo, 
+  bienes_muebles.marca, 
+  bienes_muebles.modelo, 
+  bienes_muebles.serie, 
+  resguardos.id_bien_mueble, 
+  personal.nombre_empleado, 
+  personal.apellidos_empleado, 
+  personal.rfc,
+  bienes_muebles.fecha_alta,
+  situacion_bienes.descripcion 
+FROM 
+  public.bienes_muebles, 
+  public.resguardos, 
+  public.personal,
+  public.situacion_bienes
+WHERE
+  (bienes_muebles.clave_cabms = '5151000138') and 
+  bienes_muebles.progresivo = $data->progresivo and
+  bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
+  resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
+  personal.id_empleado = resguardos.id_personal";
+$inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
+
+$resguardante = $inventario['nombre_empleado']." ".$inventario['apellidos_empleado'];
+
+
+        return $resguardante;
+      },
+        'visible'=>$dispColumn,
+            ],
+
 	   /* [
 	    //  'label' => 'Created At',
 	      'attribute' => 'created_at',

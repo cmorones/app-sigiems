@@ -128,6 +128,8 @@ class InvEquiposSearch extends InvEquipos
             return $dataProvider;
         }
 
+         $id_p = Yii::$app->user->identity->id_plantel;
+
       //  $id_p = Yii::$app->user->identity->id_plantel;
         // grid filtering conditions
         $query->andFilterWhere([
@@ -137,7 +139,7 @@ class InvEquiposSearch extends InvEquipos
             'marca' => $this->marca,
             'modelo' => $this->modelo,
             'estado' => $this->estado,
-            'id_plantel' => $this->id_plantel,
+            'id_plantel' => $id_p,
             'id_area' => $this->id_area,
             'id_piso' => $this->id_piso,
             'clasif' => $this->clasif,
