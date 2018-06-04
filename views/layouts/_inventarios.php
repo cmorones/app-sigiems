@@ -85,15 +85,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         </li>
 
                       
-                         <?php
-                          
-
-
-
-                        }
-                         
-                        ?>
-
+                       
 
                     </ul>
                 </div>
@@ -266,6 +258,16 @@ Yii::$app->name = "APP-SIGIEMS";
             }
 
             ?>
+
+              <?php
+                          
+
+
+
+                        }
+                         
+                        ?>
+
 
 
 
