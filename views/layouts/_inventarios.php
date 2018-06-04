@@ -27,10 +27,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         <li>
                             <a href="#"><i class="fa fa-graduation-cap"></i> Inventario IEMS</a>
                         </li>
-                         <?php  
-                        if(Yii::$app->user->can('mesaAyuda')) {
-                         ?>
-                        
+                       
                       
 
                         
@@ -42,15 +39,6 @@ Yii::$app->name = "APP-SIGIEMS";
 
                     
 
-                       
-                         <?php
-                          
-
-
-
-                        }
-                         
-                        ?>
 
 
                     </ul>
