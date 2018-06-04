@@ -37,6 +37,15 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos en RED',['/soporte/inv-equipos/index']) ?>
                         </li>
 
+                       <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario CAMBS telecom',['/soporte/inv-equipos-telecom/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Revision de  Equipos Telecom',['/petic/default/revtelecom'])?>
+                        </li>
+
+
                     
 
 
