@@ -31,10 +31,7 @@ Yii::$app->name = "APP-SIGIEMS";
                         if(Yii::$app->user->can('mesaAyuda')) {
                          ?>
                         
-                        <?php
-                       
-                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
-                        ?>
+                      
 
                         
                        
@@ -47,7 +44,7 @@ Yii::$app->name = "APP-SIGIEMS";
 
                        
                          <?php
-                            }
+                          
 
 
 
