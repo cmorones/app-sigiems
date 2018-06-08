@@ -1,5 +1,6 @@
-movimientos/
 config/
+config/db.php
+movimientos/
 assets/
 runtime/
 pdfprestamos/
