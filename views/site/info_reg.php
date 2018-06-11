@@ -24,7 +24,7 @@ $count1 = \Yii::$app->db3->createCommand("SELECT COUNT(*) FROM aspirantes")->que
             <div class="inner">
               <h3><? echo $count1 ?></h3>
 
-              <p>Aspirantes registrados 2017</p>
+              <p>Aspirantes registrados 2018</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
