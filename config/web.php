@@ -182,7 +182,10 @@ $config = [
         ],
          'consumibles' => [
             'class' => 'app\modules\consumibles\ConsumiblesModule',
-        ],        
+        ], 
+        'telecom' => [
+            'class' => 'app\modules\telecom\telecomModule',
+        ],       
         'rights' => [
         'class' => 'mdm\admin\Module',
         'controllerMap' => [

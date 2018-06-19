@@ -49,6 +49,9 @@ class ConsSalidas extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $file;
+ 
     public static function tableName()
     {
         return 'cons_salidas';
@@ -63,6 +66,7 @@ class ConsSalidas extends \yii\db\ActiveRecord
             [['folio', 'id_plantel_origen', 'id_area_origen', 'id_plantel_destino', 'id_area_destino', 'suministro', 'prestamo', 'salida', 'equipo', 'refaccion', 'material', 'tipo_manto', 'actualizacion', 'distribucion', 'garantia', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['sfolio', 'condiciones', 'observaciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
             [['total'], 'number'],
+            [['file'], 'file', 'on'=>'updoc'],
             [['fecha_reg', 'created_at', 'updated_at'], 'safe'],
             [['created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -106,6 +110,7 @@ class ConsSalidas extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'file'=> 'Subir Archivo',
         ];
     }
 

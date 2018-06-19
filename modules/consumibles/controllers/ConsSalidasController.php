@@ -26,9 +26,20 @@ class ConsSalidasController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+        public function behaviors()
     {
         return [
+               'access' => [
+                'class' => AccessControl::className(),
+               // 'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','docto','pdf'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -37,6 +48,7 @@ class ConsSalidasController extends Controller
             ],
         ];
     }
+
 
     /**
      * Lists all ConsSalidas models.
@@ -184,6 +196,39 @@ class ConsSalidasController extends Controller
         }
     }
 
+       public function actionDocto($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = 'updoc';
+
+       
+   //     $model2 = InvBajas::findOne($idb);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+        
+        $model->file = UploadedFile::getInstance($model,'file');
+        $model->file->saveAs('refacciones_doctos/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+        $model->estado=2;
+        $model->updated_by=@Yii::$app->user->identity->user_id;
+        $model->updated_at = new Expression('NOW()');    
+       if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+            }
+            return $this->redirect(['/consumibles/cons-salidas/salidas']);
+         
+
+        } else {
+            return $this->render('docto', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+
     /**
      * Updates an existing ConsSalidas model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -311,4 +356,17 @@ class ConsSalidasController extends Controller
           
             ]);
     }
+
+
+
+     public function actionPdf($id) {
+    $model = $this->findModel($id);
+
+    // This will need to be the path relative to the root of your app.
+    $filePath = '/refacciones_doctos';
+    // Might need to change '@app' for another alias
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->docto);
+
+    return Yii::$app->response->sendFile($completePath, $model->docto);
+}
 }

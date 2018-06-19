@@ -360,17 +360,35 @@ Yii::$app->name = "APP-SIGIEMS";
         </div>
         <div class="row">
             <!-- Menu Dirección de Informática y Telecomunicaciones --> 
-            <?php  
-              if(Yii::$app->user->can('menuAdmin')) {
-            ?>
+          
             <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="menu-box">
                     <ul>
+
+
+        <?php  
+            if(Yii::$app->user->can('modTelecom')) {
+                                          ?>
+
+                                                        <li>
+                            <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
+                        
+  <li>
+
+<li>
+                            <?= Html::a('<i class="fa fa-list"></i> Resumen de IPS',['/telecom'])?>
+                        </li>
+
+  <?php  
+}
+              if(Yii::$app->user->can('menuAdmin')) {
+            ?>
+
                         <li>
                             <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
                         
   <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Calendario',['/dashboard'])?>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Calendario',['/dashboard'])?>
                         </li>
 
                           <li>
