@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
 use yii\db\Expression;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
+use yii\filters\AccessControl;
 
 
 /**
