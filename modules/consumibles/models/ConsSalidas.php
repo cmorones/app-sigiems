@@ -67,6 +67,7 @@ class ConsSalidas extends \yii\db\ActiveRecord
             [['sfolio', 'condiciones', 'observaciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
             [['total'], 'number'],
             [['file'], 'file', 'on'=>'updoc'],
+            [['file'], 'required', 'on'=>'updoc'],
             [['fecha_reg', 'created_at', 'updated_at'], 'safe'],
             [['created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],

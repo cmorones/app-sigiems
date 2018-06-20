@@ -22,10 +22,14 @@ use app\modules\soporte\models\CatManto;
 
        <?php $form = ActiveForm::begin([
             'id' => 'mov-bienes-form',
+            'enableClientValidation' => true,
             'fieldConfig' => [
                 'template' => "{label}{input}{error}",
             ],
     ]); ?>
+
+  
+
 
 
      <div class="row">

@@ -96,8 +96,17 @@ if ($model2->id_tipo==7) {
     
   </div>
 
-    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
-
+    <?php //$form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin([
+   'id' => 'w0',
+    'enableClientValidation' => true,
+//'enableAjaxValidation' => true,
+    'options' => [
+      //  'validateOnSubmit' => true,
+      //  'class' => 'form',
+        'enctype'=>'multipart/form-data'
+    ],
+]); ?>
 
         <div class="row">
  <?= $form->field($model, 'file')->fileInput() ?>

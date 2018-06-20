@@ -4,7 +4,7 @@ use yii\helpers\Html;
 $this->off(\yii\web\View::EVENT_END_BODY, [\yii\debug\Module::getInstance(), 'renderToolbar']);
 
 \app\assets_b\AppAsset::register($this);
-$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/rudra-lte';
+$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . 'iems-lte';
 ?>
 <?php //$this->registerJsFile(Yii::$app->request->baseUrl.'/js/icheck.min.js',['depends' => ['yii\web\YiiAsset', 'yii\bootstrap\BootstrapAsset', 'yii\bootstrap\BootstrapPluginAsset'], 'position' => \yii\web\View::POS_HEAD]); ?>
 

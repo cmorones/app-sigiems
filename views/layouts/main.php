@@ -10,7 +10,7 @@ if (Yii::$app->controller->action->id === 'login') {
     );
 } else {
     \app\assets_b\AppAsset::register($this);
-    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/moltran';
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . 'iems-lte';
     ?>
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
