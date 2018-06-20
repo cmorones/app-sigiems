@@ -88,7 +88,7 @@ if ($model2->id_tipo==7) {
     <div class="col-xs-4 edusecArLangHide"></div>
     <div class="col-xs-4 edusecArLangHide"></div>
     <div class="col-xs-4 left-padding">
-    <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+    <?= Html::a(Yii::t('app', 'Regresar'), ['salidas', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
     <br>
     <br>
