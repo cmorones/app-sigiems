@@ -35,7 +35,7 @@ class ConsSalidasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','docto','pdf', 'salidas'],
+                        'actions' => ['index','create','view','update','docto','pdf', 'salidas','items'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
