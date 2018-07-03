@@ -73,6 +73,10 @@ if ($model2->id_tipo==6) {
 if ($model2->id_tipo==7) {
   $clabe_cabs = '5651000172';
 }
+
+if ($model2->id_tipo==13) {
+  $clabe_cabs = '5151000154';
+}
 ?>
 <div class="col-xs-12" style="padding-top: 10px;">
 <div class="box view-item col-xs-12 col-lg-12">
