@@ -205,7 +205,7 @@ if ($baja_certi->id_tipo==9) {
               $nombre = 'FAX';
             }
 
-            if ($baja->id_tipo==13) {
+            if ($baja_certi->id_tipo==13) {
               $clabe_cabs = '5151000154';
               $nombre = 'MONITOR';
             }
