@@ -204,6 +204,12 @@ if ($baja_certi->id_tipo==9) {
               $clabe_cabs = '5651000094';
               $nombre = 'FAX';
             }
+
+            if ($baja->id_tipo==13) {
+              $clabe_cabs = '5151000154';
+              $nombre = 'MONITOR';
+            }
+?>
 ?>
 <div class="col-xs-12" style="padding-top: 10px;">
 <div class="box view-item col-xs-12 col-lg-12">
