@@ -7,6 +7,7 @@ use app\modules\admin\models\Users;
 use app\modules\admin\models\CatPlanteles;
 use app\modules\admin\models\CatPerfiles;
 use app\modules\admin\models\CatAnos;
+use app\modules\admin\models\CatAreas;
 use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Users */
@@ -61,6 +62,8 @@ if($('#activa').prop('checked')) {
 <?= $form->field($model, 'cargo')->textInput() ?>
   
     <?= $form->field($model, 'id_plantel')->dropDownList(ArrayHelper::map(CatPlanteles::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un plantel']) ?>
+
+      <?= $form->field($model, 'id_area')->dropDownList(ArrayHelper::map(CatAreas::find()->where(['id_plantel'=>$model->id_plantel])->all(), 'id_area', 'nombre'), ['prompt'=>'Selecciona Area']) ?>
 
      <?= $form->field($model, 'id_periodo')->dropDownList(ArrayHelper::map(CatAnos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Periodo']) ?>
 

@@ -88,6 +88,15 @@ Yii::$app->name = "APP-SIGIEMS";
                                         </li>
                                     <?php 
                                   }
+
+                                   if(Yii::$app->user->can('ModAsignaciones')) {
+                                          ?>
+
+                                           <li>
+                                            <a href="#asignaciones"><i class="fa fa-calendar-o"></i> Asignaciones de Equipo</a>
+                                        </li>
+                                    <?php 
+                                  }
                             ?> 
                                 
                         
@@ -108,6 +117,17 @@ Yii::$app->name = "APP-SIGIEMS";
         </div>
 
         <?= $this->render('_inventarios.php')?>
+</div> 
+
+ <div id="asignaciones" class="tab-pane">
+        <div class="visible-sm visible-xs menu-box-header">
+            <button aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h4><i class="fa fa-calendar-o"></i> Asignaciones de Equipo</h4>
+        </div>
+
+        <?= $this->render('_asignaciones.php')?>
 </div>       
 
 

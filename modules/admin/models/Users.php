@@ -43,7 +43,7 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_login_id', 'user_password', 'id_plantel', 'perfil', 'id_periodo' ], 'required'],
+            [['user_login_id', 'user_password', 'id_plantel', 'perfil', 'id_periodo', 'id_area' ], 'required'],
                [[ 'user_password'], 'required', 'on'=>'cambiar'],
             ['mail', 'email'],
             [['is_block', 'created_by', 'updated_by', 'perfil', 'id_plantel', 'id_profesor', 'id_periodo'], 'integer'],
@@ -78,7 +78,8 @@ class Users extends \yii\db\ActiveRecord
             'mail' => 'Mail',
             'nombre' => 'Nombre del Usuario',
             'activa' => 'Cambiar contraseña?',
-            'cargo' => 'Cargo que Ocupa'
+            'cargo' => 'Cargo que Ocupa',
+            'id_area' => 'Area'
         ];
     }
 
