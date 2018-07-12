@@ -77,7 +77,25 @@ use app\modules\admin\models\CatAreas;
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'observaciones', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Nuevo Resguardante'] ] )->textInput(['maxlength' => 35])->label(false); ?>
+                                             <?= $form->field($model, 'observaciones', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Observaciones'] ] )->textarea(['rows' => '6'])->label(false); ?>
+                                            </div>
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2"></label>
+                                            <div class="col-lg-4">
+                                              
+
+                                            <?= $form->field($model, "sustitucion")->checkbox(['value' => "1"]); ?>
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Detalle de la Sustitucion:</label>
+                                            <div class="col-lg-4">
+                                              
+
+                                             <?= $form->field($model, 'detalle_sus', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'Detalle'] ] )->textarea(['rows' => '6'])->label(false); ?>
                                             </div>
                                         </div>
 

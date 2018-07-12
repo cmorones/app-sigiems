@@ -146,7 +146,7 @@ actualizacion integer DEFAULT 0,
                                       
                                       </div>
                                 </div>
-<br><br>
+<br>
                                 <div class="row">
                                   <div class="col-md-6">
                                     <p><b>Datos de la nueva asignación de bien:</b></p>
@@ -211,10 +211,20 @@ actualizacion integer DEFAULT 0,
                                         <h5 class="text-left">Total Bienes: <?=$grantotal?></h5>
                                 <br>
                                 <br>
-                                <div class="row" style="border-radius: 0px">
+                                <div class="row">
                                     <div class="col-md-3 col-md-offset-9">
-                                        <p class="text-left"><b>Condiciones:</b><?//=$model->condiciones?></p>
-                                        <p class="text-left"><b>Observaciones:</b><?//=$model->observaciones?></p>
+                                       
+                                        <p class="text-left"><b>Observaciones:</b><?=$model->observaciones?></p>
+
+                                        <? if ($model->sustitucion == 1) {
+                                          ?>
+                                          <p><b>Equipo en sustitucion:</b>SI</p>
+                                          <p class="text-left"><b>Detalle de Sustitución:</b><?=$model->observaciones?></p>
+
+                                         <?php
+                                        }
+
+                                        ?>
                                        
                                        
                                        

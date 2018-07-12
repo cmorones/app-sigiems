@@ -39,9 +39,9 @@ class InvAsignaciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_periodo','id_mes','id_plantel', 'id_area', 'progresivo', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id_periodo','id_mes','id_plantel', 'id_area', 'progresivo', 'estado', 'created_by', 'updated_by','sustitucion'], 'integer'],
             [['fecha', 'created_at', 'updated_at'], 'safe'],
-            [['resguardante', 'observaciones','autoriza','entrega','recibe'], 'string'],
+            [['resguardante', 'observaciones','autoriza','entrega','recibe', 'detalle_sus'], 'string'],
             [['folio','progresivo','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
@@ -64,6 +64,11 @@ class InvAsignaciones extends \yii\db\ActiveRecord
             'estado' => 'Estado',
             'resguardante' => 'Resguardante',
             'observaciones' => 'Observaciones',
+            'autoriza'=> 'Autoriza',
+            'recibe' => 'Recibe',
+            'entrega' => 'Entrega',
+            'sustitucion' => 'Sustitucion',
+            'detalle_sus' => 'Detalle Sustitucuion',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
