@@ -11,6 +11,18 @@ use app\modules\soporte\models\AsignDetalle;
 
 
 
+if ($model->id_tipo==1) {
+  $clabe_cabs = '5151000138';
+  $nombre = 'COMPUTADORA PERSONAL';
+}
+
+if ($model->id_tipo==2) {
+  $clabe_cabs = '5151000096';
+  $nombre = 'IMPRESORA LASER';
+}
+
+
+
  $sql = "SELECT 
   bienes_muebles.clave_cabms, 
   bienes_muebles.progresivo, 
@@ -29,14 +41,14 @@ FROM
   public.personal,
   public.situacion_bienes
 WHERE
-  (bienes_muebles.clave_cabms = '5151000138' OR bienes_muebles.clave_cabms = '5151000192') and 
+  (bienes_muebles.clave_cabms = '$clabe_cabs' and 
   bienes_muebles.progresivo = $model->progresivo and
   bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
   resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
   personal.id_empleado = resguardos.id_personal";
 
 
-$cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(marca) FROM bienes_muebles where clave_cabms=\'5151000138\' and progresivo='.$model->progresivo.'')->queryColumn();
+$cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(marca) FROM bienes_muebles where clave_cabms=$clabe_cabs and progresivo='.$model->progresivo.'')->queryColumn();
 $inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
 
 /*$mov = '';
@@ -138,6 +150,7 @@ actualizacion integer DEFAULT 0,
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <p><b>Tipo:</b><?=$nombre?></p>
                                         <p><b>Progresivo:</b><?=$model->progresivo?></p>
                                         <b>Marca:</b><?= $inventario['marca'] ?></p>
                                         <b>Modelo:</b><?= $inventario['modelo'] ?></p>

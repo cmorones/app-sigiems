@@ -7,3 +7,4 @@ return [
     'password' => '2020kylix',
     'charset' => 'utf8',
 ];
+
