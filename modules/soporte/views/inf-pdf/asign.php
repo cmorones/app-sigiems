@@ -165,7 +165,7 @@ actualizacion integer DEFAULT 0,
                                   <div class="col-md-6">
                                     <p><b>Datos de la nueva asignación de bien:</b></p>
                                      <b>Resguardante nuevo:</b><?=$model->resguardante?></p>
-                                      <b>Plantel/OFCentral:</b><?=$model->catAreas->nombre?></p>
+                                      <b>Plantel/OFCentral:</b><?=$model->catPlanteles->nombre?></p>
                                      <b>Area:</b><?=$model->catAreas->nombre?></p>
                                   </div>
                                 </div>
