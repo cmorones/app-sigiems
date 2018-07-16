@@ -42,7 +42,7 @@ FROM
   public.situacion_bienes
 WHERE
   (bienes_muebles.clave_cabms ='".$clabe_cabs."' and 
-  bienes_muebles.progresivo ='.$model->progresivo.' and
+  bienes_muebles.progresivo =$model->progresivo and
   bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
   resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
   personal.id_empleado = resguardos.id_personal";
