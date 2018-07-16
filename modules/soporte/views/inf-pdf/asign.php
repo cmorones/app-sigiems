@@ -48,7 +48,7 @@ WHERE
   personal.id_empleado = resguardos.id_personal";
 
 
-$cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(marca) FROM bienes_muebles where clave_cabms=$clabe_cabs and progresivo='.$model->progresivo.'')->queryColumn();
+$cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(marca) FROM bienes_muebles where clave_cabms='.$clabe_cabs.' and progresivo='.$model->progresivo.'')->queryColumn();
 $inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
 
 /*$mov = '';
