@@ -128,6 +128,7 @@ class InvAsignacionesController extends Controller
             if($dato[2] == '2018'){
                 $model->id_periodo = 4;
             }
+            $model->id_mes =  $dato[1];
 
             $model->updated_by=Yii::$app->user->identity->user_id;
             $model->updated_at = new Expression('NOW()');
