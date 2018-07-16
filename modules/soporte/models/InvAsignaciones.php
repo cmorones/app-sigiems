@@ -39,7 +39,7 @@ class InvAsignaciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_periodo','id_mes','id_plantel', 'id_area', 'progresivo', 'estado', 'created_by', 'updated_by','sustitucion'], 'integer'],
+            [['id_tipo','id_periodo','id_mes','id_plantel', 'id_area', 'progresivo', 'estado', 'created_by', 'updated_by','sustitucion'], 'integer'],
             [['fecha', 'created_at', 'updated_at'], 'safe'],
             [['resguardante', 'observaciones','autoriza','entrega','recibe', 'detalle_sus'], 'string'],
             [['folio','progresivo','created_at', 'created_by'], 'required'],
@@ -57,6 +57,7 @@ class InvAsignaciones extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_plantel' => 'Id Plantel',
             'id_periodo' => 'Id Periodo',
+            'id_tipo' => 'Tipo',
             'id_mes' => 'Id Mes',
             'id_area' => 'Id Area',
             'progresivo' => 'Progresivo',

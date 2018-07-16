@@ -16,6 +16,15 @@ use app\modules\admin\models\CatAreas;
 <div clas="row">
     <?php $form = ActiveForm::begin(); ?>
 
+              <div class="form-group">
+                                            <label for="cname" class="control-label col-lg-2">Tipo:</label>
+                                            <div class="col-lg-4">
+                                              
+
+                                           <?= $form->field($model, 'id_tipo', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'tipo'] ] )->dropDownList(ArrayHelper::map(app\modules\soporte\models\TipoEquipo::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona tipo ---')])->label(false); ?>
+                                            </div>
+                                        </div>
+
           <div class="form-group">
                                             <label for="cname" class="control-label col-lg-2">Fecha de asignacion:</label>
                                             <div class="col-lg-4">

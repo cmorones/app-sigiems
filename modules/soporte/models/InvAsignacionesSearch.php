@@ -18,7 +18,7 @@ class InvAsignacionesSearch extends InvAsignaciones
     public function rules()
     {
         return [
-            [['id', 'id_periodo', 'id_mes', 'id_plantel', 'id_area', 'progresivo', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'id_tipo', 'id_periodo', 'id_mes', 'id_plantel', 'id_area', 'progresivo', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['fecha', 'resguardante', 'observaciones', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -64,6 +64,7 @@ class InvAsignacionesSearch extends InvAsignaciones
         $query->andFilterWhere([
             'id' => $this->id,
             'id_periodo' => $idp,
+            'id_tipo' => $this->id_tipo,
             'id_mes' => $this->id_mes,
             'id_plantel' => $id_plantel,
             'id_area' => $this->id_area,
