@@ -3,6 +3,7 @@
 namespace app\modules\soporte\models;
 
 use Yii;
+use app\modules\admin\models\CatPlanteles;
 
 /**
  * This is the model class for table "inv_asignaciones".
