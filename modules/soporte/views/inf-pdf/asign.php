@@ -23,7 +23,7 @@ if ($model->id_tipo==2) {
 
 
 
- $sql = 'SELECT 
+ $sql = "SELECT 
   bienes_muebles.clave_cabms, 
   bienes_muebles.progresivo, 
   bienes_muebles.marca, 
@@ -41,11 +41,11 @@ FROM
   public.personal,
   public.situacion_bienes
 WHERE
-  (bienes_muebles.clave_cabms ='.$clabe_cabs.' and 
+  (bienes_muebles.clave_cabms ='".$clabe_cabs."' and 
   bienes_muebles.progresivo ='.$model->progresivo.' and
   bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
   resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
-  personal.id_empleado = resguardos.id_personal';
+  personal.id_empleado = resguardos.id_personal";
 
 
 $cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(marca) FROM bienes_muebles where clave_cabms='.$clabe_cabs.' and progresivo='.$model->progresivo.'')->queryColumn();
