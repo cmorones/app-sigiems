@@ -66,6 +66,24 @@ Yii::$app->name = "APP-SIGIEMS";
 
             ?>
 
+                                           <?php  
+              if(Yii::$app->user->can('licencias')) {
+            ?>
+   
+
+
+                                          <li>
+                                            <a href="#licencias"><i class="fa fa-calendar-o"></i> Licencias</a>
+                                        </li>
+
+                                          <?php
+
+            }
+
+            ?>
+
+
+
                                          <?php  
                                        }
 
@@ -78,6 +96,9 @@ Yii::$app->name = "APP-SIGIEMS";
                                         </li>
                                       <?php 
                                   }
+
+
+                                    
                                 
 
                                    if(Yii::$app->user->can('ModConsumibles')) {
@@ -128,7 +149,18 @@ Yii::$app->name = "APP-SIGIEMS";
         </div>
 
         <?= $this->render('_asignaciones.php')?>
-</div>       
+</div> 
+
+ <div id="licencias" class="tab-pane">
+        <div class="visible-sm visible-xs menu-box-header">
+            <button aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h4><i class="fa fa-calendar-o"></i> Administracion de Licencias</h4>
+        </div>
+
+        <?= $this->render('_licencias.php')?>
+</div>           
 
 
 
