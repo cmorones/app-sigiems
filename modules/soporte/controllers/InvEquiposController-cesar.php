@@ -248,7 +248,7 @@ class InvEquiposController extends Controller
             $tiempo .= " años, ";
     }
      
-if ($tiempo==0) {
+   if ($tiempo==0) {
        $rest=1;
    }    
    if ($tiempo==1) {

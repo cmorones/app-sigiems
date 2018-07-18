@@ -36,7 +36,7 @@ class AsignDetalleController extends Controller
     public function actionIndex($id,$idp)
     {
         $searchModel = new AsignDetalleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
