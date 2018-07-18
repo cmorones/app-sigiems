@@ -249,7 +249,7 @@ class InvEquiposController extends Controller
     }
      
 if ($tiempo==0) {
-       $rest=0;
+       $rest=1;
    }    
    if ($tiempo==1) {
        $rest=1;
