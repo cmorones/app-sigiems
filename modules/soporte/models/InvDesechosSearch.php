@@ -112,7 +112,7 @@ class InvDesechosSearch extends InvDesechos
             'marca' => $this->marca,
             'modelo' => $this->modelo,
             'tipo' => $this->tipo,
-            'id_periodo' => $this->id_periodo,
+           // 'id_periodo' => $this->id_periodo,
             'id_area' => $this->id_area,
             'id_piso' => $this->id_piso,
             'created_at' => $this->created_at,

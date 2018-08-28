@@ -18,7 +18,7 @@ Yii::$app->name = "APP-SIGIEMS";
 
 
                                       <?php  
-              if(Yii::$app->user->can('modTelecom') ) {
+              if(Yii::$app->user->can('judTelecom') ) {
             ?> 
 
                <div class="col-md-3 col-sm-4 col-xs-12">
@@ -123,21 +123,6 @@ Yii::$app->name = "APP-SIGIEMS";
 
                       
 
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Validacion de Bajas vs Almacen',['/soporte/inv-bajas/validacion']) ?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias de Desecho',['/soporte/inv-baterias/index']) ?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
-                        </li>
 
                           <li>
                             <?= Html::a('<i class="fa fa-share-alt"></i>Prestamo de Equipos',['/soporte/solicitud-presta/index']) ?>
@@ -259,7 +244,26 @@ Yii::$app->name = "APP-SIGIEMS";
 
 
                         }
-                         
+                         /*
+
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Validacion de Bajas vs Almacen',['/soporte/inv-bajas/validacion']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias de Desecho',['/soporte/inv-baterias/index']) ?>
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
+                        </li>
+
+                        */
                         ?>
 
 

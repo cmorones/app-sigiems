@@ -513,6 +513,17 @@ if ($inventario['progresivo']==$data->progresivo && $inventario['serie']==$data-
 
     ]); ?>
         <p>
+          <?php 
+if ($idp==4) {
+  ?>
+
         <?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Agregar Baja', ['create', 'idp'=>$idp], ['class' => 'btn btn-success']) ?>
+
+        <?php
+
+         # code...
+}
+
+?>
     </p>
 </div>

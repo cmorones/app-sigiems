@@ -42,6 +42,10 @@ Yii::$app->name = "APP-SIGIEMS";
                                         </li>
 
                                          <li>
+                                            <a href="#bajas"><i class="fa fa-calendar-o"></i> Proceso de Bajas 2018</a>
+                                        </li>
+
+                                         <li>
                                             <a href="#inventario"><i class="fa fa-calendar-o"></i> Inventario de bienes</a>
                                         </li>
 
@@ -101,7 +105,7 @@ Yii::$app->name = "APP-SIGIEMS";
                                     
                                 
 
-                                   if(Yii::$app->user->can('ModConsumibles')) {
+                                   if(Yii::$app->user->can('ModConsumiblesST')) {
                                           ?>
 
                                            <li>
@@ -127,7 +131,16 @@ Yii::$app->name = "APP-SIGIEMS";
                                 <div class="col-md-9 menu-sub-items">
                                     <div class="tab-content">
 
+ <div id="bajas" class="tab-pane">
+        <div class="visible-sm visible-xs menu-box-header">
+            <button aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h4><i class="fa fa-calendar-o"></i> Opiniones Técnicas</h4>
+        </div>
 
+        <?= $this->render('_bajas.php')?>
+</div> 
 
  <div id="inventario" class="tab-pane">
         <div class="visible-sm visible-xs menu-box-header">
@@ -419,7 +432,7 @@ Yii::$app->name = "APP-SIGIEMS";
 
 
         <?php  
-            if(Yii::$app->user->can('modTelecom')) {
+            if(Yii::$app->user->can('modTelecomAc')) {
                                           ?>
 
                                                         <li>
@@ -520,10 +533,12 @@ Yii::$app->name = "APP-SIGIEMS";
              <?php  
               if(Yii::$app->user->can('menuSoporte')) {
             ?> 
-                    <div class="col-md-3 col-sm-4 col-xs-12">
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="menu-box">
                     <ul>
-                        <li>
+                          <li>
                             <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
                         <li>
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
@@ -537,16 +552,13 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Revision de  Equipos IEMS',['/petic/default/revision'])?>
                         </li>
 
-                      
-                      
                     </ul>
                 </div>
-            </div>                                   
-          
-
-              <?php
+            </div>
+            <?php
                 }
             ?>
+ 
 
          
 
