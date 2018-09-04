@@ -70,6 +70,10 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
                         </li>
 
+                          <li>
+                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias de Desecho',['/soporte/inv-baterias/index']) ?>
+                        </li>
+
                          
                          <?php
                             }
