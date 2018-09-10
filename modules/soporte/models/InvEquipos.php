@@ -75,7 +75,7 @@ class InvEquipos extends ActiveRecord
     public function progresivovalido($attribute, $params){
 
 
-       $cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(progresivo) FROM bienes_muebles where id_situacion_bien=1 and (clave_cabms=\'5151000138\' or clave_cabms=\'5151000192\') and progresivo='.$this->progresivo.'')->queryColumn();
+       $cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(progresivo) FROM base_bienes where id_situacion_bien=1 and (clave_cabms=\'5151000138\' or clave_cabms=\'5151000192\') and progresivo='.$this->progresivo.'')->queryColumn();
 
        // $cuenta_inv[0] =0;
 

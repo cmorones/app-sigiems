@@ -21,35 +21,37 @@ if ($model->id_tipo==2) {
   $nombre = 'IMPRESORA LASER';
 }
 
+if ($model->id_tipo==3) {
+  $clabe_cabs = '5151000192';
+  $nombre = 'SERVIDOR';
+}
+
+
+
 
 $sql = "SELECT 
-  bienes_muebles.clave_cabms, 
-  bienes_muebles.progresivo, 
-  bienes_muebles.marca, 
-  bienes_muebles.modelo, 
-  bienes_muebles.serie,
-  bienes_muebles.clave_cabms,
-  bienes_muebles.id_situacion_bien, 
-  resguardos.id_bien_mueble, 
-  personal.nombre_empleado, 
-  personal.apellidos_empleado, 
-  personal.rfc,
-  bienes_muebles.fecha_alta,
-  situacion_bienes.descripcion 
+  base_bienes.clave_cabms, 
+  base_bienes.progresivo, 
+  base_bienes.marca, 
+  base_bienes.modelo, 
+  base_bienes.serie,
+  base_bienes.clave_cabms,
+  base_bienes.id_bien_mueble, 
+  base_bienes.nombre_empleado, 
+  base_bienes.apellidos_empleado, 
+  base_bienes.rfc,
+  base_bienes.fecha_alta,
+  base_bienes.descripcion 
 FROM 
-  public.bienes_muebles, 
-  public.resguardos, 
-  public.personal,
-  public.situacion_bienes
+  public.base_bienes
 WHERE
-  bienes_muebles.clave_cabms = '".$clabe_cabs."' and 
-  bienes_muebles.progresivo = '$model->progresivo' and
-  bienes_muebles.id_situacion_bien = situacion_bienes.id_situacion_bien and  
-  resguardos.id_bien_mueble = bienes_muebles.id_bien_mueble AND
-  personal.id_empleado = resguardos.id_personal";
+  base_bienes.clave_cabms = '".$clabe_cabs."' and 
+  base_bienes.progresivo = $model->progresivo";
+
+  //$sql =  'SELECT count(base_bienes.marca) FROM base_bienes where base_bienes.clave_cabms='.$clabe_cabs.' and base_bienes.progresivo='.$model->progresivo. '';
 
 
-$cuenta_inv = \Yii::$app->db2->createCommand('SELECT count(marca) FROM bienes_muebles where clave_cabms='.$clabe_cabs.' and progresivo='.$model->progresivo.'')->queryColumn();
+$cuenta_inv = \Yii::$app->db2->createCommand("SELECT count(base_bienes.marca) FROM base_bienes where base_bienes.clave_cabms='".$clabe_cabs."' and base_bienes.progresivo='".$model->progresivo."'")->queryColumn();
 $inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
 
 /*$mov = '';

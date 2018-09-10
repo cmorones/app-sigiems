@@ -75,7 +75,16 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong><?= $model->getAttributeLabel('clasif') ?></strong></div>
-		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $model->catAntiguedad->nombre ?></div>
+		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?
+       
+       if ($model->clasif == 0) {
+       	 echo "Menos de un año";
+       } else {
+       	 echo $model->catAntiguedad->nombre;
+       }
+
+
+	?></div>
 	</div>
 
 	<div class="col-md-12 col-xs-12 col-sm-12">

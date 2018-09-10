@@ -272,6 +272,10 @@ class InvEquiposController extends Controller
         else
             $tiempo .= " años, ";
     }
+
+ if ($tiempo<1) {
+       $rest=0;
+   }
          
    if ($tiempo==1) {
        $rest=1;
@@ -298,12 +302,12 @@ class InvEquiposController extends Controller
  public function traerFechaInv($progresivo){
 
     $sql = "SELECT 
-   bienes_muebles.fecha_alta 
+   base_bienes.fecha_alta 
 FROM 
-  public.bienes_muebles 
+  public.base_bienes 
  WHERE
-  bienes_muebles.clave_cabms = '5151000138' and 
-  bienes_muebles.progresivo = '$progresivo'";
+  base_bienes.clave_cabms = '5151000138' and 
+  base_bienes.progresivo = '$progresivo'";
 $inventario = \Yii::$app->db2->createCommand($sql)->queryOne();
 
  return $inventario['fecha_alta'];
