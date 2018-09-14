@@ -60,10 +60,11 @@ $config = [
         'class' => 'yii\authclient\Collection',
         'clients' => [
             'google' => [
-                'class' => 'yii\authclient\clients\Google',
+                //'class' => 'yii\authclient\clients\Google',
+                'class' => 'yii\authclient\clients\GoogleOAuth',
                 'clientId' => '243454299382-dsiu8lh9bnqkrfe2o2e3mhtk390b9r00.apps.googleusercontent.com',
                 'clientSecret' => '2A86Zc1I81YTK7Ha6EAvpJkp',
-               
+
              //   'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
 
             ],
