@@ -18,63 +18,23 @@ if ($plantel == 23 ) {
   $pl = $plantel;
 }
 
-$sql = "select 
- bm.id_bien_mueble,
- bm.clave_cabms,
- bm.progresivo,
- bm.id_situacion_bien,
- bm.no_partida_presupuestal,
- bm.fecha_factura,
- bm.costo_alta,
- bm.marca,
- bm.modelo,
- bm.serie,
- bm.fecha_baja,
- bm.fecha_alta,
- bm.id_unidad_procedencia,
- bm.id_causa,
- bm.no_factura,
- bm.id_proveedor,
- bm.id_causa_baja,
- bm.acta_baja,
- cbs.descripcion AS cbscorta,
- cbsdlle.descripcion AS cbsdllelargo,
- r.id_zona,
- r.id_area,
- r.id_personal,
- r.fecha_asignacion,
- p.apellidos_empleado,
- p.nombre_empleado,
- p.rfc,
- z.id_seccion,
- z.id_edificio,
- z.id_plantel,
- z.id_nivel,
- z.id_ubicacion,
- z.cubiculo,
- a.descripcion AS adescrip,
- pros.razon_social AS prosdescrip,
- ps.descripcion AS pdescrip,
- s.descripcion AS sdescrip,
- e.descripcion AS edescrip,
- u.descripcion AS udescrip,
- n.descripcion AS ndescrip 
- from 
- bienes_muebles bm 
- LEFT JOIN cabms cbs ON bm.clave_cabms=cbs.clave_cabms 
- LEFT JOIN cabms_detalle cbsdlle ON bm.id_cabms_detalle=cbsdlle.id_cabms_detalle 
- LEFT JOIN resguardos r ON bm.id_bien_mueble=r.id_bien_mueble
- LEFT JOIN proveedores pros ON bm.id_proveedor=pros.id_proveedor 
- LEFT JOIN personal p ON r.id_personal=p.id_empleado 
- LEFT JOIN zonas z ON r.id_zona=z.id_zona 
- LEFT JOIN areas a ON r.id_area=a.id_area 
- LEFT JOIN planteles ps ON z.id_plantel=ps.id_plantel 
- LEFT JOIN secciones s ON z.id_seccion=s.id_seccion 
- LEFT JOIN edificios e ON z.id_edificio=e.id_edificio
- LEFT JOIN ubicaciones u ON z.id_ubicacion=u.id_ubicacion 
- LEFT JOIN niveles n ON z.id_nivel=n.id_nivel  
- where 
- bm.id_situacion_bien IN(1)  and bm.clave_cabms='5151000138' and z.id_plantel = $pl order by bm.id_bien_mueble";
+$sql = "SELECT 
+  base_bienes.clave_cabms, 
+  base_bienes.progresivo, 
+  base_bienes.marca, 
+  base_bienes.modelo, 
+  base_bienes.serie, 
+  base_bienes.id_bien_mueble, 
+  base_bienes.nombre_empleado, 
+  base_bienes.apellidos_empleado, 
+  base_bienes.rfc,
+  base_bienes.fecha_alta,
+  base_bienes.id_situacion_bien,
+  base_bienes.descripcion 
+FROM 
+  public.base_bienes 
+WHERE
+  (base_bienes.clave_cabms = '5151000138' OR base_bienes.clave_cabms = '5151000192')";
 $inventario = \Yii::$app->db2->createCommand($sql)->queryAll();
 
 
@@ -232,7 +192,7 @@ foreach ($inventario as $key => $value) {
     <td><?=$value['serie']?></td>
    
     <td><?=$value['nombre_empleado']?> <?=$value['apellidos_empleado']?></td>
-    <td><?=$value['pdescrip']?></td>
+    <td><?//=$value['pdescrip']?></td>
     <td><?=$inv?></td>
      <td><?=$pbajas?></td>
      <td>
