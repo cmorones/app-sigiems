@@ -7,7 +7,7 @@
 
 namespace yii\authclient;
 
-use yii\base\BaseObject;
+use yii\base\Object;
 
 /**
  * Token represents OAuth token.
@@ -24,7 +24,7 @@ use yii\base\BaseObject;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-class OAuthToken extends BaseObject
+class OAuthToken extends Object
 {
     /**
      * @var string key in [[params]] array, which stores token key.
@@ -51,7 +51,7 @@ class OAuthToken extends BaseObject
 
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function init()
     {

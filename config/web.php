@@ -58,28 +58,15 @@ $config = [
         ],
           'authClientCollection' => [
         'class' => 'yii\authclient\Collection',
-        /*'clients' => [
+        'clients' => [
             'google' => [
                 'class' => 'yii\authclient\clients\Google',
-                'clientId' => '243454299382-c5allghh5tr1nbhvaa37fiasmdei5gsf.apps.googleusercontent.com',
-                'clientSecret' => '7Zw2JnsjHmoml20tAyNQz3V7',
+                'clientId' => '243454299382-dsiu8lh9bnqkrfe2o2e3mhtk390b9r00.apps.googleusercontent.com',
+                'clientSecret' => 'Im4GB0r8ugwFCPLk2bz6tAAU',
                
              //   'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
 
-            ],*/
-            'authClientCollection' => [
-        'class' => 'yii\authclient\Collection',
-        'clients' => [
-            'google' => [
-                'class' => 'yii\authclient\OpenIdConnect',
-                'issuerUrl' => 'https://accounts.google.com',
-                'clientId' => '243454299382-c5allghh5tr1nbhvaa37fiasmdei5gsf.apps.googleusercontent.com',
-                'clientSecret' => '7Zw2JnsjHmoml20tAyNQz3V7',
-                'name' => 'google',
-                'title' => 'Google OpenID Connect',
             ],
-        ],
-    ]
         ],
     ],
         'mailer' => [

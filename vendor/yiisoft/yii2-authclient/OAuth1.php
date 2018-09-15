@@ -19,16 +19,13 @@ use yii\web\HttpException;
  *
  * ```php
  * use yii\authclient\OAuth1;
- * use Yii;
  *
- * // assuming class MyAuthClient extends OAuth1
- * $oauthClient = new MyAuthClient();
+ * $oauthClient = new OAuth1();
  * $requestToken = $oauthClient->fetchRequestToken(); // Get request token
  * $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
  * return Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL
- *
  * // After user returns at our site:
- * $accessToken = $oauthClient->fetchAccessToken(Yii::$app->request->get('oauth_token'), $requestToken); // Upgrade to access token
+ * $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to access token
  * ```
  *
  * @see https://oauth.net/1/
@@ -99,6 +96,7 @@ abstract class OAuth1 extends BaseOAuth
             ->setData(array_merge($defaultParams, $params));
 
         $this->signRequest($request);
+        $request->setContent(''); // enforce empty body, avoiding duplicate param server error
 
         $response = $this->sendRequest($request);
 
@@ -142,10 +140,10 @@ abstract class OAuth1 extends BaseOAuth
      */
     public function fetchAccessToken($oauthToken = null, OAuthToken $requestToken = null, $oauthVerifier = null, array $params = [])
     {
-        $incomingRequest = Yii::$app->getRequest();
-
         if ($oauthToken === null) {
-            $oauthToken = $incomingRequest->get('oauth_token', $incomingRequest->post('oauth_token', $oauthToken));
+            if (isset($_REQUEST['oauth_token'])) {
+                $oauthToken = $_REQUEST['oauth_token'];
+            }
         }
 
         if (!is_object($requestToken)) {
@@ -166,7 +164,9 @@ abstract class OAuth1 extends BaseOAuth
             'oauth_token' => $requestToken->getToken()
         ];
         if ($oauthVerifier === null) {
-            $oauthVerifier = $incomingRequest->get('oauth_verifier', $incomingRequest->post('oauth_verifier'));
+            if (isset($_REQUEST['oauth_verifier'])) {
+                $oauthVerifier = $_REQUEST['oauth_verifier'];
+            }
         }
         if (!empty($oauthVerifier)) {
             $defaultParams['oauth_verifier'] = $oauthVerifier;
@@ -190,7 +190,7 @@ abstract class OAuth1 extends BaseOAuth
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function createRequest()
     {
@@ -200,7 +200,7 @@ abstract class OAuth1 extends BaseOAuth
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function createApiRequest()
     {
@@ -225,7 +225,7 @@ abstract class OAuth1 extends BaseOAuth
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function applyAccessTokenToRequest($request, $accessToken)
     {
@@ -252,7 +252,7 @@ abstract class OAuth1 extends BaseOAuth
      */
     protected function defaultReturnUrl()
     {
-        $params = Yii::$app->getRequest()->getQueryParams();
+        $params = $_GET;
         unset($params['oauth_token']);
         $params[0] = Yii::$app->controller->getRoute();
 
@@ -302,7 +302,7 @@ abstract class OAuth1 extends BaseOAuth
     {
         $params = $request->getData();
 
-        if (isset($params['oauth_signature_method']) || $request->hasHeaders() && $request->getHeaders()->has('authorization')) {
+        if (isset($params['oauth_signature_method'])) {
             // avoid double sign of request
             return;
         }
@@ -322,21 +322,14 @@ abstract class OAuth1 extends BaseOAuth
         $signatureKey = $this->composeSignatureKey($token);
         $params['oauth_signature'] = $signatureMethod->generateSignature($signatureBaseString, $signatureKey);
 
+        $request->setData($params);
+
         if ($this->authorizationHeaderMethods === null || in_array(strtoupper($request->getMethod()), array_map('strtoupper', $this->authorizationHeaderMethods), true)) {
             $authorizationHeader = $this->composeAuthorizationHeader($params);
             if (!empty($authorizationHeader)) {
                 $request->addHeaders($authorizationHeader);
-
-                // removing authorization header params, avoiding duplicate param server error :
-                foreach ($params as $key => $value) {
-                    if (substr_compare($key, 'oauth', 0, 5) === 0) {
-                        unset($params[$key]);
-                    }
-                }
             }
         }
-
-        $request->setData($params);
     }
 
     /**
@@ -348,11 +341,6 @@ abstract class OAuth1 extends BaseOAuth
      */
     protected function composeSignatureBaseString($method, $url, array $params)
     {
-        if (strpos($url, '?') !== false) {
-            list($url, $queryString) = explode('?', $url, 2);
-            parse_str($queryString, $urlParams);
-            $params = array_merge($urlParams, $params);
-        }
         unset($params['oauth_signature']);
         uksort($params, 'strcmp'); // Parameters are sorted by name, using lexicographical byte value ordering. Ref: Spec: 9.1.1
         $parts = [

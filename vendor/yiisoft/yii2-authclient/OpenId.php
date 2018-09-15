@@ -118,13 +118,12 @@ class OpenId extends BaseClient
 
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function init()
     {
         if ($this->data === null) {
-            $request = Yii::$app->getRequest();
-            $this->data = array_merge($request->get(), $request->post()); // OPs may send data as POST or GET.
+            $this->data = array_merge($_GET, $_POST); // OPs may send data as POST or GET.
         }
     }
 
@@ -198,7 +197,7 @@ class OpenId extends BaseClient
      */
     protected function defaultReturnUrl()
     {
-        $params = Yii::$app->getRequest()->get();
+        $params = $_GET;
         foreach ($params as $name => $value) {
             if (strncmp('openid', $name, 6) === 0) {
                 unset($params[$name]);
@@ -272,7 +271,7 @@ class OpenId extends BaseClient
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function defaultRequestOptions()
     {
@@ -838,7 +837,7 @@ class OpenId extends BaseClient
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function initUserAttributes()
     {
