@@ -30,13 +30,13 @@ use Yii;
  *             ],
  *         ],
  *     ]
- *     // ...
+ *     ...
  * ]
  * ```
  *
- * @see https://developer.linkedin.com/docs/oauth2
+ * @see http://developer.linkedin.com/documents/authentication
  * @see https://www.linkedin.com/secure/developer
- * @see https://developer.linkedin.com/docs/rest-api
+ * @see http://developer.linkedin.com/apis
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
@@ -44,15 +44,15 @@ use Yii;
 class LinkedIn extends OAuth2
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public $authUrl = 'https://www.linkedin.com/oauth/v2/authorization';
+    public $authUrl = 'https://www.linkedin.com/uas/oauth2/authorization';
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public $tokenUrl = 'https://www.linkedin.com/oauth/v2/accessToken';
+    public $tokenUrl = 'https://www.linkedin.com/uas/oauth2/accessToken';
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public $apiBaseUrl = 'https://api.linkedin.com/v1';
     /**
@@ -69,7 +69,7 @@ class LinkedIn extends OAuth2
 
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function init()
     {
@@ -83,7 +83,7 @@ class LinkedIn extends OAuth2
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function defaultNormalizeUserAttributeMap()
     {
@@ -95,7 +95,7 @@ class LinkedIn extends OAuth2
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function initUserAttributes()
     {
@@ -103,7 +103,7 @@ class LinkedIn extends OAuth2
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function applyAccessTokenToRequest($request, $accessToken)
     {
@@ -113,7 +113,7 @@ class LinkedIn extends OAuth2
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function defaultName()
     {
@@ -121,7 +121,7 @@ class LinkedIn extends OAuth2
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function defaultTitle()
     {

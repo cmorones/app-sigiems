@@ -74,7 +74,7 @@ class AuthAction extends Action
      * For example:
      *
      * ```php
-     * public function onAuthSuccess(ClientInterface $client)
+     * public function onAuthSuccess($client)
      * {
      *     $attributes = $client->getUserAttributes();
      *     // user login or signup comes here
@@ -83,26 +83,9 @@ class AuthAction extends Action
      *
      * If this callback returns [[Response]] instance, it will be used as action response,
      * otherwise redirection to [[successUrl]] will be performed.
+     *
      */
     public $successCallback;
-    /**
-     * @var callable PHP callback, which should be triggered in case of authentication cancelation.
-     * This callback should accept [[ClientInterface]] instance as an argument.
-     * For example:
-     *
-     * ```php
-     * public function onAuthCancel(ClientInterface $client)
-     * {
-     *     // set flash, logging, etc.
-     * }
-     * ```
-     *
-     * If this callback returns [[Response]] instance, it will be used as action response,
-     * otherwise redirection to [[cancelUrl]] will be performed.
-     *
-     * @since 2.1.5
-     */
-    public $cancelCallback;
     /**
      * @var string name or alias of the view file, which should be rendered in order to perform redirection.
      * If not set - default one will be used.
@@ -112,11 +95,11 @@ class AuthAction extends Action
     /**
      * @var string the redirect url after successful authorization.
      */
-    private $_successUrl;
+    private $_successUrl = '';
     /**
      * @var string the redirect url after unsuccessful authorization (e.g. user canceled).
      */
-    private $_cancelUrl;
+    private $_cancelUrl = '';
 
 
     /**
@@ -182,8 +165,8 @@ class AuthAction extends Action
      */
     public function run()
     {
-        $clientId = Yii::$app->getRequest()->getQueryParam($this->clientIdGetParamName);
-        if (!empty($clientId)) {
+        if (!empty($_GET[$this->clientIdGetParamName])) {
+            $clientId = $_GET[$this->clientIdGetParamName];
             /* @var $collection \yii\authclient\Collection */
             $collection = Yii::$app->get($this->clientCollection);
             if (!$collection->hasClient($clientId)) {
@@ -225,33 +208,13 @@ class AuthAction extends Action
     protected function authSuccess($client)
     {
         if (!is_callable($this->successCallback)) {
-            throw new InvalidConfigException('"' . get_class($this) . '::$successCallback" should be a valid callback.');
+            throw new InvalidConfigException('"' . get_class($this) . '::successCallback" should be a valid callback.');
         }
-
         $response = call_user_func($this->successCallback, $client);
         if ($response instanceof Response) {
             return $response;
         }
-
         return $this->redirectSuccess();
-    }
-
-    /**
-     * This method is invoked in case of authentication cancelation.
-     * @param ClientInterface $client auth client instance.
-     * @return Response response instance.
-     * @since 2.1.5
-     */
-    protected function authCancel($client)
-    {
-        if ($this->cancelCallback !== null) {
-            $response = call_user_func($this->cancelCallback, $client);
-            if ($response instanceof Response) {
-                return $response;
-            }
-        }
-
-        return $this->redirectCancel();
     }
 
     /**
@@ -268,15 +231,12 @@ class AuthAction extends Action
         } else {
             $viewFile = Yii::getAlias($viewFile);
         }
-
         $viewData = [
             'url' => $url,
             'enforceRedirect' => $enforceRedirect,
         ];
-
         $response = Yii::$app->getResponse();
         $response->content = Yii::$app->getView()->renderFile($viewFile, $viewData);
-
         return $response;
     }
 
@@ -315,25 +275,28 @@ class AuthAction extends Action
      */
     protected function authOpenId($client)
     {
-        $request = Yii::$app->getRequest();
-        $mode = $request->get('openid_mode', $request->post('openid_mode'));
-
-        if (empty($mode)) {
+        if (!empty($_REQUEST['openid_mode'])) {
+            switch ($_REQUEST['openid_mode']) {
+                case 'id_res':
+                    if ($client->validate()) {
+                        return $this->authSuccess($client);
+                    } else {
+                        throw new HttpException(400, 'Unable to complete the authentication because the required data was not received.');
+                    }
+                    break;
+                case 'cancel':
+                    $this->redirectCancel();
+                    break;
+                default:
+                    throw new HttpException(400);
+                    break;
+            }
+        } else {
             $url = $client->buildAuthUrl();
             return Yii::$app->getResponse()->redirect($url);
         }
 
-        switch ($mode) {
-            case 'id_res':
-                if ($client->validate()) {
-                    return $this->authSuccess($client);
-                }
-                throw new HttpException(400, 'Unable to complete the authentication because the required data was not received.');
-            case 'cancel':
-                return $this->authCancel($client);
-            default:
-                throw new HttpException(400);
-        }
+        return $this->redirectCancel();
     }
 
     /**
@@ -343,16 +306,14 @@ class AuthAction extends Action
      */
     protected function authOAuth1($client)
     {
-        $request = Yii::$app->getRequest();
-
         // user denied error
-        if ($request->get('denied') !== null) {
-            return $this->authCancel($client);
+        if (isset($_GET['denied'])) {
+            return $this->redirectCancel();
         }
 
-        if (($oauthToken = $request->get('oauth_token', $request->post('oauth_token'))) !== null) {
+        if (isset($_REQUEST['oauth_token'])) {
             // Upgrade to access token.
-            $client->fetchAccessToken($oauthToken);
+            $client->fetchAccessToken($_REQUEST['oauth_token']);
             return $this->authSuccess($client);
         }
 
@@ -372,31 +333,35 @@ class AuthAction extends Action
      */
     protected function authOAuth2($client)
     {
-        $request = Yii::$app->getRequest();
-
-        if (($error = $request->get('error')) !== null) {
-            if ($error === 'access_denied' || $error === 'user_cancelled_login') {
+        if (isset($_GET['error'])) {
+            if ($_GET['error'] == 'access_denied') {
                 // user denied error
-                return $this->authCancel($client);
+                return $this->redirectCancel();
+            } else {
+                // request error
+                if (isset($_GET['error_description'])) {
+                    $errorMessage = $_GET['error_description'];
+                } elseif (isset($_GET['error_message'])) {
+                    $errorMessage = $_GET['error_message'];
+                } else {
+                    $errorMessage = http_build_query($_GET);
+                }
+                throw new Exception('Auth error: ' . $errorMessage);
             }
-            // request error
-            $errorMessage = $request->get('error_description', $request->get('error_message'));
-            if ($errorMessage === null) {
-                $errorMessage = http_build_query($request->get());
-            }
-            throw new Exception('Auth error: ' . $errorMessage);
         }
 
         // Get the access_token and save them to the session.
-        if (($code = $request->get('code')) !== null) {
+        if (isset($_GET['code'])) {
+            $code = $_GET['code'];
             $token = $client->fetchAccessToken($code);
             if (!empty($token)) {
                 return $this->authSuccess($client);
+            } else {
+                return $this->redirectCancel();
             }
-            return $this->authCancel($client);
+        } else {
+            $url = $client->buildAuthUrl();
+            return Yii::$app->getResponse()->redirect($url);
         }
-
-        $url = $client->buildAuthUrl();
-        return Yii::$app->getResponse()->redirect($url);
     }
 }

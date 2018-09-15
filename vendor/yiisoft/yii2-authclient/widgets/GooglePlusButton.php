@@ -24,7 +24,7 @@ use yii\web\View;
  * in getter and setter. See [[getCallback()]] and [[setCallback()]] for details.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
- * @since 2.0.4
+ * @since 2.0
  */
 class GooglePlusButton extends AuthChoiceItem
 {
@@ -109,9 +109,6 @@ function $callbackName(authResult) {
     if (authResult['code']) {
         urlParams.push('code=' + encodeURIComponent(authResult['code']));
     } else if (authResult['error']) {
-        if (authResult['error'] == 'immediate_failed') {
-            return;
-        }
         urlParams.push('error=' + encodeURIComponent(authResult['error']));
         urlParams.push('error_description=' + encodeURIComponent(authResult['error_description']));
     } else {
