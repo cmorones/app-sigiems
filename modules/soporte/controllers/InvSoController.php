@@ -112,7 +112,7 @@ class InvSoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+           return $this->redirect(['/soporte/inv-equipos/view', 'id' => $model->id_equipo]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -131,7 +131,7 @@ class InvSoController extends Controller
         $this->findModel($id)->delete();
 
       //  return $this->redirect(['index']);
-        return $this->redirect(['/soporte/inv-equipos/view', 'id' => $ide]);
+        return $this->redirect(['/soporte/inv-equipos/view', 'id' => $model->id_equipo]);
     }
 
     /**
