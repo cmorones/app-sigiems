@@ -80,7 +80,7 @@ class SiteController extends Controller
         $this->email = $attributes['emails'][0]['value'];
 
         
-        $user = \Yii::$app->db ->createCommand("SELECT * FROM users WHERE mail='$this->email'")
+        echo $user = \Yii::$app->db ->createCommand("SELECT * FROM users WHERE mail='$this->email'")
         ->queryOne();
 
        //echo json_encode($user);

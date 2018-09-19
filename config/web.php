@@ -61,8 +61,8 @@ $config = [
         'clients' => [
             'google' => [
                 'class' => 'yii\authclient\clients\Google',
-                'clientId' => '190780014874-17s1npbrtohu0p8qftur4kl9kk2ggp0b.apps.googleusercontent.com',
-                'clientSecret' => 'Ilr0pWpZzEjaQldcWRsheiNU',
+                'clientId' => '190780014874-a512dk4n4lj3hceulcbh78kg88r5613b.apps.googleusercontent.com',
+                'clientSecret' => 'edccKmxrfg1LhvbjLq97-HmZ',
                
              //   'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
 

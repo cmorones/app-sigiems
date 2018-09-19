@@ -27,7 +27,7 @@ class InvSoController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create'],
+                        'actions' => ['index','create','update','delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
