@@ -131,7 +131,7 @@ class InvSoController extends Controller
         $this->findModel($id)->delete();
 
       //  return $this->redirect(['index']);
-        return $this->redirect(['/soporte/inv-equipos/view', 'id' => $model->id_equipo]);
+        return $this->redirect(['/soporte/inv-equipos/view', 'id' => $ide]);
     }
 
     /**
