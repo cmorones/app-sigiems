@@ -78,10 +78,6 @@ class InvAsignacionesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-           
-
-
-
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->id_plantel=Yii::$app->user->identity->id_plantel;
             $model->created_at = new Expression('NOW()');
@@ -90,7 +86,7 @@ class InvAsignacionesController extends Controller
 
             
             $model->id_mes =  $dato[1];
-            $model->folio = $this->ultimofolio(Yii::$app->user->identity->id_plantel,Yii::$app->user->identity->id_area);
+            $model->folio = $this->ultimofolio(Yii::$app->user->identity->id_plantel);
           
             $model->estado = 1;
             $model->id_periodo = $idp;
@@ -172,10 +168,10 @@ class InvAsignacionesController extends Controller
         }
     }
 
-      public function ultimoFolio($id_plantel,$id_area){
+      public function ultimoFolio($id_plantel){
 
             $folio = \Yii::$app->db->createCommand("SELECT max(inv_asignaciones.id) as lastfolio
-            FROM inv_asignaciones   WHERE id_plantel=$id_plantel and id_area=$id_area and estado=1")->queryOne();
+            FROM inv_asignaciones   WHERE id_plantel=$id_plantel  and estado=1")->queryOne();
 
             if ($folio['lastfolio'] !=0 ){
                 return $folio['lastfolio']+1;

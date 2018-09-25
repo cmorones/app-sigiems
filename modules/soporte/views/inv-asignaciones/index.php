@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'folio',
             'fecha',
             'progresivo',
           //  'id',
@@ -47,6 +48,12 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\soporte\models\CatMeses::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
            // 'id_plantel',
+
+            [
+              'attribute'=>'id_plantel',
+              'value' => 'catPlanteles.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
              [
               'attribute'=>'id_area',
               'value' => 'catAreas.nombre',
