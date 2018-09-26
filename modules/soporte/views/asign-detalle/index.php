@@ -72,15 +72,33 @@ $this->params['breadcrumbs'][] = $this->title;
             
                [ 'attribute' => 'Modificar',
               'filter' =>false,
-              'format' => 'raw', 'value' => function($data,$id){
+              'format' => 'raw', 'value' => function($data,$idp){
 
 
                   return (Html::a('<center><span class="glyphicon glyphicon-print"></span> Modificar</center>', [
                             '/soporte/asign-detalle/update',
                             'id' => $data->id,
-                             'idp' => $data->id_mov,
+                             'idp' => 4,
                         ], [
                             'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+              
+            }
+              ],
+
+
+               [ 'attribute' => 'Eliminar',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data,$idp){
+
+
+                  return (Html::a('<center><span class="glyphicon glyphicon-trash"></span> Eliminar</center>', [
+                            '/soporte/asign-detalle/delete',
+                            'id' => $data->id_mov,
+                           'idp' => 4,
+                        ], [
+                            'class' => 'btn btn-danger btn-sm',
                             'target' => '_blank',
                         ]));
               

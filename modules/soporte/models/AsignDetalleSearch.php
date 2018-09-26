@@ -39,7 +39,7 @@ class AsignDetalleSearch extends AsignDetalle
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$idp)
+    public function search($params,$id)
     {
         $query = AsignDetalle::find();
 
@@ -60,7 +60,7 @@ class AsignDetalleSearch extends AsignDetalle
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_mov' => $idp,
+            'id_mov' => $id,
             'cantidad' => $this->cantidad,
             'estado' => $this->estado,
             'created_at' => $this->created_at,

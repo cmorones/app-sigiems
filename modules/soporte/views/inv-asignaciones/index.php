@@ -138,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
               [ 'attribute' => 'Subir Archivo',
               'filter' =>false,
-              'format' => 'raw', 'value' => function($data){
+              'format' => 'raw', 'value' => function($data,$idp){
               //return "<a href=\"?r=country/view&id={$data->validacion}\">{$data->tipo_baja}</a>";} BajasCertificado
            //   $docto = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->one();
            //   $dictaminado = app\modules\soporte\models\BajasDictamen::find()->where(['id_baja'=>$data->id])->count();
@@ -147,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
               if($data->estado ==1 ){
                 
                   
-                 return (Html::a('<center><span class="glyphicon glyphicon-floppy-open"></span></center>', ['/soporte/inv-asignaciones/docto','id'=>$data->id], ['title' => 'Subir']));
+                 return (Html::a('<center><span class="glyphicon glyphicon-floppy-open"></span></center>', ['/soporte/inv-asignaciones/docto','id'=>$data->id, 'idp'=>$idp], ['title' => 'Subir']));
               }elseif($data->estado == 2 ) {
  
                  return (Html::a('<center><span class="glyphicon glyphicon-download"></span> PDF</center>', [

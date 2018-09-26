@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
+use yii\web\UploadedFile;
 
 /**
  * InvAsignacionesController implements the CRUD actions for InvAsignaciones model.
@@ -106,6 +107,53 @@ class InvAsignacionesController extends Controller
             ]);
         }
     }
+
+
+        public function actionDocto($id,$idp)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = 'updoc';
+
+       
+        $model2 = InvAsignaciones::findOne($id);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+        
+        $model->file = UploadedFile::getInstance($model,'file');
+        $model->file->saveAs('asignaciones/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+       //  $model->docto=1;
+         $model->estado=2;
+        $model->updated_by=@Yii::$app->user->identity->user_id;
+        $model->updated_at = new Expression('NOW()');    
+       if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+            }
+             return $this->redirect(['index', 'idp' => $idp]);
+         
+
+        } else {
+            return $this->render('docto', [
+                'model' => $model,
+                'model2' => $model2,
+
+            ]);
+        }
+    }
+
+      public function actionPdf($id) {
+    $model = $this->findModel($id);
+
+    // This will need to be the path relative to the root of your app.
+    $filePath = '/asignaciones';
+    // Might need to change '@app' for another alias
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->docto);
+    return Yii::$app->response->sendFile($completePath, $model->docto);
+}
+
 
     /**
      * Updates an existing InvAsignaciones model.

@@ -8,6 +8,7 @@ use app\modules\soporte\models\AsignDetalleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Expression;
 
 /**
  * AsignDetalleController implements the CRUD actions for AsignDetalle model.
@@ -23,7 +24,7 @@ class AsignDetalleController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['GET'],
                 ],
             ],
         ];
@@ -36,7 +37,7 @@ class AsignDetalleController extends Controller
     public function actionIndex($id,$idp)
     {
         $searchModel = new AsignDetalleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$id,$idp);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -96,7 +97,7 @@ class AsignDetalleController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idp)
     {
         $model = $this->findModel($id);
 
@@ -111,10 +112,12 @@ class AsignDetalleController extends Controller
                 exit;
                 # code...
             }
-            return $this->redirect(['index', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $model->id_mov, 'idp'=>$idp]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'id' => $id,
+                'idp' => $idp,
             ]);
         }
     }
@@ -125,11 +128,11 @@ class AsignDetalleController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$idp)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'id' => $id, 'idp'=>$idp]);
     }
 
     /**

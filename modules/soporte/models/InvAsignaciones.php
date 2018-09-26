@@ -29,6 +29,7 @@ class InvAsignaciones extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
     public static function tableName()
     {
         return 'inv_asignaciones';
@@ -44,6 +45,8 @@ class InvAsignaciones extends \yii\db\ActiveRecord
             [['fecha', 'created_at', 'updated_at'], 'safe'],
             [['resguardante', 'observaciones','autoriza','entrega','recibe', 'detalle_sus'], 'string'],
             [['folio','progresivo','created_at', 'created_by'], 'required'],
+            [['file'], 'file', 'on'=>'updoc'],
+             [['file'], 'file', 'skipOnEmpty' => false, 'uploadRequired' => 'No has seleccionado ningún archivo', 'on'=>'updoc'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];

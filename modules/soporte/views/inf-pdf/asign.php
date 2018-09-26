@@ -26,6 +26,11 @@ if ($model->id_tipo==3) {
   $nombre = 'SERVIDOR';
 }
 
+if ($model->id_tipo==5) {
+  $clabe_cabs = '5151000152';
+  $nombre = 'NO-BREAK';
+}
+
 
 
 
