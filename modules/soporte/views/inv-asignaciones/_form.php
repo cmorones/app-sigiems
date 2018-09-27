@@ -52,11 +52,11 @@ use app\modules\admin\models\CatAreas;
       <div class="form-group">
                                           
                                         
-                                             <label for="cname" class="control-label col-lg-2">Area:</label>
+                                             <label for="cname" class="control-label col-lg-2">Plantel:</label>
                                             <div class="col-lg-4">
                                               
 
-                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAreas::find()->all(), 'id_area', 'nombre'), ['prompt'=>'Selecciona una Área'])->label(false); ?>
+                                             <?= $form->field($model, 'id_area', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatPlanteles::find()->all(), 'id_area', 'nombre'), ['prompt'=>'Selecciona una Área'])->label(false); ?>
                                             </div>
                                         </div>
 
