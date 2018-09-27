@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\CatAreas;
+use app\modules\admin\models\CatPlanteles;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\soporte\models\InvAsignaciones */
